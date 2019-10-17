@@ -5,7 +5,7 @@ Copyright (C) 2017 - Today: GRAP (http://www.grap.coop)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
-<openerp><data>
+<odoo>
 
     <!-- Sale 5,5% -->
     <record id="sale_vat_5" model="account.tax">
@@ -33,4 +33,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="account_collected_id" ref="account_vat_20" />
     </record>
 
-</data></openerp>
+</odoo>

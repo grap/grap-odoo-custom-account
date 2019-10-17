@@ -5,7 +5,7 @@ Copyright (C) 2017 - Today: GRAP (http://www.grap.coop)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
-<openerp><data>
+<odoo>
 
     <record id="account_vat_5" model="account.account">
         <field name="code">445-5</field>
@@ -39,4 +39,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="user_type" ref="account.data_account_type_income" />
     </record>
 
-</data></openerp>
+</odoo>
