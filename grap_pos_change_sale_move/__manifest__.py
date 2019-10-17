@@ -8,11 +8,10 @@
     "category": "Point Of Sale",
     "author": "GRAP",
     "summary": "Make Sale accounting moves from PoS acceptable for accoutants",
-    "depends": ["pos_pricelist"],
+    "depends": ["point_of_sale"],
     "demo": [
         "demo/res_groups.xml",
         "demo/account_account.xml",
-        "demo/account_tax_code.xml",
         "demo/account_tax.xml",
         "demo/product_product.xml",
     ],
