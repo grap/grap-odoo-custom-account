@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/grap/grap-odoo-custom-account.svg?branch=12.0)](https://travis-ci.org/grap/grap-odoo-custom-account?branch=12.0)
-[![codecov](https://codecov.io/gh/grap/grap-odoo-custom-account/branch/12.0/graph/badge.svg)](https://codecov.io/gh/grap/grap-odoo-custom-account)
 [![Coverage Status](https://coveralls.io/repos/github/grap/grap-odoo-custom-account/badge.svg?branch=12.0)](https://coveralls.io/github/grap/grap-odoo-custom-account?branch=12.0)
 [![Code Climate](https://codeclimate.com/github/grap/grap-odoo-custom-account/badges/gpa.svg)](https://codeclimate.com/github/grap/grap-odoo-custom-account)
 
