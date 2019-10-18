@@ -43,6 +43,10 @@ class TestModule(TransactionCase):
         self.account_vat_20 = self.env.ref(
             "grap_pos_change_sale_move.account_vat_20"
         )
+        self.sale_vat_5 = self.env.ref(
+            "grap_pos_change_sale_move.sale_vat_5")
+        self.sale_vat_20 = self.env.ref(
+            "grap_pos_change_sale_move.sale_vat_20")
         self.account_income_701 = self.env.ref(
             "grap_pos_change_sale_move.account_income_701"
         )
@@ -117,17 +121,18 @@ class TestModule(TransactionCase):
                 [("journal_id", "=", self.sale_journal.id)]
             )
 
-    # def _get_move_line(self, move, account, tax=False):
-    #     res = self.AccountMoveLine.search(
-    #         [
-    #             ("move_id", "=", move.id),
-    #             ("account_id", "=", account.id),
-    #             # ("tax_code_id", "=", tax_code and tax_code.id or False),
-    #         ]
-    #     )
-
-    #     self.assertEquals(len(res), 1, "Expected on single line.")
-    #     return res
+    def _get_move_line(self, move, account, tax_ids, message):
+        domain = [
+            ("move_id", "=", move.id),
+            ("account_id", "=", account.id),
+            ("tax_ids", "=", tax_ids),
+        ]
+        res = self.AccountMoveLine.search(domain)
+        import pdb; pdb.set_trace()
+        self.assertEquals(
+            len(res), 1,
+            "Expected on single line for %s" % message)
+        return res
 
     # Test Section
     def _test_01_move_many_orders(self):
@@ -161,14 +166,12 @@ class TestModule(TransactionCase):
         self._sale(False, self.product_vat_20_707, 160, 192)
         # sale #5 product no VAT / Account 707 with customer
         self._sale(self.partner_agrolait, self.product_no_vat, 1000, 1000)
-        # # sale #6 product no VAT / Account 707 invoiced
-        # order = self._sale(
-        #     self.partner_agrolait, self.product_no_vat, 10000, 10000,
-        #     to_invoice=True
-        # )
+        # sale #6 product no VAT / Account 707 invoiced
+        order = self._sale(
+            self.partner_agrolait, self.product_no_vat, 50000, 50000,
+            to_invoice=True
+        )
 
-        # self.env.cr.commit()
-        # import pdb; pdb.set_trace()
         self._close_session()
 
         sale_moves = self._get_sale_moves(True)
@@ -178,26 +181,31 @@ class TestModule(TransactionCase):
             "Anonymous PoS orders (or uninvoiced PoS Orders) should generate"
             " a uniq sale move when closing the session",
         )
-        # sale_move = sale_moves[0]
+        sale_move = sale_moves[0]
 
-    #     # Check Line quantity
-    #     self.assertEquals(
-    #         len(sale_move.line_id), 7, "Incorrect quantity of lines."
-    #     )
+        # Check Line quantity
+        self.assertEquals(
+            len(sale_move.line_ids), 6, "Incorrect quantity of lines."
+            "Expected : 3 sale lines + 2 tax lines + 1 counterpart"
+        )
 
-    #     # Check Customer Line
-    #     line = self._get_move_line(sale_move, self.partner_account)
-    #     self.assertEquals(
-    #         line.debit, 1435.0, "incorrect Debit value for customer sales."
-    #     )
+        # Check Customer Line
+        line = self._get_move_line(
+            sale_move, self.partner_account, [], "counter part line")
+        self.assertEquals(
+            line.debit, 220.5 + 73.5 + 96 + 192 + 1000,
+            "incorrect Debit value for customer sales."
+        )
 
-    #     # Check VAT Line (5%)
-    #     line = self._get_move_line(
-    #         sale_move, self.account_vat_5, self.tax_code_5
-    #     )
-    #     self.assertEquals(
-    #         line.credit, 7, "incorrect Credit value for VAT line (5%)."
-    #     )
+        # Check VAT Line (5%)
+        line = self._get_move_line(
+            sale_move, self.account_vat_5, [self.sale_vat_5.id],
+            "sale line vat 5%"
+        )
+        self.assertEquals(
+            line.credit, 220.5 + 73.5,
+            "incorrect Credit value for VAT line (5%)."
+        )
 
     #     # Check VAT Line (20%)
     #     line = self._get_move_line(
