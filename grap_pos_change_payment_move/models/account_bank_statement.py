@@ -12,42 +12,22 @@ from odoo import api, models, tools
 class AccountBankStatement(models.Model):
     _inherit = "account.bank.statement"
 
-    def button_confirm_cash(self, cr, uid, ids, context=None):
-        """Rewrite function to make it call button_confirm_bank and not
-        super(button_confirm_bank). (Odoo Core bad design) that disables
-        possibility to inherit button_confirm_bank correctly.
-        See file odoo/addons/account/account_cash_statement.py
-        This function is written in old api, because of a weird call
-        of the function button_confirm_, that forbid new api call."""
-
-        return self.button_confirm_bank(cr, uid, ids, context=context)
-
-    def button_confirm_bank(self, cr, uid, ids, context=None):
+    def button_confirm_bank(self):
         """
         Call normal super function for statement, except for PoS statement,
         that will call button_confirm_bank_point_of_sale() function.
-        This function is written in old api, because of a weird call
-        of the function button_confirm_, that forbid new api call."""
-        res = []
-        for statement in self.browse(cr, uid, ids, context=context):
-            if statement.pos_session_id:
-                res.append(
-                    self.button_confirm_bank_point_of_sale(
-                        cr, uid, [statement.id], context=context
-                    )
-                )
-            else:
-                res.append(
-                    super(AccountBankStatement, self).button_confirm_bank(
-                        cr, uid, [statement.id], context=context
-                    )
-                )
-        return all(res)
+        """
+        self.filtered(
+            lambda x: x.pos_session_id).button_confirm_bank_point_of_sale()
+
+        super(self.filtered(
+            lambda x: not x.pos_session_id).button_confirm_bank())
 
     @api.multi
     def button_confirm_bank_point_of_sale(self):
-        """This function is called instead of button_confirm_bank() core
-        function, if the statement is a statement from point of sale."""
+        print("====================")
+        print("HACKING THE SYSTEM")
+        print("====================")
 
         def _prepare_local_date(obj, date):
             context_tz = pytz.timezone(obj.env.user.tz)
@@ -58,8 +38,8 @@ class AccountBankStatement(models.Model):
             tz_timestamp = utc_timestamp.astimezone(context_tz)
             return tz_timestamp.strftime("%Y-%m-%d")
 
-        move_obj = self.env["account.move"]
-        statement_line_obj = self.env["account.bank.statement.line"]
+        AccountMove = self.env["account.move"]
+        AccountBankStatementLine = self.env["account.bank.statement.line"]
 
         for statement in self:
             move_ids = []
@@ -90,7 +70,7 @@ class AccountBankStatement(models.Model):
             i = 0
             for key in groups.keys():
                 i += 1
-                statement_lines = statement_line_obj.browse(groups[key])
+                statement_lines = AccountBankStatementLine.browse(groups[key])
                 move = statement.create_move_point_of_sale(
                     key, statement_lines, statement.name + "/" + str(i)
                 )
@@ -99,7 +79,7 @@ class AccountBankStatement(models.Model):
                 statement_lines.write({"journal_entry_id": move.id})
 
             if move_ids:
-                moves = move_obj.browse(move_ids)
+                moves = AccountMove.browse(move_ids)
                 moves.post()
 
         return self.write(
@@ -113,24 +93,24 @@ class AccountBankStatement(models.Model):
     def create_move_point_of_sale(self, key, statement_lines, move_name):
         self.ensure_one()
 
-        move_obj = self.env["account.move"]
-        move_line_obj = self.env["account.move.line"]
+        AccountMove = self.env["account.move"]
+        AccountMoveLine = self.env["account.move.line"]
 
         move_vals = self._prepare_move_point_of_sale(
             key, statement_lines, move_name
         )
 
-        move = move_obj.create(move_vals)
+        move = AccountMove.create(move_vals)
 
         move_line_vals = self._prepare_bank_move_line_point_of_sale(
             key, statement_lines, move
         )
-        move_line_obj.create(move_line_vals)
+        AccountMoveLine.create(move_line_vals)
 
         move_line_vals = self._prepare_counterpart_move_line_point_of_sale(
             key, statement_lines, move
         )
-        move_line_obj.create(move_line_vals)
+        AccountMoveLine.create(move_line_vals)
 
         return move
 
@@ -138,11 +118,9 @@ class AccountBankStatement(models.Model):
     def _prepare_move_point_of_sale(self, key, statement_lines, move_name):
         self.ensure_one()
         (account_id, partner_id, move_date) = key
-        period_obj = self.env["account.period"]
         return {
             "journal_id": self.journal_id.id,
             "partner_id": partner_id,
-            "period_id": period_obj.find(dt=move_date).id,
             "date": move_date,
             "name": move_name,
             "ref": self.pos_session_id.name,
@@ -171,7 +149,6 @@ class AccountBankStatement(models.Model):
             "debit": debit,
             "statement_id": self.id,
             "journal_id": self.journal_id.id,
-            "period_id": move.period_id.id,
         }
 
     @api.multi
@@ -200,5 +177,4 @@ class AccountBankStatement(models.Model):
             "debit": debit,
             "statement_id": self.id,
             "journal_id": self.journal_id.id,
-            "period_id": move.period_id.id,
         }

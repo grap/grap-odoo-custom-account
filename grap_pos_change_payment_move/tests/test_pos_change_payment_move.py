@@ -2,7 +2,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from datetime import datetime, timedelta
+from odoo import fields
 
 from odoo.tests.common import TransactionCase
 
@@ -11,57 +11,80 @@ class TetsChangePaymentMove(TransactionCase):
     def setUp(self):
         super(TetsChangePaymentMove, self).setUp()
 
-        self.session_obj = self.env["pos.session"]
-        self.order_obj = self.env["pos.order"]
-        self.move_obj = self.env["account.move"]
+        self.PosSession = self.env["pos.session"]
+        self.PosOrder = self.env["pos.order"]
+        self.AccountMove = self.env["account.move"]
+        self.AccountJournal = self.env["account.journal"]
+        self.pricelist = self.env.ref('product.list0')
 
-        self.pos_config = self.env.ref("point_of_sale.pos_config_main")
-        self.product_evian = self.env.ref("point_of_sale.evian_2l")
+        self.product_no_vat = self.env.ref(
+            "grap_pos_change_payment_move.product_no_vat")
         self.partner_agrolait = self.env.ref("base.res_partner_2")
-        self.cash_journal = self.env.ref("account.cash_journal")
+        self.cash_journal = self.AccountJournal.search(
+            [('type', '=', 'cash')])[0]
+        self.pos_config = self.env.ref('point_of_sale.pos_config_main').copy()
+        self.pos_config.open_session_cb()
+        self.pos_session = self.pos_config.current_session_id
+
+        self.sale_journal = self.pos_config.journal_id
+        self.uid = 1
 
     # Tools function section
     def _open_session(self):
-        return self.session_obj.create({"config_id": self.pos_config.id})
+        return self.PosSession.create({"config_id": self.pos_config.id})
 
-    def _sale(self, session, partner, journal, qty, date_diff=0):
-        order = self.order_obj.create(
-            {
-                "session_id": session.id,
-                "partner_id": partner and partner.id or False,
-                "lines": [
-                    [
-                        0,
-                        False,
-                        {
-                            "discount": 0,
-                            "price_unit": 1,
-                            "product_id": self.product_evian.id,
-                            "qty": qty,
-                        },
-                    ]
-                ],
-            }
-        )
-        if date_diff:
-            order.date_order = datetime.strptime(
-                order.date_order, "%Y-%m-%d %H:%M:%S"
-            ) + timedelta(days=date_diff)
-        self.order_obj.add_payment(
-            order.id, {"amount": qty, "journal": journal.id}
-        )
+    # Tools function section
+    def _sale(self, partner, product, vat_excl, vat_incl, to_invoice=False):
+        # Create order
+        self.uid += 1
+        order_data = {
+            'id': u'0006-001-000%d' % (self.uid),
+            'to_invoice': to_invoice,
+            'data': {
+                'pricelist_id': self.pricelist.id,
+                'user_id': 1,
+                'sequence_number': self.uid,
+                'name': 'Order 0006-001-000%d' % self.uid,
+                'partner_id': partner and partner.id,
+                'pos_session_id': self.pos_session.id,
+                'lines': [[0, 0, {
+                    'product_id': product.id,
+                    'price_unit': vat_incl,
+                    'qty': 1,
+                    'price_subtotal': vat_excl,
+                    'price_subtotal_incl': vat_incl,
+                    'tax_ids': [[6, False, product.taxes_id.ids]],
+                }]],
+                'statement_ids': [[0, 0, {
+                    'journal_id': self.pos_config.journal_ids[0].id,
+                    'amount': vat_incl,
+                    'name': fields.Datetime.now(),
+                    'account_id':
+                    self.env.user.partner_id.property_account_receivable_id.id,
+                    'statement_id':
+                    self.pos_config.current_session_id.statement_ids[0].id,
+                }]],
+                'creation_date': u'2018-09-27 15:51:03',
+                'fiscal_position_id': False,
+                'uid': u'00001-001-000%d' % self.uid,
+                'amount_paid': vat_incl,
+                'amount_return': 0,
+                'amount_tax': vat_incl - vat_excl,
+                'amount_total': vat_incl,
+            }}
 
-        order.signal_workflow("paid")
+        result = self.PosOrder.create_from_ui([order_data])
+        order = self.PosOrder.browse(result[0])
         return order
 
-    def _close_session(self, session):
-        session.signal_workflow("close")
+    def _close_session(self):
+        self.pos_session.action_pos_session_closing_control()
 
-    def _get_payment_move(self, session, journal, partner_id):
-        return self.move_obj.search(
+    def _get_payment_move(self, partner_id):
+        return self.AccountMove.search(
             [
-                ("ref", "=", session.name),
-                ("journal_id", "=", journal.id),
+                ("ref", "=", self.pos_session.name),
+                ("journal_id", "=", self.cash_journal.id),
                 ("partner_id", "=", partner_id),
             ]
         )
@@ -79,24 +102,18 @@ class TetsChangePaymentMove(TransactionCase):
 
     # Test Section
     def test_01_test_many_uninvoiced_orders(self):
-        """Test if making many PoS orders uninvoiced generated a single
-            good accounting entry.
-        """
-        session = self._open_session()
         # anonymous sale
-        self._sale(session, False, self.cash_journal, 50)
+        self._sale(False, self.product_no_vat, 50, 50)
         # Anonymous return
-        self._sale(session, False, self.cash_journal, -10)
+        self._sale(False, self.product_no_vat, -10, -10)
         # sale #1 with customer, without invoice
-        self._sale(session, self.partner_agrolait, self.cash_journal, 20)
+        self._sale(self.partner_agrolait, self.product_no_vat, 20, 20)
         # sale #2 with customer, without invoice
-        self._sale(session, self.partner_agrolait, self.cash_journal, 40)
+        self._sale(self.partner_agrolait, self.product_no_vat, 40, 40)
 
-        self._close_session(session)
+        self._close_session()
 
-        payment_moves = self._get_payment_move(
-            session, self.cash_journal, False
-        )
+        payment_moves = self._get_payment_move(False)
 
         self.assertEquals(
             len(payment_moves),
@@ -113,10 +130,7 @@ class TetsChangePaymentMove(TransactionCase):
         )
 
     # Test Section
-    def test_02_test_invoiced_orders(self):
-        """Test if making many PoS orders invoiced generated a single
-            good accounting entry.
-        """
+    def _test_02_test_invoiced_orders(self):
         session = self._open_session()
         # sale #1 with customer, without invoice
         self._sale(session, self.partner_agrolait, self.cash_journal, 1)
@@ -173,10 +187,7 @@ class TetsChangePaymentMove(TransactionCase):
         )
 
     # Test Section
-    def test_03_move_per_day(self):
-        """Test if making many PoS orders invoiced generated a single
-            good accounting entry.
-        """
+    def _test_03_move_per_day(self):
         session = self._open_session()
         # sale #1 date 1
         self._sale(session, False, self.cash_journal, 10)
