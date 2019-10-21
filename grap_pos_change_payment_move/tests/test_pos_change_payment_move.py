@@ -91,14 +91,14 @@ class TetsChangePaymentMove(TransactionCase):
 
     def _get_first_move_line(self, move, is_debit):
         self.assertEquals(
-            len(move.line_id),
+            len(move.line_ids),
             2,
             "Payment moves from Point of Sale should have two lines.",
         )
-        if move.line_id[0].debit and is_debit:
-            return move.line_id[0]
+        if move.line_ids[0].debit and is_debit:
+            return move.line_ids[0]
         else:
-            return move.line_id[1]
+            return move.line_ids[1]
 
     # Test Section
     def test_01_test_many_uninvoiced_orders(self):
