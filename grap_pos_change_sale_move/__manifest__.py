@@ -9,6 +9,7 @@
     "author": "GRAP",
     "summary": "Make Sale accounting moves from PoS acceptable for accoutants",
     "depends": ["point_of_sale"],
+    "licence": "AGPL-3",
     "demo": [
         "demo/res_groups.xml",
         "demo/account_account.xml",

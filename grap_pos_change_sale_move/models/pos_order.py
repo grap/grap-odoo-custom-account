@@ -12,7 +12,8 @@ class PosOrder(models.Model):
     # Remove partner_id product_id and name from the keys.
     @api.model
     def _get_account_move_line_group_data_type_key(
-            self, data_type, values, options={}):
+            self, data_type, values, options=False):
+        options = options or {}
         if data_type == 'product':
             return (
                 'product',

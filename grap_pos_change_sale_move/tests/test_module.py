@@ -92,7 +92,6 @@ class TestModule(TransactionCase):
                     self.pos_config.current_session_id.statement_ids[0].id,
                 }]],
                 'creation_date': u'2018-09-27 15:51:03',
-                'amount_tax': 0,
                 'fiscal_position_id': False,
                 'uid': u'00001-001-000%d' % self.uid,
                 'amount_paid': vat_incl,
