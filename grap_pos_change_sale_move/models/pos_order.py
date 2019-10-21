@@ -22,7 +22,10 @@ class PosOrder(models.Model):
                 (False, tuple(values['tax_ids'][0][2]), False),
                 values['analytic_account_id'],
                 values['debit'] > 0,
-                values.get('currency_id'))
+                values.get('currency_id'),
+                # Add new key "account_id"
+                values['account_id'],
+            )
         elif data_type == 'tax':
             order_id = values.pop('order_id', False)
             tax_key = (

@@ -125,10 +125,12 @@ class TestModule(TransactionCase):
         domain = [
             ("move_id", "=", move.id),
             ("account_id", "=", account.id),
-            ("tax_ids", "=", tax_ids),
         ]
+        if tax_ids:
+            domain.append(("tax_ids", "in", tax_ids))
+        else:
+            domain.append(("tax_ids", "=", False))
         res = self.AccountMoveLine.search(domain)
-        import pdb; pdb.set_trace()
         self.assertEquals(
             len(res), 1,
             "Expected on single line for %s" % message)
@@ -160,14 +162,14 @@ class TestModule(TransactionCase):
         self._sale(False, self.product_vat_5_707, 210, 220.5)
         # sale #2 product VAT 5% / Account 707
         self._sale(False, self.product_vat_5_707, 70, 73.5)
-        # sale #3 product VAT 20% / Account 701
-        self._sale(False, self.product_vat_20_701, 80, 96)
-        # sale #4 product VAT 20% / Account 707
+        # sale #3 product VAT 20% / Account 707
         self._sale(False, self.product_vat_20_707, 160, 192)
+        # sale #4 product VAT 20% / Account 701
+        self._sale(False, self.product_vat_20_701, 80, 96)
         # sale #5 product no VAT / Account 707 with customer
         self._sale(self.partner_agrolait, self.product_no_vat, 1000, 1000)
         # sale #6 product no VAT / Account 707 invoiced
-        order = self._sale(
+        self._sale(
             self.partner_agrolait, self.product_no_vat, 50000, 50000,
             to_invoice=True
         )
@@ -185,8 +187,8 @@ class TestModule(TransactionCase):
 
         # Check Line quantity
         self.assertEquals(
-            len(sale_move.line_ids), 6, "Incorrect quantity of lines."
-            "Expected : 3 sale lines + 2 tax lines + 1 counterpart"
+            len(sale_move.line_ids), 7, "Incorrect quantity of lines."
+            "Expected : 4 sale lines + 2 tax lines + 1 counterpart"
         )
 
         # Check Customer Line
@@ -194,66 +196,73 @@ class TestModule(TransactionCase):
             sale_move, self.partner_account, [], "counter part line")
         self.assertEquals(
             line.debit, 220.5 + 73.5 + 96 + 192 + 1000,
-            "incorrect Debit value for customer sales."
+            "incorrect Debit value for Counter part line."
         )
 
         # Check VAT Line (5%)
         line = self._get_move_line(
-            sale_move, self.account_vat_5, [self.sale_vat_5.id],
-            "sale line vat 5%"
+            sale_move, self.account_vat_5, [],
+            "vat line (vat 5)%"
         )
         self.assertEquals(
-            line.credit, 220.5 + 73.5,
+            line.credit, 10.5 + 3.5,
             "incorrect Credit value for VAT line (5%)."
         )
 
-    #     # Check VAT Line (20%)
-    #     line = self._get_move_line(
-    #         sale_move, self.account_vat_20, self.tax_code_20
-    #     )
-    #     self.assertEquals(
-    #         line.credit, 48, "incorrect Credit value for VAT line (20%)."
-    #     )
+        # Check VAT Line (20%)
+        line = self._get_move_line(
+            sale_move, self.account_vat_20, [],
+            "vat line (vat 20%)"
+        )
+        self.assertEquals(
+            line.credit, 32 + 16,
+            "incorrect Credit value for VAT line (20%)."
+        )
 
-    #     # Check Income Line 707 (no vat)
-    #     line = self._get_move_line(sale_move, self.account_income_707)
-    #     self.assertEquals(
-    #         line.credit,
-    #         1000,
-    #         "incorrect Credit value for Income 707 line (No VAT).",
-    #     )
+        # Check Income Line 707 (no vat)
+        line = self._get_move_line(
+            sale_move, self.account_income_707, [],
+            "Sale line 707 (No VAT)")
+        self.assertEquals(
+            line.credit,
+            1000,
+            "incorrect Credit value for Income 707 line (No VAT).",
+        )
 
-    #     # Check Income Line 707(5%)
-    #     line = self._get_move_line(
-    #         sale_move, self.account_income_707, self.tax_code_base_5
-    #     )
-    #     self.assertEquals(
-    #         line.credit,
-    #         140,
-    #         "incorrect Credit value for Income 707 line (5%).",
-    #     )
+        # Check Income Line 707(5%)
+        line = self._get_move_line(
+            sale_move, self.account_income_707, [self.sale_vat_5.id],
+            "Sale line 707 (vat 5%)"
+        )
+        self.assertEquals(
+            line.credit,
+            210.0 + 70.0,
+            "incorrect Credit value for Income 707 line (5%).",
+        )
 
-    #     # Check Income Line 707(20%)
-    #     line = self._get_move_line(
-    #         sale_move, self.account_income_707, self.tax_code_base_20
-    #     )
-    #     self.assertEquals(
-    #         line.credit,
-    #         160,
-    #         "incorrect Credit value for Income 707 line (20%).",
-    #     )
+        # Check Income Line 707(20%)
+        line = self._get_move_line(
+            sale_move, self.account_income_707, [self.sale_vat_20.id],
+            "Sale line 707 (vat 20%)"
+        )
+        self.assertEquals(
+            line.credit,
+            160,
+            "incorrect Credit value for Income 707 line (20%).",
+        )
 
-    #     # Check Income Line 701(20%)
-    #     line = self._get_move_line(
-    #         sale_move, self.account_income_701, self.tax_code_base_20
-    #     )
-    #     self.assertEquals(
-    #         line.credit,
-    #         80,
-    #         "incorrect Credit value for Income 701 line (20%).",
-    #     )
+        # Check Income Line 701(20%)
+        line = self._get_move_line(
+            sale_move, self.account_income_701, [self.sale_vat_20.id],
+            "Sale line 701 (vat 20%)"
+        )
+        self.assertEquals(
+            line.credit,
+            80,
+            "incorrect Credit value for Income 701 line (20%).",
+        )
 
-    #     # Check the state of the account move
-    #     self.assertEquals(
-    #         sale_move.state, "posted", "Sale Move should be posted"
-    #     )
+        # Check the state of the account move
+        self.assertEquals(
+            sale_move.state, "posted", "Sale Move should be posted"
+        )
