@@ -207,6 +207,10 @@ class TestModule(TransactionCase):
             line.credit, 10.5 + 3.5,
             "incorrect Credit value for VAT line (5%)."
         )
+        self.assertEquals(
+            line.tax_line_id.id,
+            self.sale_vat_5.id,
+            "Vat tax line doesn't have correct 'Originator tax'")
 
         # Check VAT Line (20%)
         line = self._get_move_line(
