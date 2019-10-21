@@ -23,10 +23,6 @@ class AccountBankStatement(models.Model):
 
     @api.multi
     def button_confirm_bank_pos(self):
-        print("====================")
-        print("HACKING THE SYSTEM")
-        print("====================")
-
         AccountBankStatementLine = self.env["account.bank.statement.line"]
 
         for statement in self:
@@ -55,8 +51,6 @@ class AccountBankStatement(models.Model):
             i = 0
             for key in groups.keys():
                 i += 1
-                print("+++++++++++++++++")
-                print(i)
                 statement_lines = AccountBankStatementLine.browse(groups[key])
                 move = statement.create_move_pos(
                     key, statement_lines, statement.name + "/" + str(i)
@@ -92,10 +86,6 @@ class AccountBankStatement(models.Model):
         move_vals = self._prepare_move_pos(
             key, statement_lines, move_name, lines_vals
         )
-
-        print("&&&&&&&&&&&&&&&&&&")
-        print(move_vals)
-        print("&&&&&&&&&&&&&&&&&&")
         return AccountMove.create(move_vals)
 
     @api.multi
@@ -132,7 +122,6 @@ class AccountBankStatement(models.Model):
             "partner_id": partner_id,
             "credit": credit,
             "debit": debit,
-            # "statement_id": self.id,
             "journal_id": self.journal_id.id,
         }
 
@@ -159,6 +148,5 @@ class AccountBankStatement(models.Model):
             "partner_id": partner_id,
             "credit": credit,
             "debit": debit,
-            # "statement_id": self.id,
             "journal_id": self.journal_id.id,
         }

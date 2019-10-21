@@ -130,32 +130,27 @@ class TetsChangePaymentMove(TransactionCase):
         )
 
     # Test Section
-    def _test_02_test_invoiced_orders(self):
-        session = self._open_session()
+    def test_02_test_invoiced_orders(self):
         # sale #1 with customer, without invoice
-        self._sale(session, self.partner_agrolait, self.cash_journal, 1)
+        self._sale(self.partner_agrolait, self.product_no_vat, 1, 1)
         # sale #2 with customer, without invoice
-        self._sale(session, self.partner_agrolait, self.cash_journal, 10)
+        self._sale(self.partner_agrolait, self.product_no_vat, 10, 10)
 
         # sale #3 with customer, with invoice
-        order = self._sale(
-            session, self.partner_agrolait, self.cash_journal, 20
-        )
-        order.action_invoice()
+        self._sale(
+            self.partner_agrolait, self.product_no_vat, 20, 20,
+            to_invoice=True)
         # sale #4 with customer, with invoice
-        order = self._sale(
-            session, self.partner_agrolait, self.cash_journal, 40
-        )
-        order.action_invoice()
+        self._sale(
+            self.partner_agrolait, self.product_no_vat, 40, 40,
+            to_invoice=True)
 
-        self._close_session(session)
+        self._close_session()
 
-        anonymous_payment_moves = self._get_payment_move(
-            session, self.cash_journal, False
-        )
+        anonymous_payment_moves = self._get_payment_move(False)
 
         customer_payment_moves = self._get_payment_move(
-            session, self.cash_journal, self.partner_agrolait.id
+            self.partner_agrolait.id
         )
 
         self.assertEquals(
@@ -172,35 +167,18 @@ class TetsChangePaymentMove(TransactionCase):
             " generate an anonymous move and one with customer.",
         )
 
-        bank_line = self._get_first_move_line(anonymous_payment_moves[0], True)
+        bank_line = self._get_first_move_line(
+            anonymous_payment_moves[0], True)
         self.assertEquals(
             bank_line.debit,
             11,
             "incorrect Debit value for 2 uninvoiced orders (1, 11)",
         )
 
-        bank_line = self._get_first_move_line(customer_payment_moves[0], True)
+        bank_line = self._get_first_move_line(
+            customer_payment_moves[0], True)
         self.assertEquals(
             bank_line.debit,
             60,
             "incorrect Debit value for 2 invoiced orders (20, 40)",
-        )
-
-    # Test Section
-    def _test_03_move_per_day(self):
-        session = self._open_session()
-        # sale #1 date 1
-        self._sale(session, False, self.cash_journal, 10)
-        # sale #2 date 2
-        self._sale(session, False, self.cash_journal, 20, date_diff=1)
-        self._close_session(session)
-
-        anonymous_payment_moves = self._get_payment_move(
-            session, self.cash_journal, False
-        )
-
-        self.assertEquals(
-            len(anonymous_payment_moves),
-            2,
-            "Closing session should generate 1 payment move per day.",
         )
