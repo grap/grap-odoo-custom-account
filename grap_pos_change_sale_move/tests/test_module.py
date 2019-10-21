@@ -32,8 +32,7 @@ class TestModule(TransactionCase):
             "grap_pos_change_sale_move.product_20_707"
         )
         self.partner_agrolait = self.env.ref("base.res_partner_2")
-        self.sale_journal = self.AccountJournal.search(
-            [('type', '=', 'sale')])[0]
+
         self.cash_journal = self.AccountJournal.search(
             [('type', '=', 'cash')])[0]
         self.partner_account = self.env.ref("l10n_generic_coa.1_conf_a_recv")
@@ -58,6 +57,8 @@ class TestModule(TransactionCase):
         self.pos_config = self.env.ref('point_of_sale.pos_config_main').copy()
         self.pos_config.open_session_cb()
         self.pos_session = self.pos_config.current_session_id
+
+        self.sale_journal = self.pos_config.journal_id
         self.uid = 1
 
     # Tools function section
@@ -136,9 +137,8 @@ class TestModule(TransactionCase):
         return res
 
     # Test Section
-    def _test_01_move_many_orders(self):
+    def test_01_move_many_orders(self):
         sale_entries_before = len(self._get_sale_moves(False))
-
         # sale #1
         self._sale(False, self.product_no_vat, 10, 10)
         # sale #2
