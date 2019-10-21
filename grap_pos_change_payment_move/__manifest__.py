@@ -7,6 +7,7 @@
     "version": "12.0.1.0.0",
     "category": "Point Of Sale",
     "author": "GRAP",
+    "license": "AGPL-3",
     "summary": "Make Bank accounting moves from PoS acceptable for accoutants",
     "depends": ["point_of_sale"],
     "demo": [
