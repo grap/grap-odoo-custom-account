@@ -23,6 +23,7 @@ class AccountBankStatement(models.Model):
 
     @api.multi
     def button_confirm_bank_pos(self):
+        AccountMove = self.env["account.move"]
         AccountBankStatementLine = self.env["account.bank.statement.line"]
 
         for statement in self:
@@ -56,13 +57,10 @@ class AccountBankStatement(models.Model):
                     key, statement_lines, statement.name + "/" + str(i)
                 )
                 move_ids.append(move.id)
-                # TODO: FIXME
-                # # Mark statement line as reconciled with a move
-                # statement_lines.write({"journal_entry_id": move.id})
 
-            # if move_ids:
-            #     moves = AccountMove.browse(move_ids)
-                # moves.post()
+            if move_ids:
+                moves = AccountMove.browse(move_ids)
+                moves.post()
 
         return self.write(
             {
