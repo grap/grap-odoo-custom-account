@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields
-
 from odoo.tests.common import TransactionCase
 
 
@@ -38,6 +37,8 @@ class TetsChangePaymentMove(TransactionCase):
     # Tools function section
     def _sale(self, partner, product, vat_excl, vat_incl, to_invoice=False):
         # Create order
+        account_id = self.env.user.partner_id.property_account_receivable_id.id
+        statement_id = self.pos_config.current_session_id.statement_ids[0].id
         self.uid += 1
         order_data = {
             "id": u"0006-001-000%d" % (self.uid),
@@ -71,10 +72,8 @@ class TetsChangePaymentMove(TransactionCase):
                             "journal_id": self.pos_config.journal_ids[0].id,
                             "amount": vat_incl,
                             "name": fields.Datetime.now(),
-                            "account_id": self.env.user.partner_id.property_account_receivable_id.id,
-                            "statement_id": self.pos_config.current_session_id.statement_ids[
-                                0
-                            ].id,
+                            "account_id": account_id,
+                            "statement_id": statement_id,
                         },
                     ]
                 ],
