@@ -17,14 +17,10 @@ class TestModule(TransactionCase):
         self.AccountMove = self.env["account.move"]
         self.AccountMoveLine = self.env["account.move.line"]
 
-        self.pricelist = self.env.ref('product.list0')
+        self.pricelist = self.env.ref("product.list0")
 
-        self.product_no_vat = self.env.ref(
-            "grap_pos_change_sale_move.product_no_vat"
-        )
-        self.product_vat_5_707 = self.env.ref(
-            "grap_pos_change_sale_move.product_5_707"
-        )
+        self.product_no_vat = self.env.ref("grap_pos_change_sale_move.product_no_vat")
+        self.product_vat_5_707 = self.env.ref("grap_pos_change_sale_move.product_5_707")
         self.product_vat_20_701 = self.env.ref(
             "grap_pos_change_sale_move.product_20_701"
         )
@@ -33,19 +29,12 @@ class TestModule(TransactionCase):
         )
         self.partner_agrolait = self.env.ref("base.res_partner_2")
 
-        self.cash_journal = self.AccountJournal.search(
-            [('type', '=', 'cash')])[0]
+        self.cash_journal = self.AccountJournal.search([("type", "=", "cash")])[0]
         self.partner_account = self.env.ref("l10n_generic_coa.1_conf_a_recv")
-        self.account_vat_5 = self.env.ref(
-            "grap_pos_change_sale_move.account_vat_5"
-        )
-        self.account_vat_20 = self.env.ref(
-            "grap_pos_change_sale_move.account_vat_20"
-        )
-        self.sale_vat_5 = self.env.ref(
-            "grap_pos_change_sale_move.sale_vat_5")
-        self.sale_vat_20 = self.env.ref(
-            "grap_pos_change_sale_move.sale_vat_20")
+        self.account_vat_5 = self.env.ref("grap_pos_change_sale_move.account_vat_5")
+        self.account_vat_20 = self.env.ref("grap_pos_change_sale_move.account_vat_20")
+        self.sale_vat_5 = self.env.ref("grap_pos_change_sale_move.sale_vat_5")
+        self.sale_vat_20 = self.env.ref("grap_pos_change_sale_move.sale_vat_20")
         self.account_income_701 = self.env.ref(
             "grap_pos_change_sale_move.account_income_701"
         )
@@ -54,7 +43,7 @@ class TestModule(TransactionCase):
         )
 
         # Create a new pos config and open it
-        self.pos_config = self.env.ref('point_of_sale.pos_config_main').copy()
+        self.pos_config = self.env.ref("point_of_sale.pos_config_main").copy()
         self.pos_config.open_session_cb()
         self.pos_session = self.pos_config.current_session_id
 
@@ -66,40 +55,53 @@ class TestModule(TransactionCase):
         # Create order
         self.uid += 1
         order_data = {
-            'id': u'0006-001-000%d' % (self.uid),
-            'to_invoice': to_invoice,
-            'data': {
-                'pricelist_id': self.pricelist.id,
-                'user_id': 1,
-                'sequence_number': self.uid,
-                'name': 'Order 0006-001-000%d' % self.uid,
-                'partner_id': partner and partner.id,
-                'pos_session_id': self.pos_session.id,
-                'lines': [[0, 0, {
-                    'product_id': product.id,
-                    'price_unit': vat_incl,
-                    'qty': 1,
-                    'price_subtotal': vat_excl,
-                    'price_subtotal_incl': vat_incl,
-                    'tax_ids': [[6, False, product.taxes_id.ids]],
-                }]],
-                'statement_ids': [[0, 0, {
-                    'journal_id': self.pos_config.journal_ids[0].id,
-                    'amount': vat_incl,
-                    'name': fields.Datetime.now(),
-                    'account_id':
-                    self.env.user.partner_id.property_account_receivable_id.id,
-                    'statement_id':
-                    self.pos_config.current_session_id.statement_ids[0].id,
-                }]],
-                'creation_date': u'2018-09-27 15:51:03',
-                'fiscal_position_id': False,
-                'uid': u'00001-001-000%d' % self.uid,
-                'amount_paid': vat_incl,
-                'amount_return': 0,
-                'amount_tax': vat_incl - vat_excl,
-                'amount_total': vat_incl,
-            }}
+            "id": u"0006-001-000%d" % (self.uid),
+            "to_invoice": to_invoice,
+            "data": {
+                "pricelist_id": self.pricelist.id,
+                "user_id": 1,
+                "sequence_number": self.uid,
+                "name": "Order 0006-001-000%d" % self.uid,
+                "partner_id": partner and partner.id,
+                "pos_session_id": self.pos_session.id,
+                "lines": [
+                    [
+                        0,
+                        0,
+                        {
+                            "product_id": product.id,
+                            "price_unit": vat_incl,
+                            "qty": 1,
+                            "price_subtotal": vat_excl,
+                            "price_subtotal_incl": vat_incl,
+                            "tax_ids": [[6, False, product.taxes_id.ids]],
+                        },
+                    ]
+                ],
+                "statement_ids": [
+                    [
+                        0,
+                        0,
+                        {
+                            "journal_id": self.pos_config.journal_ids[0].id,
+                            "amount": vat_incl,
+                            "name": fields.Datetime.now(),
+                            "account_id": self.env.user.partner_id.property_account_receivable_id.id,
+                            "statement_id": self.pos_config.current_session_id.statement_ids[
+                                0
+                            ].id,
+                        },
+                    ]
+                ],
+                "creation_date": u"2018-09-27 15:51:03",
+                "fiscal_position_id": False,
+                "uid": u"00001-001-000%d" % self.uid,
+                "amount_paid": vat_incl,
+                "amount_return": 0,
+                "amount_tax": vat_incl - vat_excl,
+                "amount_total": vat_incl,
+            },
+        }
 
         result = self.PosOrder.create_from_ui([order_data])
         order = self.PosOrder.browse(result[0])
@@ -114,26 +116,19 @@ class TestModule(TransactionCase):
                 [
                     ("ref", "=", self.pos_session.name),
                     ("journal_id", "=", self.sale_journal.id),
-                ],
+                ]
             )
         else:
-            return self.AccountMove.search(
-                [("journal_id", "=", self.sale_journal.id)]
-            )
+            return self.AccountMove.search([("journal_id", "=", self.sale_journal.id)])
 
     def _get_move_line(self, move, account, tax_ids, message):
-        domain = [
-            ("move_id", "=", move.id),
-            ("account_id", "=", account.id),
-        ]
+        domain = [("move_id", "=", move.id), ("account_id", "=", account.id)]
         if tax_ids:
             domain.append(("tax_ids", "in", tax_ids))
         else:
             domain.append(("tax_ids", "=", False))
         res = self.AccountMoveLine.search(domain)
-        self.assertEquals(
-            len(res), 1,
-            "Expected on single line for %s" % message)
+        self.assertEquals(len(res), 1, "Expected on single line for %s" % message)
         return res
 
     # Test Section
@@ -169,8 +164,7 @@ class TestModule(TransactionCase):
         self._sale(self.partner_agrolait, self.product_no_vat, 1000, 1000)
         # sale #6 product no VAT / Account 707 invoiced
         self._sale(
-            self.partner_agrolait, self.product_no_vat, 50000, 50000,
-            to_invoice=True
+            self.partner_agrolait, self.product_no_vat, 50000, 50000, to_invoice=True
         )
 
         self._close_session()
@@ -186,60 +180,62 @@ class TestModule(TransactionCase):
 
         # Check Line quantity
         self.assertEquals(
-            len(sale_move.line_ids), 7, "Incorrect quantity of lines."
-            "Expected : 4 sale lines + 2 tax lines + 1 counterpart"
+            len(sale_move.line_ids),
+            7,
+            "Incorrect quantity of lines."
+            "Expected : 4 sale lines + 2 tax lines + 1 counterpart",
         )
 
         # Check Customer Line
         line = self._get_move_line(
-            sale_move, self.partner_account, [], "counter part line")
+            sale_move, self.partner_account, [], "counter part line"
+        )
         self.assertEquals(
-            line.debit, 220.5 + 73.5 + 96 + 192 + 1000,
-            "incorrect Debit value for Counter part line."
+            line.debit,
+            220.5 + 73.5 + 96 + 192 + 1000,
+            "incorrect Debit value for Counter part line.",
         )
 
         # Check VAT Line (5%)
         line = self._get_move_line(
-            sale_move, self.account_vat_5, [],
-            "vat line (vat 5)%"
+            sale_move, self.account_vat_5, [], "vat line (vat 5)%"
         )
         self.assertEquals(
-            line.credit, 10.5 + 3.5,
-            "incorrect Credit value for VAT line (5%)."
+            line.credit, 10.5 + 3.5, "incorrect Credit value for VAT line (5%)."
         )
         self.assertEquals(
             line.tax_line_id.id,
             self.sale_vat_5.id,
-            "Vat tax line (5%) doesn't have correct 'Originator tax'")
+            "Vat tax line (5%) doesn't have correct 'Originator tax'",
+        )
 
         # Check VAT Line (20%)
         line = self._get_move_line(
-            sale_move, self.account_vat_20, [],
-            "vat line (vat 20%)"
+            sale_move, self.account_vat_20, [], "vat line (vat 20%)"
         )
         self.assertEquals(
-            line.credit, 32 + 16,
-            "incorrect Credit value for VAT line (20%)."
+            line.credit, 32 + 16, "incorrect Credit value for VAT line (20%)."
         )
         self.assertEquals(
             line.tax_line_id.id,
             self.sale_vat_20.id,
-            "Vat tax line (20%) doesn't have correct 'Originator tax'")
+            "Vat tax line (20%) doesn't have correct 'Originator tax'",
+        )
 
         # Check Income Line 707 (no vat)
         line = self._get_move_line(
-            sale_move, self.account_income_707, [],
-            "Sale line 707 (No VAT)")
+            sale_move, self.account_income_707, [], "Sale line 707 (No VAT)"
+        )
         self.assertEquals(
-            line.credit,
-            1000,
-            "incorrect Credit value for Income 707 line (No VAT).",
+            line.credit, 1000, "incorrect Credit value for Income 707 line (No VAT)."
         )
 
         # Check Income Line 707(5%)
         line = self._get_move_line(
-            sale_move, self.account_income_707, [self.sale_vat_5.id],
-            "Sale line 707 (vat 5%)"
+            sale_move,
+            self.account_income_707,
+            [self.sale_vat_5.id],
+            "Sale line 707 (vat 5%)",
         )
         self.assertEquals(
             line.credit,
@@ -249,27 +245,25 @@ class TestModule(TransactionCase):
 
         # Check Income Line 707(20%)
         line = self._get_move_line(
-            sale_move, self.account_income_707, [self.sale_vat_20.id],
-            "Sale line 707 (vat 20%)"
+            sale_move,
+            self.account_income_707,
+            [self.sale_vat_20.id],
+            "Sale line 707 (vat 20%)",
         )
         self.assertEquals(
-            line.credit,
-            160,
-            "incorrect Credit value for Income 707 line (20%).",
+            line.credit, 160, "incorrect Credit value for Income 707 line (20%)."
         )
 
         # Check Income Line 701(20%)
         line = self._get_move_line(
-            sale_move, self.account_income_701, [self.sale_vat_20.id],
-            "Sale line 701 (vat 20%)"
+            sale_move,
+            self.account_income_701,
+            [self.sale_vat_20.id],
+            "Sale line 701 (vat 20%)",
         )
         self.assertEquals(
-            line.credit,
-            80,
-            "incorrect Credit value for Income 701 line (20%).",
+            line.credit, 80, "incorrect Credit value for Income 701 line (20%)."
         )
 
         # Check the state of the account move
-        self.assertEquals(
-            sale_move.state, "posted", "Sale Move should be posted"
-        )
+        self.assertEquals(sale_move.state, "posted", "Sale Move should be posted")
