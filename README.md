@@ -26,6 +26,6 @@ region Rhône Alpes. We promote organic and local food, social and solidarity
 economy and cooperation.
 
 The GRAP IT Team promote Free Software and develops all the Odoo modules under
-AGPL-3 Licence. You can find all this modules here : 
+AGPL-3 Licence. You can find all this modules here :
 * on the [Odoo Apps Store](https://www.odoo.com/apps/modules/browse?author=GRAP).
 * on the [Odoo Community Association Apps Store](https://odoo-community.org/shop?search=groupement+r%C3%A9gional&order=total_download_count+desc)
