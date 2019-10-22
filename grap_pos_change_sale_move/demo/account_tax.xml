@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2017 - Today: GRAP (http://www.grap.coop)
+@author Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="sale_vat_5" model="account.tax">
+        <field name="name">SALE VAT 5% Included (grap_pos_change_sale_move)</field>
+        <field name="type_tax_use">sale</field>
+        <field name="amount">5.0</field>
+        <field name="price_include" eval="True"/>
+        <field name="company_id" ref="base.main_company" />
+        <field name="account_id" ref="account_vat_5" />
+        <field name="refund_account_id" ref="account_vat_5" />
+    </record>
+
+    <record id="sale_vat_20" model="account.tax">
+        <field name="name">SALE VAT 20% Included (grap_pos_change_sale_move)</field>
+        <field name="type_tax_use">sale</field>
+        <field name="amount">20.0</field>
+        <field name="price_include" eval="True"/>
+        <field name="company_id" ref="base.main_company" />
+        <field name="account_id" ref="account_vat_20" />
+        <field name="refund_account_id" ref="account_vat_20" />
+    </record>
+
+</odoo>
