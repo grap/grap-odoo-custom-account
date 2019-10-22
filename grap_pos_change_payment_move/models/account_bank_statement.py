@@ -63,10 +63,7 @@ class AccountBankStatement(models.Model):
                 moves.post()
 
         return self.write(
-            {
-                "state": "confirm",
-                "date_done": time.strftime("%Y-%m-%d %H:%M:%S"),
-            }
+            {"state": "confirm", "date_done": time.strftime("%Y-%m-%d %H:%M:%S")}
         )
 
     @api.multi
@@ -77,18 +74,12 @@ class AccountBankStatement(models.Model):
 
         dict_1 = self._prepare_bank_move_line_pos(key, statement_lines)
         dict_2 = self._prepare_counterpart_move_line_pos(key, statement_lines)
-        lines_vals = [
-            (0, 0, dict_1),
-            (0, 0, dict_2),
-        ]
-        move_vals = self._prepare_move_pos(
-            key, statement_lines, move_name, lines_vals
-        )
+        lines_vals = [(0, 0, dict_1), (0, 0, dict_2)]
+        move_vals = self._prepare_move_pos(key, statement_lines, move_name, lines_vals)
         return AccountMove.create(move_vals)
 
     @api.multi
-    def _prepare_move_pos(
-            self, key, statement_lines, move_name, lines_vals):
+    def _prepare_move_pos(self, key, statement_lines, move_name, lines_vals):
         self.ensure_one()
         (account_id, partner_id, move_date) = key
         return {
@@ -101,9 +92,7 @@ class AccountBankStatement(models.Model):
         }
 
     @api.multi
-    def _prepare_bank_move_line_pos(
-        self, key, statement_lines
-    ):
+    def _prepare_bank_move_line_pos(self, key, statement_lines):
         self.ensure_one()
         (account_id, partner_id, move_date) = key
         amount = 0
@@ -124,9 +113,7 @@ class AccountBankStatement(models.Model):
         }
 
     @api.multi
-    def _prepare_counterpart_move_line_pos(
-        self, key, statement_lines
-    ):
+    def _prepare_counterpart_move_line_pos(self, key, statement_lines):
         self.ensure_one()
         (x, partner_id, move_date) = key
         amount = 0

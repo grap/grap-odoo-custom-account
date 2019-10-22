@@ -14,7 +14,7 @@ Point Of Sale - Change Payment Move Lines
     :target: https://github.com/GRAP/grap-odoo-custom-account/tree/12.0-ADD-grap_pos_change_payment_move/grap_pos_change_payment_move
     :alt: GRAP/grap-odoo-custom-account
 
-|badge1| |badge2| 
+|badge1| |badge2|
 
 this module intents to manage correctly payment move lines generated from
 point of sale.
@@ -23,7 +23,7 @@ By default, with Odoo, an account move is create by payment, that generates
 a lot of useless account moves for an accountant.
 
 With this module, when closing a PoS session, a single account move is created
-for each combination of: 
+for each combination of:
 
 * journal
 * pos order partner (*)

@@ -5,7 +5,7 @@ By default, with Odoo, an account move is create by payment, that generates
 a lot of useless account moves for an accountant.
 
 With this module, when closing a PoS session, a single account move is created
-for each combination of: 
+for each combination of:
 
 * journal
 * pos order partner (*)

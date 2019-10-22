@@ -10,9 +10,6 @@
     "license": "AGPL-3",
     "summary": "Make Bank accounting moves from PoS acceptable for accoutants",
     "depends": ["point_of_sale"],
-    "demo": [
-        "demo/res_groups.xml",
-        "demo/product_product.xml",
-    ],
+    "demo": ["demo/res_groups.xml", "demo/product_product.xml"],
     "installable": True,
 }
