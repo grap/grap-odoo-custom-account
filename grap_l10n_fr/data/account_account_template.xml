@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Quentin DUPONT <quentin.dupont@grap.coop>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- ====================================-->
+    <!-- Comptes 4x =========================-->
+    <!-- ====================================-->
+
+    <!-- Renommage du compte 4011 en 401-->
+    <record model="account.account.template" id="l10n_fr.fr_pcg_pay">
+        <field name="code">401</field>
+    </record>
+
+    <!-- Désactivation du compte 4017-->
+    <record model="account.account.template" id="l10n_fr.pcg_4017">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Renommage du compte 4111 en 411-->
+    <record model="account.account.template" id="l10n_fr.fr_pcg_recv">
+        <field name="code">411</field>
+    </record>
+
+    <!-- Désactivation du compte 4117-->
+    <record model="account.account.template" id="l10n_fr.pcg_4117">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- ====================================-->
+    <!-- Comptes 5x =========================-->
+    <!-- ====================================-->
+
+    <!-- Création d'un nouveau compte 5312-->
+    <record id="grap_l10n_fr_5312" model="account.account.template">
+      <field name="code">5312</field>
+      <field name="name">Caisse pour Petits achats</field>
+      <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+    </record>
+
+    <!-- Création d'un nouveau compte 581-->
+    <record id="grap_l10n_fr_581" model="account.account.template">
+      <field name="code">581</field>
+      <field name="name">Espèce en attente d'encaissement</field>
+      <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+    </record>
+
+    <!-- ====================================-->
+    <!-- Comptes 6x =========================-->
+    <!-- ====================================-->
+
+    <!-- Renommage du compte 6011 en 601-->
+    <record model="account.account.template" id="l10n_fr.pcg_6011">
+      <field name="code">601</field>
+    </record>
+
+    <!-- Désactivation du compte 6012-->
+    <record model="account.account.template" id="l10n_fr.pcg_6012">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Désactivation du compte 6017-->
+    <record model="account.account.template" id="l10n_fr.pcg_6017">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Creation d'un sous-compte 6041 -->
+    <record id="grap_l10n_fr_6041" model="account.account.template">
+      <field name="code">6041</field>
+      <field name="name">Contrib GRAP</field>
+      <field name="user_type_id" ref="account.data_account_type_expenses"/>
+    </record>
+
+    <!-- Renommage du compte 6338-->
+    <record model="account.account.template" id="l10n_fr.pcg_6338" >
+        <field name="name">Autres Taxes</field>
+    </record>
+
+    <!-- Désactivation du compte 658-->
+    <record model="account.account.template" id="l10n_fr.pcg_658">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Creation d'un sous-compte 6581 -->
+    <record model="account.account.template" id="pcg_6581">
+        <field name="code">6581</field>
+        <field name="name">Fond de caisse (D)</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+    </record>
+
+    <!-- Creation d'un sous-compte 6582 -->
+    <record id="grap_l10n_fr_6582" model="account.account.template">
+      <field name="code">6582</field>
+      <field name="name">Erreurs de caisse</field>
+      <field name="user_type_id" ref="account.data_account_type_expenses"/>
+    </record>
+
+    <!-- Renommage du compte 6071-->
+    <record model="account.account.template" id="l10n_fr.pcg_6071">
+        <field name="name">Achats de marchandises externes</field>
+    </record>
+
+    <!-- Désactivation du compte 6072-->
+    <record model="account.account.template" id="l10n_fr.pcg_6072">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Renommage des comptes 609x-->
+    <record model="account.account.template" id="l10n_fr.pcg_6091">
+        <field name="name">RRR sur achats de matières premières (et fournitures)</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6092">
+        <field name="name">RRR sur achats d'autres approvisionnements stockés</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6094">
+        <field name="name">RRR sur achats d'études et prestations de services</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6095">
+        <field name="name">RRR sur achats de matériel, équipements et travaux</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6096">
+        <field name="name">RRR sur achats d'approvisionnements non stockés</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6097">
+        <field name="name">RRR sur achats de marchandises</field>
+    </record>
+
+
+    <!-- ====================================-->
+    <!-- Comptes 7x =========================-->
+    <!-- ====================================-->
+
+    <!-- Renommage du compte 7011 en 701-->
+    <record model="account.account.template" id="l10n_fr.pcg_7011">
+      <field name="code">701</field>
+    </record>
+
+    <!-- Désactivation du compte 7012-->
+    <record model="account.account.template" id="l10n_fr.pcg_7012">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Désactivation du compte 758-->
+    <record model="account.account.template" id="l10n_fr.pcg_758">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Creation d'un sous-compte 7581 -->
+    <record model="account.account.template" id="pcg_7581">
+        <field name="code">7581</field>
+        <field name="name">Fond de caisse (C)</field>
+        <field name="user_type_id" ref="account.data_account_type_revenue"/>
+    </record>
+
+    <!-- Creation d'un sous-compte 7582 -->
+    <record model="account.account.template" id="pcg_7582">
+        <field name="code">7582</field>
+        <field name="name">Erreurs de caisse</field>
+        <field name="user_type_id" ref="account.data_account_type_revenue"/>
+    </record>
+
+    <!-- Creation d'un sous-compte 7063 -->
+    <record id="grap_l10n_fr_7063" model="account.account.template">
+      <field name="code">7063</field>
+      <field name="name">Commission sur Vente</field>
+      <field name="user_type_id" ref="account.data_account_type_revenue"/>
+    </record>
+
+    <!-- Creation d'un sous-compte 7066 -->
+    <record id="grap_l10n_fr_7066" model="account.account.template">
+      <field name="code">7066</field>
+      <field name="name">Prestation Formation</field>
+      <field name="user_type_id" ref="account.data_account_type_revenue"/>
+    </record>
+
+    <!-- Renommage du compte 7071 en 707-->
+    <record model="account.account.template" id="l10n_fr.pcg_7071">
+        <field name="name">Achats de marchandises externes</field>
+    </record>
+
+    <!-- Désactivation du compte 7072-->
+    <record model="account.account.template" id="l10n_fr.pcg_7072">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Désactivation du compte 7073-->
+    <record model="account.account.template" id="l10n_fr.pcg_7073">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Renommage des comptes 709x-->
+    <record model="account.account.template" id="l10n_fr.pcg_7091">
+        <field name="name">RRR sur ventes de produits finis</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7092">
+        <field name="name">RRR sur ventes de produits intermédiaires</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7094">
+        <field name="name">RRR sur travaux</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7095">
+        <field name="name">RRR sur études</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7096">
+        <field name="name">RRR sur prestations de services</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7097">
+        <field name="name">RRR sur ventes de marchandises</field>
+    </record>
+</odoo>
