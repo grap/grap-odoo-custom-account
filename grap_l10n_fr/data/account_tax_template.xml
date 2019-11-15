@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Quentin DUPONT <quentin.dupont@grap.coop>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- ====================================-->
+    <!-- TVA à la vente                      -->
+    <!-- ====================================-->
+
+    <!-- TVA Vente HT -->
+    <record id="l10n_fr.tva_normale" model="account.tax.template">
+        <field name="name">TVA vente à 20,0% basé sur prix HT</field>
+        <field name="description">TVA-VT-20.0-HT</field>
+    </record>
+
+    <record id="l10n_fr.tva_normale_encaissement" model="account.tax.template">
+        <field name="active" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_intermediaire" model="account.tax.template">
+        <field name="name">TVA vente à 10,0% basé sur prix HT</field>
+        <field name="description">TVA-VT-10.0-HT</field>
+    </record>
+
+    <record id="l10n_fr.tva_specifique" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_reduite" model="account.tax.template">
+        <field name="name">TVA vente à 05,5% basé sur prix HT</field>
+        <field name="description">TVA-VT-05.5-HT</field>
+    </record>
+
+    <record id="l10n_fr.tva_reduite_encaissement" model="account.tax.template">
+        <field name="active" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_super_reduite" model="account.tax.template">
+        <field name="name">TVA vente à 02,1% basé sur prix HT</field>
+        <field name="description">TVA-VT-02.1-HT</field>
+    </record>
+
+    <record id="l10n_fr.tva_super_reduite_encaissement" model="account.tax.template">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- TVA Vente TTC -->
+     <record id="l10n_fr.tva_normale_ttc" model="account.tax.template">
+        <field name="name">TVA vente à 20,0% basé sur prix TTC</field>
+        <field name="description">TVA-VT-20.0-TTC</field>
+    </record>
+
+    <record id="l10n_fr.tva_normale_encaissement_ttc" model="account.tax.template">
+        <field name="active" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_intermediaire_ttc" model="account.tax.template">
+        <field name="name">TVA vente à 10,0% basé sur prix TTC</field>
+        <field name="description">TVA-VT-10.0-TTC</field>
+    </record>
+
+    <record id="l10n_fr.tva_specifique_ttc" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_reduite_ttc" model="account.tax.template">
+        <field name="name">TVA vente à 05,5% basé sur prix TTC</field>
+        <field name="description">TVA-VT-05.5-TTC</field>
+    </record>
+
+    <record id="l10n_fr.tva_reduite_encaissement_ttc" model="account.tax.template">
+        <field name="active" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_super_reduite_ttc" model="account.tax.template">
+        <field name="name">TVA vente à 02,1% basé sur prix TTC</field>
+        <field name="description">TVA-VT-02.1-TTC</field>
+    </record>
+
+    <record id="l10n_fr.tva_super_reduite_encaissement_ttc" model="account.tax.template">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- ====================================-->
+    <!-- TVA à l'achat                       -->
+    <!-- ====================================-->
+
+    <!-- TVA Achat HT -->
+    <record id="l10n_fr.tva_acq_normale" model="account.tax.template">
+        <field name="name">TVA achat 20,0% basé sur prix HT</field>
+        <field name="description">TVA-HA-20.0-HT</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intermediaire" model="account.tax.template">
+        <field name="name">TVA achat 10,0% basé sur prix HT</field>
+        <field name="description">TVA-HA-10.0-HT</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_specifique" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_reduite" model="account.tax.template">
+        <field name="name">TVA achat 05,5% basé sur prix HT</field>
+        <field name="description">TVA-HA-05.5-HT</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_super_reduite" model="account.tax.template">
+        <field name="name">TVA achat 02,1% basé sur prix HT</field>
+        <field name="description">TVA-HA-02.1-HT</field>
+    </record>
+
+    <!-- TVA Achat TTC -->
+    <record id="l10n_fr.tva_acq_normale_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intermediaire_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_specifique_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_reduite_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_super_reduite_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- ====================================-->
+    <!-- TVA à l'achat (Immobilisation)      -->
+    <!-- ====================================-->
+
+    <record id="l10n_fr.tva_imm_normale" model="account.tax.template">
+        <field name="name">TVA achat 20,0% basé sur prix HT pour IMMOBILISATION</field>
+        <field name="description">TVA-HA-IMMO-20.0-HT</field>
+        <field name="price_include" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_imm_intermediaire" model="account.tax.template">
+        <field name="name">TVA achat 10,0% basé sur prix HT pour IMMOBILISATION</field>
+        <field name="description">TVA-HA-IMMO-10.0-HT</field>
+        <field name="price_include" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_imm_specifique" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="l10n_fr.tva_imm_reduite" model="account.tax.template">
+        <field name="name">TVA achat 05,5% basé sur prix HT pour IMMOBILISATION</field>
+        <field name="description">TVA-HA-IMMO-5.5-HT</field>
+        <field name="price_include" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_imm_super_reduite" model="account.tax.template">
+        <field name="name">TVA achat 02,1% basé sur prix HT pour IMMOBILISATION</field>
+        <field name="description">TVA-HA-IMMO-2.1-HT</field>
+        <field name="price_include" eval="False"/>
+    </record>
+
+
+
+    <!-- ====================================-->
+    <!-- TVA à l'achat (Intracom)            -->
+    <!-- ====================================-->
+
+<!-- Achat Intracom Due -->
+    <record id="l10n_fr.tva_intra_normale" model="account.tax.template">
+        <field name="name">TVA achat 20,0% basé sur prix HT DUE Intracom</field>
+        <field name="description">TVA-HA-UE-due-20.0</field>
+    </record>
+
+    <record id="l10n_fr.tva_intra_intermediaire" model="account.tax.template">
+        <field name="name">TVA achat 10,0% basé sur prix HT DUE Intracom</field>
+        <field name="description">TVA-HA-UE-due-10.0</field>
+    </record>
+
+    <record id="l10n_fr.tva_intra_specifique" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_intra_reduite" model="account.tax.template">
+        <field name="name">TVA achat 05,5% basé sur prix HT DUE Intracom</field>
+        <field name="description">TVA-HA-UE-due-05.5</field>
+    </record>
+
+    <record id="l10n_fr.tva_intra_super_reduite" model="account.tax.template">
+        <field name="name">TVA achat 02,1% basé sur prix HT DUE Intracom</field>
+        <field name="description">TVA-HA-UE-due-02.1</field>
+    </record>
+
+<!-- Achat Intracom déductible -->
+    <record id="l10n_fr.tva_acq_intra_normale" model="account.tax.template">
+        <field name="name">TVA achat 20,0% basé sur prix HT DEDUCTIBLE Intracom</field>
+        <field name="description">TVA-HA-UE-deduc-20.0</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intra_intermediaire" model="account.tax.template">
+        <field name="name">TVA achat 10,0% basé sur prix HT DEDUCTIBLE Intracom</field>
+        <field name="description">TVA-HA-UE-deduc-10.0</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intra_specifique" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intra_reduite" model="account.tax.template">
+        <field name="name">TVA achat 05,5% basé sur prix HT DEDUCTIBLE Intracom</field>
+        <field name="description">TVA-HA-UE-deduc-05.5</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intra_super_reduite" model="account.tax.template">
+        <field name="name">TVA achat 02,1% basé sur prix HT DEDUCTIBLE Intracom</field>
+        <field name="description">TVA-HA-UE-deduc-02.1</field>
+    </record>
+</odoo>
