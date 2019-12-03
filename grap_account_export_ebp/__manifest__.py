@@ -19,10 +19,10 @@
         # "wizard/view_wizard_ebp_unexport.xml",
         "views/view_account_account.xml",
         "views/view_account_journal.xml",
-        # "views/view_account_move.xml",
+        "views/view_account_move.xml",
         # "views/view_account_tax_code.xml",  # TO CHANGE
         "views/view_ebp_export.xml",
-        # "views/view_res_partner.xml",
+        "views/view_res_partner.xml",
         "views/view_res_company.xml",
     ],
     "demo": [

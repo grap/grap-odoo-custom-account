@@ -30,7 +30,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_account_move_filter" />
         <field name="arch" type="xml">
-            <filter string="Posted" position="after">
+            <filter name="posted" position="after">
                 <field name="ebp_export_id" />
                 <filter string="Not Exported in EBP" name="ebp_not_exported"
                     domain="[('ebp_export_id', '=', False)]"/>
@@ -38,22 +38,20 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-<!--     <record id="value_wizard_ebp_export" model="ir.values">
-        <field name="model_id" ref="model_wizard_ebp_export" />
+    <record id="action_wizard_ebp_export" model="ir.actions.act_window">
         <field name="name">Export to EBP</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_wizard_ebp_export'))" />
-        <field name="key">action</field>
-        <field name="model">account.move</field>
+        <field name="res_model">wizard.ebp.export</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
     </record>
 
-    <record id="value_wizard_ebp_unexport" model="ir.values" >
-        <field name="model_id" ref="model_wizard_ebp_unexport" />
+    <record id="action_wizard_ebp_unexport" model="ir.actions.act_window">
         <field name="name">Cancel EBP Export</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_wizard_ebp_unexport'))" />
-        <field name="key">action</field>
-        <field name="model">account.move</field>
-    </record> -->
+        <field name="res_model">wizard.ebp.unexport</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+    </record>
 
 </odoo>

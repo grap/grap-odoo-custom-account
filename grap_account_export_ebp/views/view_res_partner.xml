@@ -10,7 +10,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-            <field name="property_account_position" position="after">
+            <field name="property_account_position_id" position="after">
                 <field name="ebp_suffix" groups="account.group_account_manager"/>
                 <newline />
             </field>
@@ -21,7 +21,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter" />
         <field name="arch" type="xml">
-            <filter help="My Partners" position="after">
+            <filter name="type_person" position="after">
                <filter string="Without EBP Suffix"
                         name="without_suffix"
                         domain="[('ebp_suffix', '=', False)]"/>
@@ -67,13 +67,22 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         action="action_res_partner"
         sequence="1"/>
 
+    <record id="action_wizard_res_partner_add_suffix" model="ir.actions.act_window">
+        <field name="name">Add EBP Suffixes</field>
+        <field name="res_model">wizard.res.partner.add.suffix</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
+    </record>
+
+<!--
     <record id="value_res_partner_add_suffix" model="ir.values">
         <field name="model_id" ref="model_wizard_res_partner_add_suffix" />
-        <field name="name">Add EBP Suffixes</field>
+        <field name="name"></field>
         <field name="key2">client_action_multi</field>
         <field name="value" eval="'ir.actions.act_window,' + str(ref('action_wizard_res_partner_add_suffix'))" />
         <field name="key">action</field>
         <field name="model">res.partner</field>
-    </record>
+    </record> -->
 
 </odoo>
