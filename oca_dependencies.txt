@@ -1,1 +1,3 @@
 account-financial-tools
+
+odoo-cae    https://github.com/odoo-cae/odoo-addons-cae     12.0
