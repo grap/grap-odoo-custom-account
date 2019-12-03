@@ -20,7 +20,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_tree" />
         <field name="arch" type="xml">
-            <field name="code" position="after">
+            <field name="name" position="before">
                 <field name="ebp_code"/>
             </field>
         </field>
