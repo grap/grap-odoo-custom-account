@@ -75,14 +75,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="binding_model_id" ref="base.model_res_partner" />
     </record>
 
-<!--
-    <record id="value_res_partner_add_suffix" model="ir.values">
-        <field name="model_id" ref="model_wizard_res_partner_add_suffix" />
-        <field name="name"></field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_wizard_res_partner_add_suffix'))" />
-        <field name="key">action</field>
-        <field name="model">res.partner</field>
-    </record> -->
-
 </odoo>

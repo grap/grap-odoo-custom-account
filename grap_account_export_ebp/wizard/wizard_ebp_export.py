@@ -132,7 +132,7 @@ class WizardEbpExport(models.TransientModel):
             full_domain += [("state", "!=", "draft")]
 
             # Filter by partner without ebp suffix
-            incorrect_partner_move_lines = selected_moves.mapped("line_id").filtered(
+            incorrect_partner_move_lines = selected_moves.mapped("line_ids").filtered(
                 lambda x: x.partner_id and x.partner_id.ebp_suffix is False
             )
             incorrect_partner_move_ids = incorrect_partner_move_lines.mapped(
@@ -142,7 +142,7 @@ class WizardEbpExport(models.TransientModel):
             full_domain += [("id", "not in", incorrect_partner_move_ids)]
 
             # Filter by tax code without ebp suffix
-            incorrect_tax_move_lines = selected_moves.mapped("line_id").filtered(
+            incorrect_tax_move_lines = selected_moves.mapped("line_ids").filtered(
                 lambda x: x.account_id.ebp_export_tax
                 and x.tax_code_id
                 and x.tax_code_id.ebp_suffix is False

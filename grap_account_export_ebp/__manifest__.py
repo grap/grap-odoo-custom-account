@@ -15,7 +15,7 @@
         "security/ir_rule.xml",
         "views/menu.xml",
         "wizard/view_wizard_res_partner_add_suffix.xml",
-        # "wizard/view_wizard_ebp_export.xml",
+        "wizard/view_wizard_ebp_export.xml",
         # "wizard/view_wizard_ebp_unexport.xml",
         "views/view_account_account.xml",
         "views/view_account_journal.xml",
