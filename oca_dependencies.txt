@@ -1,3 +1,4 @@
 account-financial-tools
+multi-company
 
 odoo-cae    https://github.com/odoo-cae/odoo-addons-cae     12.0
