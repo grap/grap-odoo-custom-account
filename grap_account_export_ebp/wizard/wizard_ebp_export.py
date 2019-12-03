@@ -135,27 +135,26 @@ class WizardEbpExport(models.TransientModel):
             full_domain += [("state", "!=", "draft")]
 
             # Filter by partner without ebp suffix
-            without_correct_partner_move_lines = selected_moves.mapped(
-                "line_id"
-            ).filtered(lambda x: x.partner_id and x.partner_id.ebp_suffix is False)
-            without_correct_partner_move_ids =\
-                without_correct_partner_move_lines.mapped("move_id").ids
-            wizard.ignored_partner_move_qty = len(without_correct_partner_move_ids)
-            full_domain += [("id", "not in", without_correct_partner_move_ids)]
+            incorrect_partner_move_lines = selected_moves.mapped("line_id").filtered(
+                lambda x: x.partner_id and x.partner_id.ebp_suffix is False
+            )
+            incorrect_partner_move_ids = incorrect_partner_move_lines.mapped(
+                "move_id"
+            ).ids
+            wizard.ignored_partner_move_qty = len(incorrect_partner_move_ids)
+            full_domain += [("id", "not in", incorrect_partner_move_ids)]
 
             # Filter by tax code without ebp suffix
-            without_correct_tax_code_move_lines = selected_moves.mapped(
-                "line_id"
-            ).filtered(
+            incorrect_tax_code_move_lines = selected_moves.mapped("line_id").filtered(
                 lambda x: x.account_id.ebp_export_tax_code
                 and x.tax_code_id
                 and x.tax_code_id.ebp_suffix is False
             )
-            without_correct_tax_code_move_ids = without_correct_tax_code_move_lines.mapped(
+            incorrect_tax_code_move_ids = incorrect_tax_code_move_lines.mapped(
                 "move_id"
             ).ids
-            wizard.ignored_tax_code_move_qty = len(without_correct_tax_code_move_ids)
-            full_domain += [("id", "not in", without_correct_tax_code_move_ids)]
+            wizard.ignored_tax_code_move_qty = len(incorrect_tax_code_move_ids)
+            full_domain += [("id", "not in", incorrect_tax_code_move_ids)]
 
             # filter by period (from fiscalyear)
             if wizard.fiscalyear_id:
