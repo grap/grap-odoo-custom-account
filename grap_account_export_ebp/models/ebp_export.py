@@ -6,8 +6,8 @@
 
 import base64
 import logging
+from io import StringIO
 
-import cStringIO
 from openerp import _, api, fields, models
 from openerp.exceptions import Warning as UserError
 
@@ -141,9 +141,9 @@ class EbpExport(models.Model):
         """Export moves into 3 files and mark the moves as exported"""
         self.ensure_one()
         # Create files
-        moves_file = cStringIO.StringIO()
-        accounts_file = cStringIO.StringIO()
-        balance_file = cStringIO.StringIO()
+        moves_file = StringIO()
+        accounts_file = StringIO()
+        balance_file = StringIO()
 
         # Export into files
         self._write_header_into_moves_file(moves_file)
