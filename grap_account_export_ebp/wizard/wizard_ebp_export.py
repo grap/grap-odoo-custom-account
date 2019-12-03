@@ -1,4 +1,3 @@
-# Copyright (C) 2010 - 2015: Numérigraphe SARL
 # Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -9,6 +8,7 @@ from openerp import api, fields, models
 
 class WizardEbpExport(models.TransientModel):
     _name = "wizard.ebp.export"
+    _description = "EBP Export Wizard"
 
     _STATE_SELECTION = [("draft", "Draft"), ("done", "Done")]
 
@@ -21,11 +21,11 @@ class WizardEbpExport(models.TransientModel):
         selection=_STATE_SELECTION, string="State", default="draft"
     )
 
-    fiscalyear_id = fields.Many2one(
-        comodel_name="account.fiscalyear",
+    fiscal_year_id = fields.Many2one(
+        comodel_name="account.fiscal.year",
         string="Fiscal year",
         required=True,
-        default=lambda s: s._default_fiscalyear_id(),
+        default=lambda s: s._default_fiscal_year_id(),
         domain="[('state', '=', 'draft')]",
         help="Only the moves in this fiscal year will be exported",
     )
@@ -106,17 +106,14 @@ class WizardEbpExport(models.TransientModel):
 
     # Default Section
     @api.model
-    def _default_fiscalyear_id(self):
-        AccountMove = self.env["account.move"]
-        moves = AccountMove.browse(self.env.context.get("active_ids", []))
-        fiscalyears = moves.mapped("period_id.fiscalyear_id")
-        if len(fiscalyears) == 1:
-            return fiscalyears[0].id
-        else:
-            return False
+    def _default_fiscal_year_id(self):
+        # TODO Full refactor. Check min max dates from active_ids
+        # AccountMove = self.env["account.move"]
+        # moves = AccountMove.browse(self.env.context.get("active_ids", []))
+        pass
 
     @api.multi
-    @api.depends("fiscalyear_id")
+    @api.depends("fiscal_year_id")
     def _compute_move_selection(self):
         AccountMove = self.env["account.move"]
         AccountJournal = self.env["account.journal"]
@@ -157,14 +154,17 @@ class WizardEbpExport(models.TransientModel):
             full_domain += [("id", "not in", incorrect_tax_code_move_ids)]
 
             # filter by period (from fiscalyear)
-            if wizard.fiscalyear_id:
-                periods = wizard.fiscalyear_id.period_ids
-                wizard.ignored_period_move_qty = len(
-                    AccountMove.search(
-                        selection_domain + [("period_id", "not in", periods.ids)]
-                    )
-                )
-                full_domain += [("period_id", "in", periods.ids)]
+            # TODO
+            # Check by date
+            if wizard.fiscal_year_id:
+                pass
+                # periods = wizard.fiscal_year_id.period_ids
+                # wizard.ignored_period_move_qty = len(
+                #     AccountMove.search(
+                #         selection_domain + [("period_id", "not in", periods.ids)]
+                #     )
+                # )
+                # full_domain += [("period_id", "in", periods.ids)]
 
             # Filter by journal (ebp_code should be defined)
             journals = AccountJournal.search([("ebp_code", "!=", False)])
@@ -195,7 +195,7 @@ class WizardEbpExport(models.TransientModel):
         self.ensure_one()
         EbpExport = self.env["ebp.export"]
         self.ebp_export_id = EbpExport.create(
-            {"fiscalyear_id": self.fiscalyear_id.id, "description": self.description}
+            {"fiscal_year_id": self.fiscal_year_id.id, "description": self.description}
         )
         self._compute_move_selection()
         self.ebp_export_id.export(self.exported_move_ids)

@@ -1,4 +1,3 @@
-# Copyright (C) 2010 - 2015: Numérigraphe SARL
 # Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)

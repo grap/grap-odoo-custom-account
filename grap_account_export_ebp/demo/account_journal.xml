@@ -5,10 +5,14 @@ Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 @author Julien WESTE
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
-<openerp><data>
+<odoo>
 
-    <record id="account.sales_journal" model="account.journal">
-        <field name="ebp_code">TST</field>
+    <record id="sale_journal" model="account.journal">
+        <field name="name">EBP Demo - Sale Journal</field>
+        <field name="type">sale</field>
+        <field name="code">VT</field>
+        <field name="ebp_code">VT</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
 
-</data></openerp>
+</odoo>

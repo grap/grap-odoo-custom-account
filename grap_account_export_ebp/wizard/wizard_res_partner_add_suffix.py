@@ -1,4 +1,3 @@
-# Copyright (C) 2010 - 2015: Numérigraphe SARL
 # Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -19,6 +18,7 @@ except ImportError:
 
 class WizardResPartnerAddSuffix(models.TransientModel):
     _name = "wizard.res.partner.add.suffix"
+    _description = "Add Suffix for Partners Wizard"
 
     line_ids = fields.One2many(
         comodel_name="wizard.res.partner.add.suffix.line",

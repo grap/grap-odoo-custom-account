@@ -1,4 +1,3 @@
-# Copyright (C) 2010 - 2015: Numérigraphe SARL
 # Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -12,5 +11,5 @@ class AccountJournal(models.Model):
 
     ebp_code = fields.Char(
         string="EBP Code",
-        help="This code will be used when exporting" " entries in the journal column",
+        help="This code will be used when exporting entries in the journal column",
     )

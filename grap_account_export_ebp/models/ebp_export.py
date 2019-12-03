@@ -1,4 +1,3 @@
-# Copyright (C) 2010 - 2015: Numérigraphe SARL
 # Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -22,6 +21,7 @@ except ImportError:
 
 class EbpExport(models.Model):
     _name = "ebp.export"
+    _description = "EBP Export"
     _order = "date desc"
 
     _EBP_REMOVE_CHAR_LIST = ["\n;", ";", ",", '"']
@@ -35,8 +35,8 @@ class EbpExport(models.Model):
         default=lambda s: s._default_company_id(),
     )
 
-    fiscalyear_id = fields.Many2one(
-        comodel_name="account.fiscalyear",
+    fiscal_year_id = fields.Many2one(
+        comodel_name="account.fiscal.year",
         string="Fiscal year",
         required=True,
         readonly=True,
