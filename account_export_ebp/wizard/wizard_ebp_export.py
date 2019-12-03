@@ -138,7 +138,8 @@ class WizardEbpExport(models.TransientModel):
             without_correct_partner_move_lines = selected_moves.mapped(
                 "line_id"
             ).filtered(lambda x: x.partner_id and x.partner_id.ebp_suffix is False)
-            without_correct_partner_move_ids = without_correct_partner_move_lines.mapped("move_id").ids
+            without_correct_partner_move_ids =\
+                without_correct_partner_move_lines.mapped("move_id").ids
             wizard.ignored_partner_move_qty = len(without_correct_partner_move_ids)
             full_domain += [("id", "not in", without_correct_partner_move_ids)]
 
