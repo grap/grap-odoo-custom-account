@@ -44,7 +44,7 @@ class AccountTaxCode(models.Model):
             FROM account_move_line aml
             INNER JOIN account_account aa
              ON aa.id = aml.account_id
-            WHERE aa.ebp_export_tax_code is True
+            WHERE aa.ebp_export_tax is True
             AND tax_code_id in %s
             AND aml.date >= '%s'
             GROUP BY aml.tax_code_id

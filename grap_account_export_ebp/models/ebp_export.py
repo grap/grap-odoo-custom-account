@@ -247,7 +247,7 @@ class EbpExport(models.Model):
             res += partner.ebp_suffix
 
         # Tax Suffix
-        if account.ebp_export_tax_code:
+        if account.ebp_export_tax:
             if line.tax_code_id.ebp_suffix:
                 # Tax code is defined
                 res += line.tax_code_id.ebp_suffix
@@ -425,7 +425,7 @@ class EbpExport(models.Model):
                     "fax": partner.fax or "",
                 }
             )
-        elif line.account_id.ebp_export_tax_code and line.tax_code_id.ebp_suffix:
+        elif line.account_id.ebp_export_tax and line.tax_code_id.ebp_suffix:
             res.update(
                 {
                     "name": (

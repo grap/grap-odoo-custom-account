@@ -10,13 +10,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">account.account</field>
         <field name="inherit_id" ref="account.view_account_form" />
         <field name="arch" type="xml">
-            <field name="deprecated" position="after">
-                <group string="EBP Settings">
-                    <field name="ebp_export_tax_code"/>
-                    <field name="ebp_code_no_tax"/>
+            <xpath expr="//group/group" position="after">
+                <group string="EBP Settings" colspan="4">
+                    <field name="ebp_export_tax"/>
+                    <field name="ebp_code_no_tax" attrs="{'invisible': [('ebp_export_tax', '=', False)]}"/>
                     <field name="ebp_analytic_mode"/>
                 </group>
-            </field>
+            </xpath>
         </field>
     </record>
 

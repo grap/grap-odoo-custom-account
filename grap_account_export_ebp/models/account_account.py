@@ -16,15 +16,14 @@ class AccountAccount(models.Model):
     ]
 
     # Columns section
-    ebp_export_tax_code = fields.Boolean(
-        oldname="export_tax_code",
-        string="Export to EBP according to Tax Codes",
+    ebp_export_tax = fields.Boolean(
+        string="Export according Taxes",
         help="If checked, when you export moves from this account,"
         " it will create one account for each Tax Code",
     )
 
     ebp_code_no_tax = fields.Char(
-        string="Tax Code Suffix in EBP (if no tax)",
+        string="Tax Suffix if undefined",
         help="When exporting Entries to EBP, this suffix will be"
         " appended to the Account Number to make it a new Account,"
         " if 'Export to EBP according to Tax Codes' is checked, and"
@@ -32,7 +31,7 @@ class AccountAccount(models.Model):
     )
 
     ebp_analytic_mode = fields.Selection(
-        string="EBP Analytic Mode",
+        string="Analytic Export Mode",
         compute="_compute_ebp_analytic_mode",
         selection=_EBP_ANALYTIC_MODE_SELECTION,
     )

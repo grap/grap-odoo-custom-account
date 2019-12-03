@@ -76,7 +76,7 @@ class WizardEbpExport(models.TransientModel):
         compute="_compute_move_selection", multi="move_selection", store=True
     )
 
-    ignored_tax_code_move_qty = fields.Integer(
+    ignored_tax_move_qty = fields.Integer(
         compute="_compute_move_selection", multi="move_selection", store=True
     )
 
@@ -142,16 +142,14 @@ class WizardEbpExport(models.TransientModel):
             full_domain += [("id", "not in", incorrect_partner_move_ids)]
 
             # Filter by tax code without ebp suffix
-            incorrect_tax_code_move_lines = selected_moves.mapped("line_id").filtered(
-                lambda x: x.account_id.ebp_export_tax_code
+            incorrect_tax_move_lines = selected_moves.mapped("line_id").filtered(
+                lambda x: x.account_id.ebp_export_tax
                 and x.tax_code_id
                 and x.tax_code_id.ebp_suffix is False
             )
-            incorrect_tax_code_move_ids = incorrect_tax_code_move_lines.mapped(
-                "move_id"
-            ).ids
-            wizard.ignored_tax_code_move_qty = len(incorrect_tax_code_move_ids)
-            full_domain += [("id", "not in", incorrect_tax_code_move_ids)]
+            incorrect_tax_move_ids = incorrect_tax_move_lines.mapped("move_id").ids
+            wizard.ignored_tax_move_qty = len(incorrect_tax_move_ids)
+            full_domain += [("id", "not in", incorrect_tax_move_ids)]
 
             # filter by period (from fiscalyear)
             # TODO
