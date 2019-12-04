@@ -11,6 +11,8 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     # Column Section
+    ebp_to_check = fields.Boolean(string="EBP To check", default=False)
+
     ebp_export_id = fields.Many2one(
         comodel_name="ebp.export",
         old_name="exported_ebp_id",

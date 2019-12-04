@@ -175,9 +175,9 @@ class WizardEbpExport(models.TransientModel):
 
             # filter moves to check
             wizard.ignored_to_check_move_qty = len(
-                AccountMove.search(selection_domain + [("to_check", "=", True)])
+                AccountMove.search(selection_domain + [("ebp_to_check", "=", True)])
             )
-            full_domain += [("to_check", "=", False)]
+            full_domain += [("ebp_to_check", "=", False)]
 
             # filter yet exported moves
             wizard.ignored_exported_move_qty = len(
