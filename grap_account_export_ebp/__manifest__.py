@@ -8,7 +8,7 @@
     "author": "GRAP",
     "category": "GRAP - Custom",
     "license": "AGPL-3",
-    "depends": ["account", "account_menu", "account_fiscal_year", "res_company_code"],
+    "depends": ["account", "account_menu", "account_fiscal_year"],
     "external_dependencies": {"python": ["unidecode"]},
     "data": [
         "security/ir.model.access.csv",
@@ -27,6 +27,7 @@
     ],
     "demo": [
         "demo/res_groups.xml",
+        "demo/account_fiscal_year.xml",
         "demo/account_journal.xml",
         "demo/account_account.xml",
         # "demo/account_move.xml",

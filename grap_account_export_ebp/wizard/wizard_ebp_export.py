@@ -26,7 +26,6 @@ class WizardEbpExport(models.TransientModel):
         string="Fiscal year",
         required=True,
         default=lambda s: s._default_fiscal_year_id(),
-        domain="[('state', '=', 'draft')]",
         help="Only the moves in this fiscal year will be exported",
     )
 

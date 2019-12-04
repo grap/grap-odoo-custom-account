@@ -9,7 +9,7 @@ from openerp.tests.common import TransactionCase
 
 class TestModule(TransactionCase):
     def setUp(self):
-        super(TestModule, self).setUp()
+        super().setUp()
         self.WizardEbpExport = self.env["wizard.ebp.export"]
         self.WizardResPartnerAddSuffix = self.env["wizard.res.partner.add.suffix"]
         self.move_invoice = self.env.ref("account.invoice_1").move_id
