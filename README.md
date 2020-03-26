@@ -14,6 +14,15 @@ You could be interesting too by the following repositories:
 * [grap-odoo-business](https://github.com/grap/grap-odoo-business)
 * [grap-odoo-custom](https://github.com/grap/grap-odoo-custom)
 
+[//]: # (addons)
+
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+
+[//]: # (end addons)
+
 ## About GRAP
 
 <p align="center">
@@ -25,7 +34,7 @@ french company which brings together activities that sale food products in the
 region Rhône Alpes. We promote organic and local food, social and solidarity
 economy and cooperation.
 
-The GRAP IT Team promote Free Software and develops all the Odoo modules under
-AGPL-3 Licence. You can find all this modules here :
+The GRAP IT Team promote Free Software and developp all the Odoo modules under
+AGPL-3 Licence. You can get find all this modules here :
+* on the [OCA Apps Store](https://odoo-community.org/shop?&search=GRAP)
 * on the [Odoo Apps Store](https://www.odoo.com/apps/modules/browse?author=GRAP).
-* on the [Odoo Community Association Apps Store](https://odoo-community.org/shop?search=groupement+r%C3%A9gional&order=total_download_count+desc)
