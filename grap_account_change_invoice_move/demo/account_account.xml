@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2019 - Today: GRAP (http://www.grap.coop)
+@author Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="sale_account_1" model="account.account">
+        <field name="name">Sale Account 1</field>
+        <field name="code">706GRAP</field>
+        <field name="user_type_id" ref="account.data_account_type_revenue"/>
+    </record>
+
+    <record id="sale_account_2" model="account.account">
+        <field name="name">Sale Account 2</field>
+        <field name="code">707GRAP</field>
+        <field name="user_type_id" ref="account.data_account_type_revenue"/>
+    </record>
+</odoo>
