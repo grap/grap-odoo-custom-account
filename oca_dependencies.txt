@@ -1,6 +1,6 @@
 account-financial-tools
 account-invoicing
 
-account-fiscal-rule_account_fiscal_position_type https://github.com/legalsylvain/account-fiscal-rule 12.0-mig-account_fiscal_position_type
+account-fiscal-rule__account_fiscal_position_type https://github.com/legalsylvain/account-fiscal-rule 12.0-mig-account_fiscal_position_type
 
-account-fiscal-rule_account_fiscal_position_usage_group https://github.com/legalsylvain/account-fiscal-rule 12.0-ADD-account_fiscal_position_usage_group
+account-fiscal-rule__account_fiscal_position_usage_group https://github.com/legalsylvain/account-fiscal-rule 12.0-ADD-account_fiscal_position_usage_group

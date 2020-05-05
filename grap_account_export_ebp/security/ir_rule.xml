@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 @author Julien WESTE
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
-<openerp><data>
+<odoo>
 
     <record id="ir_rule_ebp_export" model="ir.rule">
         <field name="name">EBP Export</field>
@@ -14,4 +14,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="domain_force">['|',('company_id','=',False), ('company_id','child_of',[user.company_id.id])]</field>
     </record>
 
-</data></openerp>
+</odoo>
