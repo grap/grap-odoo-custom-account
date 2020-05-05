@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ir_model_access_ebp_export_reader,EBP Export reader,grap_account_export_ebp.model_ebp_export,account.group_account_manager,1,1,1,
+ir_model_access_ebp_export_manager,EBP Export manager,grap_account_export_ebp.model_ebp_export,base.group_no_one,1,1,1,1
