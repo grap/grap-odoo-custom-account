@@ -20,7 +20,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[grap_account_change_invoice_move](grap_account_change_invoice_move/) | 12.0.1.0.0 | Remove product from the keys during account moves generation from invoices
+[grap_account_change_invoice_move](grap_account_change_invoice_move/) | 12.0.1.0.1 | Remove product from the keys during account moves generation from invoices
 [grap_pos_change_payment_move](grap_pos_change_payment_move/) | 12.0.1.0.0 | Make Bank accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move](grap_pos_change_sale_move/) | 12.0.1.0.0 | Make Sale accounting moves from PoS acceptable for accoutants
 
