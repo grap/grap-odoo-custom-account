@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Removing default 6071 / 7071 account-->
+     <record model="account.chart.template" id="l10n_fr.l10n_fr_pcg_chart_template">
+        <field name="property_account_expense_categ_id" />
+        <field name="property_account_income_categ_id" />
+    </record>
+
+</odoo>
