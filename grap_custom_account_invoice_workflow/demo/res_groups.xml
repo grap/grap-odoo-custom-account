@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2013-Today: GRAP (<http://www.grap.coop/>)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Julien WESTE
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+<!--
+        <record id="demo_invoice_0" model="account.invoice">
+            <field name="partner_id" ref="base.res_partner_12"/>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="payment_term_id" ref="account.account_payment_term"/>
+            <field name="type">out_invoice</field>
+            <field name="date_invoice" eval="time.strftime('%Y-%m')+'-01'"/>
+        </record>
+ -->
+</odoo>
