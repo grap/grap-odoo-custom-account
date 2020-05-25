@@ -3,13 +3,17 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Point Of Sale - Change Sale Move Lines",
+    "name": "Point Of Sale - Change Sale Move Lines - Test",
     "version": "12.0.1.0.0",
     "category": "Point Of Sale",
     "author": "GRAP",
-    "summary": "Make Sale accounting moves from PoS acceptable for accoutants",
-    "depends": ["point_of_sale"],
+    "summary": "Test the module grap_pos_change_sale_move",
+    "depends": ["grap_pos_change_sale_move", "l10n_generic_coa"],
     "license": "AGPL-3",
-    "demo": ["demo/res_groups.xml"],
+    "demo": [
+        "demo/account_account.xml",
+        "demo/account_tax.xml",
+        "demo/product_product.xml",
+    ],
     "installable": True,
 }

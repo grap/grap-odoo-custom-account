@@ -18,27 +18,35 @@ class TestModule(TransactionCase):
 
         self.pricelist = self.env.ref("product.list0")
 
-        self.product_no_vat = self.env.ref("grap_pos_change_sale_move.product_no_vat")
-        self.product_vat_5_707 = self.env.ref("grap_pos_change_sale_move.product_5_707")
+        self.product_no_vat = self.env.ref(
+            "grap_pos_change_sale_move_test.product_no_vat"
+        )
+        self.product_vat_5_707 = self.env.ref(
+            "grap_pos_change_sale_move_test.product_5_707"
+        )
         self.product_vat_20_701 = self.env.ref(
-            "grap_pos_change_sale_move.product_20_701"
+            "grap_pos_change_sale_move_test.product_20_701"
         )
         self.product_vat_20_707 = self.env.ref(
-            "grap_pos_change_sale_move.product_20_707"
+            "grap_pos_change_sale_move_test.product_20_707"
         )
         self.partner_agrolait = self.env.ref("base.res_partner_2")
 
         self.cash_journal = self.AccountJournal.search([("type", "=", "cash")])[0]
         self.partner_account = self.env.ref("l10n_generic_coa.1_conf_a_recv")
-        self.account_vat_5 = self.env.ref("grap_pos_change_sale_move.account_vat_5")
-        self.account_vat_20 = self.env.ref("grap_pos_change_sale_move.account_vat_20")
-        self.sale_vat_5 = self.env.ref("grap_pos_change_sale_move.sale_vat_5")
-        self.sale_vat_20 = self.env.ref("grap_pos_change_sale_move.sale_vat_20")
+        self.account_vat_5 = self.env.ref(
+            "grap_pos_change_sale_move_test.account_vat_5"
+        )
+        self.account_vat_20 = self.env.ref(
+            "grap_pos_change_sale_move_test.account_vat_20"
+        )
+        self.sale_vat_5 = self.env.ref("grap_pos_change_sale_move_test.sale_vat_5")
+        self.sale_vat_20 = self.env.ref("grap_pos_change_sale_move_test.sale_vat_20")
         self.account_income_701 = self.env.ref(
-            "grap_pos_change_sale_move.account_income_701"
+            "grap_pos_change_sale_move_test.account_income_701"
         )
         self.account_income_707 = self.env.ref(
-            "grap_pos_change_sale_move.account_income_707"
+            "grap_pos_change_sale_move_test.account_income_707"
         )
 
         # Create a new pos config and open it
