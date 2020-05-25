@@ -4,7 +4,7 @@
 
 {
     "name": "Point Of Sale - Change Sale Move Lines - Test",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Point Of Sale",
     "author": "GRAP",
     "summary": "Test the module grap_pos_change_sale_move",
