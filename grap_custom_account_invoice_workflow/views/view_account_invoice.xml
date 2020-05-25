@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2013-Today: GRAP (<http://www.grap.coop/>)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Julien WESTE
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_invoice_tree_supplier" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <button name="action_invoice_verify" states="draft" string="Verify" type="object"/>
+                <button name="action_invoice_open" states="draft,verified" type="object"
+                    groups="account.group_account_manager" string="Validate"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_form_supplier" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,verified,open,paid</attribute>
+            </field>
+            <button name="action_invoice_open" position="attributes">
+                <attribute name="groups" ref="account.group_account_manager"/>
+                <attribute name="states">draft,verified</attribute>
+            </button>
+            <button name="action_invoice_draft" position="attributes">
+                <attribute name="states">verified,cancel</attribute>
+            </button>
+            <button name="action_invoice_open" position="before">
+                <button name="action_invoice_verify" states="draft"
+                    class="oe_highlight" string="Verify" type="object"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>
