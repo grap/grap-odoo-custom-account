@@ -4,7 +4,7 @@
 
 {
     "name": "Point Of Sale - Change Sale Move Lines",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Point Of Sale",
     "author": "GRAP",
     "summary": "Make Sale accounting moves from PoS acceptable for accoutants",
