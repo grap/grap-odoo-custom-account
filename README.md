@@ -21,6 +21,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [grap_account_change_invoice_move](grap_account_change_invoice_move/) | 12.0.1.0.1 | Remove product from the keys during account moves generation from invoices
+[grap_l10n_fr](grap_l10n_fr/) | 12.0.1.0.0 | Custom changes of l10n_fr module for GRAP
 [grap_pos_change_payment_move](grap_pos_change_payment_move/) | 12.0.1.0.0 | Make Bank accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move](grap_pos_change_sale_move/) | 12.0.1.0.1 | Make Sale accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move_test](grap_pos_change_sale_move_test/) | 12.0.1.0.1 | Test the module grap_pos_change_sale_move
