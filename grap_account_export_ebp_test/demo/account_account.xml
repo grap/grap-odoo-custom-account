@@ -9,15 +9,22 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="sale_account" model="account.account">
         <field name="name">EBP Demo - Sale Account</field>
         <field name="user_type_id" ref="account.data_account_type_revenue"/>
-        <field name="code">7xy</field>
-        <field name="ebp_export_tax">7xy</field>
+        <field name="code">707EBP</field>
         <field name="company_id" ref="base.main_company"/>
     </record>
 
     <record id="receivable_account" model="account.account">
         <field name="name">EBP Demo - Receivable Account</field>
         <field name="user_type_id" ref="account.data_account_type_receivable"/>
-        <field name="code">4xy</field>
+        <field name="code">411EBP</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tax_account" model="account.account">
+        <field name="name">EBP Demo - Tax Account</field>
+        <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+        <field name="code">445EBP</field>
         <field name="reconcile" eval="True"/>
         <field name="company_id" ref="base.main_company"/>
     </record>
