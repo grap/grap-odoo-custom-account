@@ -4,12 +4,12 @@
 
 {
     "name": "GRAP - Export accounting moves to EBP",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "author": "GRAP",
     "category": "GRAP - Custom",
     "license": "AGPL-3",
     "depends": ["account", "account_menu", "account_fiscal_year"],
-    "external_dependencies": {"python": ["unidecode"]},
+    "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
         "security/ir.model.access.csv",
         "security/ir_rule.xml",
@@ -25,12 +25,6 @@
         "views/view_res_partner.xml",
         "views/view_res_company.xml",
     ],
-    "demo": [
-        "demo/res_groups.xml",
-        "demo/account_fiscal_year.xml",
-        "demo/account_journal.xml",
-        "demo/account_account.xml",
-        "demo/account_move.xml",
-    ],
+    "demo": ["demo/res_groups.xml"],
     "installable": True,
 }
