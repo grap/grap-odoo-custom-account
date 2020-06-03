@@ -43,10 +43,7 @@ class EbpExport(models.Model):
     )
 
     date = fields.Datetime(
-        string="Date",
-        required=True,
-        readonly=True,
-        default=lambda s: s._default_date(),
+        string="Date", required=True, readonly=True, default=lambda s: s._default_date()
     )
 
     name = fields.Char(
@@ -60,9 +57,7 @@ class EbpExport(models.Model):
     )
 
     exported_move_qty = fields.Integer(
-        oldname="exported_moves",
-        string="Quantity of Moves Exported",
-        readonly=True,
+        oldname="exported_moves", string="Quantity of Moves Exported", readonly=True
     )
 
     exported_account_qty = fields.Integer(
@@ -79,28 +74,24 @@ class EbpExport(models.Model):
     )
 
     ebp_move_qty = fields.Integer(
-        compute="_compute_ebp_move_qty",
-        string="EBP Moves Quantity",
-        store=True,
+        compute="_compute_ebp_move_qty", string="EBP Moves Quantity", store=True
     )
 
-    data_moves = fields.Binary(string="Moves file", readonly=True)
+    data_moves = fields.Binary(string="Moves file", readonly=True, attachment=True)
 
-    data_accounts = fields.Binary(string="Accounts file", readonly=True)
-
-    data_balance = fields.Binary(string="Balance file", readonly=True)
-
-    file_name_moves = fields.Char(
-        readonly=True, compute="_compute_file_name_moves"
+    data_accounts = fields.Binary(
+        string="Accounts file", readonly=True, attachment=True
     )
+
+    data_balance = fields.Binary(string="Balance file", readonly=True, attachment=True)
+
+    file_name_moves = fields.Char(readonly=True, compute="_compute_file_name_moves")
 
     file_name_accounts = fields.Char(
         readonly=True, compute="_compute_file_name_accounts"
     )
 
-    file_name_balance = fields.Char(
-        readonly=True, compute="_compute_file_name_balance"
-    )
+    file_name_balance = fields.Char(readonly=True, compute="_compute_file_name_balance")
 
     # Default Section
     @api.model
@@ -127,26 +118,17 @@ class EbpExport(models.Model):
     @api.multi
     def _compute_file_name_moves(self):
         for export in self:
-            export.file_name_moves = "export_%d_%s.csv" % (
-                export.id,
-                _("MOVES"),
-            )
+            export.file_name_moves = "export_%d_%s.csv" % (export.id, _("MOVES"))
 
     @api.multi
     def _compute_file_name_accounts(self):
         for export in self:
-            export.file_name_accounts = "export_%d_%s.csv" % (
-                export.id,
-                _("ACCOUNTS"),
-            )
+            export.file_name_accounts = "export_%d_%s.csv" % (export.id, _("ACCOUNTS"))
 
     @api.multi
     def _compute_file_name_balance(self):
         for export in self:
-            export.file_name_balance = "export_%d_%s.csv" % (
-                export.id,
-                _("BALANCE"),
-            )
+            export.file_name_balance = "export_%d_%s.csv" % (export.id, _("BALANCE"))
 
     # Custom Section
     @api.model
@@ -170,9 +152,7 @@ class EbpExport(models.Model):
         self._write_header_into_accounts_file(accounts_file)
         self._write_header_into_balance_file(balance_file)
 
-        vals = self._export_to_files(
-            moves, moves_file, accounts_file, balance_file
-        )
+        vals = self._export_to_files(moves, moves_file, accounts_file, balance_file)
         data_moves = base64.encodestring(moves_file.getvalue())
         data_accounts = base64.encodestring(accounts_file.getvalue())
         data_balance = base64.encodestring(balance_file.getvalue())
@@ -215,26 +195,17 @@ class EbpExport(models.Model):
 
                 # Collect data for the file of move lines
                 if move_key not in moves_data.keys():
-                    moves_data[move_key] = self._prepare_move_line_dict(
-                        move, line
-                    )
+                    moves_data[move_key] = self._prepare_move_line_dict(move, line)
                 else:
                     moves_data[move_key]["credit"] += line.credit
                     moves_data[move_key]["debit"] += line.debit
                     # Keep the earliest maturity date
-                    if (
-                        line.date_maturity
-                        < moves_data[move_key]["date_maturity"]
-                    ):
-                        moves_data[move_key][
-                            "date_maturity"
-                        ] = line.date_maturity
+                    if line.date_maturity < moves_data[move_key]["date_maturity"]:
+                        moves_data[move_key]["date_maturity"] = line.date_maturity
 
                 # Collect data for the file of accounts
                 if account_code not in accounts_data.keys():
-                    accounts_data[account_code] = self._prepare_account_dict(
-                        move, line
-                    )
+                    accounts_data[account_code] = self._prepare_account_dict(move, line)
                 accounts_data[account_code]["credit"] += line.credit
                 accounts_data[account_code]["debit"] += line.debit
 
@@ -299,8 +270,7 @@ class EbpExport(models.Model):
             # 15 characters but "EBP Comptabilité" v13 will refuse anything
             # longer than 10 characters
             raise UserError(
-                _("Account code '%s' is too long to be exported to" " EBP.")
-                % res
+                _("Account code '%s' is too long to be exported to" " EBP.") % res
             )
         return res
 
