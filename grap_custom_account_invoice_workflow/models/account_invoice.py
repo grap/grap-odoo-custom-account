@@ -50,7 +50,9 @@ class AccountInvoice(models.Model):
         return super(AccountInvoice, cancel_invoices).action_invoice_draft()
 
     def _check_supplier_validation_access(self):
-        if not self.env.user.has_group("account.group_account_manager"):
+        if not self.env.user.has_group(
+            "account.group_account_manager"
+        ) and not self.env.context.get("intercompany_trade_create", False):
             raise UserError(
                 _(
                     "You can not confirm supplier invoices because you're not"
@@ -69,17 +71,17 @@ class AccountInvoice(models.Model):
             # values for the 3 checked fields
             if invoice.get_xml_id()[invoice.id].startswith("l10n_generic_coa"):
                 continue
-            if not (
-                invoice.date_invoice
-                and invoice.date_due
-                and invoice.supplier_invoice_number
-            ):
+            message = []
+            if not invoice.date_invoice:
+                message.append(_("Date"))
+            if not invoice.date_due:
+                message.append(_("Due Date"))
+            if not invoice.supplier_invoice_number:
+                message.append(_("Supplier Invoice Number"))
+            if message:
                 raise UserError(
                     _(
                         "Verify a supplier invoice requires to set the"
-                        " following fields :\n"
-                        "* ' Date'\n"
-                        "* 'Due Date'\n"
-                        "* 'Supplier Invoice Number'"
+                        " following fields :\n %s" % ("\n - ".join(message))
                     )
                 )
