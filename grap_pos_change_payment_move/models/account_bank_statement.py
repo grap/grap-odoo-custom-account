@@ -42,8 +42,7 @@ class AccountBankStatement(models.Model):
                 keys = (
                     statement_line.account_id.id,
                     partner_id,
-                    "2019-10-21",
-                    # statement.date,
+                    pos_order.date_order.strftime("%Y-%m-%d"),
                 )
                 groups.setdefault(keys, [])
                 groups[keys].append(statement_line.id)
