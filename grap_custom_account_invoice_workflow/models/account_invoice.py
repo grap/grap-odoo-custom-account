@@ -37,9 +37,16 @@ class AccountInvoice(models.Model):
         purchase_invoices = self.filtered(lambda x: x.journal_id.type == "purchase")
         if purchase_invoices:
             # Check access right
-            self._check_supplier_validation_access()
+            purchase_invoices._check_supplier_validation_access()
             # Check fields
             purchase_invoices._check_supplier_information()
+
+        # Reset to draft verified invoices to avoid error in super
+        # of action_invoice_open
+        verified_invoices = self.filtered(lambda x: x.state == "verified").with_context(
+            tracking_disable=True
+        )
+        verified_invoices.write({"state": "draft"})
 
         return super().action_invoice_open()
 
@@ -73,7 +80,7 @@ class AccountInvoice(models.Model):
                 continue
             message = []
             if not invoice.date_invoice:
-                message.append(_("Date"))
+                message.append(_("Invoice Date"))
             if not invoice.date_due:
                 message.append(_("Due Date"))
             if not invoice.supplier_invoice_number:
@@ -82,6 +89,6 @@ class AccountInvoice(models.Model):
                 raise UserError(
                     _(
                         "Verify a supplier invoice requires to set the"
-                        " following fields :\n %s" % ("\n - ".join(message))
+                        " following fields :\n\n - %s" % ("\n - ".join(message))
                     )
                 )
