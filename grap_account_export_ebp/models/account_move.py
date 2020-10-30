@@ -15,7 +15,6 @@ class AccountMove(models.Model):
 
     ebp_export_id = fields.Many2one(
         comodel_name="ebp.export",
-        old_name="exported_ebp_id",
         string="EBP Export",
         copy=False,
         help="Indicates whether the move has already been exported"
@@ -26,20 +25,18 @@ class AccountMove(models.Model):
     @api.multi
     def write(self, vals):
         self._check_exported_moves()
-        return super(AccountMove, self).write(vals)
+        return super().write(vals)
 
     @api.multi
     def unlink(self):
         self._check_exported_moves()
-        return super(AccountMove, self).unlink()
+        return super().unlink()
 
     # Custom section
     @api.multi
     def _check_exported_moves(self):
         if not self.env.context.get("force_write_ebp_exported", False):
-            exported_moves = self.filtered(
-                lambda x: x.ebp_export_id.id is not False
-            )
+            exported_moves = self.filtered(lambda x: x.ebp_export_id.id is not False)
             if exported_moves:
                 raise UserError(
                     _("You cannot modify or delete exported moves: %s!")

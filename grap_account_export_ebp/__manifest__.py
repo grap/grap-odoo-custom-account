@@ -8,7 +8,13 @@
     "author": "GRAP",
     "category": "GRAP - Custom",
     "license": "AGPL-3",
-    "depends": ["account", "account_menu", "account_fiscal_year"],
+    "depends": [
+        "account",
+        "account_menu",
+        "account_fiscal_year",
+        "fiscal_company_base",
+        "intercompany_trade_base",
+    ],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
         "security/ir.model.access.csv",
@@ -16,11 +22,11 @@
         "views/menu.xml",
         "wizard/view_wizard_res_partner_add_suffix.xml",
         "wizard/view_wizard_ebp_export.xml",
-        # "wizard/view_wizard_ebp_unexport.xml",
+        "wizard/view_wizard_ebp_unexport.xml",
         "views/view_account_account.xml",
         "views/view_account_journal.xml",
         "views/view_account_move.xml",
-        # "views/view_account_tax_code.xml",  # TO CHANGE
+        "views/view_account_tax.xml",
         "views/view_ebp_export.xml",
         "views/view_res_partner.xml",
         "views/view_res_company.xml",
