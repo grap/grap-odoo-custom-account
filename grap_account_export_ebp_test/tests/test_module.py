@@ -9,107 +9,59 @@ class TestModule(TransactionCase):
     def setUp(self):
         super().setUp()
         self.WizardEbpExport = self.env["wizard.ebp.export"]
+        self.WizardEbpUnexport = self.env["wizard.ebp.unexport"]
         self.WizardResPartnerAddSuffix = self.env["wizard.res.partner.add.suffix"]
         self.move_1 = self.env.ref("grap_account_export_ebp_test.move_1")
         self.customer_1 = self.env.ref("grap_account_export_ebp_test.customer_1")
         self.sale_account = self.env.ref("grap_account_export_ebp_test.sale_account")
+        self.fiscal_year = self.env.ref(
+            "grap_account_export_ebp_test.curent_fiscal_year"
+        )
         self.receivable_account = self.env.ref(
             "grap_account_export_ebp_test.receivable_account"
         )
 
     # Test Section
-    def test_01_export_move_correct(self):
-        # Add EBP suffix to partner
-        suffix_wizard = self.WizardResPartnerAddSuffix.with_context(
-            active_ids=[self.customer_1.id]
-        ).create({})
-        suffix_wizard.button_affect_suffix()
-
+    def test_01_export_move_and_unexport(self):
+        self.move_1.post()
         wizard = self.WizardEbpExport.with_context(active_ids=[self.move_1.id]).create(
-            {}
+            {"fiscal_year_id": self.fiscal_year.id}
         )
-
         wizard.button_export()
-
         self.assertEqual(
-            self.move_invoice.ebp_export_id.id,
+            self.move_1.ebp_export_id.id,
             wizard.ebp_export_id.id,
             "Exporting a move should link it to the ebp export created.",
         )
 
-    # def test_02_export_move_without_partner_code(self):
-    #     wizard = self.WizardEbpExport.with_context(
-    #         active_ids=[self.move_invoice.id]
-    #     ).create({})
+        wizard = self.WizardEbpUnexport.with_context(
+            active_ids=[self.move_1.id]
+        ).create({})
+        wizard.button_unexport()
+        self.assertEqual(
+            self.move_1.ebp_export_id.id,
+            False,
+            "Cancelling an export should remove the link with the EBP export.",
+        )
 
-    #     wizard.button_export()
+    def test_02_export_move_without_unposted(self):
+        wizard = self.WizardEbpExport.with_context(active_ids=[self.move_1.id]).create(
+            {"fiscal_year_id": self.fiscal_year.id}
+        )
+        self.assertEqual(
+            wizard.ignored_draft_move_qty,
+            1,
+            "It should not be possible to export a unposted move.",
+        )
 
-    #     self.assertEqual(
-    #         self.move_invoice.ebp_export_id.id,
-    #         False,
-    #         "Exporting a move with partner without suffix"
-    #         " should not link it to the ebp export created.",
-    #     )
-
-    # def test_02_export_content(self):
-    #     self.move_1.button_validate()
-
-    #     wizard = self.WizardEbpExport.with_context(
-    # active_ids=[self.move_1.id]).create(
-    #         {}
-    #     )
-
-    #     wizard.button_export()
-    #     data_lines = self._get_lines_from_data_move(
-    #         self.move_1.ebp_export_id.data_moves
-    #     )
-    #     self._asset_line_content(
-    #         data_lines, self.move_1.journal_id.ebp_code,
-    # self.sale_account.code, 100, 0
-    #     )
-    #     self._asset_line_content(
-    #         data_lines, self.move_1.journal_id.ebp_code,
-    # self.sale_account.code, 0, 20
-    #     )
-    #     self._asset_line_content(
-    #         data_lines,
-    #         self.move_1.journal_id.ebp_code,
-    #         self.receivable_account.code,
-    #         0,
-    #         80,
-    #     )
-
-    # def _get_lines_from_data_move(self, base64_data):
-    #     datas = base64.decodestring(base64_data)
-    #     data_list = datas.split("\r\n")
-    #     if data_list[0][:4] == "Line":
-    #         del data_list[0]
-    #     if data_list[-1] == "":
-    #         del data_list[-1]
-    #     return data_list
-
-    # def _asset_line_content(
-    #     self, data_lines, journal_code, account_code, debit=0, credit=0
-    # ):
-    #     matches = []
-    #     for data_line in data_lines:
-    #         ok = True
-    #         line_table = data_line.split(",")
-    #         ok = ok and line_table[2] == journal_code
-    #         ok = ok and line_table[3] == account_code
-    #         if credit:
-    #             ok = ok and line_table[7] == "C"
-    # and float(line_table[6]) == credit
-    #         if debit:
-    #             ok = ok and line_table[7] == "D"
-    # and float(line_table[6]) == debit
-    #         if ok:
-    #             matches.append(data_line)
-    #     self.assertEqual(
-    #         len(matches),
-    #         1,
-    #         "The line with journal %s ; account %s ;
-    #  debit %d ; credit %d has"
-    #         " not been found" % (journal_code,
-    #  account_code, debit, credit),
-    #     )
+    def test_03_export_move_with_partner_without_suffix(self):
+        self.move_1.post()
+        self.customer_1.ebp_suffix = False
+        wizard = self.WizardEbpExport.with_context(active_ids=[self.move_1.id]).create(
+            {"fiscal_year_id": self.fiscal_year.id}
+        )
+        self.assertEqual(
+            wizard.ignored_partner_move_qty,
+            1,
+            "It should not be possible to export a unposted move.",
+        )

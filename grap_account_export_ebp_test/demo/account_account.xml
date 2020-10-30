@@ -10,6 +10,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">EBP Demo - Sale Account</field>
         <field name="user_type_id" ref="account.data_account_type_revenue"/>
         <field name="code">707EBP</field>
+        <field name="ebp_export_tax" eval="True"/>
+        <field name="ebp_code_no_tax">9</field>
         <field name="company_id" ref="base.main_company"/>
     </record>
 
