@@ -12,6 +12,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="company_id" ref="base.main_company"/>
         <field name="amount_type">percent</field>
         <field name="amount">20.00</field>
+        <field name="ebp_suffix">1</field>
         <field name="account_id" ref="tax_account"/>
         <field name="refund_account_id" ref="tax_account"/>
     </record>
