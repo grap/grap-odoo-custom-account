@@ -7,15 +7,14 @@
 from odoo import api, fields, models
 
 
-class AccountTaxCode(models.Model):
-    _inherit = "account.tax.code"
+class AccountTax(models.Model):
+    _inherit = "account.tax"
 
     _SEARCH_DATE_BEGIN = "01/01/2017"
 
     # Columns section
     ebp_suffix = fields.Char(
         string="Suffix in EBP",
-        oldname="ref_nb",
         help="When exporting Entries to EBP, this suffix will be"
         " appended to the Account Number to make it a new Account.",
     )
@@ -30,29 +29,29 @@ class AccountTaxCode(models.Model):
     @api.multi
     def _compute_has_ebp_suffix_required(self):
         res = self._get_has_ebp_suffix_required()
-        for code in self:
+        for tax in self:
             for item in res:
-                if item[0] == code.id:
-                    code.has_ebp_suffix_required = True
+                if item[0] == tax.id:
+                    tax.has_ebp_suffix_required = True
                     continue
 
     @api.multi
     def _get_has_ebp_suffix_required(self):
-        # pylint: disable=sql-injection
-        req = """
-            SELECT aml.tax_code_id, count(*)
-            FROM account_move_line aml
+        self._cr.execute(
+            """
+            SELECT amlt.account_tax_id, count(*)
+            FROM account_move_line_account_tax_rel amlt
+            INNER JOIN account_move_line aml
+            ON aml.id = amlt.account_move_line_id
             INNER JOIN account_account aa
-             ON aa.id = aml.account_id
+            ON aa.id = aml.account_id
             WHERE aa.ebp_export_tax is True
-            AND tax_code_id in %s
-            AND aml.date >= '%s'
-            GROUP BY aml.tax_code_id
-        """ % (
-            tuple(self.ids),
-            self._SEARCH_DATE_BEGIN,
+            AND amlt.account_tax_id in %s
+            AND aml.date >= %s
+            GROUP BY amlt.account_tax_id
+        """,
+            (tuple(self.ids), self._SEARCH_DATE_BEGIN),
         )
-        self._cr.execute(req)
         res = self._cr.fetchall()
         return res
 

@@ -153,9 +153,9 @@ class EbpExport(models.Model):
         self._write_header_into_balance_file(balance_file)
 
         vals = self._export_to_files(moves, moves_file, accounts_file, balance_file)
-        data_moves = base64.encodestring(moves_file.getvalue())
-        data_accounts = base64.encodestring(accounts_file.getvalue())
-        data_balance = base64.encodestring(balance_file.getvalue())
+        data_moves = base64.b64encode(moves_file.getvalue().encode("utf-8"))
+        data_accounts = base64.b64encode(accounts_file.getvalue().encode("utf-8"))
+        data_balance = base64.b64encode(balance_file.getvalue().encode("utf-8"))
         moves_file.close()
         accounts_file.close()
         balance_file.close()
@@ -183,7 +183,7 @@ class EbpExport(models.Model):
         for move in moves:
             # dictionary to summarize the lines of the move by account
             moves_data = {}
-            for line in move.line_id:
+            for line in move.line_ids:
                 if line.credit == line.debit:
                     # Ignoring line with null debit and credit
                     continue
@@ -233,8 +233,8 @@ class EbpExport(models.Model):
 
         # Company Suffix
         if (
-            company.fiscal_company.fiscal_type == "fiscal_mother"
-            and account.type in ("payable", "receivable")
+            company.fiscal_company_id.fiscal_type == "fiscal_mother"
+            and account.user_type_id.type in ["receivable", "payable"]
             and not account.is_intercompany_trade_fiscal_company
         ):
             res += company.code
@@ -243,16 +243,16 @@ class EbpExport(models.Model):
         if (
             partner
             and partner.ebp_suffix
-            and account.type in ("payable", "receivable")
+            and account.user_type_id.type in ["receivable", "payable"]
             and not account.is_intercompany_trade_fiscal_company
         ):
             res += partner.ebp_suffix
 
         # Tax Suffix
-        if account.ebp_export_tax:
-            if line.tax_code_id.ebp_suffix:
+        if account.ebp_export_tax and line.tax_ids:
+            if line.tax_ids[0].ebp_suffix:
                 # Tax code is defined
-                res += line.tax_code_id.ebp_suffix
+                res += line.tax_ids[0].ebp_suffix
             else:
                 if not account.ebp_code_no_tax:
                     raise UserError(
@@ -292,7 +292,9 @@ class EbpExport(models.Model):
         if move.partner_id.intercompany_trade:
             ref = " (" + move.partner_id.name + ")"
         else:
-            ref = line.name + ((" (" + move.ref + ")") if move.ref else "")
+            ref = (line.name and line.name or line.account_id.name) + (
+                move.ref and " (%s)" % (move.ref) or ""
+            )
 
         # Manage analytic cases
         if line.account_id.ebp_analytic_mode == "fiscal_analytic":
@@ -338,10 +340,8 @@ class EbpExport(models.Model):
             data = [
                 # Line number
                 "%d" % i,
-                # Date (ddmmyy)
-                "{}/{}/{}".format(
-                    line["date"][8:10], line["date"][5:7], line["date"][2:4]
-                ),
+                # Date (dd/mm/yy)
+                line["date"].strftime("%d/%m/%y"),
                 # Journal
                 self._normalize(line["journal"])[:4],
                 # Account number
@@ -368,14 +368,7 @@ class EbpExport(models.Model):
                 ]
             data += [
                 # Date of maturity (ddmmyy)
-                line["date_maturity"]
-                and "%s%s%s"
-                % (
-                    line["date_maturity"][8:10],
-                    line["date_maturity"][5:7],
-                    line["date_maturity"][2:4],
-                )
-                or "",
+                line["date_maturity"] and line["date_maturity"].strftime("%d%m%y"),
                 # Currency
                 line["currency_name"],
             ]
@@ -404,7 +397,7 @@ class EbpExport(models.Model):
         if (
             line.partner_id
             and line.partner_id.ebp_suffix
-            and line.account_id.type in ("payable", "receivable")
+            and line.account_id.user_type_id.type in ("payable", "receivable")
         ):
             # Partner account
             if line.account_id.is_intercompany_trade_fiscal_company:
@@ -424,16 +417,19 @@ class EbpExport(models.Model):
                     "country": self._normalize(partner.country_id.name or ""),
                     "contact": self._normalize(partner.email or ""),
                     "phone": partner.phone or partner.mobile or "",
-                    "fax": partner.fax or "",
                 }
             )
-        elif line.account_id.ebp_export_tax and line.tax_code_id.ebp_suffix:
+        elif (
+            line.account_id.ebp_export_tax
+            and line.tax_ids
+            and line.tax_ids[0].ebp_suffix
+        ):
             res.update(
                 {
                     "name": (
                         self._normalize(line.account_id.name)
                         + "("
-                        + self._normalize(line.tax_code_id.name)
+                        + self._normalize(line.tax_ids[0].name)
                         + ")"
                     )
                 }
