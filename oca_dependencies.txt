@@ -2,7 +2,7 @@ account-financial-tools
 account-invoicing
 
 odoo-addons-cae https://github.com/odoo-cae/odoo-addons-cae 12.0
-odoo-addons-cae https://github.com/grap/odoo-addons-intercompany-trade 12.0
+odoo-addons-intercompany-trade https://github.com/grap/odoo-addons-intercompany-trade 12.0
 
 account-fiscal-rule__account_fiscal_position_type https://github.com/legalsylvain/account-fiscal-rule 12.0-mig-account_fiscal_position_type
 
