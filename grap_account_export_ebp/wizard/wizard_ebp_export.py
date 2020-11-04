@@ -106,10 +106,17 @@ class WizardEbpExport(models.TransientModel):
     # Default Section
     @api.model
     def _default_fiscal_year_id(self):
-        # TODO Full refactor. Check min max dates from active_ids
-        # AccountMove = self.env["account.move"]
-        # moves = AccountMove.browse(self.env.context.get("active_ids", []))
-        pass
+        dates = [
+            x["date"]
+            for x in self.env["account.move"].search_read(
+                [("id", "in", self.env.context.get("active_ids"))], ["date"]
+            )
+        ]
+        min_date = min(dates)
+        max_date = max(dates)
+        for fiscal_year in self.env["account.fiscal.year"].search([]):
+            if fiscal_year.date_from <= min_date and max_date <= fiscal_year.date_to:
+                return fiscal_year.id
 
     @api.multi
     @api.depends("fiscal_year_id")
@@ -149,18 +156,12 @@ class WizardEbpExport(models.TransientModel):
             wizard.ignored_tax_move_qty = len(incorrect_tax_move_ids)
             full_domain += [("id", "not in", incorrect_tax_move_ids)]
 
-            # filter by period (from fiscalyear)
-            # TODO
-            # Check by date
+            # filter by fiscalyear
             if wizard.fiscal_year_id:
-                pass
-                # periods = wizard.fiscal_year_id.period_ids
-                # wizard.ignored_period_move_qty = len(
-                #     AccountMove.search(
-                #         selection_domain + [("period_id", "not in", periods.ids)]
-                #     )
-                # )
-                # full_domain += [("period_id", "in", periods.ids)]
+                full_domain += [
+                    ("date", ">=", wizard.fiscal_year_id.date_from),
+                    ("date", "<=", wizard.fiscal_year_id.date_to),
+                ]
 
             # Filter by journal (ebp_code should be defined)
             journals = AccountJournal.search([("ebp_code", "!=", False)])

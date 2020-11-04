@@ -15,6 +15,8 @@ class WizardEbpUnexport(models.TransientModel):
     def button_unexport(self):
         AccountMove = self.env["account.move"]
         moves = AccountMove.browse(self.env.context.get("active_ids", False))
-        moves.with_context(force_write_ebp_exported=True).write(
+        # We use sudo, because in a CAE context, if we cancel an export done
+        # in GRP context, it will not be accessible in 3PP context.
+        moves.sudo().with_context(force_write_ebp_exported=True).write(
             {"ebp_export_id": False}
         )
