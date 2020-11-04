@@ -35,11 +35,16 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <filter name="posted" position="after">
                 <field name="ebp_export_id" />
-                <filter string="Not Exported in EBP" name="ebp_not_exported"
-                    domain="[('ebp_export_id', '=', False)]"/>
+                <filter string="Not Exported in EBP (>2018)" name="ebp_not_exported"
+                    domain="[('ebp_export_id', '=', False), ('date', '>', '2018-12-31')]"/>
             </filter>
         </field>
     </record>
+
+        <record id="account.action_move_journal_line" model="ir.actions.act_window">
+            <field name="context">{'search_default_ebp_not_exported':1}</field>
+        </record>
+
 
     <record id="action_wizard_ebp_export" model="ir.actions.act_window">
         <field name="name">Export to EBP</field>
