@@ -14,6 +14,7 @@
         "account_fiscal_year",
         "fiscal_company_base",
         "intercompany_trade_base",
+        "intercompany_trade_fiscal_company",
     ],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
