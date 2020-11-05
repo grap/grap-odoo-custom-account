@@ -14,6 +14,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Renommage du compte 4011 en 401-->
     <record model="account.account.template" id="l10n_fr.fr_pcg_pay">
         <field name="code">401</field>
+        <field name="active" eval="True" />
     </record>
 
     <!-- Désactivation du compte 4017-->
@@ -24,6 +25,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Renommage du compte 4111 en 411-->
     <record model="account.account.template" id="l10n_fr.fr_pcg_recv">
         <field name="code">411</field>
+        <field name="active" eval="True" />
     </record>
 
     <!-- Désactivation du compte 4117-->
