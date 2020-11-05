@@ -11,22 +11,21 @@ class AccountTax(models.Model):
     @api.model
     def _get_tax_group_by_amount(self, amount):
         xml_id = {
-            -20: 'l10n_fr.tax_group_intra_20',
-            -8.5: 'l10n_fr.tax_group_intra_85',
-            -10: 'l10n_fr.tax_group_intra_10',
-            -5.5: 'l10n_fr.tax_group_intra_55',
-            -2.1: 'l10n_fr.tax_group_intra_21',
-            0: 'l10n_fr.tax_group_tva_0',
-            2.1: 'l10n_fr.tax_group_tva_21',
-            20: 'l10n_fr.tax_group_tva_20',
-            5.5: 'l10n_fr.tax_group_tva_55',
-            8.5: 'l10n_fr.tax_group_tva_85',
-            10: 'l10n_fr.tax_group_tva_10',
-            20: 'l10n_fr.tax_group_tva_20',
-        }.get(amount, 'account.tax_group_taxes')
+            -20: "l10n_fr.tax_group_intra_20",
+            -8.5: "l10n_fr.tax_group_intra_85",
+            -10: "l10n_fr.tax_group_intra_10",
+            -5.5: "l10n_fr.tax_group_intra_55",
+            -2.1: "l10n_fr.tax_group_intra_21",
+            0: "l10n_fr.tax_group_tva_0",
+            2.1: "l10n_fr.tax_group_tva_21",
+            5.5: "l10n_fr.tax_group_tva_55",
+            8.5: "l10n_fr.tax_group_tva_85",
+            10: "l10n_fr.tax_group_tva_10",
+            20: "l10n_fr.tax_group_tva_20",
+        }.get(amount, "account.tax_group_taxes")
         return self.env.ref(xml_id)
 
-    @api.onchange('amount')
+    @api.onchange("amount")
     def onchange_amount(self):
         res = super().onchange_amount()
         self.tax_group_id = self._get_tax_group_by_amount(self.amount).id
@@ -34,5 +33,5 @@ class AccountTax(models.Model):
 
     @api.model
     def create(self, vals):
-        vals['tax_group_id'] = self._get_tax_group_by_amount(vals['amount']).id
+        vals["tax_group_id"] = self._get_tax_group_by_amount(vals["amount"]).id
         return super().create(vals)
