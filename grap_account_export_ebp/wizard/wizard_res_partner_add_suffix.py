@@ -30,18 +30,15 @@ class WizardResPartnerAddSuffix(models.TransientModel):
     @api.multi
     def button_affect_suffix(self):
         for wizard in self:
-            for line in wizard.line_ids:
-                if line.ebp_suffix:
-                    line.partner_id.write({"ebp_suffix": line.ebp_suffix})
+            for line in wizard.line_ids.filtered(lambda x: x.ebp_suffix):
+                line.partner_id.ebp_suffix = line.ebp_suffix
 
     # Overloading section
     @api.model
     def default_get(self, default_fields):
         ResPartner = self.env["res.partner"]
 
-        res = super(WizardResPartnerAddSuffix, self).default_get(
-            default_fields
-        )
+        res = super().default_get(default_fields)
 
         line_ids = []
 
@@ -63,8 +60,7 @@ class WizardResPartnerAddSuffix(models.TransientModel):
                 ebp_suffix = partner.ebp_suffix
             else:
                 ebp_suffix = self._get_suffix(
-                    partner.name,
-                    existing_suffixes.get(partner.company_id.id, []),
+                    partner.name, existing_suffixes.get(partner.company_id.id, [])
                 )
                 if ebp_suffix:
                     existing_suffixes.setdefault(partner.company_id.id, [])
@@ -106,10 +102,7 @@ class WizardResPartnerAddSuffix(models.TransientModel):
                 for j in range(1, len(names)):
                     for n in range(3, 0, -1):
                         if len(names[0]) >= n:
-                            suffix = (
-                                names[0][:n].upper()
-                                + names[j][: (4 - n)].upper()
-                            )
+                            suffix = names[0][:n].upper() + names[j][: (4 - n)].upper()
                             suffix = unidecode(suffix)
                             if suffix and not (suffix in existing_suffixes):
                                 return suffix
