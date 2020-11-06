@@ -34,15 +34,14 @@ class AccountBankStatement(models.Model):
                 pos_order = statement_line.pos_statement_id
 
                 partner_id = False
-                if pos_order:
-                    if pos_order.state == "invoiced":
-                        # We keep partner information only if
-                        # an invoice has been generated
-                        partner_id = statement_line.partner_id.id
+                if pos_order and pos_order.state == "invoiced":
+                    # We keep partner information only if
+                    # an invoice has been generated
+                    partner_id = statement_line.partner_id.id
                 keys = (
                     statement_line.account_id.id,
                     partner_id,
-                    pos_order.date_order.strftime("%Y-%m-%d"),
+                    statement_line.date.strftime("%Y-%m-%d"),
                 )
                 groups.setdefault(keys, [])
                 groups[keys].append(statement_line.id)
