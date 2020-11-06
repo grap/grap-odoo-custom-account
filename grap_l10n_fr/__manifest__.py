@@ -22,6 +22,7 @@
         "data/account_fiscal_position_tax_template.xml",
         "data/account_product_fiscal_classification_template.xml",
         "data/account_tax_template.xml",
+        "views/view_account_tax_template.xml",
     ],
     "installable": True,
 }
