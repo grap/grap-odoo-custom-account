@@ -27,6 +27,7 @@ addon | version | summary
 [grap_pos_change_payment_move](grap_pos_change_payment_move/) | 12.0.1.0.2 | Make Bank accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move](grap_pos_change_sale_move/) | 12.0.1.0.1 | Make Sale accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move_test](grap_pos_change_sale_move_test/) | 12.0.1.0.1 | Test the module grap_pos_change_sale_move
+[grap_pos_reconcile](grap_pos_reconcile/) | 12.0.1.0.1 | Reconcile PoS entries
 
 [//]: # (end addons)
 
