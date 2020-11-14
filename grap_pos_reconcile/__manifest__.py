@@ -4,7 +4,7 @@
 
 {
     "name": "Point Of Sale - Pos Reconcile",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "category": "Point Of Sale",
     "author": "GRAP",
     "license": "AGPL-3",
