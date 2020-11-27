@@ -45,7 +45,7 @@ class AccountAccount(models.Model):
         ]
         for account in self:
             if account.company_id.ebp_analytic_enabled:
-                if account.user_type.id in analytic_user_type_ids:
+                if account.user_type_id.id in analytic_user_type_ids:
                     account.ebp_analytic_mode = "normal"
                 else:
                     account.ebp_analytic_mode = "no"
