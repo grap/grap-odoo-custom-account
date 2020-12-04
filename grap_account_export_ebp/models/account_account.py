@@ -12,6 +12,7 @@ class AccountAccount(models.Model):
 
     _EBP_ANALYTIC_MODE_SELECTION = [
         ("no", "No Analytic"),
+        ("fiscal_analytic", "Fiscal Analytic"),
         ("normal", "Normal Analytic"),
     ]
 
@@ -44,10 +45,18 @@ class AccountAccount(models.Model):
             self.env.ref("account.data_account_type_revenue").id,
         ]
         for account in self:
-            if account.company_id.ebp_analytic_enabled:
+            if account.company_id.fiscal_type in ["fiscal_child", "fiscal_mother"]:
+                # If we are in a CAE, we export "company analytic"
+                # for all accounts
+                account.ebp_analytic_mode = "fiscal_analytic"
+            elif account.company_id.ebp_analytic_enabled:
+                # If we are in an normal company, we will export
+                # only for expense and revenue account. (classical analytic)
                 if account.user_type_id.id in analytic_user_type_ids:
                     account.ebp_analytic_mode = "normal"
                 else:
                     account.ebp_analytic_mode = "no"
             else:
+                # If we are in an holding (group)
+                # we don't have to export account moves
                 account.ebp_analytic_mode = "no"
