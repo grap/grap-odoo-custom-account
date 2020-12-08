@@ -43,4 +43,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="property_account_income_id" ref="account_income_701"/>
     </record>
 
+    <record id="product_5_20_701" model="product.product">
+        <field name="name">Product VAT 20% and 5% (701)</field>
+        <field name="type">consu</field>
+        <field name="available_in_pos" eval="True"/>
+        <field name="taxes_id" eval="[(6, 0, [ref('sale_vat_20'), ref('sale_vat_5')])]" />
+        <field name="property_account_income_id" ref="account_income_701"/>
+    </record>
+
 </odoo>
