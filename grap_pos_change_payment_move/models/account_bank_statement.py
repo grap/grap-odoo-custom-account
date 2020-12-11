@@ -52,7 +52,7 @@ class AccountBankStatement(models.Model):
                 i += 1
                 statement_lines = AccountBankStatementLine.browse(groups[key])
                 move = statement.create_move_pos(
-                    key, statement_lines, statement.name + "/" + str(i)
+                    key, statement_lines
                 )
                 move_ids.append(move.id)
 
@@ -65,7 +65,7 @@ class AccountBankStatement(models.Model):
         )
 
     @api.multi
-    def create_move_pos(self, key, statement_lines, move_name):
+    def create_move_pos(self, key, statement_lines):
         self.ensure_one()
 
         AccountMove = self.env["account.move"]
@@ -73,18 +73,17 @@ class AccountBankStatement(models.Model):
         dict_1 = self._prepare_bank_move_line_pos(key, statement_lines)
         dict_2 = self._prepare_counterpart_move_line_pos(key, statement_lines)
         lines_vals = [(0, 0, dict_1), (0, 0, dict_2)]
-        move_vals = self._prepare_move_pos(key, statement_lines, move_name, lines_vals)
+        move_vals = self._prepare_move_pos(key, statement_lines, lines_vals)
         return AccountMove.create(move_vals)
 
     @api.multi
-    def _prepare_move_pos(self, key, statement_lines, move_name, lines_vals):
+    def _prepare_move_pos(self, key, statement_lines, lines_vals):
         self.ensure_one()
         (account_id, partner_id, move_date) = key
         return {
             "journal_id": self.journal_id.id,
             "partner_id": partner_id,
             "date": move_date,
-            "name": move_name,
             "ref": self.pos_session_id.name,
             "line_ids": lines_vals,
         }
