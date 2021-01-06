@@ -83,7 +83,7 @@ class AccountInvoice(models.Model):
                 message.append(_("Invoice Date"))
             if not invoice.date_due:
                 message.append(_("Due Date"))
-            if not invoice.supplier_invoice_number:
+            if not invoice.supplier_invoice_number and not invoice.intercompany_trade:
                 message.append(_("Supplier Invoice Number"))
             if message:
                 raise UserError(
