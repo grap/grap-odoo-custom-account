@@ -10,7 +10,7 @@
     "author": "GRAP",
     "website": "http://www.grap.coop",
     "license": "AGPL-3",
-    "depends": ["account_invoice_supplier_ref_unique"],
+    "depends": ["account_invoice_supplier_ref_unique", "intercompany_trade_account"],
     "data": ["views/view_account_invoice.xml"],
     "demo": ["demo/res_groups.xml"],
     "installable": True,
