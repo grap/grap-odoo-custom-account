@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_move_tree" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="ebp_export_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_move_form" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+        <field name="arch" type="xml">
+            <field name="ref" position="after">
+                <field name="ebp_export_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_move_search" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+        <field name="arch" type="xml">
+            <filter name="posted" position="after">
+                <field name="ebp_export_id" />
+                <filter string="Not Exported in EBP (>2018)" name="ebp_not_exported"
+                    domain="[('ebp_export_id', '=', False), ('date', '>', '2018-12-31')]"/>
+            </filter>
+        </field>
+    </record>
+
+        <record id="account.action_move_journal_line" model="ir.actions.act_window">
+            <field name="context">{'search_default_ebp_not_exported':1}</field>
+        </record>
+
+
+    <record id="action_wizard_ebp_export" model="ir.actions.act_window">
+        <field name="name">Export to EBP</field>
+        <field name="res_model">wizard.ebp.export</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+
+    <record id="action_wizard_ebp_unexport" model="ir.actions.act_window">
+        <field name="name">Cancel EBP Export</field>
+        <field name="res_model">wizard.ebp.unexport</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+
+</odoo>

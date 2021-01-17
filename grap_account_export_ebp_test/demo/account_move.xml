@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author Julien WESTE
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo noupdate="1">
+
+    <record id="move_1" model="account.move">
+        <field name="company_id" ref="base.main_company"/>
+        <field name="journal_id" model="account.journal" search="[
+                ('type', '=', 'sale'),
+                ('company_id', '=', ref('base.main_company'))
+            ]"/>
+        <field name="line_ids" eval="[
+            (5, 0),
+            (0, 0, {
+                'name': 'Line Name C (Sale with tax)',
+                'partner_id': ref('customer_1'),
+                'account_id': ref('sale_account'),
+                'tax_ids': [(4, ref('tax_20'))],
+                'debit': 0.0,
+                'credit': 100.0,
+                }),
+            (0, 0, {
+                'name': 'Line Name D (Sale without tax)',
+                'partner_id': ref('customer_1'),
+                'account_id': ref('sale_account'),
+                'debit': 0.0,
+                'credit': 20.0,
+                }),
+            (0, 0, {
+                'name': 'Line Name B (Tax)',
+                'partner_id': ref('customer_1'),
+                'account_id': ref('tax_account'),
+                'tax_line_id': ref('tax_20'),
+                'debit': 0.0,
+                'credit': 50.0,
+                }),
+            (0, 0, {
+                'name': 'Line Name A (Customer)',
+                'partner_id': ref('customer_1'),
+                'account_id': ref('receivable_account'),
+                'debit': 170.0,
+                'credit': 0.0,
+                }),
+            ]"
+            />
+    </record>
+
+</odoo>

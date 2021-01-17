@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author Julien WESTE
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="tax_20" model="account.tax">
+        <field name="name">EBP Tax 20%</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="amount_type">percent</field>
+        <field name="amount">20.00</field>
+        <field name="ebp_suffix">1</field>
+        <field name="account_id" ref="tax_account"/>
+        <field name="refund_account_id" ref="tax_account"/>
+    </record>
+
+</odoo>

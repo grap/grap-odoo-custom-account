@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2019-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="sale_account" model="account.account">
+        <field name="name">EBP Demo - Sale Account</field>
+        <field name="user_type_id" ref="account.data_account_type_revenue"/>
+        <field name="code">707EBP</field>
+        <field name="ebp_export_tax" eval="True"/>
+        <field name="ebp_code_no_tax">9</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="receivable_account" model="account.account">
+        <field name="name">EBP Demo - Receivable Account</field>
+        <field name="user_type_id" ref="account.data_account_type_receivable"/>
+        <field name="code">411EBP</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="tax_account" model="account.account">
+        <field name="name">EBP Demo - Tax Account</field>
+        <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+        <field name="code">445EBP</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+</odoo>

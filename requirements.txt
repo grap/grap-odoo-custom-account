@@ -1,0 +1,3 @@
+# [grap_account_export_ebp]
+unidecode
+git+https://github.com/OCA/openupgradelib.git@master
