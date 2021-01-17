@@ -42,6 +42,16 @@ to make easy the creation of taxes and accounts for GRAP.
 * Disable somes accounts. (via the active field)
 * rename or change type of some accounts
 
+**``account.chart.template`` Model**
+
+* do not initialize ``account_sale_tax_id`` and ``purchase_sale_tax_id``
+  when installing new chart of account
+
+**``account.chart.template`` Data**
+
+* Set ``digit_codes`` (No. of Digits to use for account code)
+  to 3. (instead of 6)
+
 **``account.tax.code.template`` Datas**
 
 * Add a new field ``active``
