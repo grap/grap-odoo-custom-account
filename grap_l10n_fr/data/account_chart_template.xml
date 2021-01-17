@@ -5,6 +5,7 @@
      <record model="account.chart.template" id="l10n_fr.l10n_fr_pcg_chart_template">
         <field name="property_account_expense_categ_id" />
         <field name="property_account_income_categ_id" />
+        <field name="code_digits">3</field>
     </record>
 
 </odoo>
