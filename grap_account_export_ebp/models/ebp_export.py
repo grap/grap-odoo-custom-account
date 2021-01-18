@@ -249,22 +249,24 @@ class EbpExport(models.Model):
             res += partner.ebp_suffix
 
         # Tax Suffix
-        if account.ebp_export_tax and line.tax_ids:
-            if line.tax_ids[0].ebp_suffix:
+        if account.ebp_export_tax:
+            if line.tax_ids and line.tax_ids[0].ebp_suffix:
                 # Tax code is defined
                 res += line.tax_ids[0].ebp_suffix
+            elif account.ebp_code_no_tax:
+                # Default  Tax Code is defined
+                res += account.ebp_code_no_tax
             else:
-                if not account.ebp_code_no_tax:
-                    raise UserError(
-                        _(
-                            "The account %s - %s is set 'export with tax"
-                            " suffix' but no tax suffix is defined for"
-                            " the account.\n Move %s"
-                            % (account.code, account.name, move.name)
-                        )
+                # Incorrect settings
+                raise UserError(
+                    _(
+                        "The account %s - %s is set 'export with tax"
+                        " suffix' but no tax suffix is defined for"
+                        " the account.\n Move %s"
+                        % (account.code, account.name, move.name)
                     )
-                else:
-                    res += account.ebp_code_no_tax
+                )
+
         if len(res) > 10:
             # The docs from EBP state that account codes may be up to
             # 15 characters but "EBP Comptabilité" v13 will refuse anything
