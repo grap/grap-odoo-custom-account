@@ -250,18 +250,34 @@ class EbpExport(models.Model):
 
         # Tax Suffix
         if account.ebp_export_tax:
-            if line.tax_ids and line.tax_ids[0].ebp_suffix:
-                # Tax code is defined
-                res += line.tax_ids[0].ebp_suffix
+            if line.tax_ids:
+                if line.tax_ids[0].ebp_suffix:
+                    # Tax code is defined
+                    res += line.tax_ids[0].ebp_suffix
+                else:
+                    # Incorrect Tax setting
+                    raise UserError(
+                        _(
+                            "The account %s - %s is set 'export with tax"
+                            " suffix' but no tax suffix is defined for"
+                            " the tax %s.\n Move %s"
+                            % (
+                                account.code,
+                                account.name,
+                                line.tax_ids[0].Name,
+                                move.name,
+                            )
+                        )
+                    )
             elif account.ebp_code_no_tax:
-                # Default  Tax Code is defined
+                # Default Tax Code is defined
                 res += account.ebp_code_no_tax
             else:
-                # Incorrect settings
+                # Incorrect account setting
                 raise UserError(
                     _(
                         "The account %s - %s is set 'export with tax"
-                        " suffix' but no tax suffix is defined for"
+                        " suffix' but no default code is defined on"
                         " the account.\n Move %s"
                         % (account.code, account.name, move.name)
                     )
