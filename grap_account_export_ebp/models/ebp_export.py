@@ -249,22 +249,40 @@ class EbpExport(models.Model):
             res += partner.ebp_suffix
 
         # Tax Suffix
-        if account.ebp_export_tax and line.tax_ids:
-            if line.tax_ids[0].ebp_suffix:
-                # Tax code is defined
-                res += line.tax_ids[0].ebp_suffix
-            else:
-                if not account.ebp_code_no_tax:
+        if account.ebp_export_tax:
+            if line.tax_ids:
+                if line.tax_ids[0].ebp_suffix:
+                    # Tax code is defined
+                    res += line.tax_ids[0].ebp_suffix
+                else:
+                    # Incorrect Tax setting
                     raise UserError(
                         _(
                             "The account %s - %s is set 'export with tax"
                             " suffix' but no tax suffix is defined for"
-                            " the account.\n Move %s"
-                            % (account.code, account.name, move.name)
+                            " the tax %s.\n Move %s"
+                            % (
+                                account.code,
+                                account.name,
+                                line.tax_ids[0].Name,
+                                move.name,
+                            )
                         )
                     )
-                else:
-                    res += account.ebp_code_no_tax
+            elif account.ebp_code_no_tax:
+                # Default Tax Code is defined
+                res += account.ebp_code_no_tax
+            else:
+                # Incorrect account setting
+                raise UserError(
+                    _(
+                        "The account %s - %s is set 'export with tax"
+                        " suffix' but no default code is defined on"
+                        " the account.\n Move %s"
+                        % (account.code, account.name, move.name)
+                    )
+                )
+
         if len(res) > 10:
             # The docs from EBP state that account codes may be up to
             # 15 characters but "EBP Comptabilité" v13 will refuse anything

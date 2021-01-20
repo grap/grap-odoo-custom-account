@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-31 12:17+0000\n"
-"PO-Revision-Date: 2020-10-31 12:17+0000\n"
+"POT-Creation-Date: 2021-01-18 21:29+0000\n"
+"PO-Revision-Date: 2021-01-18 21:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,20 +27,20 @@ msgid "Account"
 msgstr "Compte"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:323
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:474
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:341
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:492
 #, python-format
 msgid "Account Number"
 msgstr "N. Compte"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:273
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:291
 #, python-format
 msgid "Account code '%s' is too long to be exported to EBP."
 msgstr "Le code comptable '%s' est trop long pour être exporté dans EBP."
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:475
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:493
 #, python-format
 msgid "Account name"
 msgstr "Nom du compte"
@@ -72,13 +72,13 @@ msgid "Affect Suffix"
 msgstr "Affecter un suffixe"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:326
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:344
 #, python-format
 msgid "Amount (related to the direction)"
 msgstr "Montant (lié au sens)"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:330
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:348
 #, python-format
 msgid "Analytic Account"
 msgstr "Compte analytique"
@@ -97,7 +97,7 @@ msgstr "Etes vous sûr d'annuler l'export EBP ?"
 #: code:addons/grap_account_export_ebp/models/ebp_export.py:131
 #, python-format
 msgid "BALANCE"
-msgstr "BALANCE"
+msgstr ""
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_ebp_export__data_balance
@@ -108,6 +108,7 @@ msgstr "Fichier des balances"
 #. module: grap_account_export_ebp
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_ebp_export_form
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_ebp_unexport_form
+#: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_res_partner_add_suffix_form
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -118,8 +119,8 @@ msgstr "Annuler l'export EBP"
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,help:grap_account_export_ebp.field_res_company__ebp_analytic_enabled
-msgid "Check this box if you want to enable the analytic when exporting in EBP. Note that this setting has will not been taken into account for Companies that belong to a CAE"
-msgstr "Cochez cette case si vous voulez activer l'analytique quand vous exportez dans EBP. Notez que ce paramétrage sera ignoré pour les sociétés appartenant à une CAE."
+msgid "Check this box if you want to enable the analytic when exporting in EBP."
+msgstr "Cochez cette case si vous voulez activer l'analytique quand vous exportez dans EBP."
 
 #. module: grap_account_export_ebp
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_ebp_export_form
@@ -141,7 +142,7 @@ msgstr "Société"
 #. module: grap_account_export_ebp
 #: model:ir.model,name:grap_account_export_ebp.model_res_partner
 msgid "Contact"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_ebp_export__create_uid
@@ -162,38 +163,38 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:477
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:495
 #, python-format
 msgid "Credit"
 msgstr "Crédit"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:479
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:497
 #, python-format
 msgid "Credit Balance"
 msgstr "Balance Crédit"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:329
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:347
 #, python-format
 msgid "Currency"
 msgstr "Monnaie"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:321
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:339
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_ebp_export__date
 #, python-format
 msgid "Date"
 msgstr "Date "
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:476
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:494
 #, python-format
 msgid "Debit"
 msgstr "Débit"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:478
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:496
 #, python-format
 msgid "Debit Balance"
 msgstr "Balance Débit"
@@ -208,13 +209,13 @@ msgstr "Compte analytique par défaut pour EBP"
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_wizard_ebp_export__description
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_ebp_export_form
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:327
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:345
 #, python-format
 msgid "Direction"
-msgstr "Direction"
+msgstr ""
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_ebp_export__display_name
@@ -236,7 +237,7 @@ msgid "Draft"
 msgstr "En brouillon"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:328
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:346
 #, python-format
 msgid "Due Date"
 msgstr "Date d'échéance"
@@ -244,7 +245,7 @@ msgstr "Date d'échéance"
 #. module: grap_account_export_ebp
 #: model:ir.ui.menu,name:grap_account_export_ebp.menu_ebp
 msgid "EBP"
-msgstr "EBP"
+msgstr ""
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_bank_statement_import_journal_creation__ebp_code
@@ -361,6 +362,11 @@ msgid "Files"
 msgstr "Fichiers"
 
 #. module: grap_account_export_ebp
+#: selection:account.account,ebp_analytic_mode:0
+msgid "Fiscal Analytic"
+msgstr "Analytique de société"
+
+#. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_ebp_export__fiscal_year_id
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_wizard_ebp_export__fiscal_year_id
 msgid "Fiscal year"
@@ -379,7 +385,7 @@ msgstr "A des écritures comptables exportables dans EBP"
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_wizard_res_partner_add_suffix__id
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_wizard_res_partner_add_suffix_line__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,help:grap_account_export_ebp.field_account_account__ebp_export_tax
@@ -429,10 +435,10 @@ msgstr "Indiquer si la pièce a déjà été exportées dans EBP ou pas. Valeur 
 #. module: grap_account_export_ebp
 #: model:ir.model,name:grap_account_export_ebp.model_account_journal
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:322
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:340
 #, python-format
 msgid "Journal Code"
 msgstr "Code Journal"
@@ -476,7 +482,7 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:320
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:338
 #, python-format
 msgid "Line"
 msgstr "Ligne"
@@ -493,7 +499,7 @@ msgid "MOVES"
 msgstr "ECRITURES"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:325
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:343
 #, python-format
 msgid "Move Number"
 msgstr "N. Pièce"
@@ -505,7 +511,7 @@ msgid "Moves file"
 msgstr "Fichier des écritures comptables"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:324
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:342
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_ebp_export__name
 #, python-format
 msgid "Name"
@@ -523,8 +529,8 @@ msgstr "Analytique classique"
 
 #. module: grap_account_export_ebp
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_account_move_search
-msgid "Not Exported in EBP"
-msgstr "Non exporté dans EBP"
+msgid "Not Exported in EBP (>2018)"
+msgstr ""Non exporté dans EBP (>2018)"
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,help:grap_account_export_ebp.field_wizard_ebp_export__fiscal_year_id
@@ -612,12 +618,20 @@ msgid "The EBP suffix must be unique per company!"
 msgstr "Le suffixe EBP doit être unique par société"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/ebp_export.py:263
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:282
 #, python-format
-msgid "The account %s - %s is set 'export with tax suffix' but no tax suffix is defined for the account.\n"
+msgid "The account %s - %s is set 'export with tax suffix' but no default code is defined on the account.\n"
 " Move %s"
-msgstr "Le compte %s - %s est défini à 'exporter avec suffixe de taxe' mais aucun suffixe de taxe n'est défini pour ce compte.\n"
+msgstr "Le compte %s - %s est défini à 'exporter avec suffixe de taxe' mais aucun code par défaut n'est défini sur ce compte.\n"
+" Pièce %s"
+
+#. module: grap_account_export_ebp
+#: code:addons/grap_account_export_ebp/models/ebp_export.py:264
+#, python-format
+msgid "The account %s - %s is set 'export with tax suffix' but no tax suffix is defined for the tax %s.\n"
 " Move %s"
+msgstr "Le compte %s - %s est défini à 'exporter avec suffixe de taxe' mais aucun suffixe n'est défini pour la taxe %s.\n"
+" Pièce %s"
 
 #. module: grap_account_export_ebp
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_ebp_unexport_form
@@ -629,6 +643,12 @@ msgstr "L'export sera annulé pour les pièces sélectionnées. Assurez vous d'a
 #: model:ir.model.fields,help:grap_account_export_ebp.field_account_journal__ebp_code
 msgid "This code will be used when exporting entries in the journal column"
 msgstr "Ce code sera utilisé lors de l'export des écritures dans la colonne journal"
+
+#. module: grap_account_export_ebp
+#: code:addons/grap_account_export_ebp/models/res_company.py:38
+#, python-format
+msgid "Unable to enable analytic for the following companies that are CAE or Integrated companies %s"
+msgstr "Impossible d'activer l'analytique pour les sociétés suivantes qui sont des CAE, ou des activités intégrées %s"
 
 #. module: grap_account_export_ebp
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_ebp_unexport_form
@@ -718,3 +738,4 @@ msgstr "pièces comptables qui n'ont pas toutes les taxes correctement paramétr
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_ebp_export_form
 msgid "moves that have already been exported in EBP."
 msgstr "pièces qui ont déjà été exportées dans EBP"
+
