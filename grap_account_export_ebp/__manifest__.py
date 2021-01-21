@@ -15,6 +15,7 @@
         "fiscal_company_base",
         "intercompany_trade_base",
         "intercompany_trade_fiscal_company",
+        "grap_custom_account_payment_workflow",
     ],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
