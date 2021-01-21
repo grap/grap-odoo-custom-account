@@ -298,11 +298,6 @@ msgid "EBP Suffix required"
 msgstr "Suffixe EBP requis"
 
 #. module: grap_account_export_ebp
-#: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_move__ebp_to_check
-msgid "EBP To check"
-msgstr "A vérifier avant intégration dans EBP"
-
-#. module: grap_account_export_ebp
 #: model:ir.model,name:grap_account_export_ebp.model_wizard_ebp_unexport
 msgid "EBP Unexport Wizard"
 msgstr "Assistant de d'annulation d'export EBP"
