@@ -5,14 +5,15 @@
 from odoo import fields, models
 
 
-class ResCompany(models.Model):
-    _inherit = "res.company"
+class PosConfig(models.Model):
+    _inherit = "pos.config"
 
-    pos_sale_move_policy = fields.Selection(
+    sale_move_policy = fields.Selection(
         selection=[
-            ("groupby_account_tax", "Group by Account and tax"),
+            ("standard", "Standard"),
+            ("groupby_account_tax", "Group by account and tax"),
             ("groupby_account_tax_partner", "Group by account, tax and partner"),
         ],
-        default="groupby_account_tax",
-        help="Select how PoS account moves should be aggregated",
+        default="standard",
+        help="Select how PoS account move lines should be aggregated",
     )

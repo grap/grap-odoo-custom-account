@@ -154,8 +154,7 @@ class TestModule(TransactionCase):
 
     # Test Section
     def test_01_move_many_orders_groupby_account_tax(self):
-        company = self.pos_session.config_id.company_id
-        company.pos_sale_move_policy = "groupby_account_tax"
+        self.pos_session.config_id.sale_move_policy = "groupby_account_tax"
         sale_entries_before = len(self._get_sale_moves(False))
         # sale #1
         self._sale(False, self.product_no_vat, 10, 10)
@@ -175,8 +174,7 @@ class TestModule(TransactionCase):
         )
 
     def test_02_test_account_and_vat_groupby_account_tax(self):
-        company = self.pos_session.config_id.company_id
-        company.pos_sale_move_policy = "groupby_account_tax"
+        self.pos_session.config_id.sale_move_policy = "groupby_account_tax"
         # sale #1 product VAT 5% / Account 707
         self._sale(False, self.product_vat_5_707, 210, 220.5)
         # sale #2 product VAT 5% / Account 707
@@ -294,8 +292,7 @@ class TestModule(TransactionCase):
         self.assertEquals(sale_move.state, "posted", "Sale Move should be posted")
 
     def test_03_move_may_orders_groupby_account_tax_partner(self):
-        company = self.pos_session.config_id.company_id
-        company.pos_sale_move_policy = "groupby_account_tax_partner"
+        self.pos_session.config_id.sale_move_policy = "groupby_account_tax_partner"
         sale_entries_before = len(self._get_sale_moves(False))
         # sale #1
         self._sale(False, self.product_no_vat, 10, 10)
@@ -317,8 +314,7 @@ class TestModule(TransactionCase):
         )
 
     def test_04_test_account_and_vat_groupby_account_tax_partner(self):
-        company = self.pos_session.config_id.company_id
-        company.pos_sale_move_policy = "groupby_account_tax_partner"
+        self.pos_session.config_id.sale_move_policy = "groupby_account_tax_partner"
         # sale product no VAT / Account 707
         self._sale(False, self.product_no_vat, 10, 10)
 
@@ -570,8 +566,7 @@ class TestModule(TransactionCase):
         self.assertEquals(sale_move.state, "posted", "Sale Move should be posted")
 
     def test_05_empty_sale_order(self):
-        company = self.pos_session.config_id.company_id
-        company.pos_sale_move_policy = "groupby_account_tax_partner"
+        self.pos_session.config_id.sale_move_policy = "groupby_account_tax_partner"
         sale_entries_before = len(self._get_sale_moves(False))
 
         # We make no sales

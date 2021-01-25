@@ -18,13 +18,16 @@ class PosOrder(models.Model):
     def _get_group_by_keys(self):
         """Return keys used to aggregate the account moves."""
         if self:
-            company = self[0].session_id.config_id.company_id
-            pos_sale_move_policy = company.pos_sale_move_policy
-            return {"partner": "partner" in pos_sale_move_policy}
+            config_id = self[0].session_id.config_id
+            pos_sale_move_policy = config_id.sale_move_policy
+            return {
+                "standard": "standard" in pos_sale_move_policy,
+                "partner": "partner" in pos_sale_move_policy,
+            }
         # In case of an empty self, we can give a random config as no
         # move.lines will be written (function using group_by_keys will
         # not be called).
-        return {}
+        return {"standard": True}
 
     # Overwrite this Odoo function.
     # Remove partner_id product_id and name from the keys.
@@ -32,8 +35,15 @@ class PosOrder(models.Model):
     def _get_account_move_line_group_data_type_key(
         self, data_type, values, options=False
     ):
-        options = options or {}
         groupby = self._get_group_by_keys()
+        # Default behaviour if standard selected
+        if groupby["standard"]:
+            return super()._get_account_move_line_group_data_type_key(
+                data_type, values, options
+            )
+
+        # Custom behaviour
+        options = options or {}
         if data_type == "product":
             tax_ids = values["tax_ids"][0][2]
 
@@ -76,10 +86,15 @@ class PosOrder(models.Model):
     # Overload this Odoo function.
     # Removing values partner_id / product_id / quantity
     def _prepare_account_move_and_lines(self, session=None, move=None):
+        groupby = self._get_group_by_keys()
+        # Default behaviour if standard selected
+        if groupby["standard"]:
+            return super()._prepare_account_move_and_lines(session=session, move=move)
+
+        # Custom behaviour
         res = super()._prepare_account_move_and_lines(session=session, move=move)
         AccountAccount = self.env["account.account"]
         grouped_data = res.get("grouped_data")
-        groupby = self._get_group_by_keys()
         for k, values in grouped_data.items():
             for value in values:
                 if not self._get_partner_required_if_specific_account(
