@@ -5,7 +5,7 @@
 {
     "name": "GRAP - Custom Payment Workflow",
     "summary": "Add Payment Check workflow",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "category": "Custom",
     "author": "GRAP",
     "website": "http://www.grap.coop",
@@ -13,4 +13,5 @@
     "depends": ["account"],
     "data": ["views/view_account_move.xml", "views/view_account_payment.xml"],
     "installable": True,
+    "pre_init_hook": "pre_init_populate_data",
 }
