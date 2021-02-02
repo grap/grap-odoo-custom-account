@@ -10,7 +10,7 @@
     "author": "GRAP",
     "website": "http://www.grap.coop",
     "license": "AGPL-3",
-    "depends": ["account"],
+    "depends": ["account", "point_of_sale"],
     "data": ["views/view_account_move.xml", "views/view_account_payment.xml"],
     "installable": True,
     "pre_init_hook": "pre_init_populate_data",
