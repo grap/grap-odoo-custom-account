@@ -51,8 +51,8 @@ class AccountInvoice(models.Model):
         res = super().action_invoice_open()
 
         for invoice in self:
-            self.env.user.notify_info(message=_(
-                "New Invoice Number: %s" % invoice.number)
+            self.env.user.notify_info(
+                message=_("New Invoice Number: %s" % invoice.number)
             )
 
         return res
