@@ -16,6 +16,10 @@ class AccountPayment(models.Model):
         store=True,
     )
 
+    journal_type = fields.Selection(related="journal_id.type")
+
+    journal_user = fields.Boolean(related="journal_id.journal_user")
+
     @api.depends("move_line_ids.move_id.is_payment_checked")
     def _compute_bank_is_checked(self):
         for payment in self:
