@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-26 13:52+0000\n"
-"PO-Revision-Date: 2020-10-26 13:52+0000\n"
+"POT-Creation-Date: 2021-02-03 16:14+0000\n"
+"PO-Revision-Date: 2021-02-03 16:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -34,18 +34,12 @@ msgid "Cancelled"
 msgstr "Annulé"
 
 #. module: grap_custom_account_invoice_workflow
-#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:80
-#, python-format
-msgid "Invoice Date"
-msgstr "Date de facturation"
-
-#. module: grap_custom_account_invoice_workflow
 #: selection:account.invoice,state:0
 msgid "Draft"
 msgstr "Brouillon"
 
 #. module: grap_custom_account_invoice_workflow
-#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:82
+#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:92
 #, python-format
 msgid "Due Date"
 msgstr "Date d'échéance"
@@ -59,6 +53,18 @@ msgstr "En Paiement"
 #: model:ir.model,name:grap_custom_account_invoice_workflow.model_account_invoice
 msgid "Invoice"
 msgstr "Facture"
+
+#. module: grap_custom_account_invoice_workflow
+#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:90
+#, python-format
+msgid "Invoice Date"
+msgstr "Date de facture"
+
+#. module: grap_custom_account_invoice_workflow
+#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:54
+#, python-format
+msgid "New Invoice Number: %s"
+msgstr "Nouveau numéro de facture : %s"
 
 #. module: grap_custom_account_invoice_workflow
 #: selection:account.invoice,state:0
@@ -76,7 +82,7 @@ msgid "Status"
 msgstr "État"
 
 #. module: grap_custom_account_invoice_workflow
-#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:84
+#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:94
 #, python-format
 msgid "Supplier Invoice Number"
 msgstr "Numéro de facture fournisseur"
@@ -98,7 +104,7 @@ msgid "Verify"
 msgstr "Vérifier"
 
 #. module: grap_custom_account_invoice_workflow
-#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:89
+#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:99
 #, python-format
 msgid "Verify a supplier invoice requires to set the following fields :\n"
 "\n"
@@ -108,7 +114,7 @@ msgstr "Marquer une facture fournisseur comme vérifier requiert de renseigner l
 " - %s"
 
 #. module: grap_custom_account_invoice_workflow
-#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:61
+#: code:addons/grap_custom_account_invoice_workflow/models/account_invoice.py:71
 #, python-format
 msgid "You can not confirm supplier invoices because you're nota member of the group'Accounting & Finance / Billing Manager'"
 msgstr "Vous ne pouvez pas confirmer les factures fournisseurs car vous n'êtes membre du groupe 'Facturation / Responsable'"

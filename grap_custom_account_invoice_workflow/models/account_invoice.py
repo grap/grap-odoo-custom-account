@@ -48,7 +48,14 @@ class AccountInvoice(models.Model):
         )
         verified_invoices.write({"state": "draft"})
 
-        return super().action_invoice_open()
+        res = super().action_invoice_open()
+
+        for invoice in self:
+            self.env.user.notify_info(message=_(
+                "New Invoice Number: %s" % invoice.number)
+            )
+
+        return res
 
     def action_invoice_draft(self):
         verified_invoices = self.filtered(lambda x: x.state == "verified")
