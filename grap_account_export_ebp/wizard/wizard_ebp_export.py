@@ -171,7 +171,9 @@ class WizardEbpExport(models.TransientModel):
 
             # filter moves to check
             wizard.ignored_to_check_move_qty = len(
-                AccountMove.search(selection_domain + [("is_payment_checked", "=", False)])
+                AccountMove.search(
+                    selection_domain + [("is_payment_checked", "=", False)]
+                )
             )
             full_domain += [("is_payment_checked", "=", True)]
 
