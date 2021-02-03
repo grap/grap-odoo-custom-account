@@ -10,9 +10,12 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     is_payment_checked = fields.Boolean(
-        string="Payment Checked", default=True,
+        string="Payment Checked",
+        default=True,
         help="Uncheck this box if you want to mark this move to be"
-        " checked manually with the bank statement")
+        " checked manually with the bank statement",
+    )
 
-    journal_type = fields.Selection(
-        related="journal_id.type")
+    journal_type = fields.Selection(related="journal_id.type")
+
+    journal_user = fields.Boolean(related="journal_id.journal_user")
