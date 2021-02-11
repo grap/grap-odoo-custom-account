@@ -24,7 +24,7 @@ class EbpExport(models.Model):
     _description = "EBP Export"
     _order = "date desc"
 
-    _EBP_REMOVE_CHAR_LIST = ["\n;", ";", ",", '"']
+    _EBP_REMOVE_CHAR_LIST = ["\n", ";", ",", '"']
 
     # Column Section
     company_id = fields.Many2one(
