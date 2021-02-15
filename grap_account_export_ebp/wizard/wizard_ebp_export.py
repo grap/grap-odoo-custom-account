@@ -12,7 +12,6 @@ class WizardEbpExport(models.TransientModel):
 
     _STATE_SELECTION = [("draft", "Draft"), ("done", "Done")]
 
-    # Columns Section
     ebp_export_id = fields.Many2one(
         string="EBP Export", comodel_name="ebp.export", readonly=True
     )
@@ -103,7 +102,6 @@ class WizardEbpExport(models.TransientModel):
         store=True,
     )
 
-    # Default Section
     @api.model
     def _default_fiscal_year_id(self):
         dates = [
@@ -118,7 +116,6 @@ class WizardEbpExport(models.TransientModel):
             if fiscal_year.date_from <= min_date and max_date <= fiscal_year.date_to:
                 return fiscal_year.id
 
-    @api.multi
     @api.depends("fiscal_year_id")
     def _compute_move_selection(self):
         AccountMove = self.env["account.move"]
@@ -174,9 +171,11 @@ class WizardEbpExport(models.TransientModel):
 
             # filter moves to check
             wizard.ignored_to_check_move_qty = len(
-                AccountMove.search(selection_domain + [("ebp_to_check", "=", True)])
+                AccountMove.search(
+                    selection_domain + [("is_payment_checked", "=", False)]
+                )
             )
-            full_domain += [("ebp_to_check", "=", False)]
+            full_domain += [("is_payment_checked", "=", True)]
 
             # filter yet exported moves
             wizard.ignored_exported_move_qty = len(
@@ -187,7 +186,6 @@ class WizardEbpExport(models.TransientModel):
             wizard.exported_move_ids = AccountMove.search(full_domain)
             wizard.exported_move_qty = len(wizard.exported_move_ids.ids)
 
-    @api.multi
     def button_export(self):
         self.ensure_one()
         EbpExport = self.env["ebp.export"]

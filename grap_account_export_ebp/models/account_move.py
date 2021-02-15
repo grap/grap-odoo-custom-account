@@ -3,15 +3,12 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import Warning as UserError
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
-
-    # Column Section
-    ebp_to_check = fields.Boolean(string="EBP To check", default=False)
 
     ebp_export_id = fields.Many2one(
         comodel_name="ebp.export",
@@ -21,19 +18,14 @@ class AccountMove(models.Model):
         " to EBP or not. It is changed automatically.",
     )
 
-    # Override section
-    @api.multi
     def write(self, vals):
         self._check_exported_moves()
         return super().write(vals)
 
-    @api.multi
     def unlink(self):
         self._check_exported_moves()
         return super().unlink()
 
-    # Custom section
-    @api.multi
     def _check_exported_moves(self):
         if not self.env.context.get("force_write_ebp_exported", False):
             exported_moves = self.filtered(lambda x: x.ebp_export_id.id is not False)
