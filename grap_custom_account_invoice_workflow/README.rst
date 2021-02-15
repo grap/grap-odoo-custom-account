@@ -36,6 +36,17 @@ Add a constraint, when verifying supplier invoices.
 .. contents::
    :local:
 
+Usage
+=====
+
+* Go to your supplier invoices tree view
+* Click on 'Verify' if you're not member of Account Manager Group.
+* click on 'Validate' if you're member of Account Manager Group.
+
+In that case, the number of the invoice will be displayed as a notification.
+
+:.. figure:: https://raw.githubusercontent.com/grap/grap-odoo-custom-account/12.0/grap_custom_account_invoice_workflow/static/description/view_account_invoice_tree.png
+
 Bug Tracker
 ===========
 
