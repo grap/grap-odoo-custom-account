@@ -5,7 +5,7 @@
 {
     "name": "GRAP - Custom Payment Workflow",
     "summary": "Add Payment Check workflow",
-    "version": "12.0.1.0.2",
+    "version": "12.0.1.0.3",
     "category": "Custom",
     "author": "GRAP",
     "website": "http://www.grap.coop",
