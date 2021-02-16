@@ -41,27 +41,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-        <record id="account.action_move_journal_line" model="ir.actions.act_window">
-            <field name="context">{'search_default_ebp_not_exported':1}</field>
-        </record>
-
-
-    <record id="action_wizard_ebp_export" model="ir.actions.act_window">
-        <field name="name">Export to EBP</field>
-        <field name="res_model">wizard.ebp.export</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field name="binding_model_id" ref="account.model_account_move" />
-        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
-    </record>
-
-    <record id="action_wizard_ebp_unexport" model="ir.actions.act_window">
-        <field name="name">Cancel EBP Export</field>
-        <field name="res_model">wizard.ebp.unexport</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field name="binding_model_id" ref="account.model_account_move" />
-        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+    <record id="account.action_move_journal_line" model="ir.actions.act_window">
+        <field name="context">{'search_default_ebp_not_exported':1}</field>
     </record>
 
 </odoo>
