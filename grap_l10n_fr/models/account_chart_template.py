@@ -15,7 +15,7 @@ class AccountChartTemplate(models.Model):
         # <Copy:odoo>
         # do not use `request.env` here, it can cause deadlocks
         if request and request.session.uid:
-            current_user = self.env['res.users'].browse(request.uid)
+            current_user = self.env["res.users"].browse(request.uid)
             company = current_user.company_id
         else:
             # fallback to company of current user, most likely __system__
