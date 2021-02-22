@@ -51,9 +51,7 @@ class AccountBankStatement(models.Model):
             for key in groups.keys():
                 i += 1
                 statement_lines = AccountBankStatementLine.browse(groups[key])
-                move = statement.create_move_pos(
-                    key, statement_lines
-                )
+                move = statement.create_move_pos(key, statement_lines)
                 move_ids.append(move.id)
 
             if move_ids:

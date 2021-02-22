@@ -67,12 +67,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         action="action_res_partner"
         sequence="1"/>
 
-    <record id="action_wizard_res_partner_add_suffix" model="ir.actions.act_window">
-        <field name="name">Add EBP Suffixes</field>
-        <field name="res_model">wizard.res.partner.add.suffix</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field name="binding_model_id" ref="base.model_res_partner" />
-    </record>
-
 </odoo>
