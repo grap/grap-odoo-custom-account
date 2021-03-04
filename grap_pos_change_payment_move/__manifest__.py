@@ -4,7 +4,7 @@
 
 {
     "name": "Point Of Sale - Change Payment Move Lines",
-    "version": "12.0.1.1.0",
+    "version": "12.0.1.1.1",
     "category": "Point Of Sale",
     "author": "GRAP",
     "license": "AGPL-3",
