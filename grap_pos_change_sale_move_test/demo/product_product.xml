@@ -9,6 +9,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="product_no_vat" model="product.product">
         <field name="name">Product No VAT (707)</field>
+        <field name="categ_id" ref="product.product_category_all"/>
         <field name="type">consu</field>
         <field name="available_in_pos" eval="True"/>
         <field name="taxes_id" eval="[(6, 0, [])]" />
@@ -17,6 +18,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="product_5_707" model="product.product">
         <field name="name">Product VAT 5% (707)</field>
+        <field name="categ_id" ref="product.product_category_all"/>
         <field name="type">consu</field>
         <field name="available_in_pos" eval="True"/>
         <field name="taxes_id" eval="[(6, 0, [ref('sale_vat_5')])]" />
@@ -25,6 +27,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="product_20_707" model="product.product">
         <field name="name">Product VAT 20% (707)</field>
+        <field name="categ_id" ref="product.product_category_all"/>
         <field name="type">consu</field>
         <field name="available_in_pos" eval="True"/>
         <field name="taxes_id" eval="[(6, 0, [ref('sale_vat_20')])]" />
@@ -33,6 +36,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="product_20_701" model="product.product">
         <field name="name">Product VAT 20% (701)</field>
+        <field name="categ_id" ref="product.product_category_all"/>
         <field name="type">consu</field>
         <field name="available_in_pos" eval="True"/>
         <field name="taxes_id" eval="[(6, 0, [ref('sale_vat_20')])]" />
