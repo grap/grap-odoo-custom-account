@@ -27,9 +27,9 @@ addon | version | summary
 [grap_custom_account_invoice_workflow_test](grap_custom_account_invoice_workflow_test/) | 12.0.1.0.1 | GRAP - Custom Invoice workflow
 [grap_custom_account_payment_workflow](grap_custom_account_payment_workflow/) | 12.0.1.0.3 | Add Payment Check workflow
 [grap_l10n_fr](grap_l10n_fr/) | 12.0.1.1.0 | Custom changes of l10n_fr module for GRAP
-[grap_pos_change_payment_move](grap_pos_change_payment_move/) | 12.0.1.1.0 | Make Bank accounting moves from PoS acceptable for accoutants
+[grap_pos_change_payment_move](grap_pos_change_payment_move/) | 12.0.1.1.1 | Make Bank accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move](grap_pos_change_sale_move/) | 12.0.1.0.1 | Make Sale accounting moves from PoS acceptable for accoutants
-[grap_pos_change_sale_move_test](grap_pos_change_sale_move_test/) | 12.0.1.0.1 | Test the module grap_pos_change_sale_move
+[grap_pos_change_sale_move_test](grap_pos_change_sale_move_test/) | 12.0.1.0.2 | Test the module grap_pos_change_sale_move
 [grap_pos_reconcile](grap_pos_reconcile/) | 12.0.1.0.2 | Reconcile PoS entries
 
 [//]: # (end addons)
