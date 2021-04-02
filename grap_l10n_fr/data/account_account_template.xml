@@ -181,7 +181,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Renommage du compte 7071 en 707-->
     <record model="account.account.template" id="l10n_fr.pcg_7071">
-        <field name="name">Achats de marchandises externes</field>
+        <field name="name">Ventes de marchandises</field>
+        <field name="code">707</field>
     </record>
 
     <!-- Désactivation du compte 7072-->
