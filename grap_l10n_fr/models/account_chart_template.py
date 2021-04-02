@@ -5,6 +5,10 @@
 from odoo import models
 from odoo.http import request
 
+_REPLACEMENT_JOURNAL_CODE = {"FAC": "VT", "FACTURE": "AC"}
+
+_DELETED_JOURNAL_CODE = ["EXCH", "CABA", "STJ"]
+
 
 class AccountChartTemplate(models.Model):
     _inherit = "account.chart.template"
@@ -26,3 +30,25 @@ class AccountChartTemplate(models.Model):
         company.account_sale_tax_id = False
         company.account_purchase_tax_id = False
         return res
+
+    def _prepare_all_journals(self, acc_template_ref, company, journals_dict=None):
+        all_journals = super()._prepare_all_journals(
+            acc_template_ref, company, journals_dict
+        )
+
+        # Remove undesired journals
+        journals = []
+        for journal in all_journals:
+            if journal["code"] not in _DELETED_JOURNAL_CODE:
+                journals.append(journal)
+
+        for journal in journals:
+            # rename incorrect code
+            if journal["code"] in _REPLACEMENT_JOURNAL_CODE:
+                journal["code"] = _REPLACEMENT_JOURNAL_CODE[journal["code"]]
+
+            # set correctly sale and purchase journal
+            if journal["type"] in ["sale", "purchase"]:
+                journal["group_invoice_lines"] = True
+                journal["update_posted"] = True
+        return journals
