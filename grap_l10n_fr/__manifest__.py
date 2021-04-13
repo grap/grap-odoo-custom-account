@@ -5,7 +5,7 @@
 {
     "name": "GRAP - Change l10n_fr",
     "summary": "Custom changes of l10n_fr module for GRAP",
-    "version": "12.0.1.1.0",
+    "version": "12.0.1.1.1",
     "category": "Custom",
     "author": "GRAP",
     "license": "AGPL-3",
