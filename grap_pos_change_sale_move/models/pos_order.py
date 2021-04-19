@@ -94,6 +94,7 @@ class PosOrder(models.Model):
         # Custom behaviour
         res = super()._prepare_account_move_and_lines(session=session, move=move)
         AccountAccount = self.env["account.account"]
+        AccountTax = self.env["account.tax"]
         grouped_data = res.get("grouped_data")
         for k, values in grouped_data.items():
             for value in values:
@@ -107,5 +108,9 @@ class PosOrder(models.Model):
                 value["quantity"] = False
                 if k[0] == "product":
                     account = AccountAccount.browse(value["account_id"])
-                    value["name"] = account.name
+                    tax_ids = value["tax_ids"][0][2]
+                    taxes = AccountTax.browse(tax_ids).exists()
+                    value["name"] = "{} ({})".format(
+                        account.name, ", ".join(tax.name for tax in taxes)
+                    )
         return res
