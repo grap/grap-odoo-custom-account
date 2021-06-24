@@ -21,7 +21,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [grap_account_change_invoice_move](grap_account_change_invoice_move/) | 12.0.1.0.1 | Remove product from the keys during account moves generation from invoices
-[grap_account_export_ebp](grap_account_export_ebp/) | 12.0.1.1.1 | GRAP - Export accounting moves to EBP
+[grap_account_export_ebp](grap_account_export_ebp/) | 12.0.1.1.2 | GRAP - Export accounting moves to EBP
 [grap_account_export_ebp_test](grap_account_export_ebp_test/) | 12.0.1.0.2 | GRAP - Export accounting moves to EBP - Test
 [grap_custom_account_invoice_workflow](grap_custom_account_invoice_workflow/) | 12.0.1.0.6 | GRAP - Custom Invoice workflow
 [grap_custom_account_invoice_workflow_test](grap_custom_account_invoice_workflow_test/) | 12.0.1.0.1 | GRAP - Custom Invoice workflow
