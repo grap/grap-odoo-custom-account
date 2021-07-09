@@ -39,6 +39,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Création d'un nouveau compte 5312-->
     <record id="grap_l10n_fr_5312" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
       <field name="code">5312</field>
       <field name="name">Caisse pour Petits achats</field>
       <field name="user_type_id" ref="account.data_account_type_liquidity"/>
@@ -46,6 +47,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Création d'un nouveau compte 581-->
     <record id="grap_l10n_fr_581" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
       <field name="code">581</field>
       <field name="name">Espèce en attente d'encaissement</field>
       <field name="user_type_id" ref="account.data_account_type_liquidity"/>
@@ -72,6 +74,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Creation d'un sous-compte 6041 -->
     <record id="grap_l10n_fr_6041" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
       <field name="code">6041</field>
       <field name="name">Contrib GRAP</field>
       <field name="user_type_id" ref="account.data_account_type_expenses"/>
@@ -89,6 +92,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Creation d'un sous-compte 6581 -->
     <record model="account.account.template" id="pcg_6581">
+        <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
         <field name="code">6581</field>
         <field name="name">Fond de caisse (D)</field>
         <field name="user_type_id" ref="account.data_account_type_expenses"/>
@@ -96,6 +100,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Creation d'un sous-compte 6582 -->
     <record id="grap_l10n_fr_6582" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
       <field name="code">6582</field>
       <field name="name">Erreurs de caisse</field>
       <field name="user_type_id" ref="account.data_account_type_expenses"/>
@@ -153,6 +158,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Creation d'un sous-compte 7581 -->
     <record model="account.account.template" id="pcg_7581">
+        <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
         <field name="code">7581</field>
         <field name="name">Fond de caisse (C)</field>
         <field name="user_type_id" ref="account.data_account_type_revenue"/>
@@ -160,6 +166,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Creation d'un sous-compte 7582 -->
     <record model="account.account.template" id="pcg_7582">
+        <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
         <field name="code">7582</field>
         <field name="name">Erreurs de caisse</field>
         <field name="user_type_id" ref="account.data_account_type_revenue"/>
@@ -167,6 +174,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Creation d'un sous-compte 7063 -->
     <record id="grap_l10n_fr_7063" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
       <field name="code">7063</field>
       <field name="name">Commission sur Vente</field>
       <field name="user_type_id" ref="account.data_account_type_revenue"/>
@@ -174,6 +182,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Creation d'un sous-compte 7066 -->
     <record id="grap_l10n_fr_7066" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
       <field name="code">7066</field>
       <field name="name">Prestation Formation</field>
       <field name="user_type_id" ref="account.data_account_type_revenue"/>
