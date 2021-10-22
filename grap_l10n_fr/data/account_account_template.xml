@@ -33,6 +33,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="active" eval="False" />
     </record>
 
+    <!-- Création d'un nouveau compte 467BA-->
+    <record id="grap_l10n_fr_467BA" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">467BA</field>
+      <field name="name">Bon d'achat</field>
+      <field name="user_type_id" ref="account.data_account_type_other_income"/>
+    </record>
+
     <!-- ====================================-->
     <!-- Comptes 5x =========================-->
     <!-- ====================================-->
