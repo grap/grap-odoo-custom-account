@@ -4,7 +4,7 @@
 
 {
     "name": "Point Of Sale - Change Sale Move Lines - Test",
-    "version": "12.0.1.0.2",
+    "version": "12.0.1.0.3",
     "category": "Point Of Sale",
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
