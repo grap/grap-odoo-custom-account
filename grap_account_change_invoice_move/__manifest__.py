@@ -10,7 +10,7 @@
     "category": "GRAP Custom",
     "license": "AGPL-3",
     "author": "GRAP",
-    "website": "http://www.grap.coop",
+    "website": "https://github.com/grap/grap-odoo-custom-account",
     "depends": ["account"],
     "installable": True,
     "demo": ["demo/account_account.xml", "demo/account_invoice.xml"],
