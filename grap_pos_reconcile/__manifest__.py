@@ -7,6 +7,7 @@
     "version": "12.0.1.0.2",
     "category": "Point Of Sale",
     "author": "GRAP",
+    "website": "https://github.com/grap/grap-odoo-custom-account",
     "license": "AGPL-3",
     "summary": "Reconcile PoS entries",
     "depends": ["grap_pos_change_payment_move", "grap_pos_change_sale_move"],

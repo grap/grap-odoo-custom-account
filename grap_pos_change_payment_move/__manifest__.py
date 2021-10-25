@@ -8,6 +8,7 @@
     "category": "Point Of Sale",
     "author": "GRAP",
     "license": "AGPL-3",
+    "website": "https://github.com/grap/grap-odoo-custom-account",
     "summary": "Make Bank accounting moves from PoS acceptable for accoutants",
     "depends": ["point_of_sale"],
     "demo": ["demo/res_groups.xml", "demo/product_product.xml"],

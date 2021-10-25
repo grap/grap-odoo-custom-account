@@ -8,6 +8,7 @@
     "author": "GRAP",
     "category": "GRAP - Custom",
     "license": "AGPL-3",
+    "website": "https://github.com/grap/grap-odoo-custom-account",
     "depends": [
         "account",
         "account_menu",

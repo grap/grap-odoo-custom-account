@@ -8,7 +8,7 @@
     "version": "12.0.1.0.1",
     "category": "Custom",
     "author": "GRAP",
-    "website": "http://www.grap.coop",
+    "website": "https://github.com/grap/grap-odoo-custom-account",
     "license": "AGPL-3",
     "depends": ["grap_custom_account_invoice_workflow", "l10n_generic_coa"],
     "data": [],

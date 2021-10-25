@@ -7,6 +7,7 @@
     "version": "12.0.1.0.2",
     "category": "Point Of Sale",
     "author": "GRAP",
+    "website": "https://github.com/grap/grap-odoo-custom-account",
     "summary": "Test the module grap_pos_change_sale_move",
     "depends": ["grap_pos_change_sale_move", "l10n_generic_coa"],
     "license": "AGPL-3",
