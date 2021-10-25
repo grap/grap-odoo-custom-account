@@ -6,7 +6,7 @@
     "name": "GRAP - Custom accounting move generation from invoices",
     "summary": "Remove product from the keys during account moves generation"
     " from invoices",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "category": "GRAP Custom",
     "license": "AGPL-3",
     "author": "GRAP",
