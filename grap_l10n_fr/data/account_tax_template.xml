@@ -41,6 +41,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="l10n_fr.tva_super_reduite" model="account.tax.template">
         <field name="name">TVA vente à 02,1% basé sur le prix HT</field>
         <field name="description">TVA-VT-02.1-HT</field>
+        <field name="refund_account_id" ref="grap_l10n_fr_445714"/>
+        <field name="account_id" ref="grap_l10n_fr_445714"/>
     </record>
 
     <record id="l10n_fr.tva_super_reduite_encaissement" model="account.tax.template">
@@ -78,6 +80,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="l10n_fr.tva_super_reduite_ttc" model="account.tax.template">
         <field name="name">TVA vente à 02,1% basé sur le prix TTC</field>
         <field name="description">TVA-VT-02.1-TTC</field>
+        <field name="refund_account_id" ref="grap_l10n_fr_445714"/>
+        <field name="account_id" ref="grap_l10n_fr_445714"/>
     </record>
 
     <record id="l10n_fr.tva_super_reduite_encaissement_ttc" model="account.tax.template">
@@ -194,6 +198,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="l10n_fr.tva_intra_super_reduite" model="account.tax.template">
         <field name="name">TVA achat 02,1% basé sur le prix HT DUE Intracom</field>
         <field name="description">TVA-HA-UE-due-02.1</field>
+        <field name="refund_account_id" ref="grap_l10n_fr_445204"/>
+        <field name="account_id" ref="grap_l10n_fr_445204"/>
     </record>
 
 <!-- Achat Intracom déductible -->
