@@ -38,12 +38,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
       <field name="name">TVA due intracommunautaire (Taux réduit)</field>
     </record>
 
-    <!-- Création d'un nouveau compte 445204 pour le taux de TVA 2.1 ACHAT INTRACOM-->
-    <record id="grap_l10n_fr_445204" model="account.account.template">
-      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-      <field name="code">445204</field>
+    <!-- renommage du compte 445204 (taux de TVA 2.1 ACHAT INTRACOM)-->
+    <record id="l10n_fr.pcg_445204" model="account.account.template">
       <field name="name">TVA due intracommunautaire (Taux très réduit)</field>
-      <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
     </record>
 
     <!-- renommage du compte 445713 (taux de TVA 5.5 VENTE)-->
@@ -51,7 +48,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
       <field name="name">TVA collectée (Taux réduit)</field>
     </record>
 
-    <!-- Création d'un nouveau compte 445713 pour le taux de TVA 2.1 Vente-->
+    <!-- Création d'un nouveau compte 445714 pour le taux de TVA 2.1 Vente-->
     <record id="grap_l10n_fr_445714" model="account.account.template">
       <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
       <field name="code">445714</field>
