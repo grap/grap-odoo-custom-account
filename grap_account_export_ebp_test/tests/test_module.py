@@ -2,6 +2,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -33,6 +34,13 @@ class TestModule(TransactionCase):
             wizard.ebp_export_id.id,
             "Exporting a move should link it to the ebp export created.",
         )
+
+        # check if exported moves are well locked
+        with self.assertRaises(ValidationError):
+            self.move_1.write({"ref": "write ref should fail"})
+
+        # Check if we can still write on allowed fields
+        self.move_1.write({"narration": "Write narration should success"})
 
         wizard = self.WizardEbpUnexport.with_context(
             active_ids=[self.move_1.id]
