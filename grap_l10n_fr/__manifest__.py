@@ -16,6 +16,7 @@
         "account_fiscal_position_type",
         "account_fiscal_position_usage_group",
         "account_product_fiscal_classification",
+        "account_product_fiscal_classification",
     ],
     "data": [
         "data/account_account_template.xml",
