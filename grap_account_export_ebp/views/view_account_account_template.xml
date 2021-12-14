@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_account_template_form" model="ir.ui.view">
+        <field name="model">account.account.template</field>
+        <field name="inherit_id" ref="account.view_account_template_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group string="EBP Settings" colspan="4">
+                    <field name="ebp_export_tax"/>
+                    <field name="ebp_code_no_tax" attrs="{'invisible': [('ebp_export_tax', '=', False)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
