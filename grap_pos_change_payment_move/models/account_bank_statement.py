@@ -26,7 +26,7 @@ class AccountBankStatement(models.Model):
         AccountMove = self.env["account.move"]
         AccountBankStatementLine = self.env["account.bank.statement.line"]
 
-        for statement in self:
+        for statement in self.filtered(lambda r: r.state == 'open'):
             move_ids = []
             groups = {}
             # parse the lines to group the ids according to the key fields
