@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-18 21:29+0000\n"
-"PO-Revision-Date: 2021-01-18 21:29+0000\n"
+"POT-Creation-Date: 2021-12-08 10:39+0000\n"
+"PO-Revision-Date: 2021-12-08 10:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -240,7 +240,7 @@ msgstr "En brouillon"
 #: code:addons/grap_account_export_ebp/models/ebp_export.py:346
 #, python-format
 msgid "Due Date"
-msgstr "Date d'échéance"
+msgstr ""
 
 #. module: grap_account_export_ebp
 #: model:ir.ui.menu,name:grap_account_export_ebp.menu_ebp
@@ -525,7 +525,7 @@ msgstr "Analytique classique"
 #. module: grap_account_export_ebp
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_account_move_search
 msgid "Not Exported in EBP (>2018)"
-msgstr ""Non exporté dans EBP (>2018)"
+msgstr "\"Non exporté dans EBP (>2018)"
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,help:grap_account_export_ebp.field_wizard_ebp_export__fiscal_year_id
@@ -534,7 +534,6 @@ msgstr "Seulement les pièces de cet exercice seront exportées"
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_wizard_res_partner_add_suffix_line__partner_id
-#: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_res_partner_tree
 msgid "Partner"
 msgstr "Partenaire"
 
@@ -689,7 +688,7 @@ msgid "Wizard"
 msgstr "Assistant"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/account_move.py:42
+#: code:addons/grap_account_export_ebp/models/account_move.py:50
 #, python-format
 msgid "You cannot modify or delete exported moves: %s!"
 msgstr "Vous ne pouvez pas modifier ou supprimer des pièces exportées : %s !"
