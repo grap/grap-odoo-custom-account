@@ -5,7 +5,7 @@
 {
     "name": "GRAP - Change l10n_fr",
     "summary": "Custom changes of l10n_fr module for GRAP",
-    "version": "12.0.1.1.5",
+    "version": "12.0.1.1.6",
     "category": "Custom",
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
