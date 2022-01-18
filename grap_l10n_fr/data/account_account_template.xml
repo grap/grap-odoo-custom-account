@@ -91,6 +91,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Renommage du compte 6011 en 601-->
     <record model="account.account.template" id="l10n_fr.pcg_6011">
       <field name="code">601</field>
+      <field name="ebp_export_tax" eval="True"/>
+      <field name="ebp_code_no_tax">9</field>
     </record>
 
     <!-- Désactivation du compte 6012-->
@@ -140,6 +142,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Renommage du compte 6071-->
     <record model="account.account.template" id="l10n_fr.pcg_6071">
         <field name="name">Achats de marchandises externes</field>
+          <field name="ebp_export_tax" eval="True"/>
+          <field name="ebp_code_no_tax">9</field>
     </record>
 
     <!-- Désactivation du compte 6072-->
@@ -175,6 +179,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Renommage du compte 7011 en 701-->
     <record model="account.account.template" id="l10n_fr.pcg_7011">
       <field name="code">701</field>
+      <field name="ebp_export_tax" eval="True"/>
     </record>
 
     <!-- Désactivation du compte 7012-->
@@ -209,6 +214,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
       <field name="code">7063</field>
       <field name="name">Commission sur Vente</field>
       <field name="user_type_id" ref="account.data_account_type_revenue"/>
+      <field name="ebp_export_tax" eval="True"/>
     </record>
 
     <!-- Creation d'un sous-compte 7066 -->
@@ -223,6 +229,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record model="account.account.template" id="l10n_fr.pcg_7071">
         <field name="name">Ventes de marchandises</field>
         <field name="code">707</field>
+        <field name="ebp_export_tax" eval="True"/>
     </record>
 
     <!-- Désactivation du compte 7072-->
