@@ -21,12 +21,12 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [grap_account_change_invoice_move](grap_account_change_invoice_move/) | 12.0.1.0.2 |  | Remove product from the keys during account moves generation from invoices
-[grap_account_export_ebp](grap_account_export_ebp/) | 12.0.1.1.4 |  | GRAP - Export accounting moves to EBP
+[grap_account_export_ebp](grap_account_export_ebp/) | 12.0.1.1.5 |  | GRAP - Export accounting moves to EBP
 [grap_account_export_ebp_test](grap_account_export_ebp_test/) | 12.0.1.0.4 |  | GRAP - Export accounting moves to EBP - Test
 [grap_custom_account_invoice_workflow](grap_custom_account_invoice_workflow/) | 12.0.1.0.7 |  | GRAP - Custom Invoice workflow
 [grap_custom_account_invoice_workflow_test](grap_custom_account_invoice_workflow_test/) | 12.0.1.0.2 |  | GRAP - Custom Invoice workflow
 [grap_custom_account_payment_workflow](grap_custom_account_payment_workflow/) | 12.0.1.0.4 |  | Add Payment Check workflow
-[grap_l10n_fr](grap_l10n_fr/) | 12.0.1.1.6 |  | Custom changes of l10n_fr module for GRAP
+[grap_l10n_fr](grap_l10n_fr/) | 12.0.1.1.7 |  | Custom changes of l10n_fr module for GRAP
 [grap_pos_change_payment_move](grap_pos_change_payment_move/) | 12.0.1.1.3 |  | Make Bank accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move](grap_pos_change_sale_move/) | 12.0.1.0.2 |  | Make Sale accounting moves from PoS acceptable for accoutants
 [grap_pos_change_sale_move_test](grap_pos_change_sale_move_test/) | 12.0.1.0.3 |  | Test the module grap_pos_change_sale_move
