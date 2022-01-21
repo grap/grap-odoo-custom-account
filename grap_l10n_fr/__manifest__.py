@@ -12,10 +12,12 @@
     "license": "AGPL-3",
     "depends": [
         "l10n_fr",
+        # OCA
         "account_template_active",
         "account_fiscal_position_type",
         "account_fiscal_position_usage_group",
         "account_product_fiscal_classification",
+        # GRAP
         "grap_account_export_ebp",
     ],
     "data": [

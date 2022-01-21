@@ -9,7 +9,11 @@
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
     "summary": "Test the module grap_pos_change_sale_move",
-    "depends": ["grap_pos_change_sale_move", "l10n_generic_coa"],
+    "depends": [
+        "l10n_generic_coa",
+        # GRAP
+        "grap_pos_change_sale_move",
+    ],
     "license": "AGPL-3",
     "demo": [
         "demo/account_account.xml",

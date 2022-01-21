@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Point Of Sale - Pos Reconcile",
+    "name": "Point Of Sale - Reconcile PoS Account Moves",
     "version": "12.0.1.0.3",
     "category": "Point Of Sale",
     "author": "GRAP",
