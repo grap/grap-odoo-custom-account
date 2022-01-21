@@ -11,8 +11,10 @@
     "website": "https://github.com/grap/grap-odoo-custom-account",
     "depends": [
         "account",
+        # OCA
         "account_menu",
         "account_fiscal_year",
+        # GRAP
         "fiscal_company_base",
         "intercompany_trade_base",
         "intercompany_trade_fiscal_company",
