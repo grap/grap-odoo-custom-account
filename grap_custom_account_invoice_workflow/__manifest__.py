@@ -11,9 +11,11 @@
     "website": "https://github.com/grap/grap-odoo-custom-account",
     "license": "AGPL-3",
     "depends": [
+        # OCA
         "account_invoice_supplier_ref_unique",
-        "intercompany_trade_account",
         "web_notify",
+        # GRAP
+        "intercompany_trade_account",
     ],
     "data": ["views/view_account_invoice.xml"],
     "demo": ["demo/res_groups.xml"],
