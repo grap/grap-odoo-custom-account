@@ -9,7 +9,11 @@
     "category": "GRAP - Custom",
     "license": "AGPL-3",
     "website": "https://github.com/grap/grap-odoo-custom-account",
-    "depends": ["grap_account_export_ebp", "l10n_generic_coa"],
+    "depends": [
+        "l10n_generic_coa",
+        # GRAP
+        "grap_account_export_ebp",
+    ],
     "demo": [
         "demo/res_partner.xml",
         "demo/account_account.xml",
