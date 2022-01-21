@@ -5,7 +5,7 @@
 
 {
     "name": "GRAP - Custom Invoice workflow",
-    "version": "12.0.1.0.7",
+    "version": "12.0.1.0.8",
     "category": "Custom",
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
