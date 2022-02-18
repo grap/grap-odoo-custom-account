@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-08 10:39+0000\n"
-"PO-Revision-Date: 2021-12-08 10:39+0000\n"
+"POT-Creation-Date: 2022-02-18 14:47+0000\n"
+"PO-Revision-Date: 2022-02-18 14:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,11 @@ msgstr "COMPTES"
 #: model:ir.model,name:grap_account_export_ebp.model_account_account
 msgid "Account"
 msgstr "Compte"
+
+#. module: grap_account_export_ebp
+#: model:ir.model,name:grap_account_export_ebp.model_account_chart_template
+msgid "Account Chart Template"
+msgstr "Modèle de plan comptable"
 
 #. module: grap_account_export_ebp
 #: code:addons/grap_account_export_ebp/models/ebp_export.py:341
@@ -284,6 +289,8 @@ msgstr "Nombre de pièces comptables exportées dans EBP"
 
 #. module: grap_account_export_ebp
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_account_account_form
+#: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_account_account_template_form
+#: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_account_tax_template_form
 msgid "EBP Settings"
 msgstr "Paramétrage EBP"
 
@@ -314,6 +321,7 @@ msgstr "Exporter"
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_account__ebp_export_tax
+#: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_account_template__ebp_export_tax
 msgid "Export according Taxes"
 msgstr "Exporter selon les taxes"
 
@@ -384,6 +392,7 @@ msgstr ""
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,help:grap_account_export_ebp.field_account_account__ebp_export_tax
+#: model:ir.model.fields,help:grap_account_export_ebp.field_account_account_template__ebp_export_tax
 msgid "If checked, when you export moves from this account, it will create one account for each Tax Code"
 msgstr "Si coché, quand vous exportez des écritures comptables liées à ce compte, cela créera un compte pour chaque code de taxe"
 
@@ -585,6 +594,7 @@ msgstr "État"
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_tax__ebp_suffix
+#: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_tax_template__ebp_suffix
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_res_partner__ebp_suffix
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_res_users__ebp_suffix
 msgid "Suffix in EBP"
@@ -597,6 +607,7 @@ msgstr "Taxe"
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_account__ebp_code_no_tax
+#: model:ir.model.fields,field_description:grap_account_export_ebp.field_account_account_template__ebp_code_no_tax
 msgid "Tax Suffix if undefined"
 msgstr "Suffixe de taxe si non défini"
 
@@ -605,6 +616,16 @@ msgstr "Suffixe de taxe si non défini"
 #: model:ir.ui.menu,name:grap_account_export_ebp.menu_account_tax_code
 msgid "Tax Suffixes"
 msgstr "Suffixes de taxe"
+
+#. module: grap_account_export_ebp
+#: model:ir.model,name:grap_account_export_ebp.model_account_account_template
+msgid "Templates for Accounts"
+msgstr "Modèles pour les comptes"
+
+#. module: grap_account_export_ebp
+#: model:ir.model,name:grap_account_export_ebp.model_account_tax_template
+msgid "Templates for Taxes"
+msgstr "Modèles pour les taxes"
 
 #. module: grap_account_export_ebp
 #: sql_constraint:res.partner:0
@@ -657,11 +678,13 @@ msgstr "Durant l'export dans EBP, ce suffixe sera ajouté au compte comptable po
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,help:grap_account_export_ebp.field_account_account__ebp_code_no_tax
+#: model:ir.model.fields,help:grap_account_export_ebp.field_account_account_template__ebp_code_no_tax
 msgid "When exporting Entries to EBP, this suffix will be appended to the Account Number to make it a new Account, if 'Export to EBP according to Tax Codes' is checked, and if no taxes is defined on the account move line."
 msgstr "Durant l'export dans EBP, ce suffixe sera ajouté au compte pour générer un nouveau sous compte, si la case 'Exporter selon les taxes' est cochée et si aucune taxes n'est défini sur l'écriture comptable."
 
 #. module: grap_account_export_ebp
 #: model:ir.model.fields,help:grap_account_export_ebp.field_account_tax__ebp_suffix
+#: model:ir.model.fields,help:grap_account_export_ebp.field_account_tax_template__ebp_suffix
 msgid "When exporting Entries to EBP, this suffix will be appended to the Account Number to make it a new Account."
 msgstr "Durant l'export dans EBP, ce suffixe sera ajouté au compte comptable pour générer un nouveau sous compte."
 
@@ -688,7 +711,7 @@ msgid "Wizard"
 msgstr "Assistant"
 
 #. module: grap_account_export_ebp
-#: code:addons/grap_account_export_ebp/models/account_move.py:50
+#: code:addons/grap_account_export_ebp/models/account_move.py:49
 #, python-format
 msgid "You cannot modify or delete exported moves: %s!"
 msgstr "Vous ne pouvez pas modifier ou supprimer des pièces exportées : %s !"
@@ -732,4 +755,3 @@ msgstr "pièces comptables qui n'ont pas toutes les taxes correctement paramétr
 #: model_terms:ir.ui.view,arch_db:grap_account_export_ebp.view_wizard_ebp_export_form
 msgid "moves that have already been exported in EBP."
 msgstr "pièces qui ont déjà été exportées dans EBP"
-
