@@ -57,11 +57,10 @@ class EbpExport(models.Model):
     )
 
     exported_move_qty = fields.Integer(
-        oldname="exported_moves", string="Quantity of Moves Exported", readonly=True
+        string="Quantity of Moves Exported", readonly=True
     )
 
     exported_account_qty = fields.Integer(
-        oldname="exported_accounts",
         string="Quantity of accounts exported",
         readonly=True,
     )
