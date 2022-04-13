@@ -64,7 +64,7 @@ class TestModule(TransactionCase):
         statement_id = self.pos_config.current_session_id.statement_ids[0].id
         self.uid += 1
         order_data = {
-            "id": u"0006-001-000%d" % (self.uid),
+            "id": "0006-001-000%d" % (self.uid),
             "to_invoice": to_invoice,
             "data": {
                 "pricelist_id": self.pricelist.id,
@@ -100,9 +100,9 @@ class TestModule(TransactionCase):
                         },
                     ]
                 ],
-                "creation_date": u"2018-09-27 15:51:03",
+                "creation_date": "2018-09-27 15:51:03",
                 "fiscal_position_id": False,
-                "uid": u"00001-001-000%d" % self.uid,
+                "uid": "00001-001-000%d" % self.uid,
                 "amount_paid": vat_incl,
                 "amount_return": 0,
                 "amount_tax": vat_incl - vat_excl,
