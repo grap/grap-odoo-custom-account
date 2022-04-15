@@ -31,6 +31,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="res_model">wizard.res.partner.add.suffix</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
         <field name="target">new</field>
     </record>
 
