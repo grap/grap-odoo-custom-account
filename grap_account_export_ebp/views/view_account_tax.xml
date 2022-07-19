@@ -13,9 +13,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                <filter string="Without EBP Suffix"
                         name="without_suffix"
                         domain="[('ebp_suffix', '=', False)]"/>
-               <filter string="With Lines Moves exportable into EBP"
-                        name="with_move_line_ebp"
-                        domain="[('has_ebp_move_line', '=', True)]"/>
                <filter string="EBP Suffix required"
                         name="filter_has_ebp_suffix_required"
                         domain="[('has_ebp_suffix_required', '=', True)]"/>
