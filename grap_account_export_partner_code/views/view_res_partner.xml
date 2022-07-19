@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_res_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="property_account_position_id" position="after">
+                <field name="accounting_export_code" groups="account.group_account_manager"/>
+                <newline />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_search" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <filter name="type_person" position="after">
+               <filter string="Requires Accounting Export Code"
+                        name="filter_requires_accounting_export_code"
+                        domain="[('accounting_export_code', '=', False),
+                        ('journal_item_count', '>', 0)]"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_res_partner_tree" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom"
+                    decoration-muted="active == False"
+                >
+                <field name="name" readonly="1"/>
+                <field name="accounting_export_code"/>
+                <field name="journal_item_count" readonly="1"/>
+                <field name="customer" readonly="1"/>
+                <field name="supplier" readonly="1"/>
+                <field name="active" readonly="1"/>
+                <field name="company_id" readonly="1" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_res_partner" model="ir.actions.act_window">
+        <field name="name">Partner Accounting Export Codes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_res_partner_tree"/>
+        <field name="context">{
+            'search_default_filter_requires_accounting_export_code': 1,
+            'active_test': False
+            }</field>
+    </record>
+
+    <menuitem id="menu_partner_accounting_export_code"
+        name="Partner Accounting Export Codes"
+        parent="grap_account_export.menu_export"
+        action="action_res_partner"
+        sequence="1"/>
+
+</odoo>
