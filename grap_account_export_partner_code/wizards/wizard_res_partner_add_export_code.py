@@ -10,12 +10,12 @@ from odoo import api, fields, models
 _logger = logging.getLogger(__name__)
 
 
-class WizardResPartnerAddSuffix(models.TransientModel):
-    _name = "wizard.res.partner.add.suffix"
+class WizardResPartnerAddExportCode(models.TransientModel):
+    _name = "wizard.res.partner.add.export.code"
     _description = "Add Suffix for Partners Wizard"
 
     line_ids = fields.One2many(
-        comodel_name="wizard.res.partner.add.suffix.line",
+        comodel_name="wizard.res.partner.add.export.code.line",
         inverse_name="wizard_id",
         string="Lines",
     )

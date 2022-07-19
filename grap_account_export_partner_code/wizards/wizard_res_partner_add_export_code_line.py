@@ -7,14 +7,14 @@
 from odoo import fields, models
 
 
-class WizardResPartnerAddSuffixLine(models.TransientModel):
-    _name = "wizard.res.partner.add.suffix.line"
+class WizardResPartnerAddExportCodeLine(models.TransientModel):
+    _name = "wizard.res.partner.add.export.code.line"
     _description = "Add Suffix for Partners Wizard Line"
 
     _order = "company_id, partner_id"
 
     wizard_id = fields.Many2one(
-        comodel_name="wizard.res.partner.add.suffix", delete="cascade"
+        comodel_name="wizard.res.partner.add.export.code", delete="cascade"
     )
 
     partner_id = fields.Many2one(
