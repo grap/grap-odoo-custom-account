@@ -4,7 +4,7 @@
 
 {
     "name": "GRAP - Export accounting moves to EBP",
-    "version": "12.0.1.1.9",
+    "version": "12.0.2.0.0",
     "author": "GRAP",
     "category": "GRAP - Custom",
     "license": "AGPL-3",
@@ -19,6 +19,7 @@
         "intercompany_trade_base",
         "intercompany_trade_fiscal_company",
         "grap_account_export",
+        "grap_account_export_partner_code",
         "grap_custom_account_payment_workflow",
     ],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
@@ -34,9 +35,7 @@
         "views/view_account_tax.xml",
         "views/view_account_tax_template.xml",
         "views/view_ebp_export.xml",
-        "views/view_res_partner.xml",
         "views/view_res_company.xml",
     ],
-    "demo": ["demo/res_groups.xml"],
     "installable": True,
 }

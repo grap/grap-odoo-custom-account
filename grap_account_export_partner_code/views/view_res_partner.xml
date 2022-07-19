@@ -11,7 +11,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <field name="property_account_position_id" position="after">
-                <field name="ebp_suffix" groups="account.group_account_manager"/>
+                <field name="accounting_export_code" groups="account.group_account_manager"/>
                 <newline />
             </field>
         </field>
@@ -22,16 +22,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="base.view_res_partner_filter" />
         <field name="arch" type="xml">
             <filter name="type_person" position="after">
-               <filter string="Without EBP Suffix"
-                        name="without_suffix"
-                        domain="[('ebp_suffix', '=', False)]"/>
-               <filter string="With Lines Moves exportable into EBP"
-                        name="with_move_line_ebp"
-                        domain="[('has_ebp_move_line', '=', True)]"/>
-               <filter string="Without Suffixes And with Exportable Move Lines into EBP"
-                        name="without_suffix_with_move_line_ebp"
-                        domain="[('ebp_suffix', '=', False),
-                        ('has_ebp_move_line', '=', True)]"/>
+               <filter string="Requires Accounting Export Code"
+                        name="filter_requires_accounting_export_code"
+                        domain="[('accounting_export_code', '=', False),
+                        ('journal_item_count', '>', 0)]"/>
             </filter>
         </field>
     </record>
@@ -39,10 +33,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_res_partner_tree" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
-            <tree editable="bottom" decoration-muted="active == False">
+            <tree editable="bottom"
+                    decoration-muted="active == False"
+                >
                 <field name="name" readonly="1"/>
-                <field name="ebp_suffix"/>
-                <field name="has_ebp_move_line"/>
+                <field name="accounting_export_code"/>
                 <field name="journal_item_count" readonly="1"/>
                 <field name="customer" readonly="1"/>
                 <field name="supplier" readonly="1"/>
@@ -53,20 +48,20 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <record id="action_res_partner" model="ir.actions.act_window">
-        <field name="name">Partner Suffixes</field>
+        <field name="name">Partner Accounting Export Codes</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_res_partner_tree"/>
         <field name="context">{
-            'search_default_without_suffix_with_move_line_ebp': 1,
+            'search_default_filter_requires_accounting_export_code': 1,
             'active_test': False
             }</field>
     </record>
 
-    <menuitem id="menu_partner_suffix"
-        name="Partner Suffixes"
+    <menuitem id="menu_partner_accounting_export_code"
+        name="Partner Accounting Export Codes"
         parent="grap_account_export.menu_export"
         action="action_res_partner"
         sequence="1"/>

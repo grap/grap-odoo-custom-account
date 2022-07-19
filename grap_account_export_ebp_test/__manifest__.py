@@ -15,7 +15,6 @@
         "grap_account_export_ebp",
     ],
     "demo": [
-        "demo/res_partner.xml",
         "demo/account_account.xml",
         "demo/account_tax.xml",
         "demo/account_move.xml",

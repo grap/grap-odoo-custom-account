@@ -12,7 +12,7 @@ class TestModule(TransactionCase):
         self.WizardEbpExport = self.env["wizard.ebp.export"]
         self.WizardEbpUnexport = self.env["wizard.ebp.unexport"]
         self.move_1 = self.env.ref("grap_account_export_ebp_test.move_1")
-        self.customer_1 = self.env.ref("grap_account_export_ebp_test.customer_1")
+        self.customer_1 = self.env.ref("grap_account_export_partner_code.customer_1")
         self.sale_account = self.env.ref("grap_account_export_ebp_test.sale_account")
         self.fiscal_year = self.env.ref(
             "grap_account_export_ebp_test.curent_fiscal_year"
@@ -61,14 +61,14 @@ class TestModule(TransactionCase):
             "It should not be possible to export a unposted move.",
         )
 
-    def test_03_export_move_with_partner_without_suffix(self):
+    def test_03_export_move_with_partner_without_code(self):
         self.move_1.post()
-        self.customer_1.ebp_suffix = False
+        self.customer_1.accounting_export_code = False
         wizard = self.WizardEbpExport.with_context(active_ids=[self.move_1.id]).create(
             {"fiscal_year_id": self.fiscal_year.id}
         )
         self.assertEqual(
             wizard.ignored_partner_move_qty,
             1,
-            "It should not be possible to export a unposted move.",
+            "It should not be possible to export a move for partner without code",
         )

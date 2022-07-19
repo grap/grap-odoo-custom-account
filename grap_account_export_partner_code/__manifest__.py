@@ -10,10 +10,17 @@
     "license": "AGPL-3",
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
-    "depends": ["account"],
+    "depends": [
+        # GRAP
+        "grap_account_export",
+    ],
+    "external_dependencies": {"python": ["unidecode"]},
     "data": [
+        "views/view_res_partner.xml",
         "wizards/view_wizard_res_partner_add_export_code.xml",
     ],
-    "demo": [],
+    "demo": [
+        "demo/res_partner.xml",
+    ],
     "installable": True,
 }

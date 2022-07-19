@@ -8,17 +8,22 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 <odoo>
 
     <record id="customer_1" model="res.partner">
-        <field name="name">My EBP Customer</field>
+        <field name="name">My Customer with Accounting Export Code</field>
         <field name="company_id" ref="base.main_company"/>
         <field name="street">Street Value</field>
         <field name="street2">Street 2 Value</field>
         <field name="zip">ZIP Value</field>
         <field name="city">City Value</field>
-        <field name="ebp_suffix">EBPC</field>
+        <field name="accounting_export_code">EBPC</field>
     </record>
 
-    <record id="base.res_partner_1" model="res.partner">
-        <field name="ebp_suffix">WOOD</field>
+    <record id="customer_2" model="res.partner">
+        <field name="name">My Customer 2 without Accounting Export Code</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="street">Street Value</field>
+        <field name="street2">Street 2 Value</field>
+        <field name="zip">ZIP Value</field>
+        <field name="city">City Value</field>
     </record>
 
 </odoo>
