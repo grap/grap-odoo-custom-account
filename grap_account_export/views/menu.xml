@@ -6,8 +6,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-    <menuitem id="menu_ebp"
-        name="EBP"
+    <menuitem id="menu_export"
+        name="Export Settings"
         parent="account.menu_finance_entries"
         groups="account.group_account_manager"
         sequence="50"/>

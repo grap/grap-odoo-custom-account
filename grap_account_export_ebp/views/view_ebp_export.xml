@@ -87,7 +87,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <menuitem id="menu_ebp_export"
         name="EBP Exports"
-        parent="menu_ebp"
+        parent="grap_account_export.menu_export"
         action="action_ebp_export"
         sequence="3"/>
 

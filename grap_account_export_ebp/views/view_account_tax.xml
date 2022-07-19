@@ -73,7 +73,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <menuitem id="menu_account_tax_code"
         name="Tax Suffixes"
-        parent="menu_ebp"
+        parent="grap_account_export.menu_export"
         action="action_account_tax"
         sequence="2"/>
 
