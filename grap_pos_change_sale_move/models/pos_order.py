@@ -8,6 +8,11 @@ from odoo import api, models
 class PosOrder(models.Model):
     _inherit = "pos.order"
 
+    @api.model
+    def _get_partner_required_if_specific_account(self, account_id):
+        account = self.env["account.account"].browse(account_id)
+        return account.code == "4197"
+
     # Overwrite this Odoo function.
     # Remove partner_id product_id and name from the keys.
     @api.model
@@ -19,7 +24,9 @@ class PosOrder(models.Model):
             return (
                 "product",
                 # Remove partner_id
-                False,
+                self._get_partner_required_if_specific_account(values["account_id"])
+                and values["partner_id"]
+                or False,
                 # remove product_id (1) and name (3)
                 (False, tuple(values["tax_ids"][0][2]), False),
                 values["analytic_account_id"],
@@ -60,7 +67,10 @@ class PosOrder(models.Model):
         grouped_data = res.get("grouped_data")
         for k, values in grouped_data.items():
             for value in values:
-                value["partner_id"] = False
+                if not self._get_partner_required_if_specific_account(
+                    value["account_id"]
+                ):
+                    value["partner_id"] = False
                 value["product_id"] = False
                 value["quantity"] = False
                 if k[0] == "product":
