@@ -10,7 +10,11 @@
     "license": "AGPL-3",
     "website": "https://github.com/grap/grap-odoo-custom-account",
     "summary": "Make Bank accounting moves from PoS acceptable for accoutants",
-    "depends": ["point_of_sale"],
+    "depends": [
+        "point_of_sale",
+        # Coop It Easy
+        "account_customer_wallet",
+    ],
     "demo": ["demo/res_groups.xml", "demo/product_product.xml"],
     "installable": True,
 }

@@ -7,3 +7,5 @@ git+https://github.com/grap/odoo-addons-cae@12.0#subdirectory=setup/fiscal_compa
 git+https://github.com/grap/odoo-addons-intercompany-trade@12.0#subdirectory=setup/intercompany_trade_base
 git+https://github.com/grap/odoo-addons-intercompany-trade@12.0#subdirectory=setup/intercompany_trade_account
 git+https://github.com/grap/odoo-addons-intercompany-trade@12.0#subdirectory=setup/intercompany_trade_fiscal_company
+
+git+https://github.com/legalsylvain/coopiteasy-addons@12.0-IMP-wallet_grap#subdirectory=setup/account_customer_wallet
