@@ -5,7 +5,7 @@
 {
     "name": "GRAP - Account Export - Partner Code",
     "summary": "Add an account export code field on partner model",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "category": "GRAP Custom",
     "license": "AGPL-3",
     "author": "GRAP",
