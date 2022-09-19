@@ -136,7 +136,7 @@ class WizardEbpExport(models.TransientModel):
 
             # Filter by partner without ebp suffix
             incorrect_partner_move_lines = selected_moves.mapped("line_ids").filtered(
-                lambda x: x.partner_id and x.partner_id.ebp_suffix is False
+                lambda x: x.partner_id and x.partner_id.accounting_export_code is False
             )
             incorrect_partner_move_ids = incorrect_partner_move_lines.mapped(
                 "move_id"

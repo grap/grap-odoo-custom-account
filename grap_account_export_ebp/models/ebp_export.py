@@ -241,11 +241,11 @@ class EbpExport(models.Model):
         # Partner Suffix
         if (
             partner
-            and partner.ebp_suffix
+            and partner.accounting_export_code
             and account.user_type_id.type in ["receivable", "payable"]
             and not account.is_intercompany_trade_fiscal_company
         ):
-            res += partner.ebp_suffix
+            res += partner.accounting_export_code
 
         # Tax Suffix
         if account.ebp_export_tax:
@@ -413,7 +413,7 @@ class EbpExport(models.Model):
 
         if (
             line.partner_id
-            and line.partner_id.ebp_suffix
+            and line.partner_id.accounting_export_code
             and line.account_id.user_type_id.type in ("payable", "receivable")
         ):
             # Partner account

@@ -6,29 +6,30 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-    <record id="view_wizard_res_partner_add_suffix_form" model="ir.ui.view">
-        <field name="model">wizard.res.partner.add.suffix</field>
+    <record id="view_wizard_res_partner_add_export_code_form" model="ir.ui.view">
+        <field name="model">wizard.res.partner.add.export.code</field>
         <field name="arch" type="xml">
             <form>
                 <field name="line_ids">
                     <tree editable="bottom" nolabel="1">
-                        <field name="company_id"/>
+                        <field name="company_id" force_save="1"/>
                         <field name="partner_id" force_save="1"/>
-                        <field name="ebp_suffix"/>
+                        <field name="accounting_export_code"/>
+                        <field name="state" force_save="1"/>
                     </tree>
                 </field>
                 <footer>
-                    <button string="Affect Suffix" name="button_affect_suffix" type="object" class="oe_highlight"/>
+                    <button string="Affect Accounting Export Codes" name="button_affect_accounting_export_code" type="object" class="oe_highlight"/>
                       <button string="Cancel" class="oe_link" special="cancel"/>
                   </footer>
             </form>
         </field>
     </record>
 
-    <record id="action_wizard_res_partner_add_suffix" model="ir.actions.act_window">
-        <field name="name">Add EBP Suffixes</field>
+    <record id="action_wizard_res_partner_add_export_code" model="ir.actions.act_window">
+        <field name="name">Add Accounting Export Codes</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.res.partner.add.suffix</field>
+        <field name="res_model">wizard.res.partner.add.export.code</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="binding_model_id" ref="base.model_res_partner" />
