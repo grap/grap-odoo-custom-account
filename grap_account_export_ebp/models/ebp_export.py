@@ -360,7 +360,7 @@ class EbpExport(models.Model):
                 # Date (dd/mm/yy)
                 line["date"].strftime("%d/%m/%y"),
                 # Journal
-                self._normalize(line["journal"])[:4],
+                self._normalize(line["journal"]),
                 # Account number
                 # (possibly with the partner code appended to it)
                 line["account_code"],
