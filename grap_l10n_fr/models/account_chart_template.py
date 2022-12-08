@@ -49,6 +49,5 @@ class AccountChartTemplate(models.Model):
 
             # set correctly sale and purchase journal
             if journal["type"] in ["sale", "purchase"]:
-                journal["group_invoice_lines"] = True
                 journal["update_posted"] = True
         return journals
