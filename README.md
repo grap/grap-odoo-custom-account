@@ -22,7 +22,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [grap_account_change_invoice_move](grap_account_change_invoice_move/) | 12.0.1.0.2 |  | Remove product from the keys during account moves generation from invoices
 [grap_account_export](grap_account_export/) | 12.0.1.0.2 |  | Add a placeholder menu for Accounting Export
-[grap_account_export_ebp](grap_account_export_ebp/) | 12.0.2.0.1 |  | GRAP - Export accounting moves to EBP
+[grap_account_export_ebp](grap_account_export_ebp/) | 12.0.2.0.2 |  | GRAP - Export accounting moves to EBP
 [grap_account_export_ebp_test](grap_account_export_ebp_test/) | 12.0.1.0.7 |  | GRAP - Export accounting moves to EBP - Test
 [grap_account_export_partner_code](grap_account_export_partner_code/) | 12.0.1.0.2 |  | Add an account export code field on partner model
 [grap_account_export_partner_code_intercompany_trade_base](grap_account_export_partner_code_intercompany_trade_base/) | 12.0.1.0.2 |  | GRAP - Account Export - Partner Code - Intercompany Trade
