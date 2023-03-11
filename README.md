@@ -17,7 +17,24 @@ This repository contains Odoo modules developped by the company GRAP for custom 
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[grap_account_change_invoice_move](grap_account_change_invoice_move/) | 12.0.1.0.2 |  | Remove product from the keys during account moves generation from invoices
+[grap_account_export](grap_account_export/) | 12.0.1.0.2 |  | Add a placeholder menu for Accounting Export
+[grap_account_export_ebp](grap_account_export_ebp/) | 12.0.2.0.2 |  | GRAP - Export accounting moves to EBP
+[grap_account_export_ebp_test](grap_account_export_ebp_test/) | 12.0.1.0.7 |  | GRAP - Export accounting moves to EBP - Test
+[grap_account_export_partner_code](grap_account_export_partner_code/) | 12.0.1.0.2 |  | Add an account export code field on partner model
+[grap_account_export_partner_code_intercompany_trade_base](grap_account_export_partner_code_intercompany_trade_base/) | 12.0.1.0.2 |  | GRAP - Account Export - Partner Code - Intercompany Trade
+[grap_custom_account_invoice_workflow](grap_custom_account_invoice_workflow/) | 12.0.1.0.8 |  | GRAP - Custom Invoice workflow
+[grap_custom_account_invoice_workflow_test](grap_custom_account_invoice_workflow_test/) | 12.0.1.0.2 |  | GRAP - Custom Invoice workflow
+[grap_custom_account_payment_workflow](grap_custom_account_payment_workflow/) | 12.0.1.0.4 |  | Add Payment Check workflow
+[grap_l10n_fr](grap_l10n_fr/) | 12.0.1.1.9 |  | Custom changes of l10n_fr module for GRAP
+[grap_pos_change_payment_move](grap_pos_change_payment_move/) | 12.0.1.1.4 |  | Make Bank accounting moves from PoS acceptable for accoutants
+[grap_pos_change_sale_move](grap_pos_change_sale_move/) | 12.0.1.0.3 |  | Make Sale accounting moves from PoS acceptable for accoutants
+[grap_pos_change_sale_move_test](grap_pos_change_sale_move_test/) | 12.0.1.0.4 |  | Test the module grap_pos_change_sale_move
+[grap_pos_reconcile](grap_pos_reconcile/) | 12.0.1.0.4 |  | Reconcile PoS entries
 
 [//]: # (end addons)
 
