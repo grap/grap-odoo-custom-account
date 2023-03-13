@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: 1e045d8
+_commit: 5a39237
 _src_path: https://github.com/grap/oca-addons-repo-template-new.git
 ci: GitHub
 dependency_installation_mode: PIP
@@ -20,7 +20,7 @@ repo_description: This repository contains Odoo modules developped by the compan
     GRAP for custom accounting needs. They are shared in the hope that it will be
     useful.
 repo_name: Custom Account Odoo modules for GRAP
-repo_slug: grap-odoo-cust
+repo_slug: grap-odoo-custom-account
 repo_website: https://github.com/grap/grap-odoo-custom-account
 travis_apt_packages: []
 travis_apt_sources: []
