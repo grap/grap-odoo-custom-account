@@ -16,6 +16,7 @@ class ResPartner(models.Model):
 
     accounting_export_code = fields.Char(
         string="Accounting Export Code",
+        copy=False,
         help="When exporting Entries, this accounting_code will be"
         " appended to the Account Number to make it a Partner Account.",
     )
