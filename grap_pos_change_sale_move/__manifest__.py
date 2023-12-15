@@ -4,7 +4,7 @@
 
 {
     "name": "Point Of Sale - Change Sale Move Lines",
-    "version": "12.0.1.0.3",
+    "version": "12.0.2.0.0",
     "category": "Point Of Sale",
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
@@ -12,5 +12,6 @@
     "depends": ["point_of_sale"],
     "license": "AGPL-3",
     "demo": ["demo/res_groups.xml"],
+    "data": ["views/pos_config_views.xml"],
     "installable": True,
 }
