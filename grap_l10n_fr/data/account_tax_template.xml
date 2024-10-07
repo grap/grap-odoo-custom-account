@@ -13,7 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- TVA Vente HT -->
     <record id="l10n_fr.tva_normale" model="account.tax.template">
         <field name="name">TVA vente à 20,0% basé sur le prix HT</field>
-        <field name="description">TVA-VT-20.0-HT</field>
+        <field name="description">20.0%</field>
         <field name="ebp_suffix">1</field>
     </record>
 
@@ -23,7 +23,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="l10n_fr.tva_intermediaire" model="account.tax.template">
         <field name="name">TVA vente à 10,0% basé sur le prix HT</field>
-        <field name="description">TVA-VT-10.0-HT</field>
+        <field name="description">10.0%</field>
         <field name="ebp_suffix">4</field>
     </record>
 
@@ -33,7 +33,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="l10n_fr.tva_reduite" model="account.tax.template">
         <field name="name">TVA vente à 05,5% basé sur le prix HT</field>
-        <field name="description">TVA-VT-05.5-HT</field>
+        <field name="description">05.5%</field>
         <field name="ebp_suffix">2</field>
     </record>
 
@@ -43,7 +43,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="l10n_fr.tva_super_reduite" model="account.tax.template">
         <field name="name">TVA vente à 02,1% basé sur le prix HT</field>
-        <field name="description">TVA-VT-02.1-HT</field>
+        <field name="description">02.1%</field>
         <field name="refund_account_id" ref="grap_l10n_fr_445714"/>
         <field name="account_id" ref="grap_l10n_fr_445714"/>
         <field name="ebp_suffix">5</field>
@@ -56,7 +56,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- TVA Vente TTC -->
      <record id="l10n_fr.tva_normale_ttc" model="account.tax.template">
         <field name="name">TVA vente à 20,0% basé sur le prix TTC</field>
-        <field name="description">TVA-VT-20.0-TTC</field>
+        <field name="description">20.0%</field>
         <field name="ebp_suffix">1</field>
     </record>
 
@@ -66,7 +66,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="l10n_fr.tva_intermediaire_ttc" model="account.tax.template">
         <field name="name">TVA vente à 10,0% basé sur le prix TTC</field>
-        <field name="description">TVA-VT-10.0-TTC</field>
+        <field name="description">10.0%</field>
         <field name="ebp_suffix">4</field>
     </record>
 
@@ -76,7 +76,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="l10n_fr.tva_reduite_ttc" model="account.tax.template">
         <field name="name">TVA vente à 05,5% basé sur le prix TTC</field>
-        <field name="description">TVA-VT-05.5-TTC</field>
+        <field name="description">05.5%</field>
         <field name="ebp_suffix">2</field>
     </record>
 
@@ -86,7 +86,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="l10n_fr.tva_super_reduite_ttc" model="account.tax.template">
         <field name="name">TVA vente à 02,1% basé sur le prix TTC</field>
-        <field name="description">TVA-VT-02.1-TTC</field>
+        <field name="description">02.1%</field>
         <field name="refund_account_id" ref="grap_l10n_fr_445714"/>
         <field name="account_id" ref="grap_l10n_fr_445714"/>
         <field name="ebp_suffix">5</field>

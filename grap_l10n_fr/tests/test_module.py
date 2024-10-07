@@ -45,5 +45,5 @@ class TestModule(TransactionCase):
         self.assertFalse(account_707.ebp_code_no_tax)
 
         # Check that custom fields are correctly applied on taxes
-        tax_sale_20 = self._get_tax(company, "TVA-VT-20.0-HT")
+        tax_sale_20 = self._get_tax(company, "20.0%")
         self.assertTrue(tax_sale_20.ebp_suffix)
