@@ -16,7 +16,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Import/Export Hors Europe + DOM-TOM</field>
         <field name="active" eval="True"/>
         <field name="type_position_use">all</field>
-        <field name="usage_group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
     </record>
 
     <record id="l10n_fr.fiscal_position_template_intraeub2b" model="account.fiscal.position.template">
