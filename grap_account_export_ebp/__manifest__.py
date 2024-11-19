@@ -4,7 +4,7 @@
 
 {
     "name": "GRAP - Export accounting moves to EBP",
-    "version": "12.0.2.0.2",
+    "version": "16.0.1.0.0",
     "author": "GRAP",
     "category": "GRAP - Custom",
     "license": "AGPL-3",

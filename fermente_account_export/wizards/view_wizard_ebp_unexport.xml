@@ -28,7 +28,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Cancel EBP Export</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">wizard.ebp.unexport</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="binding_model_id" ref="account.model_account_move" />

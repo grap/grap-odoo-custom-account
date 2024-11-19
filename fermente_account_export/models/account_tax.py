@@ -26,7 +26,6 @@ class AccountTax(models.Model):
     )
 
     # Columns section
-    @api.multi
     def _compute_has_ebp_suffix_required(self):
         res = self._get_has_ebp_suffix_required()
         for tax in self:
@@ -35,7 +34,6 @@ class AccountTax(models.Model):
                     tax.has_ebp_suffix_required = True
                     continue
 
-    @api.multi
     def _get_has_ebp_suffix_required(self):
         self._cr.execute(
             """
