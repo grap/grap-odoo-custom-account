@@ -10,7 +10,16 @@
     "license": "AGPL-3",
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
-    "depends": ["account"],
+    "depends": [
+        # Odoo
+        "account",
+        # OCA
+        "account_fiscal_year",
+        # GRAP
+        "fiscal_company_base",
+        # "intercompany_trade_base",
+        # "intercompany_trade_fiscal_company",
+    ],
     "external_dependencies": {"python": ["unidecode"]},
     "data": [
         "security/ir.model.access.csv",

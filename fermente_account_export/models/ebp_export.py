@@ -234,7 +234,6 @@ class EbpExport(models.Model):
         if (
             company.fiscal_company_id.fiscal_type == "fiscal_mother"
             and account.user_type_id.type in ["receivable", "payable"]
-            and not account.is_intercompany_trade_fiscal_company
         ):
             res += company.code
 
@@ -243,7 +242,6 @@ class EbpExport(models.Model):
             partner
             and partner.accounting_export_code
             and account.user_type_id.type in ["receivable", "payable"]
-            and not account.is_intercompany_trade_fiscal_company
         ):
             res += partner.accounting_export_code
 
@@ -287,7 +285,7 @@ class EbpExport(models.Model):
             # 15 characters but "EBP Comptabilité" v13 will refuse anything
             # longer than 10 characters
             raise UserError(
-                _("Account code '%s' is too long to be exported to" " EBP.") % res
+                _("Account code '%s' is too long to be exported to EBP.") % res
             )
         return res
 
@@ -305,13 +303,9 @@ class EbpExport(models.Model):
 
     @api.model
     def _prepare_move_line_dict(self, move, line):
-
-        if move.partner_id.intercompany_trade:
-            ref = " (" + move.partner_id.name + ")"
-        else:
-            ref = (line.name and line.name or line.account_id.name) + (
-                move.ref and " (%s)" % (move.ref) or ""
-            )
+        ref = (line.name and line.name or line.account_id.name) + (
+            move.ref and " (%s)" % (move.ref) or ""
+        )
 
         # Manage analytic cases
         if line.account_id.ebp_analytic_mode == "fiscal_analytic":

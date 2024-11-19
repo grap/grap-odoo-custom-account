@@ -9,19 +9,7 @@
     "category": "GRAP - Custom",
     "license": "AGPL-3",
     "website": "https://github.com/grap/grap-odoo-custom-account",
-    "depends": [
-        "account",
-        # OCA
-        "account_menu",
-        "account_fiscal_year",
-        # GRAP
-        "fiscal_company_base",
-        "intercompany_trade_base",
-        "intercompany_trade_fiscal_company",
-        "grap_account_export",
-        "grap_account_export_partner_code",
-        "grap_custom_account_payment_workflow",
-    ],
+    "depends": [],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
         "security/ir.model.access.csv",
