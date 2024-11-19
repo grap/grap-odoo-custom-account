@@ -11,7 +11,6 @@ class WizardEbpUnexport(models.TransientModel):
     _name = "wizard.ebp.unexport"
     _description = "EBP Unexport Wizard"
 
-    @api.multi
     def button_unexport(self):
         AccountMove = self.env["account.move"]
         moves = AccountMove.browse(self.env.context.get("active_ids", False))

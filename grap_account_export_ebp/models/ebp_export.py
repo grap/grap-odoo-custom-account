@@ -102,29 +102,24 @@ class EbpExport(models.Model):
         return fields.Datetime.now()
 
     # Compute Section
-    @api.multi
     @api.depends("date")
     def _compute_name(self):
         for export in self:
             export.name = "export_%d" % export.id
 
-    @api.multi
     @api.depends("ebp_move_ids.ebp_export_id")
     def _compute_ebp_move_qty(self):
         for export in self:
             export.ebp_move_qty = len(export.ebp_move_ids)
 
-    @api.multi
     def _compute_file_name_moves(self):
         for export in self:
             export.file_name_moves = "export_%d_%s.csv" % (export.id, _("MOVES"))
 
-    @api.multi
     def _compute_file_name_accounts(self):
         for export in self:
             export.file_name_accounts = "export_%d_%s.csv" % (export.id, _("ACCOUNTS"))
 
-    @api.multi
     def _compute_file_name_balance(self):
         for export in self:
             export.file_name_balance = "export_%d_%s.csv" % (export.id, _("BALANCE"))
@@ -137,7 +132,6 @@ class EbpExport(models.Model):
             res = res.replace(char, " ")
         return res
 
-    @api.multi
     def export(self, moves):
         """Export moves into 3 files and mark the moves as exported"""
         self.ensure_one()
