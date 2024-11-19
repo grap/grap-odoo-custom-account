@@ -3,19 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "GRAP - Account Export",
+    "name": "Fermente - Account Export",
     "summary": "Add a placeholder menu for Accounting Export",
     "version": "16.0.1.0.0",
-    "category": "GRAP Custom",
+    "category": "Fermente Custom",
     "license": "AGPL-3",
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
     "depends": ["account"],
     "data": [
         "views/menu.xml",
-    ],
-    "demo": [
-        "demo/res_groups.xml",
     ],
     "installable": True,
 }
