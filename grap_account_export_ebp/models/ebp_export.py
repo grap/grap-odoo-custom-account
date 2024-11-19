@@ -305,7 +305,6 @@ class EbpExport(models.Model):
 
     @api.model
     def _prepare_move_line_dict(self, move, line):
-
         if move.partner_id.intercompany_trade:
             ref = " (" + move.partner_id.name + ")"
         else:
