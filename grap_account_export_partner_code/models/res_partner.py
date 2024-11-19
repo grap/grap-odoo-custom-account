@@ -121,7 +121,6 @@ class ResPartner(models.Model):
         # Complete with 0
         return bigger_word + "0" * (3 - len(bigger_word)) + "1"
 
-    @api.multi
     def _guess_accounting_export_code(self, reserved_codes):
         self.ensure_one()
         base_accounting_code = self._accounting_export_get_base_text(self.name)

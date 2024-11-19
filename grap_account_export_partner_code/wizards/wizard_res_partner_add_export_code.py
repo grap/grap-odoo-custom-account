@@ -18,7 +18,6 @@ class WizardResPartnerAddExportCode(models.TransientModel):
     )
 
     # View Section
-    @api.multi
     def button_affect_accounting_export_code(self):
         self.ensure_one()
         incorrect_lines = self.line_ids.filtered(lambda x: x.state != "ok")
