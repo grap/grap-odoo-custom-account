@@ -5,7 +5,7 @@
 {
     "name": "GRAP - Account Export",
     "summary": "Add a placeholder menu for Accounting Export",
-    "version": "12.0.1.0.2",
+    "version": "16.0.1.0.0",
     "category": "GRAP Custom",
     "license": "AGPL-3",
     "author": "GRAP",
