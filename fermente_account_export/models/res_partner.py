@@ -15,7 +15,6 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     accounting_export_code = fields.Char(
-        string="Accounting Export Code",
         copy=False,
         help="When exporting Entries, this accounting_code will be"
         " appended to the Account Number to make it a Partner Account.",
@@ -68,8 +67,9 @@ class ResPartner(models.Model):
         for x in self.with_context(active_test=False).search_read(
             domain, ["company_id", "accounting_export_code"]
         ):
-            res.setdefault(x["company_id"][0], [])
-            res[x["company_id"][0]].append(x["accounting_export_code"])
+            company_id = x["company_id"][0] if x["company_id"] else False
+            res.setdefault(company_id, [])
+            res[company_id].append(x["accounting_export_code"])
         return res
 
     @api.model

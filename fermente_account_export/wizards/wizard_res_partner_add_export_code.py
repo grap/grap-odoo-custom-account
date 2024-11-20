@@ -33,6 +33,19 @@ class WizardResPartnerAddExportCode(models.TransientModel):
             for line in wizard.line_ids.filtered(lambda x: x.accounting_export_code):
                 line.partner_id.accounting_export_code = line.accounting_export_code
 
+    def _check_incorrect_partners(self, partners):
+        """Overload me for custom reasons"""
+        global_partners = partners.filtered(lambda x: not x.company_id)
+
+        if global_partners:
+            raise ValidationError(
+                _(
+                    "Unable to use the wizard to guess export code for global partners"
+                    "that are not related to a company.\n"
+                    f"{','.join(global_partners.mapped('name'))}"
+                )
+            )
+
     # Overloading section
     @api.model
     def default_get(self, default_fields):
@@ -43,6 +56,7 @@ class WizardResPartnerAddExportCode(models.TransientModel):
         line_ids = []
 
         partners = ResPartner.browse(self.env.context.get("active_ids", []))
+        self._check_incorrect_partners(partners)
 
         existing_suffixes = ResPartner._get_existing_accounting_export_codes(
             company_ids=partners.mapped("company_id").ids

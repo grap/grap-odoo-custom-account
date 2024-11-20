@@ -13,6 +13,7 @@
     "depends": ["account"],
     "external_dependencies": {"python": ["unidecode"]},
     "data": [
+        "security/ir.model.access.csv",
         "views/menu.xml",
         "views/view_res_partner.xml",
         "wizards/view_wizard_res_partner_add_export_code.xml",

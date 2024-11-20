@@ -39,8 +39,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="name" readonly="1"/>
                 <field name="accounting_export_code"/>
                 <field name="journal_item_count" readonly="1"/>
-                <field name="customer" readonly="1"/>
-                <field name="supplier" readonly="1"/>
+<!--                 <field name="customer" readonly="1"/>
+                <field name="supplier" readonly="1"/> -->
                 <field name="active" readonly="1"/>
                 <field name="company_id" readonly="1" groups="base.group_multi_company"/>
             </tree>
@@ -61,7 +61,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <menuitem id="menu_partner_accounting_export_code"
         name="Partner Accounting Export Codes"
-        parent="grap_account_export.menu_export"
+        parent="menu_export"
         action="action_res_partner"
         sequence="1"/>
 
