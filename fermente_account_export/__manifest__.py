@@ -11,8 +11,14 @@
     "author": "GRAP",
     "website": "https://github.com/grap/grap-odoo-custom-account",
     "depends": ["account"],
+    "external_dependencies": {"python": ["unidecode"]},
     "data": [
         "views/menu.xml",
+        "views/view_res_partner.xml",
+        "wizards/view_wizard_res_partner_add_export_code.xml",
+    ],
+    "demo": [
+        "demo/res_partner.xml",
     ],
     "installable": True,
 }

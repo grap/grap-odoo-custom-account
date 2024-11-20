@@ -1,0 +1,175 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * fermente_account_export
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-21 15:30+0000\n"
+"PO-Revision-Date: 2022-07-21 15:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_partner__accounting_export_code
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_users__accounting_export_code
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__accounting_export_code
+msgid "Accounting Export Code"
+msgstr "Code d'export comptable"
+
+#. module: fermente_account_export
+#: model:ir.actions.act_window,name:fermente_account_export.action_wizard_res_partner_add_export_code
+msgid "Add Accounting Export Codes"
+msgstr "Ajouter les codes d'export comptable"
+
+#. module: fermente_account_export
+#: model:ir.model,name:fermente_account_export.model_wizard_res_partner_add_export_code
+msgid "Add Suffix for Partners Wizard"
+msgstr "Assistant pour l'ajout de suffixe de partenaire"
+
+#. module: fermente_account_export
+#: model:ir.model,name:fermente_account_export.model_wizard_res_partner_add_export_code_line
+msgid "Add Suffix for Partners Wizard Line"
+msgstr "Ligne d'assistant pour l'ajout de suffixe de partenaire"
+
+#. module: fermente_account_export
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_res_partner_add_export_code_form
+msgid "Affect Accounting Export Codes"
+msgstr "Affecter les codes d'export comptable"
+
+#. module: fermente_account_export
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_res_partner_add_export_code_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: fermente_account_export
+#: model:ir.model,name:fermente_account_export.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code__create_uid
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code__create_date
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code__display_name
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: fermente_account_export
+#: selection:wizard.res.partner.add.export.code.line,state:0
+msgid "Duplicate With Existing Codes"
+msgstr "En doublon avec des codes existants"
+
+#. module: fermente_account_export
+#: selection:wizard.res.partner.add.export.code.line,state:0
+msgid "Duplicate With New Codes"
+msgstr "En doublon avec de nouveaux codes"
+
+#. module: fermente_account_export
+#: selection:wizard.res.partner.add.export.code.line,state:0
+msgid "Empty"
+msgstr "Vide"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code__id
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__id
+msgid "ID"
+msgstr ""
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_partner__journal_item_count
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_users__journal_item_count
+msgid "Journal Items"
+msgstr "Écritures comptables"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code____last_update
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code__write_uid
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code__write_date
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code__line_ids
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: fermente_account_export
+#: selection:wizard.res.partner.add.export.code.line,state:0
+msgid "OK"
+msgstr ""
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: fermente_account_export
+#: model:ir.actions.act_window,name:fermente_account_export.action_res_partner
+#: model:ir.ui.menu,name:fermente_account_export.menu_partner_accounting_export_code
+msgid "Partner Accounting Export Codes"
+msgstr "Codes d'export comptable de partenaire"
+
+#. module: fermente_account_export
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_res_partner_search
+msgid "Requires Accounting Export Code"
+msgstr "Requiert un code d'export comptable"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__state
+msgid "State"
+msgstr "État"
+
+#. module: fermente_account_export
+#: sql_constraint:res.partner:0
+msgid "The Accounting Export Code must be unique per Company!"
+msgstr "Le code d'export comptable doit être unique par société !"
+
+#. module: fermente_account_export
+#: code:addons/fermente_account_export/wizards/wizard_res_partner_add_export_code.py:26
+#, python-format
+msgid "Unable to affect the account export code because some of them are incorrect."
+msgstr "Impossible d'affecter un code d'export comptable, car certains sont incorrectes."
+
+#. module: fermente_account_export
+#: model:ir.model.fields,help:fermente_account_export.field_res_partner__accounting_export_code
+#: model:ir.model.fields,help:fermente_account_export.field_res_users__accounting_export_code
+msgid "When exporting Entries, this accounting_code will be appended to the Account Number to make it a Partner Account."
+msgstr "Lors de l'export de pièce comptable, ce code comptable sera ajouter au compte comptable, pour générer le comptable comptable du partenaire"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__wizard_id
+msgid "Wizard"
+msgstr "Assistant"
+
