@@ -21,7 +21,7 @@ class WizardResPartnerAddExportCodeLine(models.TransientModel):
     ]
 
     wizard_id = fields.Many2one(
-        comodel_name="wizard.res.partner.add.export.code", delete="cascade"
+        comodel_name="wizard.res.partner.add.export.code", ondelete="cascade"
     )
 
     partner_id = fields.Many2one(
@@ -32,9 +32,9 @@ class WizardResPartnerAddExportCodeLine(models.TransientModel):
         comodel_name="res.company", string="Company", readonly=True
     )
 
-    accounting_export_code = fields.Char(string="Accounting Export Code", size=4)
+    accounting_export_code = fields.Char(size=4)
 
-    state = fields.Selection(selection=_STATE_SELECTION, string="State", readonly=True)
+    state = fields.Selection(selection=_STATE_SELECTION, readonly=True)
 
     @api.onchange("accounting_export_code")
     def onchange_accounting_export_code(self):

@@ -14,19 +14,20 @@ class TestModule(TransactionCase):
         self.AccountAccount = self.env["account.account"]
         self.AccountJournal = self.env["account.journal"]
         self.AccountMove = self.env["account.move"]
+        self.main_company = self.env.ref("base.main_company")
 
-        self.customer = self.env.ref("grap_account_export_partner_code.customer_2")
-        self.account_type_receivable = self.env.ref(
-            "account.data_account_type_receivable"
-        )
-        self.account_type_revenue = self.env.ref("account.data_account_type_revenue")
+        self.customer = self.env.ref("fermente_account_export.customer_2")
+        # self.account_type_receivable = self.env.ref(
+        #     "account.data_account_type_receivable"
+        # )
+        # self.account_type_revenue = self.env.ref("account.data_account_type_revenue")
 
         self.account_sale = self.AccountAccount.create(
             {
                 "code": "SALET",
                 "name": "Revenue (sale)",
-                "reconcile": True,
-                "user_type_id": self.account_type_revenue.id,
+                "reconcile": False,
+                "account_type": "income",
             }
         )
         self.account_receivable = self.AccountAccount.create(
@@ -34,7 +35,7 @@ class TestModule(TransactionCase):
                 "code": "RECVT",
                 "name": "Receivable (test)",
                 "reconcile": True,
-                "user_type_id": self.account_type_receivable.id,
+                "account_type": "asset_receivable",
             }
         )
 
@@ -43,8 +44,8 @@ class TestModule(TransactionCase):
                 "name": "Sales journal",
                 "code": "SAJT",
                 "type": "sale",
-                "default_credit_account_id": self.account_sale.id,
-                "default_debit_account_id": self.account_sale.id,
+                # "default_credit_account_id": self.account_sale.id,
+                # "default_debit_account_id": self.account_sale.id,
             }
         )
 
@@ -76,17 +77,23 @@ class TestModule(TransactionCase):
         self.assertEqual(_get_base("A B"), "A001")
         self.assertEqual(_get_base(""), "")
 
+    def _create_partner(self, name, extra_vals=False):
+        vals = {"name": name, "company_id": self.main_company.id}
+        if extra_vals:
+            vals.update(extra_vals)
+        return self.ResPartner.create(vals)
+
     def test_03_wizard_partner_add_export_code(self):
-        partner_with_suffix = self.ResPartner.create(
-            {"name": "Partner With Suffix", "accounting_export_code": "SUFF"}
+        partner_with_suffix = self._create_partner(
+            "Partner With Suffix", {"accounting_export_code": "SUFF"}
         )
-        partner_a = self.ResPartner.create({"name": "A"})
-        partner_bb = self.ResPartner.create({"name": "BB"})
-        partner_ccc = self.ResPartner.create({"name": "CCC"})
-        partner_dddd = self.ResPartner.create({"name": "DDDD"})
-        partner_duplicate_1 = self.ResPartner.create({"name": "bobleponge 01"})
-        partner_duplicate_2 = self.ResPartner.create({"name": "bobleponge 02"})
-        partner_duplicate_3 = self.ResPartner.create({"name": "bobleponge 03"})
+        partner_a = self._create_partner("A")
+        partner_bb = self._create_partner("BB")
+        partner_ccc = self._create_partner("CCC")
+        partner_dddd = self._create_partner("DDDD")
+        partner_duplicate_1 = self._create_partner("bobleponge 01")
+        partner_duplicate_2 = self._create_partner("bobleponge 02")
+        partner_duplicate_3 = self._create_partner("bobleponge 03")
 
         wizard = self.Wizard.with_context(
             active_ids=[
