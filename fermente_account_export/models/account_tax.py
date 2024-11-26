@@ -12,29 +12,28 @@ class AccountTax(models.Model):
 
     _SEARCH_DATE_BEGIN = "01/01/2017"
 
-    # Columns section
-    ebp_suffix = fields.Char(
-        string="Suffix in EBP",
-        help="When exporting Entries to EBP, this suffix will be"
+    export_suffix = fields.Char(
+        copy=False,
+        help="When exporting Entries, this suffix will be"
         " appended to the Account Number to make it a new Account.",
     )
 
-    has_ebp_suffix_required = fields.Boolean(
-        compute="_compute_has_ebp_suffix_required",
-        search="_search_has_ebp_suffix_required",
-        string="Require EBP Suffix",
+    export_suffix_required = fields.Boolean(
+        compute="_compute_export_suffix_required",
+        search="_search_export_suffix_required",
+        string="Require Export Suffix",
     )
 
     # Columns section
-    def _compute_has_ebp_suffix_required(self):
-        res = self._get_has_ebp_suffix_required()
+    def _compute_export_suffix_required(self):
+        res = self._get_export_suffix_required()
         for tax in self:
             for item in res:
                 if item[0] == tax.id:
-                    tax.has_ebp_suffix_required = True
+                    tax.export_suffix_required = True
                     continue
 
-    def _get_has_ebp_suffix_required(self):
+    def _get_export_suffix_required(self):
         self._cr.execute(
             """
             SELECT amlt.account_tax_id, count(*)
@@ -43,7 +42,7 @@ class AccountTax(models.Model):
             ON aml.id = amlt.account_move_line_id
             INNER JOIN account_account aa
             ON aa.id = aml.account_id
-            WHERE aa.ebp_export_tax is True
+            WHERE aa.export_suffix_on_tax_required is True
             AND amlt.account_tax_id in %s
             AND aml.date >= %s
             GROUP BY amlt.account_tax_id
@@ -54,7 +53,7 @@ class AccountTax(models.Model):
         return res
 
     @api.model
-    def _search_has_ebp_suffix_required(self, operator, value):
+    def _search_export_suffix_required(self, operator, value):
         assert operator in ("=", "!="), "Invalid domain operator"
         assert value in (True, False), "Invalid domain value"
 
@@ -63,5 +62,5 @@ class AccountTax(models.Model):
         )
 
         # Get ids accessible in the current context
-        res = self.search([])._get_has_ebp_suffix_required()
+        res = self.search([])._get_export_suffix_required()
         return [("id", with_line and "in" or "not in", [x[0] for x in res])]

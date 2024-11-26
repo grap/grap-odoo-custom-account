@@ -7,5 +7,4 @@ from . import account_tax
 from . import account_tax_template
 
 from . import ebp_export
-from . import res_company
 from . import res_partner

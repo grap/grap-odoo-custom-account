@@ -9,7 +9,9 @@ from odoo import fields, models
 class AccountJournal(models.Model):
     _inherit = "account.journal"
 
-    ebp_code = fields.Char(
-        string="EBP Code",
-        help="This code will be used when exporting entries in the journal column",
+    export_code = fields.Char(
+        string="Export Code",
+        help="This code will be used when exporting entries in the journal column"
+        " Let empty if you don't want to export the accounting moves that are"
+        " in this journal.",
     )

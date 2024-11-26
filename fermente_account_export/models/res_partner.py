@@ -14,7 +14,7 @@ from odoo import api, fields, models
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    accounting_export_code = fields.Char(
+    export_suffix = fields.Char(
         copy=False,
         help="When exporting Entries, this accounting_code will be"
         " appended to the Account Number to make it a Partner Account.",
@@ -25,8 +25,8 @@ class ResPartner(models.Model):
     # Constraints section
     _sql_constraints = [
         (
-            "accounting_export_code_company_id_uniq",
-            "unique (accounting_export_code, company_id)",
+            "export_suffix_company_id_uniq",
+            "unique (export_suffix, company_id)",
             "The Accounting Export Code must be unique per Company!",
         )
     ]
@@ -53,27 +53,25 @@ class ResPartner(models.Model):
 
     # Custom Section
     @api.model
-    def _get_existing_accounting_export_codes(
-        self, company_ids=False, ignore_partner=False
-    ):
+    def _get_existing_export_suffixes(self, company_ids=False, ignore_partner=False):
         """Return a dictionnary {'company_id': [list_of_existing_codes]}"""
         res = {}
-        domain = [("accounting_export_code", "!=", False)]
+        domain = [("export_suffix", "!=", False)]
         if company_ids:
             domain.append(("company_id", "in", company_ids))
         if ignore_partner:
             domain.append(("id", "!=", ignore_partner.id))
 
         for x in self.with_context(active_test=False).search_read(
-            domain, ["company_id", "accounting_export_code"]
+            domain, ["company_id", "export_suffix"]
         ):
             company_id = x["company_id"][0] if x["company_id"] else False
             res.setdefault(company_id, [])
-            res[company_id].append(x["accounting_export_code"])
+            res[company_id].append(x["export_suffix"])
         return res
 
     @api.model
-    def _accounting_export_sanitize(self, name):
+    def _export_suffix_sanitize(self, name):
         """Sanitize a text (partner name)
         returning a clean text like 'Bob - #hello' -> BOB HELLO"""
         # Upper name
@@ -93,7 +91,7 @@ class ResPartner(models.Model):
         return res
 
     @api.model
-    def _accounting_export_get_base_text(self, name):
+    def _export_suffix_get_base_text(self, name):
         """First sanitize a text, then try to extract
         a Four letter char.
         If the name contains a word that have at least 4 char
@@ -104,7 +102,7 @@ class ResPartner(models.Model):
         - Coeur d'artichaut -> ARTI
         - Ba -> BA01
         """
-        name = self._accounting_export_sanitize(name)
+        name = self._export_suffix_sanitize(name)
         if not name:
             return ""
 
@@ -121,9 +119,9 @@ class ResPartner(models.Model):
         # Complete with 0
         return bigger_word + "0" * (3 - len(bigger_word)) + "1"
 
-    def _guess_accounting_export_code(self, reserved_codes):
+    def _guess_export_suffix(self, reserved_codes):
         self.ensure_one()
-        base_accounting_code = self._accounting_export_get_base_text(self.name)
+        base_accounting_code = self._export_suffix_get_base_text(self.name)
 
         # if no proposal, return empty
         if not base_accounting_code:

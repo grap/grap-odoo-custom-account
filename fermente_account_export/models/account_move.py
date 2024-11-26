@@ -15,13 +15,12 @@ class AccountMove(models.Model):
         "reverse_entry_id",
     ]
 
-    ebp_export_id = fields.Many2one(
-        comodel_name="ebp.export",
-        string="EBP Export",
+    account_export_id = fields.Many2one(
+        comodel_name="account.export",
         copy=False,
         readonly=True,
         help="Indicates whether the move has already been exported"
-        " to EBP or not. It is changed automatically.",
+        " in an accounting Software. It is changed automatically.",
     )
 
     def write(self, vals):
@@ -42,8 +41,10 @@ class AccountMove(models.Model):
             if not forbidden_fields:
                 return
 
-        if not self.env.context.get("force_write_ebp_exported", False):
-            exported_moves = self.filtered(lambda x: x.ebp_export_id.id is not False)
+        if not self.env.context.get("ignore_account_move_exported", False):
+            exported_moves = self.filtered(
+                lambda x: x.account_export_id.id is not False
+            )
             if exported_moves:
                 raise ValidationError(
                     _("You cannot modify or delete exported moves: %s!")

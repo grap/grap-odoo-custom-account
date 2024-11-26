@@ -12,19 +12,15 @@ from odoo.exceptions import Warning as UserError
 
 _logger = logging.getLogger(__name__)
 
-try:
-    from unidecode import unidecode
-except ImportError:
-    unidecode = False
-    _logger.debug("account_export_ebp - 'unidecode' librairy not found")
+from unidecode import unidecode
 
 
-class EbpExport(models.Model):
-    _name = "ebp.export"
-    _description = "EBP Export"
+class AccountExport(models.Model):
+    _name = "account.export"
+    _description = "Account Export"
     _order = "date desc"
 
-    _EBP_REMOVE_CHAR_LIST = ["\n", ";", ",", '"']
+    _ACCOUNT_REMOVE_CHAR_LIST = ["\n", ";", ",", '"']
 
     # Column Section
     company_id = fields.Many2one(

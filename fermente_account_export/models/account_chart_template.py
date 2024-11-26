@@ -15,8 +15,8 @@ class AccountChartTemplate(models.Model):
         )
         res.update(
             {
-                "ebp_export_tax": account_template.ebp_export_tax,
-                "ebp_code_no_tax": account_template.ebp_code_no_tax,
+                "export_suffix_on_tax_required": account_template.export_suffix_on_tax_required,
+                "export_suffix_on_tax_default": account_template.export_suffix_on_tax_default,
             }
         )
         return res

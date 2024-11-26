@@ -9,16 +9,16 @@ from odoo import fields, models
 class AccountAccountTemplate(models.Model):
     _inherit = "account.account.template"
 
-    ebp_export_tax = fields.Boolean(
-        string="Export according Taxes",
+    export_suffix_on_tax_required = fields.Boolean(
+        string="Export according to Taxes",
         help="If checked, when you export moves from this account,"
         " it will create one account for each Tax Code",
     )
 
-    ebp_code_no_tax = fields.Char(
+    export_suffix_on_tax_default = fields.Char(
         string="Tax Suffix if undefined",
-        help="When exporting Entries to EBP, this suffix will be"
+        help="When exporting Entries, this suffix will be"
         " appended to the Account Number to make it a new Account,"
-        " if 'Export to EBP according to Tax Codes' is checked, and"
+        " if 'Export according to Taxes' is checked, and"
         " if no taxes is defined on the account move line.",
     )

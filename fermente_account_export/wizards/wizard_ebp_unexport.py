@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import api, models
+from odoo import models
 
 
 class WizardEbpUnexport(models.TransientModel):
@@ -16,6 +16,6 @@ class WizardEbpUnexport(models.TransientModel):
         moves = AccountMove.browse(self.env.context.get("active_ids", False))
         # We use sudo, because in a CAE context, if we cancel an export done
         # in GRP context, it will not be accessible in 3PP context.
-        moves.sudo().with_context(force_write_ebp_exported=True).write(
+        moves.sudo().with_context(ignore_account_move_exported=True).write(
             {"ebp_export_id": False}
         )

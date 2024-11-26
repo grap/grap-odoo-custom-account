@@ -16,21 +16,17 @@ class WizardEbpExport(models.TransientModel):
         string="EBP Export", comodel_name="ebp.export", readonly=True
     )
 
-    state = fields.Selection(
-        selection=_STATE_SELECTION, string="State", default="draft"
-    )
+    state = fields.Selection(selection=_STATE_SELECTION, default="draft")
 
     fiscal_year_id = fields.Many2one(
         comodel_name="account.fiscal.year",
-        string="Fiscal year",
+        string="Fiscal Year",
         required=True,
         default=lambda s: s._default_fiscal_year_id(),
         help="Only the moves in this fiscal year will be exported",
     )
 
-    description = fields.Text(
-        string="Description", help="Extra Description for Accountant Manager."
-    )
+    description = fields.Text(help="Extra Description for Accountant Manager.")
 
     file_name_moves = fields.Char(
         related="ebp_export_id.file_name_moves", readonly=True
