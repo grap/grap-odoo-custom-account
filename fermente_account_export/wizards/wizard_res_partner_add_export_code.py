@@ -24,9 +24,11 @@ class WizardResPartnerAddExportCode(models.TransientModel):
         if incorrect_lines:
             raise ValidationError(
                 _(
-                    f"Unable to affect the account export code"
-                    f" because {len(incorrect_lines)}"
-                    f" over {len(self.line_ids)} are incorrect."
+                    "Unable to affect the account export code"
+                    " because %(incorrect_line_qty)s"
+                    " over %(line_qty)s are incorrect.",
+                    incorrect_line_qty=len(incorrect_lines),
+                    line_qty=len(self.line_ids),
                 )
             )
         for wizard in self:
@@ -41,8 +43,8 @@ class WizardResPartnerAddExportCode(models.TransientModel):
             raise ValidationError(
                 _(
                     "Unable to use the wizard to guess export code for global partners"
-                    "that are not related to a company.\n"
-                    f"{','.join(global_partners.mapped('name'))}"
+                    " that are not related to a company.\n %(partner_names)s.",
+                    partner_names=",".join(global_partners.mapped("name")),
                 )
             )
 

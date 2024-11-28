@@ -27,7 +27,7 @@ class ResPartner(models.Model):
         (
             "export_suffix_company_id_uniq",
             "unique (export_suffix, company_id)",
-            "The Accounting Export Code must be unique per Company!",
+            "The Export Suffix must be unique per Company!",
         )
     ]
 

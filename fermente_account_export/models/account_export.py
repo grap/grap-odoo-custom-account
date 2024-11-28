@@ -66,7 +66,7 @@ class AccountExport(models.Model):
     )
 
     move_qty = fields.Integer(
-        compute="_compute_move_qty", string="EBP Moves Quantity", store=True
+        compute="_compute_move_qty", string="Moves Quantity", store=True
     )
 
     data_moves = fields.Binary(string="Moves file", readonly=True, attachment=True)
