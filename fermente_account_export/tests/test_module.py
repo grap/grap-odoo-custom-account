@@ -79,7 +79,7 @@ class TestModule(TransactionCase):
 
     def test_03_wizard_partner_add_export_code(self):
         partner_with_suffix = self._create_partner(
-            "Partner With Suffix", {"accounting_export_code": "SUFF"}
+            "Partner With Suffix", {"export_suffix": "SUFF"}
         )
         partner_a = self._create_partner("A")
         partner_bb = self._create_partner("BB")
@@ -106,35 +106,35 @@ class TestModule(TransactionCase):
             lambda x: x.partner_id.id == partner_duplicate_3.id
         )
         # Test OnChange
-        line_duplicate_3.accounting_export_code = "BOBL"
-        line_duplicate_3.onchange_accounting_export_code()
+        line_duplicate_3.export_suffix = "BOBL"
+        line_duplicate_3.onchange_export_suffix()
         self.assertEqual(line_duplicate_3.state, "duplicate_new")
 
-        line_duplicate_3.accounting_export_code = "EBPC"
-        line_duplicate_3.onchange_accounting_export_code()
+        line_duplicate_3.export_suffix = "EBPC"
+        line_duplicate_3.onchange_export_suffix()
         self.assertEqual(line_duplicate_3.state, "duplicate_existing")
 
-        line_duplicate_3.accounting_export_code = "abéc"
-        line_duplicate_3.onchange_accounting_export_code()
-        self.assertEqual(line_duplicate_3.accounting_export_code, "ABEC")
+        line_duplicate_3.export_suffix = "abéc"
+        line_duplicate_3.onchange_export_suffix()
+        self.assertEqual(line_duplicate_3.export_suffix, "ABEC")
 
-        line_duplicate_3.accounting_export_code = ""
-        line_duplicate_3.onchange_accounting_export_code()
+        line_duplicate_3.export_suffix = ""
+        line_duplicate_3.onchange_export_suffix()
         self.assertEqual(line_duplicate_3.state, "empty")
 
         # Try to confirm with incorrect value
         with self.assertRaises(ValidationError):
-            wizard.button_affect_accounting_export_code()
+            wizard.button_affect_export_suffix()
         line_duplicate_3.unlink()
 
-        wizard.button_affect_accounting_export_code()
-        self.assertEqual(partner_with_suffix.accounting_export_code, "SUFF")
-        self.assertEqual(partner_a.accounting_export_code, "A001")
-        self.assertEqual(partner_bb.accounting_export_code, "BB01")
-        self.assertEqual(partner_ccc.accounting_export_code, "CCC1")
-        self.assertEqual(partner_dddd.accounting_export_code, "DDDD")
-        self.assertEqual(partner_duplicate_1.accounting_export_code, "BOBL")
-        self.assertEqual(partner_duplicate_2.accounting_export_code, "BOB2")
+        wizard.button_affect_export_suffix()
+        self.assertEqual(partner_with_suffix.export_suffix, "SUFF")
+        self.assertEqual(partner_a.export_suffix, "A001")
+        self.assertEqual(partner_bb.export_suffix, "BB01")
+        self.assertEqual(partner_ccc.export_suffix, "CCC1")
+        self.assertEqual(partner_dddd.export_suffix, "DDDD")
+        self.assertEqual(partner_duplicate_1.export_suffix, "BOBL")
+        self.assertEqual(partner_duplicate_2.export_suffix, "BOB2")
 
     def test_04_search_journal_item_count(self):
         # Check first if partner doesn't requires export code

@@ -51,38 +51,35 @@ class WizardAccountExport(models.TransientModel):
     )
 
     ignored_draft_move_qty = fields.Integer(
-        compute="_compute_move_selection", multi="move_selection", store=True
+        compute="_compute_move_selection", store=True
     )
 
     ignored_period_move_qty = fields.Integer(
-        compute="_compute_move_selection", multi="move_selection", store=True
+        compute="_compute_move_selection", store=True
     )
 
     ignored_journal_code_move_qty = fields.Integer(
-        compute="_compute_move_selection", multi="move_selection", store=True
+        compute="_compute_move_selection", store=True
     )
 
     ignored_to_check_move_qty = fields.Integer(
-        compute="_compute_move_selection", multi="move_selection", store=True
+        compute="_compute_move_selection", store=True
     )
 
     ignored_exported_move_qty = fields.Integer(
-        compute="_compute_move_selection", multi="move_selection", store=True
+        compute="_compute_move_selection", store=True
     )
 
     ignored_partner_move_qty = fields.Integer(
-        compute="_compute_move_selection", multi="move_selection", store=True
+        compute="_compute_move_selection", store=True
     )
 
-    ignored_tax_move_qty = fields.Integer(
-        compute="_compute_move_selection", multi="move_selection", store=True
-    )
+    ignored_tax_move_qty = fields.Integer(compute="_compute_move_selection", store=True)
 
     selected_move_qty = fields.Integer(
         string="Quantity of Selected Moves",
         readonly=True,
         compute="_compute_move_selection",
-        multi="move_selection",
         store=True,
     )
 
@@ -90,7 +87,6 @@ class WizardAccountExport(models.TransientModel):
         string="Exported Moves",
         comodel_name="account.move",
         compute="_compute_move_selection",
-        multi="move_selection",
         store=True,
     )
 
@@ -98,7 +94,6 @@ class WizardAccountExport(models.TransientModel):
         string="Quantity of Exported Moves",
         readonly=True,
         compute="_compute_move_selection",
-        multi="move_selection",
         store=True,
     )
 
@@ -136,7 +131,7 @@ class WizardAccountExport(models.TransientModel):
 
             # Filter by partner without export suffix
             incorrect_partner_move_lines = selected_moves.mapped("line_ids").filtered(
-                lambda x: x.partner_id and x.partner_id.accounting_export_code is False
+                lambda x: x.partner_id and x.partner_id.export_suffix is False
             )
             incorrect_partner_move_ids = incorrect_partner_move_lines.mapped(
                 "move_id"

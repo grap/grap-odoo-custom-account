@@ -14,12 +14,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <tree editable="bottom" nolabel="1">
                         <field name="company_id" force_save="1"/>
                         <field name="partner_id" force_save="1"/>
-                        <field name="accounting_export_code"/>
+                        <field name="export_suffix"/>
                         <field name="state" force_save="1"/>
                     </tree>
                 </field>
                 <footer>
-                    <button string="Affect Accounting Export Codes" name="button_affect_accounting_export_code" type="object" class="oe_highlight"/>
+                    <button string="Affect Accounting Export Codes" name="button_affect_export_suffix" type="object" class="oe_highlight"/>
                       <button string="Cancel" class="oe_link" special="cancel"/>
                   </footer>
             </form>

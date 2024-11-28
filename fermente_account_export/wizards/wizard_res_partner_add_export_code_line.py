@@ -32,23 +32,21 @@ class WizardResPartnerAddExportCodeLine(models.TransientModel):
         comodel_name="res.company", string="Company", readonly=True
     )
 
-    accounting_export_code = fields.Char(size=4)
+    export_suffix = fields.Char(size=4)
 
     state = fields.Selection(selection=_STATE_SELECTION, readonly=True)
 
-    @api.onchange("accounting_export_code")
-    def onchange_accounting_export_code(self):
+    @api.onchange("export_suffix")
+    def onchange_export_suffix(self):
         ResPartner = self.env["res.partner"]
-        self.accounting_export_code = ResPartner._accounting_export_sanitize(
-            self.accounting_export_code
-        )
-        if not self.accounting_export_code:
+        self.export_suffix = ResPartner._accounting_export_sanitize(self.export_suffix)
+        if not self.export_suffix:
             self.state = "empty"
         else:
-            existing_suffixes = ResPartner._get_existing_accounting_export_codes(
+            existing_suffixes = ResPartner._get_existing_export_suffixs(
                 company_ids=[self.company_id.id], ignore_partner=self.partner_id
             ).get(self.company_id.id, [])
-            if self.accounting_export_code in existing_suffixes:
+            if self.export_suffix in existing_suffixes:
                 self.state = "duplicate_existing"
             else:
                 if (
@@ -56,10 +54,7 @@ class WizardResPartnerAddExportCodeLine(models.TransientModel):
                         lambda x: x.company_id == self.company_id
                     )
                     .filtered(lambda x: x.partner_id != self.partner_id)
-                    .filtered(
-                        lambda x: x.accounting_export_code
-                        == self.accounting_export_code
-                    )
+                    .filtered(lambda x: x.export_suffix == self.export_suffix)
                 ):
                     self.state = "duplicate_new"
                 else:

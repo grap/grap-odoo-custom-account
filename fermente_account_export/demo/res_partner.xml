@@ -14,7 +14,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="street2">Street 2 Value</field>
         <field name="zip">ZIP Value</field>
         <field name="city">City Value</field>
-        <field name="accounting_export_code">EBPC</field>
+        <field name="export_suffix">EBPC</field>
     </record>
 
     <record id="customer_2" model="res.partner">

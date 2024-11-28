@@ -11,7 +11,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <field name="property_account_position_id" position="after">
-                <field name="accounting_export_code" groups="account.group_account_manager"/>
+                <field name="export_suffix" groups="account.group_account_manager"/>
                 <newline />
             </field>
         </field>
@@ -23,8 +23,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <filter name="type_person" position="after">
                <filter string="Requires Accounting Export Code"
-                        name="filter_requires_accounting_export_code"
-                        domain="[('accounting_export_code', '=', False),
+                        name="filter_requires_export_suffix"
+                        domain="[('export_suffix', '=', False),
                         ('journal_item_count', '>', 0)]"/>
             </filter>
         </field>
@@ -37,7 +37,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     decoration-muted="active == False"
                 >
                 <field name="name" readonly="1"/>
-                <field name="accounting_export_code"/>
+                <field name="export_suffix"/>
                 <field name="journal_item_count" readonly="1"/>
 <!--                 <field name="customer" readonly="1"/>
                 <field name="supplier" readonly="1"/> -->
@@ -54,12 +54,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_res_partner_tree"/>
         <field name="context">{
-            'search_default_filter_requires_accounting_export_code': 1,
+            'search_default_filter_requires_export_suffix': 1,
             'active_test': False
             }</field>
     </record>
 
-    <menuitem id="menu_partner_accounting_export_code"
+    <menuitem id="menu_partner_export_suffix"
         name="Partner Accounting Export Codes"
         parent="menu_export"
         action="action_res_partner"

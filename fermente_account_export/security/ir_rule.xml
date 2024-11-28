@@ -7,11 +7,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-    <record id="ir_rule_ebp_export" model="ir.rule">
-        <field name="name">EBP Export</field>
-        <field name="model_id" ref="model_ebp_export" />
+    <record id="ir_rule_account_export" model="ir.rule">
+        <field name="name">Account Export</field>
+        <field name="model_id" ref="model_account_export" />
         <field name="global" eval="True" />
-        <field name="domain_force">['|',('company_id','=',False), ('company_id','child_of',[user.company_id.id])]</field>
+        <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
     </record>
 
 </odoo>

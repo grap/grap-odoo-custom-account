@@ -227,10 +227,10 @@ class AccountExport(models.Model):
         # Partner Suffix
         if (
             partner
-            and partner.accounting_export_code
+            and partner.export_suffix
             and account.user_type_id.type in ["receivable", "payable"]
         ):
-            res += partner.accounting_export_code
+            res += partner.export_suffix
 
         # Tax Suffix
         if account.export_suffix_on_tax_required:
@@ -391,7 +391,7 @@ class AccountExport(models.Model):
 
         if (
             line.partner_id
-            and line.partner_id.accounting_export_code
+            and line.partner_id.export_suffix
             and line.account_id.user_type_id.type in ("payable", "receivable")
         ):
             # Partner account
