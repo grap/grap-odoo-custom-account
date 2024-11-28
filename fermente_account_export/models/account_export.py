@@ -7,12 +7,12 @@ import base64
 import logging
 from io import StringIO
 
+from unidecode import unidecode
+
 from odoo import _, api, fields, models
 from odoo.exceptions import Warning as UserError
 
 _logger = logging.getLogger(__name__)
-
-from unidecode import unidecode
 
 
 class AccountExport(models.Model):
@@ -39,15 +39,12 @@ class AccountExport(models.Model):
     )
 
     date = fields.Datetime(
-        string="Date", required=True, readonly=True, default=lambda s: s._default_date()
+        required=True, readonly=True, default=lambda s: s._default_date()
     )
 
-    name = fields.Char(
-        compute="_compute_name", string="Name", store=True, readonly=True
-    )
+    name = fields.Char(compute="_compute_name", store=True, readonly=True)
 
     description = fields.Text(
-        string="Description",
         readonly=True,
         help="Extra Description for Accountant Manager.",
     )
@@ -245,15 +242,14 @@ class AccountExport(models.Model):
                     # Incorrect Tax setting
                     raise UserError(
                         _(
-                            "The account %s - %s is set 'export with tax"
+                            "The account %(account_code)s - %(account_name)s"
+                            " is set 'export with tax"
                             " suffix' but no tax suffix is defined for"
-                            " the tax %s.\n Move %s"
-                            % (
-                                account.code,
-                                account.name,
-                                line.tax_ids[0].Name,
-                                move.name,
-                            )
+                            " the tax %(tax_name)s.\n Move %(move_name)s",
+                            account_code=account.code,
+                            account_name=account.name,
+                            tax_name=line.tax_ids[0].name,
+                            move_name=move.name,
                         )
                     )
             elif account.export_suffix_on_tax_default:
@@ -263,10 +259,13 @@ class AccountExport(models.Model):
                 # Incorrect account setting
                 raise UserError(
                     _(
-                        "The account %s - %s is set 'export with tax"
+                        "The account %(account_code)s - %(account_name)s"
+                        " is set 'export with tax"
                         " suffix' but no default code is defined on"
-                        " the account.\n Move %s"
-                        % (account.code, account.name, move.name)
+                        " the account.\n Move %(move_name)s",
+                        account_code=account.code,
+                        account_name=account.name,
+                        move_name=move.name,
                     )
                 )
 
@@ -295,7 +294,6 @@ class AccountExport(models.Model):
         # Manage analytic cases
         if move.company_id.fiscal_type == "fiscal_child":
             ref = line.company_id.code + " " + ref
-            analytic_code = line.company_id.code
 
         return {
             "date": move.date,

@@ -10,7 +10,6 @@ class AccountJournal(models.Model):
     _inherit = "account.journal"
 
     export_code = fields.Char(
-        string="Export Code",
         help="This code will be used when exporting entries in the journal column"
         " Let empty if you don't want to export the accounting moves that are"
         " in this journal.",
