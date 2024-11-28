@@ -43,9 +43,9 @@ class TestModule(TransactionCase):
             }
         )
 
-    def test_01_accounting_export_sanitize(self):
+    def test_01_export_suffix_sanitize(self):
         def _sanitize(name):
-            return self.ResPartner._accounting_export_sanitize(name)
+            return self.ResPartner._export_suffix_sanitize(name)
 
         # Check Upper
         self.assertEqual(_sanitize("To Upper"), "TO UPPER")
@@ -61,9 +61,9 @@ class TestModule(TransactionCase):
         self.assertEqual(_sanitize("With Special ! Char"), "WITH SPECIAL CHAR")
         self.assertEqual(_sanitize("With Number 123"), "WITH NUMBER")
 
-    def test_02_accounting_export_get_base_text(self):
+    def test_02_export_suffix_get_base_text(self):
         def _get_base(name):
-            return self.ResPartner._accounting_export_get_base_text(name)
+            return self.ResPartner._export_suffix_get_base_text(name)
 
         self.assertEqual(_get_base("a Name with a word of many characters"), "CHAR")
         self.assertEqual(_get_base("Mr Baa"), "BAA1")

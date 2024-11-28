@@ -39,11 +39,11 @@ class WizardResPartnerAddExportCodeLine(models.TransientModel):
     @api.onchange("export_suffix")
     def onchange_export_suffix(self):
         ResPartner = self.env["res.partner"]
-        self.export_suffix = ResPartner._accounting_export_sanitize(self.export_suffix)
+        self.export_suffix = ResPartner._export_suffix_sanitize(self.export_suffix)
         if not self.export_suffix:
             self.state = "empty"
         else:
-            existing_suffixes = ResPartner._get_existing_export_suffixs(
+            existing_suffixes = ResPartner._get_existing_export_suffixes(
                 company_ids=[self.company_id.id], ignore_partner=self.partner_id
             ).get(self.company_id.id, [])
             if self.export_suffix in existing_suffixes:

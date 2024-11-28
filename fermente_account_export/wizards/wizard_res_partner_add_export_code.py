@@ -58,7 +58,7 @@ class WizardResPartnerAddExportCode(models.TransientModel):
         partners = ResPartner.browse(self.env.context.get("active_ids", []))
         self._check_incorrect_partners(partners)
 
-        existing_suffixes = ResPartner._get_existing_export_suffixs(
+        existing_suffixes = ResPartner._get_existing_export_suffixes(
             company_ids=partners.mapped("company_id").ids
         )
 
