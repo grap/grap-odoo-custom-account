@@ -61,15 +61,15 @@ class AccountExport(models.Model):
         readonly=True,
     )
 
-    ebp_move_ids = fields.One2many(
+    move_ids = fields.One2many(
         comodel_name="account.move",
-        inverse_name="ebp_export_id",
-        string="EBP Moves",
+        inverse_name="account_export_id",
+        string="Account Moves",
         readonly=True,
     )
 
-    ebp_move_qty = fields.Integer(
-        compute="_compute_ebp_move_qty", string="EBP Moves Quantity", store=True
+    move_qty = fields.Integer(
+        compute="_compute_move_qty", string="EBP Moves Quantity", store=True
     )
 
     data_moves = fields.Binary(string="Moves file", readonly=True, attachment=True)
@@ -103,10 +103,10 @@ class AccountExport(models.Model):
         for export in self:
             export.name = "export_%d" % export.id
 
-    @api.depends("ebp_move_ids.ebp_export_id")
-    def _compute_ebp_move_qty(self):
+    @api.depends("move_ids.account_export_id")
+    def _compute_move_qty(self):
         for export in self:
-            export.ebp_move_qty = len(export.ebp_move_ids)
+            export.move_qty = len(export.move_ids)
 
     def _compute_file_name_moves(self):
         for export in self:
@@ -160,7 +160,7 @@ class AccountExport(models.Model):
         self.write(vals)
 
         # Mark moves as exported
-        moves.write({"ebp_export_id": self.id})
+        moves.write({"account_export_id": self.id})
 
     @api.model
     def _export_to_files(self, moves, moves_file, accounts_file, balance_file):
@@ -236,11 +236,11 @@ class AccountExport(models.Model):
             res += partner.accounting_export_code
 
         # Tax Suffix
-        if account.ebp_export_tax:
+        if account.export_suffix_on_tax_required:
             if line.tax_ids:
-                if line.tax_ids[0].ebp_suffix:
+                if line.tax_ids[0].export_suffix:
                     # Tax code is defined
-                    res += line.tax_ids[0].ebp_suffix
+                    res += line.tax_ids[0].export_suffix
                 else:
                     # Incorrect Tax setting
                     raise UserError(
@@ -256,9 +256,9 @@ class AccountExport(models.Model):
                             )
                         )
                     )
-            elif account.ebp_code_no_tax:
+            elif account.export_suffix_on_tax_default:
                 # Default Tax Code is defined
-                res += account.ebp_code_no_tax
+                res += account.export_suffix_on_tax_default
             else:
                 # Incorrect account setting
                 raise UserError(
@@ -280,15 +280,10 @@ class AccountExport(models.Model):
         return res
 
     @api.model
-    def _get_analytic_code(self, move, line):
+    def _get_analytic_code(self, move):
         res = ""
-        if line.account_id.ebp_analytic_mode == "fiscal_analytic":
-            res = line.company_id.code
-        elif line.account_id.ebp_analytic_mode == "normal":
-            if line.analytic_account_id:
-                res = line.analytic_account_id.code
-            elif line.company_id.ebp_default_analytic_account_id:
-                res = line.company_id.ebp_default_analytic_account_id.code
+        if move.company_id.fiscal_type == "fiscal_child":
+            res = move.company_id.code
         return res
 
     @api.model
@@ -298,12 +293,13 @@ class AccountExport(models.Model):
         )
 
         # Manage analytic cases
-        if line.account_id.ebp_analytic_mode == "fiscal_analytic":
+        if move.company_id.fiscal_type == "fiscal_child":
             ref = line.company_id.code + " " + ref
+            analytic_code = line.company_id.code
 
         return {
             "date": move.date,
-            "journal": move.journal_id.ebp_code,
+            "journal": move.journal_id.export_code,
             "account_code": self._get_account_code(move, line),
             "ref": self._normalize(ref),
             "name": self._normalize(move.name),
@@ -311,7 +307,7 @@ class AccountExport(models.Model):
             "debit": line.debit,
             "date_maturity": line.date_maturity,
             "currency_name": move.company_id.currency_id.name,
-            "analytic_code": self._get_analytic_code(move, line),
+            "analytic_code": self._get_analytic_code(move),
         }
 
     @api.model
@@ -421,9 +417,9 @@ class AccountExport(models.Model):
                 }
             )
         elif (
-            line.account_id.ebp_export_tax
+            line.account_id.export_suffix_on_tax_required
             and line.tax_ids
-            and line.tax_ids[0].ebp_suffix
+            and line.tax_ids[0].export_suffix
         ):
             res.update(
                 {
@@ -439,7 +435,7 @@ class AccountExport(models.Model):
             # Normal account
             res.update({"name": self._normalize(line.account_id.name)})
 
-        if line.account_id.ebp_analytic_mode in ["fiscal_analytic", "normal"]:
+        if move.company_id.fiscal_type == "fiscal_child":
             res.update({"allow_analytic": "1"})
 
         return res
@@ -507,39 +503,3 @@ class AccountExport(models.Model):
         tmp = ",".join(data_list)
         file.write(unidecode(tmp))
         file.write("\r\n")
-
-    #     _logger.debug(
-    #         "%d accounts(s) exported to COMPTES.TXT" % len(accounts_data))
-
-    #     self.write(cr, uid, ids, {
-    #         'exported_moves': len(exported_move_ids),
-    #         'ignored_moves': len(ignored_move_ids),
-    #         'exported_lines': l,
-    #         'exported_accounts': len(accounts_data),
-    #     }, context=context)
-    #     if export_id:
-    #         export_obj.write(cr, uid, export_id, {
-    #             'exported_moves': len(exported_move_ids),
-    #             'ignored_moves': len(ignored_move_ids),
-    #             'exported_lines': l,
-    #             'exported_accounts': len(accounts_data),
-    #         }, context=context)
-    #     return export_id
-
-
-# FILE
-# FUCK ANALYTIC
-
-#     is_analytic_column = False
-#     for move in moves:
-#         if move.company_id.ebp_trigram != '':
-#             is_analytic_column = True
-
-# if is_analytic_column:
-#     move_line += ',Poste analytique'
-
-# AH BON ????
-#             if len(move.name) > 15:
-#                 raise osv.except_osv(_('Move name too long'), _(
-#                     """Move name '%s' is too long to be exported to"""
-#                     """ EBP.""") % move.name)

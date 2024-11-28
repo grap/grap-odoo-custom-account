@@ -16,9 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_res_partner__accounting_export_code
-#: model:ir.model.fields,field_description:fermente_account_export.field_res_users__accounting_export_code
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__accounting_export_code
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_partner__export_suffix
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_users__export_suffix
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__export_suffix
 msgid "Accounting Export Code"
 msgstr "Code d'export comptable"
 
@@ -137,7 +137,7 @@ msgstr "Partenaire"
 
 #. module: fermente_account_export
 #: model:ir.actions.act_window,name:fermente_account_export.action_res_partner
-#: model:ir.ui.menu,name:fermente_account_export.menu_partner_accounting_export_code
+#: model:ir.ui.menu,name:fermente_account_export.menu_partner_export_suffix
 msgid "Partner Accounting Export Codes"
 msgstr "Codes d'export comptable de partenaire"
 
@@ -163,8 +163,8 @@ msgid "Unable to affect the account export code because some of them are incorre
 msgstr "Impossible d'affecter un code d'export comptable, car certains sont incorrectes."
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_res_partner__accounting_export_code
-#: model:ir.model.fields,help:fermente_account_export.field_res_users__accounting_export_code
+#: model:ir.model.fields,help:fermente_account_export.field_res_partner__export_suffix
+#: model:ir.model.fields,help:fermente_account_export.field_res_users__export_suffix
 msgid "When exporting Entries, this accounting_code will be appended to the Account Number to make it a Partner Account."
 msgstr "Lors de l'export de pièce comptable, ce code comptable sera ajouter au compte comptable, pour générer le comptable comptable du partenaire"
 
@@ -174,7 +174,7 @@ msgid "Wizard"
 msgstr "Assistant"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:126
+#: code:addons/fermente_account_export/models/account_export.py:126
 #, python-format
 msgid "ACCOUNTS"
 msgstr "COMPTES"
@@ -190,27 +190,27 @@ msgid "Account Chart Template"
 msgstr "Modèle de plan comptable"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:341
-#: code:addons/fermente_account_export/models/ebp_export.py:492
+#: code:addons/fermente_account_export/models/account_export.py:341
+#: code:addons/fermente_account_export/models/account_export.py:492
 #, python-format
 msgid "Account Number"
 msgstr "N. Compte"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:291
+#: code:addons/fermente_account_export/models/account_export.py:291
 #, python-format
 msgid "Account code '%s' is too long to be exported to EBP."
 msgstr "Le code comptable '%s' est trop long pour être exporté dans EBP."
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:493
+#: code:addons/fermente_account_export/models/account_export.py:493
 #, python-format
 msgid "Account name"
 msgstr "Nom du compte"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__data_accounts
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__data_accounts
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__data_accounts
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__data_accounts
 msgid "Accounts file"
 msgstr "Fichier des comptes"
 
@@ -235,13 +235,13 @@ msgid "Affect Suffix"
 msgstr "Affecter un suffixe"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:344
+#: code:addons/fermente_account_export/models/account_export.py:344
 #, python-format
 msgid "Amount (related to the direction)"
 msgstr "Montant (lié au sens)"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:348
+#: code:addons/fermente_account_export/models/account_export.py:348
 #, python-format
 msgid "Analytic Account"
 msgstr "Compte analytique"
@@ -257,19 +257,19 @@ msgid "Are you sure you want to cancel EBP Export ?"
 msgstr "Etes vous sûr d'annuler l'export EBP ?"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:131
+#: code:addons/fermente_account_export/models/account_export.py:131
 #, python-format
 msgid "BALANCE"
 msgstr ""
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__data_balance
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__data_balance
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__data_balance
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__data_balance
 msgid "Balance file"
 msgstr "Fichier des balances"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_unexport_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_res_partner_add_suffix_form
 msgid "Cancel"
@@ -286,7 +286,7 @@ msgid "Check this box if you want to enable the analytic when exporting in EBP."
 msgstr "Cochez cette case si vous voulez activer l'analytique quand vous exportez dans EBP."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "Close"
 msgstr "Fermer"
 
@@ -296,9 +296,9 @@ msgid "Companies"
 msgstr "Sociétés"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__company_id
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__company_id
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__company_id
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_ebp_export_search
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_export_search
 msgid "Company"
 msgstr "Société"
 
@@ -308,8 +308,8 @@ msgid "Contact"
 msgstr ""
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__create_uid
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__create_uid
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__create_uid
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__create_uid
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_unexport__create_uid
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix__create_uid
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__create_uid
@@ -317,8 +317,8 @@ msgid "Created by"
 msgstr "Créé par"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__create_date
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__create_date
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__create_date
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__create_date
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_unexport__create_date
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix__create_date
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__create_date
@@ -326,38 +326,38 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:495
+#: code:addons/fermente_account_export/models/account_export.py:495
 #, python-format
 msgid "Credit"
 msgstr "Crédit"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:497
+#: code:addons/fermente_account_export/models/account_export.py:497
 #, python-format
 msgid "Credit Balance"
 msgstr "Balance Crédit"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:347
+#: code:addons/fermente_account_export/models/account_export.py:347
 #, python-format
 msgid "Currency"
 msgstr "Monnaie"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:339
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__date
+#: code:addons/fermente_account_export/models/account_export.py:339
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__date
 #, python-format
 msgid "Date"
 msgstr "Date "
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:494
+#: code:addons/fermente_account_export/models/account_export.py:494
 #, python-format
 msgid "Debit"
 msgstr "Débit"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:496
+#: code:addons/fermente_account_export/models/account_export.py:496
 #, python-format
 msgid "Debit Balance"
 msgstr "Balance Débit"
@@ -368,21 +368,21 @@ msgid "Default Analytic Account for EBP"
 msgstr "Compte analytique par défaut pour EBP"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__description
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__description
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_ebp_export_form
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__description
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__description
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_export_form
 msgid "Description"
 msgstr ""
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:345
+#: code:addons/fermente_account_export/models/account_export.py:345
 #, python-format
 msgid "Direction"
 msgstr ""
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__display_name
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__display_name
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__display_name
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__display_name
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_unexport__display_name
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix__display_name
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__display_name
@@ -390,17 +390,17 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: fermente_account_export
-#: selection:wizard.ebp.export,state:0
+#: selection:wizard.account.export,state:0
 msgid "Done"
 msgstr "Terminé"
 
 #. module: fermente_account_export
-#: selection:wizard.ebp.export,state:0
+#: selection:wizard.account.export,state:0
 msgid "Draft"
 msgstr "En brouillon"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:346
+#: code:addons/fermente_account_export/models/account_export.py:346
 #, python-format
 msgid "Due Date"
 msgstr ""
@@ -411,37 +411,37 @@ msgid "EBP"
 msgstr ""
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_bank_statement_import_journal_creation__ebp_code
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_journal__ebp_code
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_bank_statement_import_journal_creation__export_code
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_journal__export_code
 msgid "EBP Code"
 msgstr "Code EBP"
 
 #. module: fermente_account_export
-#: model:ir.model,name:fermente_account_export.model_ebp_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_move__ebp_export_id
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ebp_export_id
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_ebp_export_form
+#: model:ir.model,name:fermente_account_export.model_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_move__account_export_id
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__account_export_id
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_export_form
 msgid "EBP Export"
 msgstr "Export EBP"
 
 #. module: fermente_account_export
-#: model:ir.model,name:fermente_account_export.model_wizard_ebp_export
+#: model:ir.model,name:fermente_account_export.model_wizard_account_export
 msgid "EBP Export Wizard"
 msgstr "Assistant d'export EBP"
 
 #. module: fermente_account_export
-#: model:ir.actions.act_window,name:fermente_account_export.action_ebp_export
-#: model:ir.ui.menu,name:fermente_account_export.menu_ebp_export
+#: model:ir.actions.act_window,name:fermente_account_export.action_account_export
+#: model:ir.ui.menu,name:fermente_account_export.menu_account_export
 msgid "EBP Exports"
 msgstr "Exports EBP"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__ebp_move_ids
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__ebp_move_ids
 msgid "EBP Moves"
 msgstr "Pièces comptables exportées dans EBP"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__ebp_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__ebp_move_qty
 msgid "EBP Moves Quantity"
 msgstr "Nombre de pièces comptables exportées dans EBP"
 
@@ -453,7 +453,7 @@ msgid "EBP Settings"
 msgstr "Paramétrage EBP"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__ebp_suffix
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__export_suffix
 msgid "EBP Suffix"
 msgstr "Suffixe EBP"
 
@@ -473,52 +473,52 @@ msgid "Enable Analytic in EBP"
 msgstr "Activer l'analytique dans EBP"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "Export"
 msgstr "Exporter"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_account__ebp_export_tax
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_account_template__ebp_export_tax
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_account__export_suffix_on_tax_required
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_account_template__export_suffix_on_tax_required
 msgid "Export according Taxes"
 msgstr "Exporter selon les taxes"
 
 #. module: fermente_account_export
-#: model:ir.actions.act_window,name:fermente_account_export.action_wizard_ebp_export
+#: model:ir.actions.act_window,name:fermente_account_export.action_wizard_account_export
 msgid "Export to EBP"
 msgstr "Exporter dans EBP"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__exported_move_ids
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__exported_move_ids
 msgid "Exported Moves"
 msgstr "Pièces exportées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_ebp_export__description
-#: model:ir.model.fields,help:fermente_account_export.field_wizard_ebp_export__description
+#: model:ir.model.fields,help:fermente_account_export.field_account_export__description
+#: model:ir.model.fields,help:fermente_account_export.field_wizard_account_export__description
 msgid "Extra Description for Accountant Manager."
 msgstr "Description supplémentaire pour le comptable."
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__file_name_accounts
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__file_name_accounts
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__file_name_accounts
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__file_name_accounts
 msgid "File Name Accounts"
 msgstr "Nom du fichier des comptes"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__file_name_balance
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__file_name_balance
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__file_name_balance
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__file_name_balance
 msgid "File Name Balance"
 msgstr "Nom du fichier de balance"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__file_name_moves
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__file_name_moves
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__file_name_moves
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__file_name_moves
 msgid "File Name Moves"
 msgstr "Nom du fichier des pièces comptables"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_export_form
 msgid "Files"
 msgstr "Fichiers"
 
@@ -528,8 +528,8 @@ msgid "Fiscal Analytic"
 msgstr "Analytique de société"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__fiscal_year_id
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__fiscal_year_id
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__fiscal_year_id
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__fiscal_year_id
 msgid "Fiscal year"
 msgstr "Exercice fiscal"
 
@@ -540,8 +540,8 @@ msgid "Has Account Move Lines exportable in EBP"
 msgstr "A des écritures comptables exportables dans EBP"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__id
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__id
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__id
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__id
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_unexport__id
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix__id
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__id
@@ -549,48 +549,48 @@ msgid "ID"
 msgstr ""
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_account_account__ebp_export_tax
-#: model:ir.model.fields,help:fermente_account_export.field_account_account_template__ebp_export_tax
+#: model:ir.model.fields,help:fermente_account_export.field_account_account__export_suffix_on_tax_required
+#: model:ir.model.fields,help:fermente_account_export.field_account_account_template__export_suffix_on_tax_required
 msgid "If checked, when you export moves from this account, it will create one account for each Tax Code"
 msgstr "Si coché, quand vous exportez des écritures comptables liées à ce compte, cela créera un compte pour chaque code de taxe"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ignored_draft_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_draft_move_qty
 msgid "Ignored Draft Move Qty"
 msgstr "Pièces comptables en brouillon ignorées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ignored_exported_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_exported_move_qty
 msgid "Ignored Exported Move Qty"
 msgstr "Pièces comptables déjà exportées ignorées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ignored_journal_code_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_journal_code_move_qty
 msgid "Ignored Journal Code Move Qty"
 msgstr "Pièces comptables sans code de journal ignorées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ignored_partner_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_partner_move_qty
 msgid "Ignored Partner Move Qty"
 msgstr "Pièces comptables sans partenaires paramétrés ignorées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ignored_period_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_period_move_qty
 msgid "Ignored Period Move Qty"
 msgstr "Pièces comptables avec période incorrecte ignorées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ignored_tax_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_tax_move_qty
 msgid "Ignored Tax Move Qty"
 msgstr "Pièces comptables sans suffixe de taxe ignorées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__ignored_to_check_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_to_check_move_qty
 msgid "Ignored To Check Move Qty"
 msgstr "Pièces comptables 'à vérifier' ignorées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_account_move__ebp_export_id
+#: model:ir.model.fields,help:fermente_account_export.field_account_move__account_export_id
 msgid "Indicates whether the move has already been exported to EBP or not. It is changed automatically."
 msgstr "Indiquer si la pièce a déjà été exportées dans EBP ou pas. Valeur changée automatiquement."
 
@@ -600,7 +600,7 @@ msgid "Journal"
 msgstr ""
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:340
+#: code:addons/fermente_account_export/models/account_export.py:340
 #, python-format
 msgid "Journal Code"
 msgstr "Code Journal"
@@ -611,14 +611,14 @@ msgid "Journal Entries"
 msgstr "Pièces comptables"
 
 #. module: fermente_account_export
-#: model:ir.actions.act_window,name:fermente_account_export.action_account_move_from_ebp_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_ebp_export_form
+#: model:ir.actions.act_window,name:fermente_account_export.action_account_move_from_account_export
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_export_form
 msgid "Journal Items"
 msgstr "Écritures comptables"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export____last_update
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export____last_update
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export____last_update
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export____last_update
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_unexport____last_update
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix____last_update
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line____last_update
@@ -626,8 +626,8 @@ msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__write_uid
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__write_uid
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__write_uid
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__write_uid
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_unexport__write_uid
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix__write_uid
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__write_uid
@@ -635,8 +635,8 @@ msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__write_date
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__write_date
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__write_date
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__write_date
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_unexport__write_date
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix__write_date
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_suffix_line__write_date
@@ -644,7 +644,7 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:338
+#: code:addons/fermente_account_export/models/account_export.py:338
 #, python-format
 msgid "Line"
 msgstr "Ligne"
@@ -655,26 +655,26 @@ msgid "Lines"
 msgstr "Lignes"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:121
+#: code:addons/fermente_account_export/models/account_export.py:121
 #, python-format
 msgid "MOVES"
 msgstr "ECRITURES"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:343
+#: code:addons/fermente_account_export/models/account_export.py:343
 #, python-format
 msgid "Move Number"
 msgstr "N. Pièce"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__data_moves
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__data_moves
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__data_moves
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__data_moves
 msgid "Moves file"
 msgstr "Fichier des écritures comptables"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:342
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__name
+#: code:addons/fermente_account_export/models/account_export.py:342
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__name
 #, python-format
 msgid "Name"
 msgstr "Nom"
@@ -695,7 +695,7 @@ msgid "Not Exported in EBP (>2018)"
 msgstr "\"Non exporté dans EBP (>2018)"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_wizard_ebp_export__fiscal_year_id
+#: model:ir.model.fields,help:fermente_account_export.field_wizard_account_export__fiscal_year_id
 msgid "Only the moves in this fiscal year will be exported"
 msgstr "Seulement les pièces de cet exercice seront exportées"
 
@@ -711,50 +711,50 @@ msgid "Partner Suffixes"
 msgstr "Suffixes de partenaires"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__exported_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__exported_move_qty
 msgid "Quantity of Exported Moves"
 msgstr "Nombre de pièces exportées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__exported_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__exported_move_qty
 msgid "Quantity of Moves Exported"
 msgstr "Nombre de pièces exportées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__selected_move_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__selected_move_qty
 msgid "Quantity of Selected Moves"
 msgstr "Nombre de pièces sélectionnées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_ebp_export__exported_account_qty
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__exported_account_qty
 msgid "Quantity of accounts exported"
 msgstr "Nombre de comptes exportés"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_tax__has_ebp_suffix_required
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_tax__export_suffix_required
 msgid "Require EBP Suffix"
 msgstr "Requiert un suffixe EBP"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "Results"
 msgstr "Résultats"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "Settings"
 msgstr "Configuration"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_ebp_export__state
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__state
 msgid "State"
 msgstr "État"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_tax__ebp_suffix
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_tax_template__ebp_suffix
-#: model:ir.model.fields,field_description:fermente_account_export.field_res_partner__ebp_suffix
-#: model:ir.model.fields,field_description:fermente_account_export.field_res_users__ebp_suffix
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_tax__export_suffix
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_tax_template__export_suffix
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_partner__export_suffix
+#: model:ir.model.fields,field_description:fermente_account_export.field_res_users__export_suffix
 msgid "Suffix in EBP"
 msgstr "Suffixe dans EBP"
 
@@ -764,8 +764,8 @@ msgid "Tax"
 msgstr "Taxe"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_account__ebp_code_no_tax
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_account_template__ebp_code_no_tax
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_account__export_suffix_on_tax_default
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_account_template__export_suffix_on_tax_default
 msgid "Tax Suffix if undefined"
 msgstr "Suffixe de taxe si non défini"
 
@@ -791,7 +791,7 @@ msgid "The EBP suffix must be unique per company!"
 msgstr "Le suffixe EBP doit être unique par société"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:282
+#: code:addons/fermente_account_export/models/account_export.py:282
 #, python-format
 msgid "The account %s - %s is set 'export with tax suffix' but no default code is defined on the account.\n"
 " Move %s"
@@ -799,7 +799,7 @@ msgstr "Le compte %s - %s est défini à 'exporter avec suffixe de taxe' mais au
 " Pièce %s"
 
 #. module: fermente_account_export
-#: code:addons/fermente_account_export/models/ebp_export.py:264
+#: code:addons/fermente_account_export/models/account_export.py:264
 #, python-format
 msgid "The account %s - %s is set 'export with tax suffix' but no tax suffix is defined for the tax %s.\n"
 " Move %s"
@@ -812,8 +812,8 @@ msgid "The export will be canceled for the selected moves. Be sure to delete the
 msgstr "L'export sera annulé pour les pièces sélectionnées. Assurez vous d'avoir supprimer les pièces comptables correspondantes dans EBP."
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_account_bank_statement_import_journal_creation__ebp_code
-#: model:ir.model.fields,help:fermente_account_export.field_account_journal__ebp_code
+#: model:ir.model.fields,help:fermente_account_export.field_account_bank_statement_import_journal_creation__export_code
+#: model:ir.model.fields,help:fermente_account_export.field_account_journal__export_code
 msgid "This code will be used when exporting entries in the journal column"
 msgstr "Ce code sera utilisé lors de l'export des écritures dans la colonne journal"
 
@@ -829,20 +829,20 @@ msgid "Unexport"
 msgstr "Annuler l'export"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_res_partner__ebp_suffix
-#: model:ir.model.fields,help:fermente_account_export.field_res_users__ebp_suffix
+#: model:ir.model.fields,help:fermente_account_export.field_res_partner__export_suffix
+#: model:ir.model.fields,help:fermente_account_export.field_res_users__export_suffix
 msgid "When exporting Entries to EBP, this suffix will be appended to the Account Number to make it a Partner Account."
 msgstr "Durant l'export dans EBP, ce suffixe sera ajouté au compte comptable pour générer un nouveau sous compte de partenaire"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_account_account__ebp_code_no_tax
-#: model:ir.model.fields,help:fermente_account_export.field_account_account_template__ebp_code_no_tax
+#: model:ir.model.fields,help:fermente_account_export.field_account_account__export_suffix_on_tax_default
+#: model:ir.model.fields,help:fermente_account_export.field_account_account_template__export_suffix_on_tax_default
 msgid "When exporting Entries to EBP, this suffix will be appended to the Account Number to make it a new Account, if 'Export to EBP according to Tax Codes' is checked, and if no taxes is defined on the account move line."
 msgstr "Durant l'export dans EBP, ce suffixe sera ajouté au compte pour générer un nouveau sous compte, si la case 'Exporter selon les taxes' est cochée et si aucune taxes n'est défini sur l'écriture comptable."
 
 #. module: fermente_account_export
-#: model:ir.model.fields,help:fermente_account_export.field_account_tax__ebp_suffix
-#: model:ir.model.fields,help:fermente_account_export.field_account_tax_template__ebp_suffix
+#: model:ir.model.fields,help:fermente_account_export.field_account_tax__export_suffix
+#: model:ir.model.fields,help:fermente_account_export.field_account_tax_template__export_suffix
 msgid "When exporting Entries to EBP, this suffix will be appended to the Account Number to make it a new Account."
 msgstr "Durant l'export dans EBP, ce suffixe sera ajouté au compte comptable pour générer un nouveau sous compte."
 
@@ -875,41 +875,41 @@ msgid "You cannot modify or delete exported moves: %s!"
 msgstr "Vous ne pouvez pas modifier ou supprimer des pièces exportées : %s !"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "You have selected"
 msgstr "Vous avez sélectionné"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "draft moves."
 msgstr "pièces comptables en brouillon."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "moves related to partners without EBP suffixes defined."
 msgstr "pièces comptables liées à des partenaires sans suffixes EBP définis."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "moves that are marked as 'To check'."
 msgstr "pièces comptables qui sont marquées 'à vérifier'."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "moves that belong to a journal that doesn't have a correct 'EBP code' set."
 msgstr "pièces comptables qui appartiennent à un journal qui n'a pas de code EBP défini."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "moves that doesn't belong to the selected fiscal year."
 msgstr "pièces comptables qui n'appartiennent pas à l'année fiscale sélectionnée."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "moves that doesn't have all the taxes correctly set."
 msgstr "pièces comptables qui n'ont pas toutes les taxes correctement paramétrées."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_ebp_export_form
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "moves that have already been exported in EBP."
 msgstr "pièces qui ont déjà été exportées dans EBP"

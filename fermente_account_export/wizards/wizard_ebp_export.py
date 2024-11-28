@@ -6,14 +6,14 @@
 from odoo import api, fields, models
 
 
-class WizardEbpExport(models.TransientModel):
-    _name = "wizard.ebp.export"
-    _description = "EBP Export Wizard"
+class WizardAccountExport(models.TransientModel):
+    _name = "wizard.account.export"
+    _description = "Account Export Wizard"
 
     _STATE_SELECTION = [("draft", "Draft"), ("done", "Done")]
 
-    ebp_export_id = fields.Many2one(
-        string="EBP Export", comodel_name="ebp.export", readonly=True
+    account_export_id = fields.Many2one(
+        string="Account Export", comodel_name="account.export", readonly=True
     )
 
     state = fields.Selection(selection=_STATE_SELECTION, default="draft")
@@ -29,22 +29,26 @@ class WizardEbpExport(models.TransientModel):
     description = fields.Text(help="Extra Description for Accountant Manager.")
 
     file_name_moves = fields.Char(
-        related="ebp_export_id.file_name_moves", readonly=True
+        related="account_export_id.file_name_moves", readonly=True
     )
 
     file_name_accounts = fields.Char(
-        related="ebp_export_id.file_name_accounts", readonly=True
+        related="account_export_id.file_name_accounts", readonly=True
     )
 
     file_name_balance = fields.Char(
-        related="ebp_export_id.file_name_balance", readonly=True
+        related="account_export_id.file_name_balance", readonly=True
     )
 
-    data_moves = fields.Binary(related="ebp_export_id.data_moves", readonly=True)
+    data_moves = fields.Binary(related="account_export_id.data_moves", readonly=True)
 
-    data_accounts = fields.Binary(related="ebp_export_id.data_accounts", readonly=True)
+    data_accounts = fields.Binary(
+        related="account_export_id.data_accounts", readonly=True
+    )
 
-    data_balance = fields.Binary(related="ebp_export_id.data_balance", readonly=True)
+    data_balance = fields.Binary(
+        related="account_export_id.data_balance", readonly=True
+    )
 
     ignored_draft_move_qty = fields.Integer(
         compute="_compute_move_selection", multi="move_selection", store=True
@@ -130,7 +134,7 @@ class WizardEbpExport(models.TransientModel):
             )
             full_domain += [("state", "!=", "draft")]
 
-            # Filter by partner without ebp suffix
+            # Filter by partner without export suffix
             incorrect_partner_move_lines = selected_moves.mapped("line_ids").filtered(
                 lambda x: x.partner_id and x.partner_id.accounting_export_code is False
             )
@@ -140,10 +144,10 @@ class WizardEbpExport(models.TransientModel):
             wizard.ignored_partner_move_qty = len(incorrect_partner_move_ids)
             full_domain += [("id", "not in", incorrect_partner_move_ids)]
 
-            # Filter by tax code without ebp suffix
+            # Filter by tax code without export suffix
             incorrect_tax_move_lines = selected_moves.mapped("line_ids").filtered(
-                lambda x: x.account_id.ebp_export_tax
-                and False in x.mapped("tax_ids.ebp_suffix")
+                lambda x: x.account_id.export_suffix_on_tax_required
+                and False in x.mapped("tax_ids.export_suffix")
             )
             incorrect_tax_move_ids = incorrect_tax_move_lines.mapped("move_id").ids
             wizard.ignored_tax_move_qty = len(incorrect_tax_move_ids)
@@ -156,8 +160,8 @@ class WizardEbpExport(models.TransientModel):
                     ("date", "<=", wizard.fiscal_year_id.date_to),
                 ]
 
-            # Filter by journal (ebp_code should be defined)
-            journals = AccountJournal.search([("ebp_code", "!=", False)])
+            # Filter by journal (export_code should be defined)
+            journals = AccountJournal.search([("export_code", "!=", False)])
             wizard.ignored_journal_code_move_qty = len(
                 AccountMove.search(
                     selection_domain + [("journal_id", "not in", journals.ids)]
@@ -175,25 +179,27 @@ class WizardEbpExport(models.TransientModel):
 
             # filter yet exported moves
             wizard.ignored_exported_move_qty = len(
-                AccountMove.search(selection_domain + [("ebp_export_id", "!=", False)])
+                AccountMove.search(
+                    selection_domain + [("account_export_id", "!=", False)]
+                )
             )
-            full_domain += [("ebp_export_id", "=", False)]
+            full_domain += [("account_export_id", "=", False)]
 
             wizard.exported_move_ids = AccountMove.search(full_domain)
             wizard.exported_move_qty = len(wizard.exported_move_ids.ids)
 
     def button_export(self):
         self.ensure_one()
-        EbpExport = self.env["ebp.export"]
-        self.ebp_export_id = EbpExport.create(
+        AccountExport = self.env["account.export"]
+        self.account_export_id = AccountExport.create(
             {"fiscal_year_id": self.fiscal_year_id.id, "description": self.description}
         )
         self._compute_move_selection()
-        self.ebp_export_id.export(self.exported_move_ids)
+        self.account_export_id.export(self.exported_move_ids)
         self.state = "done"
         return {
             "type": "ir.actions.act_window",
-            "res_model": "wizard.ebp.export",
+            "res_model": "wizard.account.export",
             "view_mode": "form",
             "view_type": "form",
             "res_id": self.id,

@@ -6,5 +6,5 @@ from . import account_move
 from . import account_tax
 from . import account_tax_template
 
-from . import ebp_export
+from . import account_export
 from . import res_partner
