@@ -7,9 +7,9 @@
 from odoo import models
 
 
-class WizardEbpUnexport(models.TransientModel):
-    _name = "wizard.ebp.unexport"
-    _description = "EBP Unexport Wizard"
+class WizardAccountUnexport(models.TransientModel):
+    _name = "wizard.account.unexport"
+    _description = "Account Unexport Wizard"
 
     def button_unexport(self):
         AccountMove = self.env["account.move"]
@@ -17,5 +17,5 @@ class WizardEbpUnexport(models.TransientModel):
         # We use sudo, because in a CAE context, if we cancel an export done
         # in GRP context, it will not be accessible in 3PP context.
         moves.sudo().with_context(ignore_account_move_exported=True).write(
-            {"ebp_export_id": False}
+            {"account_export_id": False}
         )

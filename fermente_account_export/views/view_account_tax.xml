@@ -10,12 +10,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">account.tax</field>
         <field name="arch" type="xml">
             <search>
-               <filter string="Without EBP Suffix"
+               <filter string="Without Export Suffix"
                         name="without_suffix"
-                        domain="[('ebp_suffix', '=', False)]"/>
-               <filter string="EBP Suffix required"
-                        name="filter_has_ebp_suffix_required"
-                        domain="[('has_ebp_suffix_required', '=', True)]"/>
+                        domain="[('export_suffix', '=', False)]"/>
+               <filter string="Export Suffix required"
+                        name="filter_export_suffix_required"
+                        domain="[('export_suffix_required', '=', True)]"/>
             </search>
         </field>
     </record>
@@ -25,7 +25,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="account.view_tax_form" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="ebp_suffix"/>
+                <field name="export_suffix"/>
             </field>
         </field>
     </record>
@@ -35,7 +35,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="account.view_tax_tree"/>
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="ebp_suffix"/>
+                <field name="export_suffix"/>
             </field>
         </field>
     </record>
@@ -47,8 +47,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="name" readonly="True"/>
                 <field name="type_tax_use" readonly="True"/>
                 <field name="description" readonly="True"/>
-                <field name="ebp_suffix"/>
-                <field name="has_ebp_suffix_required"/>
+                <field name="export_suffix"/>
+                <field name="export_suffix_required"/>
                 <field name="active" readonly="True"/>
                 <field name="company_id" groups="base.group_multi_company"/>
             </tree>
@@ -62,7 +62,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_account_tax_tree_editable"/>
         <field name="context">{
-            'search_default_filter_has_ebp_suffix_required': 1,
+            'search_default_filter_export_suffix_required': 1,
             'active_test': False
             }</field>
     </record>

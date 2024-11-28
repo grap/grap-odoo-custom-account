@@ -6,8 +6,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-    <record  id="view_wizard_ebp_export_form" model="ir.ui.view">
-        <field name="model">wizard.ebp.export</field>
+    <record  id="view_wizard_account_export_form" model="ir.ui.view">
+        <field name="model">wizard.account.export</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -16,7 +16,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
                 <group states="draft">
 
-                    <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_partner_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_partner_move_qty" nolabel="1" class="oe_inline"/></b> moves related to partners without EBP suffixes defined.</p>
+                    <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_partner_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_partner_move_qty" nolabel="1" class="oe_inline"/></b> moves related to partners without Export suffixes defined.</p>
 
                     <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_draft_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_draft_move_qty" nolabel="1" class="oe_inline"/></b> draft moves.</p>
 
@@ -24,11 +24,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
                     <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_period_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_period_move_qty" nolabel="1" class="oe_inline"/></b> moves that doesn't belong to the selected fiscal year.</p>
 
-                    <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_journal_code_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_journal_code_move_qty" nolabel="1" class="oe_inline"/></b> moves that belong to a journal that doesn't have a correct 'EBP code' set.</p>
+                    <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_journal_code_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_journal_code_move_qty" nolabel="1" class="oe_inline"/></b> moves that belong to a journal that doesn't have a correct 'Export code' set.</p>
 
                     <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_to_check_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_to_check_move_qty" nolabel="1" class="oe_inline"/></b> moves that are marked as 'To check'.</p>
 
-                    <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_exported_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_exported_move_qty" nolabel="1" class="oe_inline"/></b> moves that have already been exported in EBP.</p>
+                    <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_exported_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_exported_move_qty" nolabel="1" class="oe_inline"/></b> moves that have already been exported in your accounting software.</p>
 
                 </group>
 
@@ -54,10 +54,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-    <record id="action_wizard_ebp_export" model="ir.actions.act_window">
-        <field name="name">Export to EBP</field>
+    <record id="action_wizard_account_export" model="ir.actions.act_window">
+        <field name="name">Export to Accounting Software</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.ebp.export</field>
+        <field name="res_model">wizard.account.export</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="binding_model_id" ref="account.model_account_move" />

@@ -7,16 +7,16 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 <odoo>
 
-        <record id="action_account_move_from_ebp_export" model="ir.actions.act_window">
+        <record id="action_account_move_from_account_export" model="ir.actions.act_window">
             <field name="name">Journal Items</field>
             <field name="res_model">account.move</field>
-            <field name="context">{'search_default_ebp_export_id': [active_id], 'default_ebp_export_id': active_id}</field>
+            <field name="context">{'search_default_account_export_id': [active_id], 'default_account_export_id': active_id}</field>
 <!--             <field name="view_id" ref="view_move_line_tree"/>
  -->        </record>
 
 
-    <record id="view_ebp_export_search" model="ir.ui.view" >
-        <field name="model">ebp.export</field>
+    <record id="view_account_export_search" model="ir.ui.view" >
+        <field name="model">account.export</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
@@ -26,8 +26,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-    <record id="view_ebp_export_tree" model="ir.ui.view" >
-        <field name="model">ebp.export</field>
+    <record id="view_account_export_tree" model="ir.ui.view" >
+        <field name="model">account.export</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="date"/>
@@ -43,14 +43,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-    <record id="view_ebp_export_form" model="ir.ui.view" >
-        <field name="model">ebp.export</field>
+    <record id="view_account_export_form" model="ir.ui.view" >
+        <field name="model">account.export</field>
         <field name="arch" type="xml">
             <form string="EBP Export">
                 <sheet>
                     <div class="oe_right oe_button_box" name="buttons">
                         <button type="action" class="oe_stat_button" icon="fa-list"
-                                name="%(action_account_move_from_ebp_export)d">
+                                name="%(action_account_move_from_account_export)d">
                             <field string="Journal Items" name="ebp_move_qty" widget="statinfo"/>
                         </button>
                     </div>
@@ -77,17 +77,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-    <record id="action_ebp_export" model="ir.actions.act_window">
+    <record id="action_account_export" model="ir.actions.act_window">
         <field name="name">EBP Exports</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">ebp.export</field>
+        <field name="res_model">account.export</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_ebp_export"
+    <menuitem id="menu_account_export"
         name="EBP Exports"
         parent="grap_account_export.menu_export"
-        action="action_ebp_export"
+        action="action_account_export"
         sequence="3"/>
 
 </odoo>

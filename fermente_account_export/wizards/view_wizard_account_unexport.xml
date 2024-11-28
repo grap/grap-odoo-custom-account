@@ -6,28 +6,28 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-    <record id="view_wizard_ebp_unexport_form" model="ir.ui.view">
-        <field name="model">wizard.ebp.unexport</field>
+    <record id="view_wizard_account_unexport_form" model="ir.ui.view">
+        <field name="model">wizard.account.unexport</field>
         <field name="arch" type="xml">
             <form>
                 <group>
                     <p class="alert alert-warning" role="alert">
-                        The export will be canceled for the selected moves. Be sure to delete the corresponding lines in EBP.
+                        The export will be canceled for the selected moves. Be sure to delete the corresponding lines in the accounting software.
                     </p>
                 </group>
                 <footer>
                     <button string="Unexport" name="button_unexport" type="object" class="oe_highlight"
-                        confirm="Are you sure you want to cancel EBP Export ?"/>
+                        confirm="Are you sure you want to cancel Account Export ?"/>
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
 
-    <record id="action_wizard_ebp_unexport" model="ir.actions.act_window">
-        <field name="name">Cancel EBP Export</field>
+    <record id="action_wizard_account_unexport" model="ir.actions.act_window">
+        <field name="name">Cancel Account Export</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.ebp.unexport</field>
+        <field name="res_model">wizard.account.unexport</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="binding_model_id" ref="account.model_account_move" />

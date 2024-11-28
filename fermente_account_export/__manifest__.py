@@ -17,8 +17,6 @@
         "account_fiscal_year",
         # GRAP
         "fiscal_company_base",
-        # "intercompany_trade_base",
-        # "intercompany_trade_fiscal_company",
     ],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
@@ -31,12 +29,12 @@
         "views/view_account_move.xml",
         "views/view_account_tax.xml",
         "views/view_account_tax_template.xml",
-        "views/view_ebp_export.xml",
+        "views/view_account_export.xml",
         "views/view_res_company.xml",
         "views/view_res_partner.xml",
         "wizards/view_wizard_res_partner_add_export_code.xml",
-        "wizards/view_wizard_ebp_export.xml",
-        "wizards/view_wizard_ebp_unexport.xml",
+        "wizards/view_wizard_account_export.xml",
+        "wizards/view_wizard_account_unexport.xml",
     ],
     "demo": [
         "demo/res_partner.xml",

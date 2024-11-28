@@ -12,8 +12,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <xpath expr="//group" position="after">
                 <group string="EBP Settings" colspan="4">
-                    <field name="ebp_export_tax"/>
-                    <field name="ebp_code_no_tax" attrs="{'invisible': [('ebp_export_tax', '=', False)]}"/>
+                    <field name="export_suffix_on_tax_required"/>
+                    <field name="export_suffix_on_tax_default" attrs="{'invisible': [('export_suffix_on_tax_required', '=', False)]}"/>
                 </group>
             </xpath>
         </field>

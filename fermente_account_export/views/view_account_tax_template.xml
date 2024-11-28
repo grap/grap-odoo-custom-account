@@ -11,8 +11,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="account.view_account_tax_template_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="before">
-                <group string="EBP Settings" colspan="4">
-                    <field name="ebp_suffix"/>
+                <group string="Export Settings" colspan="4">
+                    <field name="export_suffix"/>
                 </group>
             </xpath>
         </field>
@@ -23,7 +23,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="account.view_account_tax_template_tree"/>
         <field name="arch" type="xml">
             <field name="description" position="after">
-                <field name="ebp_suffix"/>
+                <field name="export_suffix"/>
             </field>
         </field>
     </record>
