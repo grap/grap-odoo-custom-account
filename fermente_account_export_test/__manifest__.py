@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "GRAP - Export accounting moves to EBP - Test",
+    "name": "GRAP - Export accounting moves - Test",
     "version": "16.0.1.0.0",
     "author": "GRAP",
     "category": "GRAP - Custom",
@@ -12,12 +12,14 @@
     "depends": [
         "l10n_generic_coa",
         # GRAP
-        "grap_account_export_ebp",
+        "fermente_account_export",
     ],
     "demo": [
-        "demo/account_account.xml",
-        "demo/account_tax.xml",
-        "demo/account_move.xml",
+        "demo/res_partner.xml",
+        # "demo/res_company.xml",
+        # "demo/account_account.xml",
+        # "demo/account_tax.xml",
+        # "demo/account_move.xml",
         "demo/account_fiscal_year.xml",
         "demo/account_journal.xml",
     ],

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2019-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="sale_account" model="account.account">
+        <field name="name">Export Demo - Sale Account</field>
+        <field name="account_type">income</field>
+        <field name="code">707EXP</field>
+        <field name="export_suffix_on_tax_required" eval="True"/>
+        <field name="export_suffix_on_tax_default">9</field>
+        <field name="company_id" ref="company"/>
+    </record>
+
+    <record id="receivable_account" model="account.account">
+        <field name="name">Export Demo - Receivable Account</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="code">411EXP</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="company"/>
+    </record>
+
+    <record id="tax_account" model="account.account">
+        <field name="name">EBP Demo - Tax Account</field>
+        <field name="account_type">asset_current</field>
+        <field name="code">445EXP</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_id" ref="company"/>
+    </record>
+
+</odoo>

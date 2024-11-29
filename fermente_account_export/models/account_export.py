@@ -121,7 +121,7 @@ class AccountExport(models.Model):
     @api.model
     def _normalize(self, text):
         res = text
-        for char in self._EBP_REMOVE_CHAR_LIST:
+        for char in self._ACCOUNT_REMOVE_CHAR_LIST:
             res = res.replace(char, " ")
         return res
 
@@ -175,7 +175,7 @@ class AccountExport(models.Model):
                     continue
 
                 account_code = self._get_account_code(move, line)
-                analytic_code = self._get_analytic_code(move, line)
+                analytic_code = self._get_analytic_code(move)
 
                 move_key = (account_code, analytic_code, line.credit > 0)
 
@@ -218,17 +218,17 @@ class AccountExport(models.Model):
         res = account.code
 
         # Company Suffix
-        if (
-            company.fiscal_company_id.fiscal_type == "fiscal_mother"
-            and account.user_type_id.type in ["receivable", "payable"]
-        ):
+        if company.fiscal_type in ["fiscal_child"] and account.account_type in [
+            "asset_receivable",
+            "liability_payable",
+        ]:
             res += company.code
 
         # Partner Suffix
         if (
             partner
             and partner.export_suffix
-            and account.user_type_id.type in ["receivable", "payable"]
+            and account.account_type in ["asset_receivable", "liability_payable"]
         ):
             res += partner.export_suffix
 
@@ -392,13 +392,11 @@ class AccountExport(models.Model):
         if (
             line.partner_id
             and line.partner_id.export_suffix
-            and line.account_id.user_type_id.type in ("payable", "receivable")
+            and line.account_id.account_type
+            in ["asset_receivable", "liability_payable"]
         ):
             # Partner account
-            if line.account_id.is_intercompany_trade_fiscal_company:
-                partner = line.company_id.partner_id
-            else:
-                partner = line.partner_id
+            partner = line.partner_id
             res.update(
                 {
                     "name": self._normalize(partner.name),
