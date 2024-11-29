@@ -11,8 +11,14 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     _ALLOWED_FIELDS_WRITE_EXPORT = [
+        # Allow to write a free text
         "narration",
+        # Allow to mark a move as to check again
+        "to_check",
+        # Allow to set a credit note on an exported invoice
         "reverse_entry_id",
+        # Technical field that is frequently written by the ORM
+        "needed_terms_dirty",
     ]
 
     account_export_id = fields.Many2one(
@@ -32,21 +38,34 @@ class AccountMove(models.Model):
         return super().unlink()
 
     def _check_exported_moves(self, vals=False):
+        if self.env.context.get("ignore_account_move_exported", False):
+            return
+
+        exported_moves = self.filtered(lambda x: x.account_export_id)
+        if not exported_moves:
+            return
+
         if vals:
-            # it is an update, we check if the all the keys
-            #  are allowed in vals
+            # it is an update, we check if the all the keys are allowed in vals
             forbidden_fields = [
                 x for x in vals.keys() if x not in self._ALLOWED_FIELDS_WRITE_EXPORT
             ]
             if not forbidden_fields:
                 return
-
-        if not self.env.context.get("ignore_account_move_exported", False):
-            exported_moves = self.filtered(
-                lambda x: x.account_export_id.id is not False
-            )
-            if exported_moves:
-                raise ValidationError(
-                    _("You cannot modify or delete exported moves: %s!")
-                    % ", ".join([m.name for m in exported_moves])
+            raise ValidationError(
+                _(
+                    "You cannot modify exported moves: %(move_names)s."
+                    " Forbidden fields: %(field_names)s",
+                    move_names=", ".join([m.name for m in exported_moves]),
+                    field_names=forbidden_fields,
                 )
+            )
+        else:
+            pass
+            # It's an unlink
+            raise ValidationError(
+                _(
+                    "You cannot delete exported moves: %(move_names)s.",
+                    move_names=", ".join([m.name for m in exported_moves]),
+                )
+            )

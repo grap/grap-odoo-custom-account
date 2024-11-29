@@ -15,13 +15,7 @@ class TestModule(TransactionCase):
         cls.WizardAccountUnexport = cls.env["wizard.account.unexport"]
         cls.move_1 = cls.env.ref("account.1_demo_invoice_followup").copy()
         cls.move_1.journal_id.export_code = cls.move_1.journal_id.code
-        cls.fiscal_year = cls.env.ref("fermente_account_export_demo.curent_fiscal_year")
-        # cls.fiscal_year = cls.env["account.fiscal.year"].create({
-        #     "name": "Demo Fiscal Year",
-        #     "date_from": Datetime.today().strftime('%Y-01-01'),
-        #     "date_to": Datetime.today().strftime('%Y-12-31'),
-        #     "company_id": cls.env.ref("base.main_company").id,
-        # })
+        cls.fiscal_year = cls.env.ref("fermente_account_export_test.curent_fiscal_year")
 
     # Test Section
     def test_01_export_move_and_unexport(self):
