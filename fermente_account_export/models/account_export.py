@@ -496,6 +496,6 @@ class AccountExport(models.Model):
 
     @api.model
     def _write_into_file(self, data_list, file):
-        tmp = ",".join(data_list)
+        tmp = ",".join([x and x or "" for x in data_list])
         file.write(unidecode(tmp))
         file.write("\r\n")
