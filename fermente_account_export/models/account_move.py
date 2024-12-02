@@ -30,14 +30,14 @@ class AccountMove(models.Model):
     )
 
     def write(self, vals):
-        self._check_exported_moves(vals)
+        self._check_exported_moves(vals, mode="write")
         return super().write(vals)
 
     def unlink(self):
-        self._check_exported_moves()
+        self._check_exported_moves(False, mode="unlink")
         return super().unlink()
 
-    def _check_exported_moves(self, vals=False):
+    def _check_exported_moves(self, vals, mode="write"):
         if self.env.context.get("ignore_account_move_exported", False):
             return
 
@@ -45,8 +45,11 @@ class AccountMove(models.Model):
         if not exported_moves:
             return
 
-        if vals:
-            # it is an update, we check if the all the keys are allowed in vals
+        if mode == "write":
+            if not vals:
+                return
+
+            # we check if the all the keys are allowed in vals
             forbidden_fields = [
                 x for x in vals.keys() if x not in self._ALLOWED_FIELDS_WRITE_EXPORT
             ]
@@ -60,9 +63,7 @@ class AccountMove(models.Model):
                     field_names=forbidden_fields,
                 )
             )
-        else:
-            pass
-            # It's an unlink
+        elif mode == "unlink":
             raise ValidationError(
                 _(
                     "You cannot delete exported moves: %(move_names)s.",
