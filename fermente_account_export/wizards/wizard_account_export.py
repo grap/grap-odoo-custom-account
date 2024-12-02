@@ -3,20 +3,17 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class WizardAccountExport(models.TransientModel):
     _name = "wizard.account.export"
     _description = "Account Export Wizard"
 
-    _STATE_SELECTION = [("draft", "Draft"), ("done", "Done")]
-
     account_export_id = fields.Many2one(
         string="Account Export", comodel_name="account.export", readonly=True
     )
-
-    state = fields.Selection(selection=_STATE_SELECTION, default="draft")
 
     fiscal_year_id = fields.Many2one(
         comodel_name="account.fiscal.year",
@@ -28,33 +25,11 @@ class WizardAccountExport(models.TransientModel):
 
     description = fields.Text(help="Extra Description for Accountant Manager.")
 
-    file_name_moves = fields.Char(
-        related="account_export_id.file_name_moves", readonly=True
-    )
-
-    file_name_accounts = fields.Char(
-        related="account_export_id.file_name_accounts", readonly=True
-    )
-
-    file_name_balance = fields.Char(
-        related="account_export_id.file_name_balance", readonly=True
-    )
-
-    data_moves = fields.Binary(related="account_export_id.data_moves", readonly=True)
-
-    data_accounts = fields.Binary(
-        related="account_export_id.data_accounts", readonly=True
-    )
-
-    data_balance = fields.Binary(
-        related="account_export_id.data_balance", readonly=True
-    )
-
     ignored_draft_move_qty = fields.Integer(
         compute="_compute_move_selection", store=True
     )
 
-    ignored_period_move_qty = fields.Integer(
+    ignored_fiscal_year_move_qty = fields.Integer(
         compute="_compute_move_selection", store=True
     )
 
@@ -150,19 +125,34 @@ class WizardAccountExport(models.TransientModel):
 
             # filter by fiscalyear
             if wizard.fiscal_year_id:
+                wizard.ignored_fiscal_year_move_qty = len(
+                    AccountMove.search(
+                        selection_domain
+                        + [
+                            "|",
+                            ("date", "<", wizard.fiscal_year_id.date_from),
+                            ("date", ">", wizard.fiscal_year_id.date_to),
+                        ]
+                    )
+                )
                 full_domain += [
                     ("date", ">=", wizard.fiscal_year_id.date_from),
                     ("date", "<=", wizard.fiscal_year_id.date_to),
                 ]
+            else:
+                wizard.ignored_fiscal_year_move_qty = 0
 
             # Filter by journal (export_code should be defined)
-            journals = AccountJournal.search([("export_code", "!=", False)])
+            journal_without_export_codes = AccountJournal.search(
+                [("export_code", "!=", False)]
+            )
             wizard.ignored_journal_code_move_qty = len(
                 AccountMove.search(
-                    selection_domain + [("journal_id", "not in", journals.ids)]
+                    selection_domain
+                    + [("journal_id", "not in", journal_without_export_codes.ids)]
                 )
             )
-            full_domain += [("journal_id", "in", journals.ids)]
+            full_domain += [("journal_id", "in", journal_without_export_codes.ids)]
 
             # filter moves to check
             wizard.ignored_to_check_move_qty = len(
@@ -183,20 +173,19 @@ class WizardAccountExport(models.TransientModel):
 
     def button_export(self):
         self.ensure_one()
+        self._compute_move_selection()
+        if self.exported_move_qty == 0:
+            raise ValidationError(_("No account move can be exported."))
         AccountExport = self.env["account.export"]
         self.account_export_id = AccountExport.create(
             {"fiscal_year_id": self.fiscal_year_id.id, "description": self.description}
         )
-        self._compute_move_selection()
         self.account_export_id.export(self.exported_move_ids)
-        self.state = "done"
         return {
             "type": "ir.actions.act_window",
-            "res_model": "wizard.account.export",
+            "res_model": "account.export",
             "view_mode": "form",
             "view_type": "form",
-            "res_id": self.id,
+            "res_id": self.account_export_id.id,
             "views": [(False, "form")],
-            "target": "new",
-            "context": {},
         }

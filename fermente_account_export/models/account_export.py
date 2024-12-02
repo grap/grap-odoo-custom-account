@@ -10,7 +10,7 @@ from io import StringIO
 from unidecode import unidecode
 
 from odoo import _, api, fields, models
-from odoo.exceptions import Warning as UserError
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -240,7 +240,7 @@ class AccountExport(models.Model):
                     res += line.tax_ids[0].export_suffix
                 else:
                     # Incorrect Tax setting
-                    raise UserError(
+                    raise ValidationError(
                         _(
                             "The account %(account_code)s - %(account_name)s"
                             " is set 'export with tax"
@@ -257,7 +257,7 @@ class AccountExport(models.Model):
                 res += account.export_suffix_on_tax_default
             else:
                 # Incorrect account setting
-                raise UserError(
+                raise ValidationError(
                     _(
                         "The account %(account_code)s - %(account_name)s"
                         " is set 'export with tax"
@@ -273,7 +273,7 @@ class AccountExport(models.Model):
             # The docs from EBP state that account codes may be up to
             # 15 characters but "EBP Comptabilité" v13 will refuse anything
             # longer than 10 characters
-            raise UserError(
+            raise ValidationError(
                 _("Account code '%s' is too long to be exported to EBP.") % res
             )
         return res
