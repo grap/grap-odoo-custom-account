@@ -11,6 +11,13 @@ class WizardAccountExport(models.TransientModel):
     _name = "wizard.account.export"
     _description = "Account Export Wizard"
 
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        required=True,
+        readonly=True,
+        default=lambda s: s._default_company_id(),
+    )
+
     account_export_id = fields.Many2one(
         string="Account Export", comodel_name="account.export", readonly=True
     )
@@ -21,6 +28,7 @@ class WizardAccountExport(models.TransientModel):
         required=True,
         default=lambda s: s._default_fiscal_year_id(),
         help="Only the moves in this fiscal year will be exported",
+        domain="[('company_id', '=', company_id)]",
     )
 
     description = fields.Text(help="Extra Description for Accountant Manager.")
@@ -71,6 +79,12 @@ class WizardAccountExport(models.TransientModel):
         compute="_compute_move_selection",
         store=True,
     )
+
+    @api.model
+    def _default_company_id(self):
+        if self.env.company.fiscal_type == "group":
+            raise ValidationError(_("Unable to export account moves at group level"))
+        return self.env.company.fiscal_company_id.id
 
     @api.model
     def _default_fiscal_year_id(self):
@@ -171,15 +185,22 @@ class WizardAccountExport(models.TransientModel):
             wizard.exported_move_ids = AccountMove.search(full_domain)
             wizard.exported_move_qty = len(wizard.exported_move_ids.ids)
 
+    def _prepare_account_export(self):
+        self.ensure_one()
+        return {
+            "fiscal_year_id": self.fiscal_year_id.id,
+            "description": self.description,
+            "company_id": self.company_id.id,
+            "export_date": fields.Datetime.now(),
+        }
+
     def button_export(self):
         self.ensure_one()
         self._compute_move_selection()
         if self.exported_move_qty == 0:
             raise ValidationError(_("No account move can be exported."))
         AccountExport = self.env["account.export"]
-        self.account_export_id = AccountExport.create(
-            {"fiscal_year_id": self.fiscal_year_id.id, "description": self.description}
-        )
+        self.account_export_id = AccountExport.create(self._prepare_account_export())
         self.account_export_id.export(self.exported_move_ids)
         return {
             "type": "ir.actions.act_window",

@@ -26,8 +26,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_exported_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_exported_move_qty" nolabel="1" class="oe_inline"/></b> moves that have already been exported in your accounting software.</p>
 
                 <group string="Settings">
-                    <field name="selected_move_qty"/>
+                    <field name="company_id"/>
                     <field name="fiscal_year_id"/>
+                    <field name="selected_move_qty"/>
                     <field name="exported_move_qty" attrs="{'invisible': [('fiscal_year_id', '=', False)]}"/>
                     <field name="description"/>
                 </group>

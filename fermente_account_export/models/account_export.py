@@ -18,17 +18,14 @@ _logger = logging.getLogger(__name__)
 class AccountExport(models.Model):
     _name = "account.export"
     _description = "Account Export"
-    _order = "date desc"
+    _order = "export_date desc"
 
     _ACCOUNT_REMOVE_CHAR_LIST = ["\n", ";", ",", '"']
 
-    # Column Section
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         readonly=True,
-        default=lambda s: s._default_company_id(),
     )
 
     fiscal_year_id = fields.Many2one(
@@ -38,9 +35,7 @@ class AccountExport(models.Model):
         readonly=True,
     )
 
-    date = fields.Datetime(
-        required=True, readonly=True, default=lambda s: s._default_date()
-    )
+    export_date = fields.Datetime(required=True, readonly=True)
 
     name = fields.Char(compute="_compute_name", store=True, readonly=True)
 
@@ -85,20 +80,15 @@ class AccountExport(models.Model):
 
     file_name_balance = fields.Char(readonly=True, compute="_compute_file_name_balance")
 
-    # Default Section
-    @api.model
-    def _default_company_id(self):
-        return self.env.user.company_id.id
-
-    @api.model
-    def _default_date(self):
-        return fields.Datetime.now()
-
     # Compute Section
-    @api.depends("date")
+    @api.depends("export_date", "company_id")
     def _compute_name(self):
         for export in self:
-            export.name = "export_%d" % export.id
+            export.name = _(
+                "%(company_code)s - Export #%(export_id)d",
+                company_code=export.company_id.code,
+                export_id=export.id,
+            )
 
     @api.depends("move_ids.account_export_id")
     def _compute_move_qty(self):
@@ -269,12 +259,20 @@ class AccountExport(models.Model):
                     )
                 )
 
-        if len(res) > 10:
-            # The docs from EBP state that account codes may be up to
-            # 15 characters but "EBP Comptabilité" v13 will refuse anything
-            # longer than 10 characters
+        Config = self.env["ir.config_parameter"].sudo()
+        max_size = int(
+            Config.get_param(
+                "fermente_account_export.parameter_max_size_account_code", 10
+            )
+        )
+
+        if len(res) > max_size:
             raise ValidationError(
-                _("Account code '%s' is too long to be exported to EBP.") % res
+                _(
+                    "Account code '%(account_code)s' is too long to be exported"
+                    " to the accounting software.",
+                    account_code=res,
+                )
             )
         return res
 

@@ -42,6 +42,12 @@ _field_renames = [
         "ebp_code_no_tax",
         "export_suffix_on_tax_default",
     ),
+    (
+        "account.export",
+        "account_export",
+        "date",
+        "export_date",
+    ),
 ]
 
 _model_renames = [
@@ -55,6 +61,6 @@ _table_renames = [
 
 @openupgrade.migrate()
 def migrate(env, version):
-    openupgrade.rename_fields(env, _field_renames)
     openupgrade.rename_models(env.cr, _model_renames)
     openupgrade.rename_tables(env.cr, _table_renames)
+    openupgrade.rename_fields(env, _field_renames)

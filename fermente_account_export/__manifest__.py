@@ -22,6 +22,7 @@
     "data": [
         "security/ir.model.access.csv",
         "security/ir_rule.xml",
+        "data/ir_config_parameter.xml",
         "views/menu.xml",
         "views/view_account_account.xml",
         # "views/view_account_account_template.xml",
