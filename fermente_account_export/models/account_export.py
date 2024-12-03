@@ -44,19 +44,14 @@ class AccountExport(models.Model):
         help="Extra Description for Accountant Manager.",
     )
 
-    exported_move_qty = fields.Integer(
-        string="Quantity of Moves Exported", readonly=True
-    )
+    exported_move_qty = fields.Integer(string="Moves Exported", readonly=True)
 
-    exported_account_qty = fields.Integer(
-        string="Quantity of accounts exported",
-        readonly=True,
-    )
+    exported_account_qty = fields.Integer(string="Accounts Exported", readonly=True)
 
     move_ids = fields.One2many(
         comodel_name="account.move",
         inverse_name="account_export_id",
-        string="Account Moves",
+        string="Moves",
         readonly=True,
     )
 
@@ -64,21 +59,17 @@ class AccountExport(models.Model):
         compute="_compute_move_qty", string="Moves Quantity", store=True
     )
 
-    data_moves = fields.Binary(string="Moves file", readonly=True, attachment=True)
+    data_moves = fields.Binary(string="Moves file", readonly=True)
 
-    data_accounts = fields.Binary(
-        string="Accounts file", readonly=True, attachment=True
-    )
+    data_accounts = fields.Binary(string="Accounts file", readonly=True)
 
-    data_balance = fields.Binary(string="Balance file", readonly=True, attachment=True)
+    data_balance = fields.Binary(string="Balance file", readonly=True)
 
-    file_name_moves = fields.Char(readonly=True, compute="_compute_file_name_moves")
+    file_name_moves = fields.Char(compute="_compute_file_name_moves")
 
-    file_name_accounts = fields.Char(
-        readonly=True, compute="_compute_file_name_accounts"
-    )
+    file_name_accounts = fields.Char(compute="_compute_file_name_accounts")
 
-    file_name_balance = fields.Char(readonly=True, compute="_compute_file_name_balance")
+    file_name_balance = fields.Char(compute="_compute_file_name_balance")
 
     # Compute Section
     @api.depends("export_date", "company_id")
@@ -97,15 +88,21 @@ class AccountExport(models.Model):
 
     def _compute_file_name_moves(self):
         for export in self:
-            export.file_name_moves = "export_%d_%s.csv" % (export.id, _("MOVES"))
+            export.file_name_moves = _(
+                "export_%(export_id)d_MOVES.csv", export_id=export.id
+            )
 
     def _compute_file_name_accounts(self):
         for export in self:
-            export.file_name_accounts = "export_%d_%s.csv" % (export.id, _("ACCOUNTS"))
+            export.file_name_accounts = _(
+                "export_%(export_id)d_ACCOUNTS.csv", export_id=export.id
+            )
 
     def _compute_file_name_balance(self):
         for export in self:
-            export.file_name_balance = "export_%d_%s.csv" % (export.id, _("BALANCE"))
+            export.file_name_balance = _(
+                "export_%(export_id)d_BALANCE.csv", export_id=export.id
+            )
 
     # Custom Section
     @api.model

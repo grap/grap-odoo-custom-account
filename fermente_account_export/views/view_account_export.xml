@@ -33,10 +33,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="export_date"/>
                 <field name="name"/>
                 <field name="exported_move_qty"/>
-                <field name="data_moves" filename="file_name_moves"/>
                 <field name="exported_account_qty"/>
-                <field name="data_accounts" filename="file_name_accounts"/>
-                <field name="data_balance" filename="file_name_balance"/>
                 <field name="fiscal_year_id"/>
                 <field name="company_id" groups="base.group_multi_company" />
             </tree>
@@ -75,8 +72,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </group>
                     <group string="Files">
                         <field name="data_moves" filename="file_name_moves"/>
+                        <field name="file_name_moves" invisible="1" />
                         <field name="data_accounts" filename="file_name_accounts"/>
+                        <field name="file_name_accounts" invisible="1" />
                         <field name="data_balance" filename="file_name_balance"/>
+                        <field name="file_name_balance" invisible="1" />
                     </group>
                     <group string="Description">
                         <field name="description" nolabel="1"/>

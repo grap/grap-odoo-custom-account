@@ -24,7 +24,7 @@ class TestModule(TransactionCase):
             active_ids=[self.move_1.id]
         ).create({"fiscal_year_id": self.fiscal_year.id})
         self.assertEqual(wizard.ignored_draft_move_qty, 0)
-        self.assertEqual(wizard.ignored_period_move_qty, 0)
+        self.assertEqual(wizard.ignored_fiscal_year_move_qty, 0)
         self.assertEqual(wizard.ignored_journal_code_move_qty, 0)
         self.assertEqual(wizard.ignored_to_check_move_qty, 0)
         self.assertEqual(wizard.ignored_exported_move_qty, 0)
