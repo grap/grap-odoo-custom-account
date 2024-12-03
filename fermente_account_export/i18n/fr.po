@@ -6,21 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-28 10:59+0000\n"
-"PO-Revision-Date: 2024-11-28 10:59+0000\n"
+"POT-Creation-Date: 2024-12-03 22:52+0000\n"
+"PO-Revision-Date: 2024-12-03 22:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: fermente_account_export
-#. odoo-python
-#: code:addons/fermente_account_export/models/account_export.py:0
-#, python-format
-msgid "ACCOUNTS"
-msgstr "COMPTES"
 
 #. module: fermente_account_export
 #: model:ir.model,name:fermente_account_export.model_account_account
@@ -53,11 +46,6 @@ msgid "Account Exports"
 msgstr "Exports EBP"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__move_ids
-msgid "Account Moves"
-msgstr "Pièces comptables"
-
-#. module: fermente_account_export
 #. odoo-python
 #: code:addons/fermente_account_export/models/account_export.py:0
 #: code:addons/fermente_account_export/models/account_export.py:0
@@ -72,10 +60,13 @@ msgstr "Assistant d'annulation d'export comptable"
 
 #. module: fermente_account_export
 #. odoo-python
-#: code:addons/fermente_account_export/models/account_export.py:0
+#: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
-msgid "Account code '%s' is too long to be exported to EBP."
-msgstr "Le code comptable '%s' est trop long pour être exporté dans EBP."
+msgid ""
+"Account code '%(account_code)s' is too long to be exported to the accounting"
+" software. The maximum length is %(max_size)s."
+msgstr "Le compte comptable '%(account_code)s' est trop long pour être être exporté dans le logiciel"
+" comptable. La taille maximum est %(max_size)s."
 
 #. module: fermente_account_export
 #. odoo-python
@@ -85,8 +76,12 @@ msgid "Account name"
 msgstr "Nom du compte"
 
 #. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__exported_account_qty
+msgid "Accounts Exported"
+msgstr "Nombre de comptes exportés"
+
+#. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__data_accounts
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__data_accounts
 msgid "Accounts file"
 msgstr "Fichier des comptes"
 
@@ -130,15 +125,7 @@ msgid "Are you sure you want to cancel Account Export ?"
 msgstr "Etes vous sûr d'annuler l'export comptable ?"
 
 #. module: fermente_account_export
-#. odoo-python
-#: code:addons/fermente_account_export/models/account_export.py:0
-#, python-format
-msgid "BALANCE"
-msgstr ""
-
-#. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__data_balance
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__data_balance
 msgid "Balance file"
 msgstr "Fichier des balances"
 
@@ -155,12 +142,8 @@ msgid "Cancel Account Export"
 msgstr "Annuler l'export comptable"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
-msgid "Close"
-msgstr "Fermer"
-
-#. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__company_id
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__company_id
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__company_id
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_export_search
 msgid "Company"
@@ -213,7 +196,6 @@ msgstr "Monnaie"
 #. module: fermente_account_export
 #. odoo-python
 #: code:addons/fermente_account_export/models/account_export.py:0
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__date
 #, python-format
 msgid "Date"
 msgstr "Date "
@@ -256,16 +238,6 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: fermente_account_export
-#: model:ir.model.fields.selection,name:fermente_account_export.selection__wizard_account_export__state__done
-msgid "Done"
-msgstr "Terminé"
-
-#. module: fermente_account_export
-#: model:ir.model.fields.selection,name:fermente_account_export.selection__wizard_account_export__state__draft
-msgid "Draft"
-msgstr "En brouillon"
-
-#. module: fermente_account_export
 #. odoo-python
 #: code:addons/fermente_account_export/models/account_export.py:0
 #, python-format
@@ -283,16 +255,6 @@ msgid "Duplicate With New Codes"
 msgstr "En doublon avec des codes nouveaux"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__move_qty
-msgid "Moves Quantity"
-msgstr "Nombre de pièces comptables"
-
-#. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_account_form
-msgid "EBP Settings"
-msgstr "Paramétrage EBP"
-
-#. module: fermente_account_export
 #: model:ir.model.fields.selection,name:fermente_account_export.selection__wizard_res_partner_add_export_code_line__state__empty
 msgid "Empty"
 msgstr "Vide"
@@ -303,12 +265,40 @@ msgid "Export"
 msgstr "Exporter"
 
 #. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/models/account_export.py:0
+#, python-format
+msgid "Export #%(export_id)d"
+msgstr "Export #%(export_id)d"
+
+#. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_journal__export_code
 msgid "Export Code"
 msgstr "Code d'export"
 
 #. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_account__export_code_emulation
+msgid "Export Code Emulation"
+msgstr ""
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_account__export_code_emulation_error
+msgid "Export Code Emulation Error"
+msgstr ""
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_account__export_code_emulation_tooltip
+msgid "Export Code Emulation Tooltip"
+msgstr "Explicadtion de l'émulation de code d'export"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__export_date
+msgid "Export Date"
+msgstr "Date d'export"
+
+#. module: fermente_account_export
 #: model:ir.ui.menu,name:fermente_account_export.menu_export
+#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_account_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_tax_template_form
 msgid "Export Settings"
 msgstr "Paramétrage d'export"
@@ -351,19 +341,16 @@ msgstr "Description supplémentaire pour le comptable."
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__file_name_accounts
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__file_name_accounts
 msgid "File Name Accounts"
 msgstr "Nom du fichier des comptes"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__file_name_balance
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__file_name_balance
 msgid "File Name Balance"
 msgstr "Nom du fichier de balance"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__file_name_moves
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__file_name_moves
 msgid "File Name Moves"
 msgstr "Nom du fichier des pièces comptables"
 
@@ -412,6 +399,11 @@ msgid "Ignored Exported Move Qty"
 msgstr "Pièces comptables déjà exportées ignorées"
 
 #. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_fiscal_year_move_qty
+msgid "Ignored Fiscal Year Move Qty"
+msgstr "Quantité de pièces comptables ignorées dû à l'exercice comptable"
+
+#. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_journal_code_move_qty
 msgid "Ignored Journal Code Move Qty"
 msgstr "Pièces comptables sans code de journal ignorées"
@@ -420,11 +412,6 @@ msgstr "Pièces comptables sans code de journal ignorées"
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_partner_move_qty
 msgid "Ignored Partner Move Qty"
 msgstr "Pièces comptables sans partenaires paramétrés ignorées"
-
-#. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_period_move_qty
-msgid "Ignored Period Move Qty"
-msgstr "Pièces comptables avec période incorrecte ignorées"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__ignored_tax_move_qty
@@ -515,19 +502,26 @@ msgstr "Lignes"
 #. odoo-python
 #: code:addons/fermente_account_export/models/account_export.py:0
 #, python-format
-msgid "MOVES"
-msgstr "ECRITURES"
-
-#. module: fermente_account_export
-#. odoo-python
-#: code:addons/fermente_account_export/models/account_export.py:0
-#, python-format
 msgid "Move Number"
 msgstr "N. Pièce"
 
 #. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__move_ids
+msgid "Moves"
+msgstr "Pièces comptables"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__exported_move_qty
+msgid "Moves Exported"
+msgstr "Nombre de pièces exportées"
+
+#. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__move_qty
+msgid "Moves Quantity"
+msgstr "Nombre de pièces comptables"
+
+#. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__data_moves
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__data_moves
 msgid "Moves file"
 msgstr "Fichier des écritures comptables"
 
@@ -538,6 +532,13 @@ msgstr "Fichier des écritures comptables"
 #, python-format
 msgid "Name"
 msgstr "Nom"
+
+#. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/wizards/wizard_account_export.py:0
+#, python-format
+msgid "No account move can be exported."
+msgstr "Aucune pièce comptable ne peut être exportée."
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_move_search
@@ -571,19 +572,9 @@ msgid "Quantity of Exported Moves"
 msgstr "Nombre de pièces exportées"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__exported_move_qty
-msgid "Quantity of Moves Exported"
-msgstr "Nombre de pièces exportées"
-
-#. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__selected_move_qty
 msgid "Quantity of Selected Moves"
 msgstr "Nombre de pièces sélectionnées"
-
-#. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__exported_account_qty
-msgid "Quantity of accounts exported"
-msgstr "Nombre de comptes exportés"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_tax__export_suffix_required
@@ -597,16 +588,10 @@ msgstr "Requiert un code d'export comptable"
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
-msgid "Results"
-msgstr "Résultats"
-
-#. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "Settings"
 msgstr "Configuration"
 
 #. module: fermente_account_export
-#: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__state
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__state
 msgid "State"
 msgstr "État"
@@ -645,7 +630,7 @@ msgstr "Le suffixe d'export doit être unique par société !"
 
 #. module: fermente_account_export
 #. odoo-python
-#: code:addons/fermente_account_export/models/account_export.py:0
+#: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
 "The account %(account_code)s - %(account_name)s is set 'export with tax suffix' but no default code is defined on the account.\n"
@@ -656,7 +641,7 @@ msgstr ""
 
 #. module: fermente_account_export
 #. odoo-python
-#: code:addons/fermente_account_export/models/account_export.py:0
+#: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
 "The account %(account_code)s - %(account_name)s is set 'export with tax suffix' but no tax suffix is defined for the tax %(tax_name)s.\n"
@@ -668,9 +653,10 @@ msgstr ""
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_unexport_form
 msgid ""
-"The export will be canceled for the selected moves. Be sure to delete the "
-"corresponding lines in the accounting software."
-msgstr "L'export sera annulé pour les pièces sélectionnées. Assurez vous d'avoir supprimer les pièces comptables correspondantes dans votre logiciel comptable."
+"The export will be canceled for the selected moves.<br/>\n"
+"                    Be sure to delete the corresponding lines in the accounting software."
+msgstr "L'export sera annulée pour les pièces sélectionnées.<br/>\n"
+" Veuillez vérifier que les pièces comptables sont bien supprimées dans le logiciel comptable."
 
 #. module: fermente_account_export
 #: model:ir.model.fields,help:fermente_account_export.field_account_journal__export_code
@@ -679,8 +665,9 @@ msgid ""
 "empty if you don't want to export the accounting moves that are in this "
 "journal."
 msgstr ""
-"Ce code sera utilisé lors de l'export des écritures dans la colonne journal."
-"Veuillez laisser vide si vous ne voulez pas exporter les pièces de ce journal"
+"Ce code sera utilisé lors de l'export des écritures dans la colonne "
+"journal.Veuillez laisser vide si vous ne voulez pas exporter les pièces de "
+"ce journal"
 
 #. module: fermente_account_export
 #. odoo-python
@@ -690,8 +677,15 @@ msgid ""
 "Unable to affect the account export code because %(incorrect_line_qty)s over"
 " %(line_qty)s are incorrect."
 msgstr ""
-"Impossible d'affecter un suffixe d'export car %(incorrect_line_qty)s lines sur "
-" %(line_qty)s sont incorrectes."
+"Impossible d'affecter un suffixe d'export car %(incorrect_line_qty)s lines "
+"sur  %(line_qty)s sont incorrectes."
+
+#. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/wizards/wizard_account_export.py:0
+#, python-format
+msgid "Unable to export account moves at group level"
+msgstr "Impossible d'exporter des pièces comptables au niveau d'une société de type groupe.s"
 
 #. module: fermente_account_export
 #. odoo-python
@@ -755,8 +749,18 @@ msgstr "Assistant"
 #. odoo-python
 #: code:addons/fermente_account_export/models/account_move.py:0
 #, python-format
-msgid "You cannot modify or delete exported moves: %s!"
-msgstr "Vous ne pouvez pas modifier ou supprimer des pièces exportées : %s !"
+msgid "You cannot delete exported moves: %(move_names)s."
+msgstr "Vous ne pouvez pas supprimer les pièces exportées : %(move_names)s."
+
+#. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/models/account_move.py:0
+#, python-format
+msgid ""
+"You cannot modify exported moves: %(move_names)s. Forbidden fields: "
+"%(field_names)s"
+msgstr "Vous ne pouvez pas modifier les pièces exportées : %(move_names)s. Champs protégés: "
+"%(field_names)s"
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
@@ -769,9 +773,31 @@ msgid "draft moves."
 msgstr "pièces comptables en brouillon."
 
 #. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/models/account_export.py:0
+#, python-format
+msgid "export_%(export_id)d_ACCOUNTS.csv"
+msgstr "export_%(export_id)d_COMPTES.csv"
+
+#. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/models/account_export.py:0
+#, python-format
+msgid "export_%(export_id)d_BALANCE.csv"
+msgstr "export_%(export_id)d_BALANCE.csv"
+
+#. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/models/account_export.py:0
+#, python-format
+msgid "export_%(export_id)d_MOVES.csv"
+msgstr "export_%(export_id)d_PIECES_COMPTABLES.csv"
+
+#. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "moves related to partners without Export suffixes defined."
-msgstr "Pièces comptables liées à des partenaires sans suffixe d'export définis."
+msgstr ""
+"Pièces comptables liées à des partenaires sans suffixe d'export définis."
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
@@ -783,7 +809,9 @@ msgstr "pièces comptables qui sont marquées 'à vérifier'."
 msgid ""
 "moves that belong to a journal that doesn't have a correct 'Export code' "
 "set."
-msgstr "pièces comptables qui appartiennent à un journal qui n'a pas de code d'export défini."
+msgstr ""
+"pièces comptables qui appartiennent à un journal qui n'a pas de code "
+"d'export défini."
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
