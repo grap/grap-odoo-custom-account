@@ -10,11 +10,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">wizard.account.unexport</field>
         <field name="arch" type="xml">
             <form>
-                <group>
-                    <p class="alert alert-warning" role="alert">
-                        The export will be canceled for the selected moves. Be sure to delete the corresponding lines in the accounting software.
-                    </p>
-                </group>
+                <p class="alert alert-warning" role="alert">
+                    The export will be canceled for the selected moves.<br/>
+                    Be sure to delete the corresponding lines in the accounting software.
+                </p>
                 <footer>
                     <button string="Unexport" name="button_unexport" type="object" class="oe_highlight"
                         confirm="Are you sure you want to cancel Account Export ?"/>
