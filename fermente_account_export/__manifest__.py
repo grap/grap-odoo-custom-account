@@ -15,6 +15,7 @@
         "account",
         # OCA
         "account_fiscal_year",
+        "res_company_code",
         # GRAP
         "fiscal_company_base",
     ],
