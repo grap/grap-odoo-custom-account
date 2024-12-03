@@ -10,7 +10,6 @@ from io import StringIO
 from unidecode import unidecode
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -72,12 +71,10 @@ class AccountExport(models.Model):
     file_name_balance = fields.Char(compute="_compute_file_name_balance")
 
     # Compute Section
-    @api.depends("export_date", "company_id")
     def _compute_name(self):
         for export in self:
             export.name = _(
-                "%(company_code)s - Export #%(export_id)d",
-                company_code=export.company_id.code,
+                "Export #%(export_id)d",
                 export_id=export.id,
             )
 
@@ -161,7 +158,7 @@ class AccountExport(models.Model):
                     # Ignoring line with null debit and credit
                     continue
 
-                account_code = self._get_account_code(move, line)
+                account_code = line.account_id._get_account_code(line)
                 analytic_code = self._get_analytic_code(move)
 
                 move_key = (account_code, analytic_code, line.credit > 0)
@@ -198,82 +195,6 @@ class AccountExport(models.Model):
         }
 
     @api.model
-    def _get_account_code(self, move, line):
-        account = line.account_id
-        company = line.company_id
-        partner = line.partner_id
-        res = account.code
-
-        # Company Suffix
-        if company.fiscal_type in ["fiscal_child"] and account.account_type in [
-            "asset_receivable",
-            "liability_payable",
-        ]:
-            res += company.code
-
-        # Partner Suffix
-        if (
-            partner
-            and partner.export_suffix
-            and account.account_type in ["asset_receivable", "liability_payable"]
-        ):
-            res += partner.export_suffix
-
-        # Tax Suffix
-        if account.export_suffix_on_tax_required:
-            if line.tax_ids:
-                if line.tax_ids[0].export_suffix:
-                    # Tax code is defined
-                    res += line.tax_ids[0].export_suffix
-                else:
-                    # Incorrect Tax setting
-                    raise ValidationError(
-                        _(
-                            "The account %(account_code)s - %(account_name)s"
-                            " is set 'export with tax"
-                            " suffix' but no tax suffix is defined for"
-                            " the tax %(tax_name)s.\n Move %(move_name)s",
-                            account_code=account.code,
-                            account_name=account.name,
-                            tax_name=line.tax_ids[0].name,
-                            move_name=move.name,
-                        )
-                    )
-            elif account.export_suffix_on_tax_default:
-                # Default Tax Code is defined
-                res += account.export_suffix_on_tax_default
-            else:
-                # Incorrect account setting
-                raise ValidationError(
-                    _(
-                        "The account %(account_code)s - %(account_name)s"
-                        " is set 'export with tax"
-                        " suffix' but no default code is defined on"
-                        " the account.\n Move %(move_name)s",
-                        account_code=account.code,
-                        account_name=account.name,
-                        move_name=move.name,
-                    )
-                )
-
-        Config = self.env["ir.config_parameter"].sudo()
-        max_size = int(
-            Config.get_param(
-                "fermente_account_export.parameter_max_size_account_code", 10
-            )
-        )
-
-        if len(res) > max_size:
-            raise ValidationError(
-                _(
-                    "Account code '%(account_code)s' is too long to be exported"
-                    " to the accounting software.",
-                    account_code=res,
-                )
-            )
-        return res
-
-    @api.model
     def _get_analytic_code(self, move):
         res = ""
         if move.company_id.fiscal_type == "fiscal_child":
@@ -293,7 +214,7 @@ class AccountExport(models.Model):
         return {
             "date": move.date,
             "journal": move.journal_id.export_code,
-            "account_code": self._get_account_code(move, line),
+            "account_code": line.account_id._get_account_code(line),
             "ref": self._normalize(ref),
             "name": self._normalize(move.name),
             "credit": line.credit,

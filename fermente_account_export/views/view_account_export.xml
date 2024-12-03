@@ -66,8 +66,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <field name="fiscal_year_id"/>
                         </group>
                         <group id="right_group">
-                            <field name="exported_account_qty"/>
                             <field name="exported_move_qty"/>
+                            <field name="exported_account_qty"/>
                         </group>
                     </group>
                     <group string="Files">
