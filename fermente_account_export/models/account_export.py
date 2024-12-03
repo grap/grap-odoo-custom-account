@@ -252,7 +252,7 @@ class AccountExport(models.Model):
                 # Line number
                 "%d" % i,
                 # Date (dd/mm/yy)
-                line["date"].strftime("%d/%m/%y"),
+                line["date"].strftime("%Y-%m-%d"),
                 # Journal
                 self._normalize(line["journal"]),
                 # Account number
@@ -279,7 +279,7 @@ class AccountExport(models.Model):
                 ]
             data += [
                 # Date of maturity (ddmmyy)
-                line["date_maturity"] and line["date_maturity"].strftime("%d%m%y"),
+                line["date_maturity"] and line["date_maturity"].strftime("%Y-%m-%d"),
                 # Currency
                 line["currency_name"],
             ]

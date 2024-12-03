@@ -8,11 +8,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="view_res_partner_form" model="ir.ui.view">
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="inherit_id" ref="account.view_partner_property_form" />
         <field name="arch" type="xml">
-            <field name="property_account_position_id" position="after">
-                <field name="export_suffix" groups="account.group_account_manager"/>
-                <newline />
+            <field name="property_account_payable_id" position="after">
+                <field name="journal_item_count"/>
+                <field name="export_suffix"/>
             </field>
         </field>
     </record>
@@ -33,14 +33,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_res_partner_tree" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
-            <tree editable="bottom"
-                    decoration-muted="active == False"
-                >
+            <tree editable="bottom" decoration-muted="active == False">
                 <field name="name" readonly="1"/>
                 <field name="export_suffix"/>
                 <field name="journal_item_count" readonly="1"/>
-<!--                 <field name="customer" readonly="1"/>
-                <field name="supplier" readonly="1"/> -->
                 <field name="active" readonly="1"/>
                 <field name="company_id" readonly="1" groups="base.group_multi_company"/>
             </tree>
