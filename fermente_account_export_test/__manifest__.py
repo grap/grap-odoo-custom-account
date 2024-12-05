@@ -16,10 +16,6 @@
     ],
     "demo": [
         "demo/res_partner.xml",
-        # "demo/res_company.xml",
-        # "demo/account_account.xml",
-        # "demo/account_tax.xml",
-        # "demo/account_move.xml",
         "demo/account_fiscal_year.xml",
         "demo/account_journal.xml",
     ],
