@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record  id="view_wizard_account_export_form" model="ir.ui.view">
+        <field name="model">wizard.account.export</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_partner_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_partner_move_qty" nolabel="1" class="oe_inline"/></b> moves related to partners without Export suffixes defined.</p>
+
+                <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_draft_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_draft_move_qty" nolabel="1" class="oe_inline"/></b> draft moves.</p>
+
+                <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_tax_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_tax_move_qty" nolabel="1" class="oe_inline"/></b> moves that doesn't have all the taxes correctly set.</p>
+
+                <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_fiscal_year_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_fiscal_year_move_qty" nolabel="1" class="oe_inline"/></b> moves that doesn't belong to the selected fiscal year.</p>
+
+                <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_journal_code_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_journal_code_move_qty" nolabel="1" class="oe_inline"/></b> moves that belong to a journal that doesn't have a correct 'Export code' set.</p>
+
+                <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_to_check_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_to_check_move_qty" nolabel="1" class="oe_inline"/></b> moves that are marked as 'To check'.</p>
+
+                <p class="alert alert-danger" role="alert" attrs="{'invisible': [('ignored_exported_move_qty', '=', 0)]}"> You have selected <b><field name="ignored_exported_move_qty" nolabel="1" class="oe_inline"/></b> moves that have already been exported in your accounting software.</p>
+
+                <group string="Settings">
+                    <field name="company_id"/>
+                    <field name="fiscal_year_id"/>
+                    <field name="selected_move_qty" force_save="1"/>
+                    <field name="exported_move_qty" attrs="{'invisible': [('fiscal_year_id', '=', False)]}" force_save="1"/>
+                    <field name="description"/>
+                </group>
+
+                <footer>
+                    <button string="Export" name="button_export" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_account_export" model="ir.actions.act_window">
+        <field name="name">Export to Accounting Software</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.account.export</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,175 @@
+# Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from odoo.exceptions import ValidationError
+from odoo.tests.common import TransactionCase
+
+
+class TestModule(TransactionCase):
+    def setUp(self):
+        super().setUp()
+        self.ResPartner = self.env["res.partner"]
+        self.Wizard = self.env["wizard.res.partner.add.export.code"]
+        self.AccountAccount = self.env["account.account"]
+        self.AccountJournal = self.env["account.journal"]
+        self.AccountMove = self.env["account.move"]
+        self.main_company = self.env.ref("base.main_company")
+
+        self.customer = self.env.ref("fermente_account_export.customer_2")
+
+        self.account_sale = self.AccountAccount.create(
+            {
+                "code": "SALET",
+                "name": "Revenue (sale)",
+                "reconcile": False,
+                "account_type": "income",
+            }
+        )
+        self.account_receivable = self.AccountAccount.create(
+            {
+                "code": "RECVT",
+                "name": "Receivable (test)",
+                "reconcile": True,
+                "account_type": "asset_receivable",
+            }
+        )
+
+        self.journal_sale = self.AccountJournal.create(
+            {
+                "name": "Sales journal",
+                "code": "SAJT",
+                "type": "sale",
+            }
+        )
+
+    def test_01_export_suffix_sanitize(self):
+        def _sanitize(name):
+            return self.ResPartner._export_suffix_sanitize(name)
+
+        # Check Upper
+        self.assertEqual(_sanitize("To Upper"), "TO UPPER")
+        self.assertEqual(_sanitize("   To Strip  "), "TO STRIP")
+        self.assertEqual(
+            _sanitize("Duplicated    Spaces Between       Words  "),
+            "DUPLICATED SPACES BETWEEN WORDS",
+        )
+        self.assertEqual(_sanitize("With accent éèàù"), "WITH ACCENT EEAU")
+
+        self.assertEqual(_sanitize("With Special# Char"), "WITH SPECIAL CHAR")
+        self.assertEqual(_sanitize("With Special ! Char"), "WITH SPECIAL CHAR")
+        self.assertEqual(_sanitize("With Special ! Char"), "WITH SPECIAL CHAR")
+        self.assertEqual(_sanitize("With Number 123"), "WITH NUMBER")
+
+    def test_02_export_suffix_get_base_text(self):
+        def _get_base(name):
+            return self.ResPartner._export_suffix_get_base_text(name)
+
+        self.assertEqual(_get_base("a Name with a word of many characters"), "CHAR")
+        self.assertEqual(_get_base("Mr Baa"), "BAA1")
+        self.assertEqual(_get_base("A Bi"), "BI01")
+        self.assertEqual(_get_base("A B"), "A001")
+        self.assertEqual(_get_base(""), "")
+
+    def _create_partner(self, name, extra_vals=False):
+        vals = {"name": name, "company_id": self.main_company.id}
+        if extra_vals:
+            vals.update(extra_vals)
+        return self.ResPartner.create(vals)
+
+    def test_03_wizard_partner_add_export_code(self):
+        partner_with_suffix = self._create_partner(
+            "Partner With Suffix", {"export_suffix": "SUFF"}
+        )
+        partner_a = self._create_partner("A")
+        partner_bb = self._create_partner("BB")
+        partner_ccc = self._create_partner("CCC")
+        partner_dddd = self._create_partner("DDDD")
+        partner_duplicate_1 = self._create_partner("bobleponge 01")
+        partner_duplicate_2 = self._create_partner("bobleponge 02")
+        partner_duplicate_3 = self._create_partner("bobleponge 03")
+
+        wizard = self.Wizard.with_context(
+            active_ids=[
+                partner_with_suffix.id,
+                partner_a.id,
+                partner_bb.id,
+                partner_ccc.id,
+                partner_dddd.id,
+                partner_duplicate_1.id,
+                partner_duplicate_2.id,
+                partner_duplicate_3.id,
+            ]
+        ).create({})
+
+        line_duplicate_3 = wizard.line_ids.filtered(
+            lambda x: x.partner_id.id == partner_duplicate_3.id
+        )
+        # Test OnChange
+        line_duplicate_3.export_suffix = "BOBL"
+        line_duplicate_3.onchange_export_suffix()
+        self.assertEqual(line_duplicate_3.state, "duplicate_new")
+
+        line_duplicate_3.export_suffix = "EBPC"
+        line_duplicate_3.onchange_export_suffix()
+        self.assertEqual(line_duplicate_3.state, "duplicate_existing")
+
+        line_duplicate_3.export_suffix = "abéc"
+        line_duplicate_3.onchange_export_suffix()
+        self.assertEqual(line_duplicate_3.export_suffix, "ABEC")
+
+        line_duplicate_3.export_suffix = ""
+        line_duplicate_3.onchange_export_suffix()
+        self.assertEqual(line_duplicate_3.state, "empty")
+
+        # Try to confirm with incorrect value
+        with self.assertRaises(ValidationError):
+            wizard.button_affect_export_suffix()
+        line_duplicate_3.unlink()
+
+        wizard.button_affect_export_suffix()
+        self.assertEqual(partner_with_suffix.export_suffix, "SUFF")
+        self.assertEqual(partner_a.export_suffix, "A001")
+        self.assertEqual(partner_bb.export_suffix, "BB01")
+        self.assertEqual(partner_ccc.export_suffix, "CCC1")
+        self.assertEqual(partner_dddd.export_suffix, "DDDD")
+        self.assertEqual(partner_duplicate_1.export_suffix, "BOBL")
+        self.assertEqual(partner_duplicate_2.export_suffix, "BOB2")
+
+    def test_04_search_journal_item_count(self):
+        # Check first if partner doesn't requires export code
+        partners = self.ResPartner.search([("journal_item_count", ">", 0)])
+        # import pdb; pdb.set_trace()
+        self.assertNotIn(self.customer.id, partners.ids)
+
+        self.AccountMove.create(
+            {
+                "journal_id": self.journal_sale.id,
+                "partner_id": self.customer.id,
+                "line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "line 1",
+                            "partner_id": self.customer.id,
+                            "account_id": self.account_receivable.id,
+                            "debit": 100,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "line 2",
+                            "partner_id": self.customer.id,
+                            "account_id": self.account_sale.id,
+                            "credit": 100,
+                        },
+                    ),
+                ],
+            }
+        )
+
+        partners = self.ResPartner.search([("journal_item_count", ">", 0)])
+        self.assertIn(self.customer.id, partners.ids)

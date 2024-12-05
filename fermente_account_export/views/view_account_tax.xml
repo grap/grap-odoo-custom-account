@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_tax_search" model="ir.ui.view">
+        <field name="model">account.tax</field>
+        <field name="arch" type="xml">
+            <search>
+               <filter string="Without Export Suffix"
+                        name="without_suffix"
+                        domain="[('export_suffix', '=', False)]"/>
+               <filter string="Export Suffix required"
+                        name="filter_export_suffix_required"
+                        domain="[('export_suffix_required', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_account_tax_form" model="ir.ui.view">
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="export_suffix"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_tax_tree" model="ir.ui.view">
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="export_suffix"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_tax_tree_editable" model="ir.ui.view">
+        <field name="model">account.tax</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" decoration-muted="active == False">
+                <field name="name" readonly="True"/>
+                <field name="type_tax_use" readonly="True"/>
+                <field name="description" readonly="True"/>
+                <field name="export_suffix"/>
+                <field name="export_suffix_required"/>
+                <field name="active" readonly="True"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_account_tax" model="ir.actions.act_window">
+        <field name="name">Tax Suffixes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.tax</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_account_tax_tree_editable"/>
+        <field name="context">{
+            'search_default_filter_export_suffix_required': 1,
+            'active_test': False
+            }</field>
+    </record>
+
+    <menuitem id="menu_account_tax_code"
+        name="Tax Suffixes"
+        parent="menu_export"
+        action="action_account_tax"
+        sequence="2"/>
+
+</odoo>

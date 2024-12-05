@@ -1,0 +1,21 @@
+# Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+# @author: Julien WESTE
+# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+
+from odoo import models
+
+
+class WizardAccountUnexport(models.TransientModel):
+    _name = "wizard.account.unexport"
+    _description = "Account Unexport Wizard"
+
+    def button_unexport(self):
+        AccountMove = self.env["account.move"]
+        moves = AccountMove.browse(self.env.context.get("active_ids", False))
+        # We use sudo, because in a CAE context, if we cancel an export done
+        # in GRP context, it will not be accessible in 3PP context.
+        moves.sudo().with_context(ignore_account_move_exported=True).write(
+            {"account_export_id": False}
+        )

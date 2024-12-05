@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_account_form" model="ir.ui.view">
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form" />
+        <field name="arch" type="xml">
+            <sheet position="before">
+                <div class="alert alert-warning" role="alert" attrs="{'invisible': [('export_code_emulation_error', '=', False)]}" style="margin-bottom:0px;">
+                        <field name="export_code_emulation_error" class="oe_inline"/>
+                </div>
+            </sheet>
+            <xpath expr="//page[@name='accounting']/group" position="after">
+                <group string="Export Settings">
+                    <field name="export_code_emulation"/>
+                    <field name="export_code_emulation_tooltip" string="" class="fst-italic text-muted"/>
+                    <field name="export_suffix_on_tax_required"/>
+                    <field name="export_suffix_on_tax_default" attrs="{'invisible': [('export_suffix_on_tax_required', '=', False)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

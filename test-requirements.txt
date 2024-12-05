@@ -1,0 +1,2 @@
+# grap/odoo-addons-cae
+git+https://github.com/grap/odoo-addons-cae@16.0#subdirectory=setup/fiscal_company_base

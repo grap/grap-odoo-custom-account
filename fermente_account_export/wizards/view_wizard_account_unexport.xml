@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_wizard_account_unexport_form" model="ir.ui.view">
+        <field name="model">wizard.account.unexport</field>
+        <field name="arch" type="xml">
+            <form>
+                <p class="alert alert-warning" role="alert">
+                    The export will be canceled for the selected moves.<br/>
+                    Be sure to delete the corresponding lines in the accounting software.
+                </p>
+                <footer>
+                    <button string="Unexport" name="button_unexport" type="object" class="oe_highlight"
+                        confirm="Are you sure you want to cancel Account Export ?"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_account_unexport" model="ir.actions.act_window">
+        <field name="name">Cancel Account Export</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.account.unexport</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+
+</odoo>
