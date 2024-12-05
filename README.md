@@ -17,7 +17,12 @@ This repository contains Odoo modules developped by the company GRAP for custom 
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[fermente_account_export](fermente_account_export/) | 16.0.1.0.0 |  | Add a placeholder menu for Accounting Export
+[fermente_account_export_test](fermente_account_export_test/) | 16.0.1.0.0 |  | GRAP - Export accounting moves - Test
 
 [//]: # (end addons)
 
