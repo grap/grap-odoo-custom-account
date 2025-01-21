@@ -26,12 +26,9 @@ class AccountTax(models.Model):
 
     # Columns section
     def _compute_export_suffix_required(self):
-        res = self._get_export_suffix_required()
+        required_tax_ids = [x[0] for x in self._get_export_suffix_required()]
         for tax in self:
-            for item in res:
-                if item[0] == tax.id:
-                    tax.export_suffix_required = True
-                    continue
+            tax.export_suffix_required = tax.id in required_tax_ids
 
     def _get_export_suffix_required(self):
         self._cr.execute(
