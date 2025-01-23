@@ -29,7 +29,7 @@ class AccountAccount(models.Model):
 
     export_code_emulation = fields.Char(compute="_compute_export_code_emulation")
 
-    export_code_emulation_tooltip = fields.Char(
+    export_code_emulation_tooltip = fields.Text(
         compute="_compute_export_code_emulation"
     )
 
@@ -46,7 +46,11 @@ class AccountAccount(models.Model):
             code, message = account._get_account_code(False)
             account.export_code_emulation = code
             account.export_code_emulation_error = message
-            account.export_code_emulation_tooltip = "BOB"
+            account.export_code_emulation_tooltip = _(
+                "- 'T' symbolizes the tax suffix that will be added at the end of the"
+                " code of the Profit & Loss account,"
+                " according to the VAT collected or deducted."
+            )
 
     def _get_account_code(self, line):
         self.ensure_one()
@@ -104,8 +108,8 @@ class AccountAccount(models.Model):
                             move_name=line.move_id.name,
                         )
                     )
-            elif self.export_suffix_on_tax_default:
-                result += "T"
+            else:
+                result += "T" * (len(self.export_suffix_on_tax_default or "1"))
 
         Config = self.env["ir.config_parameter"].sudo()
         max_size = int(
