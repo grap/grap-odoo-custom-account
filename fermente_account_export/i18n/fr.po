@@ -16,6 +16,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: fermente_account_export
+#. odoo-python
+#: code:addons/fermente_account_export/models/account_account.py:0
+#, python-format
+msgid ""
+"- 'T' symbolizes the tax suffix that will be added at the end of the code of"
+" the Profit & Loss account, according to the VAT collected or deducted."
+msgstr ""
+"- 'T' symbolises le suffixe de taxe qui sera ajouté à la fin du code du compte comptable"
+" pour les comptes de résultat, en fonction de la TVA déductible ou collectée."
+
+#. module: fermente_account_export
 #: model:ir.model,name:fermente_account_export.model_account_account
 msgid "Account"
 msgstr "Compte"
