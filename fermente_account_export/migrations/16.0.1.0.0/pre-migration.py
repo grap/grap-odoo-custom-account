@@ -55,7 +55,7 @@ _model_renames = [
 ]
 
 _table_renames = [
-    ("ebp_export", "account.export"),
+    ("ebp_export", "account_export"),
 ]
 
 
