@@ -31,8 +31,14 @@ the session. If a session is opened at the end of a year (or a month) and
 closed in the next year (or month), it generates account errors (for years)
 or analysis errors (for
 
-With this module, when closing a PoS session, a unique account move is created.
+With this module, when closing a PoS session, you can chose how account
+move are created.
 
+Three different aggregation mode are defined.
+
+*Standard Mode*: the default Odoo behaviour is not changed.
+
+*Group by account and tax Mode*:
 In each account move
 
 * a 'tax' line is created for each
@@ -42,12 +48,33 @@ In each account move
     * VAT
 * a unique 'customer' line is created
 
+*Group by account, tax and partner Mode*:
+In each account move
+
+* a 'tax' line is created for each
+    * VAT.
+* a 'product' line is created for each
+    * products accounts
+    * VAT
+    * customer
+* a unique 'customer' line is created
+
 This module could be used with ``grap_pos_change_payment_move``.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+To configure this module, you need to:
+
+#. Go to **Point of Sale > Configuration > Point of Sale**
+#. On the chose the desired Point of Sale and clic on it.
+#. Edit and chose aggregation mode on 'Sale Move Policy' under the
+   'Accounting' section.
 
 Bug Tracker
 ===========
@@ -71,6 +98,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Sylvain LE GAL <https://twitter.com/legalsylvain>
+* Rémy TAYMANS <remy@coopiteasy.be>
 
 Maintainers
 ~~~~~~~~~~~
