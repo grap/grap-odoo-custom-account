@@ -19,6 +19,8 @@ class AccountMove(models.Model):
         "reverse_entry_id",
         # Technical field that is frequently written by the ORM
         "needed_terms_dirty",
+        # Allow to create/delete attachment
+        "message_attachment_count",
     ]
 
     account_export_id = fields.Many2one(
