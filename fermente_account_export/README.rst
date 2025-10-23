@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =========================
 Fermente - Account Export
 =========================
@@ -13,7 +17,7 @@ Fermente - Account Export
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fgrap--odoo--custom--account-lightgray.png?logo=github
@@ -22,9 +26,8 @@ Fermente - Account Export
 
 |badge1| |badge2| |badge3|
 
-Custom Fermente module that allows to export accounting moves, accounts and balance
-to Accounting Softwares like EPB.
-
+Custom Fermente module that allows to export accounting moves, accounts
+and balance to Accounting Softwares like EPB.
 
 - TODO, vérifier l'histoire du code comptable.
 
@@ -36,8 +39,8 @@ to Accounting Softwares like EPB.
 Configuration
 =============
 
-* Go to "Settings > Technical > System Parameters"
-* set the max size exportable in your accounting software in the key
+- Go to "Settings > Technical > System Parameters"
+- set the max size exportable in your accounting software in the key
   ``fermente_account_export.parameter_max_size_account_code``
 
 Bug Tracker
@@ -54,18 +57,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Julien WESTE
-* Sylvain LE GAL <https://twitter.com/legalsylvain>
+- Julien WESTE
+- Sylvain LE GAL
+  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/grap-odoo-custom-account <https://github.com/grap/grap-odoo-custom-account/tree/16.0/fermente_account_export>`_ project on GitHub.
 
