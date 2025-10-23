@@ -21,8 +21,8 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[fermente_account_export](fermente_account_export/) | 16.0.1.0.3 |  | Add a placeholder menu for Accounting Export
-[fermente_account_export_test](fermente_account_export_test/) | 16.0.1.0.0 |  | GRAP - Export accounting moves - Test
+[fermente_account_export](fermente_account_export/) | 16.0.1.0.4 |  | Add a placeholder menu for Accounting Export
+[fermente_account_export_test](fermente_account_export_test/) | 16.0.1.0.1 |  | GRAP - Export accounting moves - Test
 
 [//]: # (end addons)
 

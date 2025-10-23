@@ -4,7 +4,7 @@
 
 {
     "name": "GRAP - Export accounting moves - Test",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "GRAP",
     "category": "GRAP - Custom",
     "license": "AGPL-3",
