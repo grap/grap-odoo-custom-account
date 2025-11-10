@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2024-12-03 22:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -20,11 +21,12 @@ msgstr ""
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"- 'T' symbolizes the tax suffix that will be added at the end of the code of"
-" the Profit & Loss account, according to the VAT collected or deducted."
+"- 'T' symbolizes the tax suffix that will be added at the end of the code of "
+"the Profit & Loss account, according to the VAT collected or deducted."
 msgstr ""
-"- 'T' symbolises le suffixe de taxe qui sera ajouté à la fin du code du compte comptable"
-" pour les comptes de résultat, en fonction de la TVA déductible ou collectée."
+"- 'T' symbolises le suffixe de taxe qui sera ajouté à la fin du code du "
+"compte comptable pour les comptes de résultat, en fonction de la TVA "
+"déductible ou collectée."
 
 #. module: fermente_account_export
 #: model:ir.model,name:fermente_account_export.model_account_account
@@ -59,7 +61,6 @@ msgstr "Exports EBP"
 #. module: fermente_account_export
 #. odoo-python
 #: code:addons/fermente_account_export/models/account_export.py:0
-#: code:addons/fermente_account_export/models/account_export.py:0
 #, python-format
 msgid "Account Number"
 msgstr "N. Compte"
@@ -74,10 +75,11 @@ msgstr "Assistant d'annulation d'export comptable"
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"Account code '%(account_code)s' is too long to be exported to the accounting"
-" software. The maximum length is %(max_size)s."
-msgstr "Le compte comptable '%(account_code)s' est trop long pour être être exporté dans le logiciel"
-" comptable. La taille maximum est %(max_size)s."
+"Account code '%(account_code)s' is too long to be exported to the accounting "
+"software. The maximum length is %(max_size)s."
+msgstr ""
+"Le compte comptable '%(account_code)s' est trop long pour être être exporté "
+"dans le logiciel comptable. La taille maximum est %(max_size)s."
 
 #. module: fermente_account_export
 #. odoo-python
@@ -644,10 +646,12 @@ msgstr "Le suffixe d'export doit être unique par société !"
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"The account %(account_code)s - %(account_name)s is set 'export with tax suffix' but no default code is defined on the account.\n"
+"The account %(account_code)s - %(account_name)s is set 'export with tax "
+"suffix' but no default code is defined on the account.\n"
 " Move %(move_name)s"
 msgstr ""
-"Le compte %(account_code)s - %(account_name)s est défini 'à exporter avec un suffixe de taxe' mais aucun suffixe n'est défini.\n"
+"Le compte %(account_code)s - %(account_name)s est défini 'à exporter avec un "
+"suffixe de taxe' mais aucun suffixe n'est défini.\n"
 " Pièce comptable %(move_name)s"
 
 #. module: fermente_account_export
@@ -655,19 +659,25 @@ msgstr ""
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"The account %(account_code)s - %(account_name)s is set 'export with tax suffix' but no tax suffix is defined for the tax %(tax_name)s.\n"
+"The account %(account_code)s - %(account_name)s is set 'export with tax "
+"suffix' but no tax suffix is defined for the tax %(tax_name)s.\n"
 " Move %(move_name)s"
 msgstr ""
-"The compte %(account_code)s - %(account_name)s est défini 'à export avec un suffixe de taxe' mais aucun suffixe n'est défini pour les taxes %(tax_name)s.\n"
+"The compte %(account_code)s - %(account_name)s est défini 'à export avec un "
+"suffixe de taxe' mais aucun suffixe n'est défini pour les taxes "
+"%(tax_name)s.\n"
 " Pièce comptable %(move_name)s"
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_unexport_form
 msgid ""
 "The export will be canceled for the selected moves.<br/>\n"
-"                    Be sure to delete the corresponding lines in the accounting software."
-msgstr "L'export sera annulée pour les pièces sélectionnées.<br/>\n"
-" Veuillez vérifier que les pièces comptables sont bien supprimées dans le logiciel comptable."
+"                    Be sure to delete the corresponding lines in the "
+"accounting software."
+msgstr ""
+"L'export sera annulée pour les pièces sélectionnées.<br/>\n"
+" Veuillez vérifier que les pièces comptables sont bien supprimées dans le "
+"logiciel comptable."
 
 #. module: fermente_account_export
 #: model:ir.model.fields,help:fermente_account_export.field_account_journal__export_code
@@ -676,17 +686,16 @@ msgid ""
 "empty if you don't want to export the accounting moves that are in this "
 "journal."
 msgstr ""
-"Ce code sera utilisé lors de l'export des écritures dans la colonne "
-"journal.Veuillez laisser vide si vous ne voulez pas exporter les pièces de "
-"ce journal"
+"Ce code sera utilisé lors de l'export des écritures dans la colonne journal."
+"Veuillez laisser vide si vous ne voulez pas exporter les pièces de ce journal"
 
 #. module: fermente_account_export
 #. odoo-python
 #: code:addons/fermente_account_export/wizards/wizard_res_partner_add_export_code.py:0
 #, python-format
 msgid ""
-"Unable to affect the account export code because %(incorrect_line_qty)s over"
-" %(line_qty)s are incorrect."
+"Unable to affect the account export code because %(incorrect_line_qty)s over "
+"%(line_qty)s are incorrect."
 msgstr ""
 "Impossible d'affecter un suffixe d'export car %(incorrect_line_qty)s lines "
 "sur  %(line_qty)s sont incorrectes."
@@ -696,17 +705,21 @@ msgstr ""
 #: code:addons/fermente_account_export/wizards/wizard_account_export.py:0
 #, python-format
 msgid "Unable to export account moves at group level"
-msgstr "Impossible d'exporter des pièces comptables au niveau d'une société de type groupe.s"
+msgstr ""
+"Impossible d'exporter des pièces comptables au niveau d'une société de type "
+"groupe.s"
 
 #. module: fermente_account_export
 #. odoo-python
 #: code:addons/fermente_account_export/wizards/wizard_res_partner_add_export_code.py:0
 #, python-format
 msgid ""
-"Unable to use the wizard to guess export code for global partners that are not related to a company.\n"
+"Unable to use the wizard to guess export code for global partners that are "
+"not related to a company.\n"
 " %(partner_names)s."
 msgstr ""
-"Impossible d'utiliser cet assistant pour deviner des suffixes d'export pour des partenaires globaux qui ne sont pas relié à une société.\n"
+"Impossible d'utiliser cet assistant pour deviner des suffixes d'export pour "
+"des partenaires globaux qui ne sont pas relié à une société.\n"
 " %(partner_names)s."
 
 #. module: fermente_account_export
@@ -718,8 +731,8 @@ msgstr "Annuler l'export"
 #: model:ir.model.fields,help:fermente_account_export.field_res_partner__export_suffix
 #: model:ir.model.fields,help:fermente_account_export.field_res_users__export_suffix
 msgid ""
-"When exporting Entries, this accounting_code will be appended to the Account"
-" Number to make it a Partner Account."
+"When exporting Entries, this accounting_code will be appended to the Account "
+"Number to make it a Partner Account."
 msgstr ""
 "Durant l'export dans EBP, ce suffixe sera ajouté au compte comptable pour "
 "générer un nouveau sous compte de partenaire"
@@ -770,8 +783,9 @@ msgstr "Vous ne pouvez pas supprimer les pièces exportées : %(move_names)s."
 msgid ""
 "You cannot modify exported moves: %(move_names)s. Forbidden fields: "
 "%(field_names)s"
-msgstr "Vous ne pouvez pas modifier les pièces exportées : %(move_names)s. Champs protégés: "
-"%(field_names)s"
+msgstr ""
+"Vous ne pouvez pas modifier les pièces exportées : %(move_names)s. Champs "
+"protégés: %(field_names)s"
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
@@ -818,8 +832,7 @@ msgstr "pièces comptables qui sont marquées 'à vérifier'."
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid ""
-"moves that belong to a journal that doesn't have a correct 'Export code' "
-"set."
+"moves that belong to a journal that doesn't have a correct 'Export code' set."
 msgstr ""
 "pièces comptables qui appartiennent à un journal qui n'a pas de code "
 "d'export défini."
