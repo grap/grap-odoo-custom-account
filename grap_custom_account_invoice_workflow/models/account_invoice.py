@@ -83,7 +83,7 @@ class AccountInvoice(models.Model):
             # to know if we are installing demo data from l10n_generic_coa
             # that will raise an error, because they don't have correct
             # values for the 3 checked fields
-            if invoice.get_xml_id()[invoice.id].startswith("l10n_generic_coa"):
+            if invoice.get_external_id()[invoice.id].startswith("l10n_generic_coa"):
                 continue
             message = []
             if not invoice.date_invoice:
