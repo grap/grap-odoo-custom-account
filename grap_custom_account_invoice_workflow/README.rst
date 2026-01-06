@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ==============================
 GRAP - Custom Invoice workflow
 ==============================
@@ -13,24 +17,24 @@ GRAP - Custom Invoice workflow
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fgrap--odoo--custom--account-lightgray.png?logo=github
-    :target: https://github.com/grap/grap-odoo-custom-account/tree/12.0/grap_custom_account_invoice_workflow
+    :target: https://github.com/grap/grap-odoo-custom-account/tree/16.0/grap_custom_account_invoice_workflow
     :alt: grap/grap-odoo-custom-account
 
 |badge1| |badge2| |badge3|
 
-This module extends the functionality of account invoices to
-changes default behaviour that doesn't fit with GRAP needs.
+This module extends the functionality of account invoices to changes
+default behaviour that doesn't fit with GRAP needs.
 
 Add a 'Verified' state on ``account.invoice`` (supplier and supplier
 refund invoices)
 
-* Only the users member of 'Accounting & Finance / Billing Manager'
-  can validate supplier account invoices
-* Member of 'Accounting & Finance / Billing' can only verify invoices.
+- Only the users member of 'Accounting & Finance / Billing Manager' can
+  validate supplier account invoices
+- Member of 'Accounting & Finance / Billing' can only verify invoices.
 
 Add a constraint, when verifying supplier invoices.
 
@@ -42,13 +46,14 @@ Add a constraint, when verifying supplier invoices.
 Usage
 =====
 
-* Go to your supplier invoices tree view
-* Click on 'Verify' if you're not member of Account Manager Group.
-* click on 'Validate' if you're member of Account Manager Group.
+- Go to your supplier invoices tree view
+- Click on 'Verify' if you're not member of Account Manager Group.
+- click on 'Validate' if you're member of Account Manager Group.
 
-In that case, the number of the invoice will be displayed as a notification.
+In that case, the number of the invoice will be displayed as a
+notification.
 
-:.. figure:: https://raw.githubusercontent.com/grap/grap-odoo-custom-account/12.0/grap_custom_account_invoice_workflow/static/description/view_account_invoice_tree.png
+:.. figure:: https://raw.githubusercontent.com/grap/grap-odoo-custom-account/16.0/grap_custom_account_invoice_workflow/static/description/view_account_invoice_tree.png
 
 Bug Tracker
 ===========
@@ -56,7 +61,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/grap/grap-odoo-custom-account/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/grap/grap-odoo-custom-account/issues/new?body=module:%20grap_custom_account_invoice_workflow%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/grap/grap-odoo-custom-account/issues/new?body=module:%20grap_custom_account_invoice_workflow%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -64,19 +69,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sylvain LE GAL (https://www.twitter.com/legalsylvain)
-* Julien WESTE
+- Sylvain LE GAL (https://www.twitter.com/legalsylvain)
+- Julien WESTE
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
-This module is part of the `grap/grap-odoo-custom-account <https://github.com/grap/grap-odoo-custom-account/tree/12.0/grap_custom_account_invoice_workflow>`_ project on GitHub.
+This module is part of the `grap/grap-odoo-custom-account <https://github.com/grap/grap-odoo-custom-account/tree/16.0/grap_custom_account_invoice_workflow>`_ project on GitHub.
 
 You are welcome to contribute.
