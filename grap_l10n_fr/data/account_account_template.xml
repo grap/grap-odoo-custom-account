@@ -127,16 +127,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record model="account.account.template" id="pcg_6581">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
         <field name="code">6581</field>
-        <field name="name">Fond de caisse (D)</field>
+        <field name="name">Charges diverses de gestion courante</field>
         <field name="user_type_id" ref="account.data_account_type_expenses"/>
-    </record>
-
-    <!-- Creation d'un sous-compte 6582 -->
-    <record id="grap_l10n_fr_6582" model="account.account.template">
-      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-      <field name="code">6582</field>
-      <field name="name">Erreurs de caisse</field>
-      <field name="user_type_id" ref="account.data_account_type_expenses"/>
     </record>
 
     <!-- Renommage du compte 6071-->
