@@ -3,7 +3,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -18,8 +18,10 @@ class WizardAccountExport(models.TransientModel):
         default=lambda s: s._default_company_id(),
     )
 
-    account_export_id = fields.Many2one(
-        string="Account Export", comodel_name="account.export", readonly=True
+    export_type = fields.Selection(
+        related="company_id.export_type",
+        readonly=False,
+        required=True,
     )
 
     fiscal_year_id = fields.Many2one(
@@ -87,6 +89,10 @@ class WizardAccountExport(models.TransientModel):
         return self.env.company.fiscal_company_id.id
 
     @api.model
+    def _default_export_type(self):
+        return self.env.company.export_type
+
+    @api.model
     def _default_fiscal_year_id(self):
         dates = [
             x["date"]
@@ -118,15 +124,18 @@ class WizardAccountExport(models.TransientModel):
             )
             full_domain += [("state", "!=", "draft")]
 
-            # Filter by partner without export suffix
-            incorrect_partner_move_lines = selected_moves.mapped("line_ids").filtered(
-                lambda x: x.partner_id and x.partner_id.export_suffix is False
-            )
-            incorrect_partner_move_ids = incorrect_partner_move_lines.mapped(
-                "move_id"
-            ).ids
-            wizard.ignored_partner_move_qty = len(incorrect_partner_move_ids)
-            full_domain += [("id", "not in", incorrect_partner_move_ids)]
+            if wizard.company_id.fiscal_company_id.third_account_add_partner_suffix:
+                # Filter by partner without export suffix
+                incorrect_partner_move_lines = selected_moves.mapped(
+                    "line_ids"
+                ).filtered(
+                    lambda x: x.partner_id and x.partner_id.export_suffix is False
+                )
+                incorrect_partner_move_ids = incorrect_partner_move_lines.mapped(
+                    "move_id"
+                ).ids
+                wizard.ignored_partner_move_qty = len(incorrect_partner_move_ids)
+                full_domain += [("id", "not in", incorrect_partner_move_ids)]
 
             # Filter by tax code without export suffix
             incorrect_tax_move_lines = selected_moves.mapped("line_ids").filtered(
@@ -192,6 +201,8 @@ class WizardAccountExport(models.TransientModel):
             "description": self.description,
             "company_id": self.company_id.id,
             "export_date": fields.Datetime.now(),
+            "export_type": self.export_type,
+            "move_ids": [Command.link(x.id) for x in self.exported_move_ids],
         }
 
     def button_export(self):
@@ -200,13 +211,13 @@ class WizardAccountExport(models.TransientModel):
         if self.exported_move_qty == 0:
             raise ValidationError(_("No account move can be exported."))
         AccountExport = self.env["account.export"]
-        self.account_export_id = AccountExport.create(self._prepare_account_export())
-        self.account_export_id.export(self.exported_move_ids)
+        export = AccountExport.create(self._prepare_account_export())
+        export.export_xlsx()
         return {
             "type": "ir.actions.act_window",
             "res_model": "account.export",
             "view_mode": "form",
             "view_type": "form",
-            "res_id": self.account_export_id.id,
+            "res_id": export.id,
             "views": [(False, "form")],
         }

@@ -139,7 +139,6 @@ class TestModule(TransactionCase):
     def test_04_search_journal_item_count(self):
         # Check first if partner doesn't requires export code
         partners = self.ResPartner.search([("journal_item_count", ">", 0)])
-        # import pdb; pdb.set_trace()
         self.assertNotIn(self.customer.id, partners.ids)
 
         self.AccountMove.create(

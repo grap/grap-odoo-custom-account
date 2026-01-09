@@ -27,6 +27,7 @@ class AccountMove(models.Model):
         comodel_name="account.export",
         copy=False,
         readonly=True,
+        tracking=True,
         help="Indicates whether the move has already been exported"
         " in an accounting Software. It is changed automatically.",
     )

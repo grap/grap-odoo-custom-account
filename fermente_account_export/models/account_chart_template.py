@@ -3,11 +3,23 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import models
+from odoo import fields, models
+
+from . import export_type_format
 
 
 class AccountChartTemplate(models.Model):
     _inherit = "account.chart.template"
+
+    export_type = fields.Selection(
+        selection=export_type_format._SELECTION_EXPORT_TYPE,
+    )
+
+    max_size_account_code = fields.Integer()
+
+    third_account_add_company_suffix = fields.Boolean(string="Add Company Suffix")
+
+    third_account_add_partner_suffix = fields.Boolean(string="Add Partner Suffix")
 
     def _get_account_vals(self, company, account_template, code_acc, tax_template_ref):
         res = super()._get_account_vals(

@@ -42,13 +42,27 @@ _field_renames = [
         "ebp_code_no_tax",
         "export_suffix_on_tax_default",
     ),
+    # account.export
     (
         "account.export",
         "account_export",
         "date",
         "export_date",
     ),
+    (
+        "account.export",
+        "account_export",
+        "data_moves",
+        "data_move_lines",
+    ),
+    (
+        "account.export",
+        "account_export",
+        "file_name_moves",
+        "file_name_move_lines",
+    ),
 ]
+
 
 _model_renames = [
     ("ebp.export", "account.export"),
