@@ -56,6 +56,12 @@ def _get_formated_moves_data(export, moves_data):
             if line.partner_id:
                 line_description += f" ({line.partner_id.name})"
 
+            # In case we are in a 'normal' company (out of CAE)
+            # The Mache want also the code of the company in the
+            # analytic column. (as a constant)
+            if move.company_id.fiscal_type == "normal":
+                analytic_code = move.company_id.code
+
             value = {
                 "is_odd": is_odd,
                 "move_number": move.name,
