@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =========================
 Fermente - Account Export
 =========================
@@ -13,7 +17,7 @@ Fermente - Account Export
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fgrap--odoo--custom--account-lightgray.png?logo=github
@@ -35,9 +39,20 @@ and balance to Accounting Softwares like EPB.
 Configuration
 =============
 
-- Go to "Settings > Technical > System Parameters"
-- set the max size exportable in your accounting software in the key
-  ``fermente_account_export.parameter_max_size_account_code``
+- for each fiscal company:
+- Go to "Accounting > Configuration > Settings"
+- adapt the configuration, depending on your accounting software and
+  your accounting tastes.
+
+..figure :: ../static/description/res_config_setting_form.png
+
+The default configuration for a new fiscal company can be configured in
+the Chart Template:
+
+- Go to "Accounting > Configuration > Templates > Chart of Account
+  Templates"
+
+..figure :: ../static/description/account_chart_template_form.png
 
 Bug Tracker
 ===========

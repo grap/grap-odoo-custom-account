@@ -27,6 +27,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
                 <group string="Settings">
                     <field name="company_id"/>
+                    <field name="export_type"/>
                     <field name="fiscal_year_id"/>
                     <field name="selected_move_qty" force_save="1"/>
                     <field name="exported_move_qty" attrs="{'invisible': [('fiscal_year_id', '=', False)]}" force_save="1"/>

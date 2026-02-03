@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="report" model="ir.actions.report">
+        <field name="model">account.export</field>
+        <field name="name">Account Export XLSX</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">report_account_export_xlsx.report</field>
+        <field name="report_file">report_account_export_xlsx.report</field>
+        <field name="attachment" eval="False"/>
+    </record>
+</odoo>
+
+<!--         <field name="attachment">object.file_name</field>
+ -->

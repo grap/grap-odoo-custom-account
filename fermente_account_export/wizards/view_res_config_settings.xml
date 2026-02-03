@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_res_config_settings_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field
+                name="inherit_id"
+                ref="account.res_config_settings_view_form"
+            />
+        <field name="arch" type="xml">
+
+            <div data-key="account" position="inside">
+                <h2>Export Settings</h2>
+                <div
+                    class="row mt16 o_settings_container"
+                    name="export_setting_container"
+                >
+
+                    <div class="col-12 col-lg-6 o_setting_box" id="export_type">
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <label for="export_type"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div>
+                                <field name="export_type"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box" id="max_size_account_code">
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <label for="max_size_account_code"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                               Maximum size of account codes allowed by the accounting software that receives the exported account moves.
+                            </div>
+                            <field name="max_size_account_code"/>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-lg-6 o_setting_box" id="third_account_add_company_suffix_setting">
+                        <div class="o_setting_left_pane">
+                            <field name="third_account_add_company_suffix"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="third_account_add_company_suffix"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                               If checked the third party account will be suffixed by the company code, when exported.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box" id="third_account_add_partner_suffix_setting">
+                        <div class="o_setting_left_pane">
+                            <field name="third_account_add_partner_suffix"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="third_account_add_partner_suffix"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                               If checked the third party account will be suffixed by a partner suffix, when exported.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </field>
+    </record>
+
+</odoo>

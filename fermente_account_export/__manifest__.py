@@ -13,20 +13,24 @@
     "depends": [
         # Odoo
         "account",
+        "mail",
         # OCA
         "account_fiscal_year",
+        "report_xlsx",
         "res_company_code",
+        "account_usability",
         # GRAP
         "fiscal_company_base",
+        "account_accountant_simple_settings",
     ],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
         "security/ir.model.access.csv",
         "security/ir_rule.xml",
-        "data/ir_config_parameter.xml",
         "views/menu.xml",
         "views/view_account_account.xml",
-        # "views/view_account_account_template.xml",
+        "views/view_account_account_template.xml",
+        "views/view_account_chart_template.xml",
         "views/view_account_journal.xml",
         "views/view_account_move.xml",
         "views/view_account_tax.xml",
@@ -35,7 +39,9 @@
         "views/view_res_partner.xml",
         "wizards/view_wizard_res_partner_add_export_code.xml",
         "wizards/view_wizard_account_export.xml",
-        "wizards/view_wizard_account_unexport.xml",
+        "wizards/view_res_config_settings.xml",
+        "wizards/view_account_config_settings.xml",
+        "reports/report_account_export_xlsx.xml",
     ],
     "demo": [
         "demo/res_partner.xml",

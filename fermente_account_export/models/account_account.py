@@ -13,14 +13,14 @@ class AccountAccount(models.Model):
 
     export_suffix_on_tax_required = fields.Boolean(
         string="Export according to Taxes",
-        tracking=200,
+        tracking=True,
         help="If checked, when you export moves from this account,"
         " it will create one account for each Tax Code",
     )
 
     export_suffix_on_tax_default = fields.Char(
         string="Tax Suffix if undefined",
-        tracking=201,
+        tracking=True,
         help="When exporting Entries, this suffix will be"
         " appended to the Account Number to make it a new Account,"
         " if 'Export according to Taxes' is checked, and"
@@ -54,22 +54,24 @@ class AccountAccount(models.Model):
 
     def _get_account_code(self, line):
         self.ensure_one()
+        fiscal_company = self.company_id.fiscal_company_id
 
         # Base Account Code
         result = self.code
 
         if self.account_type in ["asset_receivable", "liability_payable"]:
-            # Company Suffix
-            if line and line.company_id.fiscal_type in ["fiscal_child"]:
-                result += self.company_id.code
-            elif self.company_id.fiscal_type in ["fiscal_child", "fiscal_mother"]:
-                result += "YYY"
-
-            # Partner Suffix
-            if line and line.partner_id:
-                result += line.partner_id.export_suffix
-            else:
-                result += "AAAA"
+            if fiscal_company.third_account_add_company_suffix:
+                # Company Suffix
+                if line and line.company_id.fiscal_type in ["fiscal_child"]:
+                    result += self.company_id.code
+                elif self.company_id.fiscal_type in ["fiscal_child", "fiscal_mother"]:
+                    result += "YYY"
+            if fiscal_company.third_account_add_partner_suffix:
+                # Partner Suffix
+                if line and line.partner_id:
+                    result += line.partner_id.export_suffix
+                else:
+                    result += "AAAA"
 
         # Tax Suffix
         if self.export_suffix_on_tax_required:
@@ -111,20 +113,16 @@ class AccountAccount(models.Model):
             else:
                 result += "T" * (len(self.export_suffix_on_tax_default or "1"))
 
-        Config = self.env["ir.config_parameter"].sudo()
-        max_size = int(
-            Config.get_param(
-                "fermente_account_export.parameter_max_size_account_code", 10
-            )
-        )
-
         message_error = False
-        if len(result) > max_size:
+        if (
+            fiscal_company.max_size_account_code
+            and len(result) > fiscal_company.max_size_account_code
+        ):
             message_error = _(
                 "Account code '%(account_code)s' is too long to be exported"
                 " to the accounting software. The maximum length is %(max_size)s.",
                 account_code=result,
-                max_size=max_size,
+                max_size=fiscal_company.max_size_account_code,
             )
 
             if line:
