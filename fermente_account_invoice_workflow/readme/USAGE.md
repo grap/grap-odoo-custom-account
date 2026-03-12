@@ -5,4 +5,4 @@
 In that case, the number of the invoice will be displayed as a
 notification.
 
-:.. figure:: ../static/description/view_account_invoice_tree.png
+:.. figure:: ../static/description/view_account_invoice_form.png

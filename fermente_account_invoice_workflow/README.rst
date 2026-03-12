@@ -2,9 +2,9 @@
    :target: https://odoo-community.org/get-involved?utm_source=readme
    :alt: Odoo Community Association
 
-==============================
-GRAP - Custom Invoice workflow
-==============================
+==================================
+Fermente - Custom Invoice workflow
+==================================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -26,15 +26,15 @@ GRAP - Custom Invoice workflow
 
 |badge1| |badge2| |badge3|
 
-This module extends the functionality of account invoices to changes
-default behaviour that doesn't fit with GRAP needs.
+This module extends the functionality of account moves to changes
+default behaviour that doesn't fit with GRAP (Fermente!) needs.
 
-Add a 'Verified' state on ``account.invoice`` (supplier and supplier
-refund invoices)
+Add a 'Verified' state on ``account.move`` (supplier and supplier refund
+invoices)
 
-- Only the users member of 'Accounting & Finance / Billing Manager' can
-  validate supplier account invoices
-- Member of 'Accounting & Finance / Billing' can only verify invoices.
+- Only the users member of 'Accounting / Accountant' can validate
+  supplier account invoices
+- Member of 'Accounting / Billing' can only verify invoices.
 
 Add a constraint, when verifying supplier invoices.
 
@@ -53,7 +53,7 @@ Usage
 In that case, the number of the invoice will be displayed as a
 notification.
 
-:.. figure:: https://raw.githubusercontent.com/grap/grap-odoo-custom-account/16.0/fermente_account_invoice_workflow/static/description/view_account_invoice_tree.png
+:.. figure:: https://raw.githubusercontent.com/grap/grap-odoo-custom-account/16.0/fermente_account_invoice_workflow/static/description/view_account_invoice_form.png
 
 Bug Tracker
 ===========
@@ -76,8 +76,9 @@ Authors
 Contributors
 ------------
 
-- Sylvain LE GAL (https://www.twitter.com/legalsylvain)
+- Sylvain LE GAL
 - Julien WESTE
+- Quentin DUPONT
 
 Maintainers
 -----------

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2013-Today: GRAP (<http://www.grap.coop/>)
+@author: Sylvain LE GAL
+@author: Julien WESTE
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_move_tree_supplier" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <button name="action_invoice_verify" states="draft" string="Verify" type="object"/>
+                <button name="action_post" states="draft,verified" type="object"
+                    groups="account.group_account_manager" string="Validate"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_move_form_supplier" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,verified,open,paid</attribute>
+            </field>
+            <!-- Double buttons in native code.. -->
+            <xpath
+                expr="//button[@name='action_post'][1]"
+                position="attributes">
+                <attribute name="groups">account.group_account_manager</attribute>
+                <attribute name="states">draft,verified</attribute>
+            </xpath>
+            <xpath
+                expr="//button[@name='action_post'][2]"
+                position="attributes">
+                <attribute name="groups">account.group_account_manager</attribute>
+                <attribute name="states">draft,verified</attribute>
+            </xpath>
+            <button name="button_draft" position="attributes">
+                <attribute name="states">verified,cancel</attribute>
+            </button>
+            <button name="action_post" position="before">
+                <button name="action_invoice_verify" states="draft"
+                    class="oe_highlight" string="Verify Bill" type="object"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "GRAP - Custom Invoice workflow",
+    "name": "Fermente - Custom Invoice workflow",
     "version": "16.0.1.0.0",
     "category": "Custom",
     "author": "GRAP",
@@ -14,10 +14,7 @@
         # OCA
         "account_invoice_supplier_ref_unique",
         "web_notify",
-        # GRAP
-        "intercompany_trade_account",
     ],
-    "data": ["views/view_account_invoice.xml"],
-    "demo": ["demo/res_groups.xml"],
+    "data": ["views/view_account_move.xml"],
     "installable": True,
 }
