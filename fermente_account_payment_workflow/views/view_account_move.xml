@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2020-Today: GRAP (<http://www.grap.coop/>)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- JOURNAL ENTRIES not customer invoices -->
+    <!-- Search -->
+    <record id="view_account_move_search" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter"/>
+        <field name="arch" type="xml">
+            <filter name="posted" position="after">
+                <filter name="payment_to_check" string="Payment To Check"
+                    groups="account.group_account_manager"
+                    domain="[('is_payment_checked', '=', False)]"/>
+            </filter>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_account_move_form_customer" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                <field name="journal_type" invisible="1"/>
+                <field name="is_payment_checked" widget="boolean_toggle"
+                    groups="account.group_account_manager"
+                    attrs="{'invisible': ['|', '|', ('journal_type', '!=', 'bank'), ('state', '!=', 'posted'), ('move_type', '!=', 'entry')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree -->
+    <record id="view_account_move_tree_customer" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="journal_type" invisible="1"/>
+                <field name="move_type" invisible="1"/>
+                <field name="is_payment_checked" optional="show"
+                    widget="boolean_toggle"
+                    groups="account.group_account_manager"
+                    attrs="{'invisible': ['|', '|', ('journal_type', '!=', 'bank'), ('state', '!=', 'posted'), ('move_type', '!=', 'entry')]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
