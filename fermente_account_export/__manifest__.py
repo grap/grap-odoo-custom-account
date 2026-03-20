@@ -21,7 +21,6 @@
         "account_usability",
         # GRAP
         "fiscal_company_base",
-        "account_accountant_simple_settings",
     ],
     "external_dependencies": {"python": ["unidecode", "openupgradelib"]},
     "data": [
@@ -40,7 +39,6 @@
         "wizards/view_wizard_res_partner_add_export_code.xml",
         "wizards/view_wizard_account_export.xml",
         "wizards/view_res_config_settings.xml",
-        "wizards/view_account_config_settings.xml",
         "reports/report_account_export_xlsx.xml",
     ],
     "demo": [
