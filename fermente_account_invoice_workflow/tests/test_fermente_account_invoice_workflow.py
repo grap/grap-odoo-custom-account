@@ -8,16 +8,17 @@ from odoo.tests.common import TransactionCase
 
 
 class TestFermenteAccountInvoiceWorkflow(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.ResPartner = self.env["res.partner"]
-        self.AccountAccount = self.env["account.account"]
-        self.AccountJournal = self.env["account.journal"]
-        self.AccountMove = self.env["account.move"]
-        self.main_company = self.env.ref("base.main_company")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.ResPartner = cls.env["res.partner"]
+        cls.AccountAccount = cls.env["account.account"]
+        cls.AccountJournal = cls.env["account.journal"]
+        cls.AccountMove = cls.env["account.move"]
+        cls.main_company = cls.env.ref("base.main_company")
         # Create user
-        group_account_user = self.env.ref("account.group_account_user").ids
-        self.user_demo_account_user = self.env["res.users"].create(
+        group_account_user = cls.env.ref("account.group_account_user").ids
+        cls.user_demo_account_user = cls.env["res.users"].create(
             {
                 "name": "John",
                 "login": "test1",
@@ -26,9 +27,9 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
             }
         )
 
-        self.vendor = self.env.ref("base.res_partner_12")
+        cls.vendor = cls.env.ref("base.res_partner_12")
 
-        self.account_expenses = self.AccountAccount.create(
+        cls.account_expenses = cls.AccountAccount.create(
             {
                 "code": "600001",
                 "name": "Expenses (test)",
@@ -36,7 +37,7 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
             }
         )
 
-        self.account_payable = self.AccountAccount.create(
+        cls.account_payable = cls.AccountAccount.create(
             {
                 "code": "211001",
                 "name": "Account Payable (test)",
@@ -44,7 +45,7 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
             }
         )
 
-        self.journal_purchase = self.AccountJournal.create(
+        cls.journal_purchase = cls.AccountJournal.create(
             {
                 "name": "Vendors Bills TEST",
                 "code": "HA-BILL",
@@ -53,24 +54,25 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
         )
 
         # MOVE 1 missing fields
-        self.move1 = self.AccountMove.create(
+        cls.move1 = cls.AccountMove.create(
             {
-                "journal_id": self.journal_purchase.id,
-                "partner_id": self.vendor.id,
+                "journal_id": cls.journal_purchase.id,
+                "partner_id": cls.vendor.id,
+                "move_type": "in_invoice",
                 "line_ids": [
                     Command.create(
                         {
                             "name": "line 1",
-                            "partner_id": self.vendor.id,
-                            "account_id": self.account_expenses.id,
+                            "partner_id": cls.vendor.id,
+                            "account_id": cls.account_expenses.id,
                             "debit": 100,
                         },
                     ),
                     Command.create(
                         {
                             "name": "line 2",
-                            "partner_id": self.vendor.id,
-                            "account_id": self.account_payable.id,
+                            "partner_id": cls.vendor.id,
+                            "account_id": cls.account_payable.id,
                             "credit": 100,
                         },
                     ),
@@ -79,10 +81,11 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
         )
 
         # MOVE 2 no missing fields
-        self.move2 = self.AccountMove.create(
+        cls.move2 = cls.AccountMove.create(
             {
-                "journal_id": self.journal_purchase.id,
-                "partner_id": self.vendor.id,
+                "journal_id": cls.journal_purchase.id,
+                "move_type": "in_invoice",
+                "partner_id": cls.vendor.id,
                 "invoice_date": "1789-07-14",
                 "invoice_date_due": "1789-07-14",
                 "supplier_invoice_number": "OSS-double-117",
@@ -90,16 +93,16 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
                     Command.create(
                         {
                             "name": "line 1",
-                            "partner_id": self.vendor.id,
-                            "account_id": self.account_expenses.id,
+                            "partner_id": cls.vendor.id,
+                            "account_id": cls.account_expenses.id,
                             "debit": 117,
                         },
                     ),
                     Command.create(
                         {
                             "name": "line 2",
-                            "partner_id": self.vendor.id,
-                            "account_id": self.account_payable.id,
+                            "partner_id": cls.vendor.id,
+                            "account_id": cls.account_payable.id,
                             "credit": 117,
                         },
                     ),
@@ -109,13 +112,13 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
 
     def test_01_account_move_verify_missing_fields(self):
         with self.assertRaises(UserError):
-            self.move1.action_invoice_verify()
+            self.move1.action_move_verify()
         self.move1.invoice_date = "1789-07-14"
         self.move1.invoice_date_due = "1789-07-14"
         self.move1.supplier_invoice_number = "OSS117"
 
         # It should pass now
-        self.move1.action_invoice_verify()
+        self.move1.action_move_verify()
         self.assertEqual(self.move1.state, "verified")
 
         self.move1.button_draft()

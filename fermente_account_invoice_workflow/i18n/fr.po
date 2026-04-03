@@ -38,7 +38,7 @@ msgstr "Pièce comptable"
 #. odoo-python
 #: code:addons/fermente_account_invoice_workflow/models/account_move.py:0
 #, python-format
-msgid "New Invoice Number: %(name)s"
+msgid "New Move Number: %(name)s"
 msgstr "Nouveau numéro de facture : %(name)s"
 
 #. module: fermente_account_invoice_workflow
