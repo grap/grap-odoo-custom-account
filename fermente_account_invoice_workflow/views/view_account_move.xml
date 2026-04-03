@@ -9,10 +9,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="view_account_move_tree_supplier" model="ir.ui.view">
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_in_invoice_tree"/>
+        <field name="inherit_id" ref="account.view_in_move_tree"/>
         <field name="arch" type="xml">
             <field name="state" position="after">
-                <button name="action_invoice_verify" states="draft" string="Verify" type="object"/>
+                <button name="action_move_verify" states="draft" string="Verify" type="object"/>
                 <button name="action_post" states="draft,verified" type="object"
                     groups="account.group_account_manager" string="Validate"/>
             </field>
@@ -43,7 +43,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <attribute name="states">verified,cancel</attribute>
             </button>
             <button name="action_post" position="before">
-                <button name="action_invoice_verify" states="draft"
+                <button name="action_move_verify" states="draft"
                     class="oe_highlight" string="Verify Bill" type="object"/>
             </button>
         </field>

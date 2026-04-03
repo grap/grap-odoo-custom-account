@@ -20,66 +20,66 @@ class AccountMove(models.Model):
         },
     )
 
-    def action_invoice_verify(self):
+    def action_move_verify(self):
         self.ensure_one()
         self._check_supplier_information()
-        draft_invoices = self.filtered(lambda x: x.state == "draft")
-        if draft_invoices:
-            draft_invoices.write({"state": "verified"})
+        draft_moves = self.filtered(lambda x: x.state == "draft")
+        if draft_moves:
+            draft_moves.write({"state": "verified"})
         return True
 
     def action_post(self):
-        purchase_invoices = self.filtered(lambda x: x.journal_id.type == "purchase")
-        if purchase_invoices:
+        purchase_moves = self.filtered(lambda x: x.journal_id.type == "purchase")
+        if purchase_moves:
             # Check access right
-            purchase_invoices._check_supplier_validation_access()
+            purchase_moves._check_supplier_validation_access()
             # Check fields
-            purchase_invoices._check_supplier_information()
+            purchase_moves._check_supplier_information()
 
-        # Reset to draft verified invoices to avoid error in super
-        # of action_invoice_open
-        verified_invoices = self.filtered(lambda x: x.state == "verified").with_context(
+        # Reset to draft verified moves to avoid error in super
+        # of action_move_open
+        verified_moves = self.filtered(lambda x: x.state == "verified").with_context(
             tracking_disable=True
         )
-        verified_invoices.write({"state": "draft"})
+        verified_moves.write({"state": "draft"})
 
         res = super().action_post()
 
-        for invoice in self:
+        for move in self:
             self.env.user.notify_info(
-                message=_("New Invoice Number: %(name)s") % {"name": invoice.name}
+                message=_("New move Number: %(name)s") % {"name": move.name}
             )
 
         return res
 
     def button_draft(self):
-        verified_invoices = self.filtered(lambda x: x.state == "verified")
-        verified_invoices.write({"state": "draft"})
-        cancel_invoices = self - verified_invoices
-        return super(AccountMove, cancel_invoices).button_draft()
+        verified_moves = self.filtered(lambda x: x.state == "verified")
+        verified_moves.write({"state": "draft"})
+        cancel_moves = self - verified_moves
+        return super(AccountMove, cancel_moves).button_draft()
 
     def _check_supplier_validation_access(self):
         if not self.env.user.has_group("account.group_account_manager"):
             raise UserError(
                 _(
-                    "You can not confirm supplier invoices because you're not "
+                    "You can not confirm supplier moves because you're not "
                     "a member of the group 'Accounting / Accountant'"
                 )
             )
 
     def _check_supplier_information(self):
-        for invoice in self:
+        for move in self:
             message = []
-            if not invoice.invoice_date:
+            if not move.move_date:
                 message.append(_("Bill Date"))
-            if not invoice.invoice_date_due:
+            if not move.move_date_due:
                 message.append(_("Due Date"))
-            if not invoice.supplier_invoice_number:
-                message.append(_("Vendor Invoice Number"))
+            if not move.supplier_move_number:
+                message.append(_("Vendor move Number"))
             if message:
                 raise UserError(
                     _(
-                        "Verify a supplier invoice requires to set the"
+                        "Verify a supplier move requires to set the"
                         " following fields :\n\n - %(message)s"
                     )
                     % {"message": ("\n - ".join(message))}
