@@ -56,7 +56,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     />
                 <!-- One for Customer Invoice -->
                 <button name="action_post"
-                    class="oe_highlight" string="Post" type="object"
+                    class="oe_highlight" string="Validate" type="object"
                     attrs="{'invisible':['|', ('state', 'not in', ['draft','verified']), ('move_type', 'in', ['in_invoice', 'in_refund'])]}"
                     />
             </button>

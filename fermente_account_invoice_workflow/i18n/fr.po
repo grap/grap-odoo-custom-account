@@ -49,6 +49,7 @@ msgid "Status"
 msgstr "Statut"
 
 #. module: fermente_account_invoice_workflow
+#: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_form_supplier
 #: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_tree_supplier
 msgid "Validate"
 msgstr "Valider"
