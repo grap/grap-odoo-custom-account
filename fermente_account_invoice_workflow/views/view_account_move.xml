@@ -28,16 +28,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="state" position="attributes">
                 <attribute name="statusbar_visible">draft,verified,open,paid</attribute>
             </field>
-            <!-- Double buttons in native code.. -->
+            <!-- Double buttons in native code.. Hide them
+                 to recreate one with right access -->
             <xpath
                 expr="//button[@name='action_post'][1]"
                 position="attributes">
-                <attribute name="states">draft,verified</attribute>
+                <attribute name="invisible">1</attribute>
             </xpath>
             <xpath
                 expr="//button[@name='action_post'][2]"
                 position="attributes">
-                <attribute name="states">draft,verified</attribute>
+                <attribute name="invisible">1</attribute>
             </xpath>
             <button name="button_draft" position="attributes">
                 <attribute name="states">verified,cancel</attribute>
@@ -46,6 +47,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <button name="action_move_verify"
                     class="oe_highlight" string="Verify Bill" type="object"
                     attrs="{'invisible':['|',('state', 'not in', ['draft']), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    />
+                <!-- One for Supplier Invoice, hiden for non manager -->
+                <button name="action_post"
+                    groups="account.group_account_manager"
+                    class="oe_highlight" string="Post" type="object"
+                    attrs="{'invisible':['|', ('state', 'not in', ['draft','verified']), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    />
+                <!-- One for Customer Invoice -->
+                <button name="action_post"
+                    class="oe_highlight" string="Post" type="object"
+                    attrs="{'invisible':['|', ('state', 'not in', ['draft','verified']), ('move_type', 'in', ['in_invoice', 'in_refund'])]}"
                     />
             </button>
         </field>
