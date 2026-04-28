@@ -26,7 +26,6 @@ class TestModule(TransactionCase):
 
     # Test Section
     def test_01_create_new_chart_of_account(self):
-
         # Create a new company
         company = self.ResCompany.create(
             {"name": "Test Company (GRAP - L10n_fr", "currency_id": self.euro.id}
@@ -37,7 +36,7 @@ class TestModule(TransactionCase):
         # Check that custom fields are correctly applied on expense accounts
         account_601 = self._get_account(company, "601")
         self.assertTrue(account_601.ebp_export_tax)
-        self.assertEquals(account_601.ebp_code_no_tax, "9")
+        self.assertEqual(account_601.ebp_code_no_tax, "9")
 
         # Check that custom fields are correctly applied on income accounts
         account_707 = self._get_account(company, "707")

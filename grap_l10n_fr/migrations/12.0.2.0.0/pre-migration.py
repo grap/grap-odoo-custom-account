@@ -23,7 +23,6 @@ _TAX_MAPPING = {
 
 @openupgrade.migrate(use_env=True)
 def migrate(env, version):
-
     for old_value, new_value in _TAX_MAPPING.items():
         openupgrade.logged_query(
             env.cr,
