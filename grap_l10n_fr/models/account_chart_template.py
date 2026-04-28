@@ -24,7 +24,7 @@ class AccountChartTemplate(models.Model):
         else:
             # fallback to company of current user, most likely __system__
             # (won't work well for multi-company)
-            company = self.env.user.company_id
+            company = self.env.company
         # </EndCopy>
 
         company.account_sale_tax_id = False

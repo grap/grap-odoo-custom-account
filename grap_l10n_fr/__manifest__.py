@@ -17,7 +17,7 @@
         "account_fiscal_position_type",
         "account_product_fiscal_classification",
         # GRAP
-        "grap_account_export_ebp",
+        "fermente_account_export",
     ],
     "data": [
         "data/account_account_template.xml",

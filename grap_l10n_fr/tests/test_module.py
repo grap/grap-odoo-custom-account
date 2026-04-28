@@ -30,18 +30,18 @@ class TestModule(TransactionCase):
         company = self.ResCompany.create(
             {"name": "Test Company (GRAP - L10n_fr", "currency_id": self.euro.id}
         )
-        self.env.user.company_id = company.id
+        self.env.company = company.id
         self.french_chart_of_account.try_loading_for_current_company()
 
         # Check that custom fields are correctly applied on expense accounts
         account_601 = self._get_account(company, "601")
-        self.assertTrue(account_601.ebp_export_tax)
-        self.assertEqual(account_601.ebp_code_no_tax, "9")
+        self.assertTrue(account_601.export_suffix_on_tax_required)
+        self.assertEqual(account_601.export_suffix_on_tax_default, "9")
 
         # Check that custom fields are correctly applied on income accounts
         account_707 = self._get_account(company, "707")
-        self.assertTrue(account_707.ebp_export_tax)
-        self.assertFalse(account_707.ebp_code_no_tax)
+        self.assertTrue(account_707.export_suffix_on_tax_required)
+        self.assertFalse(account_707.export_suffix_on_tax_default)
 
         # Check that custom fields are correctly applied on taxes
         tax_sale_20 = self._get_tax(company, "20.0%")
