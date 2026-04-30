@@ -11,6 +11,10 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     _ALLOWED_FIELDS_WRITE_EXPORT = [
+        # Allow to send to partner after export
+        "is_move_sent",
+        # Allow to generate access token to public visualization
+        "access_token",
         # Allow to write a free text
         "narration",
         # Allow to mark a move as to check again
@@ -21,6 +25,7 @@ class AccountMove(models.Model):
         "needed_terms_dirty",
         # Allow to create/delete attachment
         "message_attachment_count",
+        "message_main_attachment_id",
     ]
 
     account_export_id = fields.Many2one(
