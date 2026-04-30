@@ -45,9 +45,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="active" eval="False" />
         </record>
 
-        <record id="l10n_fr.fp_tax_template_intraeub2b_ha_specifique_acq" model="account.fiscal.position.tax.template">
-            <field name="active" eval="False" />
-        </record>
 
    <!-- =======================================================================
     Export International
