@@ -100,6 +100,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <!-- TVA Vente Exo  (Consumable) Apply same naming as in l10n_fr_oca -->
+    <record id="l10n_fr.tva_sale_good_0" model="account.tax.template">
+        <field name="name">TVA 0% exonéré</field>
+        <field name="tax_scope" eval="False" />
+    </record>
     <record id="l10n_fr.tva_sale_good_intra_0" model="account.tax.template">
         <field name="name">TVA VT 0% intracom</field>
         <field name="tax_scope" eval="False" />
@@ -108,6 +112,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="l10n_fr.tva_sale_good_export_0" model="account.tax.template">
         <field name="name">TVA VT 0% extracom</field>
         <field name="tax_scope" eval="False" />
+    </record>
+    <!-- TVA Vente Immo  (Consumable) disable for the time being -->
+    <record id="l10n_fr.tva_imm_normale" model="account.tax.template">
+        <field name="active" eval="False"/>
     </record>
 
 
