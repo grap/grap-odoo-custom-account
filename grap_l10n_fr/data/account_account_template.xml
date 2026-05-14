@@ -131,7 +131,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
           <field name="export_suffix_on_tax_default">9</field>
     </record>
 
-
     <!-- Renommage des comptes 609x00-->
     <record model="account.account.template" id="l10n_fr.pcg_6091">
         <field name="name">RRR sur achats de matières premières (et fournitures)</field>
