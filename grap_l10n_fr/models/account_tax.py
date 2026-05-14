@@ -31,7 +31,8 @@ class AccountTax(models.Model):
         self.tax_group_id = self._get_tax_group_by_amount(self.amount).id
         return res
 
-    @api.model
-    def create(self, vals):
-        vals["tax_group_id"] = self._get_tax_group_by_amount(vals["amount"]).id
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            vals["tax_group_id"] = self._get_tax_group_by_amount(vals["amount"]).id
         return super().create(vals)
