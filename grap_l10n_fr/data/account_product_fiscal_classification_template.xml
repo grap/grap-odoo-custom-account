@@ -9,28 +9,28 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- B2C Fiscal Classification Template -->
     <record id="fiscal_classification_template_b2c_20" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 20,0% (Achat HT ; Vente TTC)</field>
+        <field name="name">TVA 20,0% (HA HT ; VT TTC)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_normale'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_normale_ttc'))]"/>
     </record>
 
     <record id="fiscal_classification_template_b2c_10" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 10,0% (Achat HT ; Vente TTC)</field>
+        <field name="name">TVA 10,0% (HA HT ; VT TTC)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_intermediaire'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_intermediaire_ttc'))]"/>
     </record>
 
     <record id="fiscal_classification_template_b2c_5_5" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 05,5% (Achat HT ; Vente TTC)</field>
+        <field name="name">TVA 05,5% (HA HT ; VT TTC)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_reduite'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_reduite_ttc'))]"/>
     </record>
 
     <record id="fiscal_classification_template_b2c_2_1" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 02,1% (Achat HT ; Vente TTC)</field>
+        <field name="name">TVA 02,1% (HA HT ; VT TTC)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_super_reduite'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_super_reduite_ttc'))]"/>
     </record>
@@ -38,28 +38,28 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- B2B Fiscal Classification Template -->
     <record id="fiscal_classification_template_bbc_20" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 20,0% (Achat HT ; Vente HT)</field>
+        <field name="name">TVA 20,0% (HA HT ; VT HT)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_normale'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_normale'))]"/>
     </record>
 
     <record id="fiscal_classification_template_b2b_10" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 10,0% (Achat HT ; Vente HT)</field>
+        <field name="name">TVA 10,0% (HA HT ; VT HT)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_intermediaire'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_intermediaire'))]"/>
     </record>
 
     <record id="fiscal_classification_template_b2b_5_5" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 05,5% (Achat HT ; Vente HT)</field>
+        <field name="name">TVA 05,5% (HA HT ; VT HT)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_reduite'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_reduite'))]"/>
     </record>
 
     <record id="fiscal_classification_template_b2b_2_1" model="account.product.fiscal.classification.template">
         <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
-        <field name="name">TVA 02,1% (Achat HT ; Vente HT)</field>
+        <field name="name">TVA 02,1% (HA HT ; VT HT)</field>
         <field name="purchase_tax_ids" eval="[(4, ref('l10n_fr.tva_acq_super_reduite'))]" />
         <field name="sale_tax_ids" eval="[(4, ref('l10n_fr.tva_super_reduite'))]"/>
     </record>
