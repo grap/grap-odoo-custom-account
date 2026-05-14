@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <!-- Removing default 6071 / 7071 account-->
      <record model="account.chart.template" id="l10n_fr.l10n_fr_pcg_chart_template">
-        <field name="property_account_expense_categ_id" />
-        <field name="property_account_income_categ_id" />
-        <field name="code_digits">3</field>
+         <field name="code_digits">3</field>
+         <field name="export_type">ebp</field>
+         <field name="third_account_add_company_suffix" eval="True" />
+         <field name="third_account_add_partner_suffix" eval="True" />
+         <!-- Removing default 6071 / 7071 accounts-->
+         <field name="property_account_expense_categ_id" />
+         <field name="property_account_income_categ_id" />
+         <!-- Removing other weird default accounts-->
+         <field name="account_journal_early_pay_discount_loss_account_id" />
+         <field name="account_journal_early_pay_discount_gain_account_id" />
     </record>
 
 </odoo>
