@@ -81,6 +81,10 @@ class AccountMove(models.Model):
     def _check_supplier_information(self):
         self.ensure_one()
         message = []
+        if "expense_sheet_id" in self._fields and self.expense_sheet_id:
+            # Do not check fields, if the account move
+            # come from hr_expense
+            return
         if not self.invoice_date:
             message.append(_("Bill Date"))
         if not self.invoice_date_due:
