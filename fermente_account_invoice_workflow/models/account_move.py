@@ -85,6 +85,10 @@ class AccountMove(models.Model):
             # Do not check fields, if the account move
             # come from hr_expense
             return
+        if self.env.context.get("chart_template_create_demo_data"):
+            # Prevent to raise an error when demo data are created
+            # without all required fields
+            return
         if not self.invoice_date:
             message.append(_("Bill Date"))
         if not self.invoice_date_due:
