@@ -49,9 +49,15 @@ class AccountMove(models.Model):
 
         res = super().action_post()
 
-        self.env.user.notify_info(
-            message=_("New Move Number: %(name)s") % {"name": self.name}
-        )
+        if len(self) == 1:
+            self.env.user.notify_info(
+                message=_("New Account Move: %(name)s") % {"name": self.name}
+            )
+        else:
+            self.env.user.notify_info(
+                message=_("%(move_qty)s New Account Moves: %(names)s")
+                % {"names": ",".join(self.mapped("name")), "move_qty": len(self)}
+            )
 
         return res
 
