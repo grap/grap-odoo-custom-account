@@ -33,7 +33,7 @@ class AccountExport(models.Model):
 
     export_date = fields.Datetime(required=True, readonly=True)
 
-    name = fields.Char(compute="_compute_name", store=True, readonly=True)
+    name = fields.Char(compute="_compute_name", store=True)
 
     description = fields.Text(
         readonly=True,
@@ -53,7 +53,7 @@ class AccountExport(models.Model):
 
     data = fields.Binary(string="Main file", readonly=True, attachment=True)
 
-    file_name = fields.Char(compute="_compute_file_names")
+    file_name = fields.Char(compute="_compute_file_names", store=True)
 
     export_type = fields.Selection(
         selection=export_type_format._SELECTION_EXPORT_TYPE, required=True
@@ -70,6 +70,7 @@ class AccountExport(models.Model):
         for export in self:
             export.move_qty = len(export.move_ids)
 
+    @api.depends("name", "export_date")
     def _compute_file_names(self):
         for export in self:
             export.file_name = (
