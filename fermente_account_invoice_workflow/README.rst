@@ -36,7 +36,15 @@ invoices)
   supplier account invoices
 - Member of 'Accounting / Billing' can only verify invoices.
 
-Add a constraint, when verifying supplier invoices.
+Add a constraint, when verifying supplier invoices. check if the
+following fields are correctly set:
+
+- Bill Date (``invoice_date``)
+- Due Date (``invoice_date_due``)
+- Vendor Invoice Number (``supplier_invoice_number``)
+
+Note: This check is not done on account moves that are generated from
+``hr_expense``.
 
 **Table of contents**
 

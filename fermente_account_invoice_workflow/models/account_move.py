@@ -49,9 +49,15 @@ class AccountMove(models.Model):
 
         res = super().action_post()
 
-        self.env.user.notify_info(
-            message=_("New Move Number: %(name)s") % {"name": self.name}
-        )
+        if len(self) == 1:
+            self.env.user.notify_info(
+                message=_("New Account Move: %(name)s") % {"name": self.name}
+            )
+        else:
+            self.env.user.notify_info(
+                message=_("%(move_qty)s New Account Moves: %(names)s")
+                % {"names": ",".join(self.mapped("name")), "move_qty": len(self)}
+            )
 
         return res
 
@@ -75,6 +81,14 @@ class AccountMove(models.Model):
     def _check_supplier_information(self):
         self.ensure_one()
         message = []
+        if "expense_sheet_id" in self._fields and self.expense_sheet_id:
+            # Do not check fields, if the account move
+            # come from hr_expense
+            return
+        if self.env.context.get("chart_template_create_demo_data"):
+            # Prevent to raise an error when demo data are created
+            # without all required fields
+            return
         if not self.invoice_date:
             message.append(_("Bill Date"))
         if not self.invoice_date_due:
