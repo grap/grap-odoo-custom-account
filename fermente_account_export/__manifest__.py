@@ -5,7 +5,7 @@
 {
     "name": "Fermente - Account Export",
     "summary": "Add a placeholder menu for Accounting Export",
-    "version": "16.0.2.0.2",
+    "version": "16.0.3.0.0",
     "category": "Fermente Custom",
     "license": "AGPL-3",
     "author": "GRAP",
