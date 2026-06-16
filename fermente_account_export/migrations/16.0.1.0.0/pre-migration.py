@@ -53,13 +53,13 @@ _field_renames = [
         "account.export",
         "account_export",
         "data_moves",
-        "data_move_lines",
+        "data",
     ),
     (
         "account.export",
         "account_export",
         "file_name_moves",
-        "file_name_move_lines",
+        "file_name",
     ),
 ]
 
@@ -78,3 +78,5 @@ def migrate(env, version):
     openupgrade.rename_models(env.cr, _model_renames)
     openupgrade.rename_tables(env.cr, _table_renames)
     openupgrade.rename_fields(env, _field_renames)
+    # force to recompute name with new syntax
+    openupgrade.logged_query(env.cr, "alter table account_export drop column name;")
