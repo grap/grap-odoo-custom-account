@@ -29,8 +29,8 @@ Fermente - Custom Invoice workflow
 This module extends the functionality of account moves to changes
 default behaviour that doesn't fit with GRAP (Fermente!) needs.
 
-Add a 'Verified' state on ``account.move`` (supplier and supplier refund
-invoices)
+Add a 'Verified' boolean on ``account.move`` (supplier and supplier
+refund invoices)
 
 - Only the users member of 'Accounting / Accountant' can validate
   supplier account invoices
@@ -62,6 +62,15 @@ In that case, the number of the invoice will be displayed as a
 notification.
 
 :.. figure:: https://raw.githubusercontent.com/grap/grap-odoo-custom-account/16.0/fermente_account_invoice_workflow/static/description/view_account_invoice_form.png
+
+Changelog
+=========
+
+16.0.2.0.0 (2026-06-15)
+-----------------------
+
+- Replace new state "Verified" by a Boolean ``is_verified`` in order to
+  avoid migration complication
 
 Bug Tracker
 ===========

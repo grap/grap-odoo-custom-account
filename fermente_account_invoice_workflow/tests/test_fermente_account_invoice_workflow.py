@@ -119,7 +119,7 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
 
         # It should pass now
         self.move1.action_move_verify()
-        self.assertEqual(self.move1.state, "verified")
+        self.assertEqual(self.move1.is_verified, True)
 
         self.move1.button_draft()
         self.assertEqual(self.move1.state, "draft")
