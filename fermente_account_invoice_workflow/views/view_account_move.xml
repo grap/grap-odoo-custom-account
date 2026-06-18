@@ -10,15 +10,18 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Supplier move TREE -->
     <record id="view_account_move_tree_supplier" model="ir.ui.view">
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_in_invoice_tree"/>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
         <field name="arch" type="xml">
-            <field name="state" position="after">
+            <field name="payment_state" position="before">
                 <button name="action_move_verify" string="Verify" type="object"
-                    attrs="{'invisible':['|',('state', 'not in', ['draft']), ('is_verified', '=', True)]}"/>
+                    attrs="{'invisible':['|',('state', 'not in', ['draft']), ('is_verified', '=', True)]}"
+                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
                 <button name="action_post" type="object"
                     attrs="{'invisible':['|',('state', 'not in', ['draft']), ('is_verified', '=', True)]}"
+                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"
                     groups="account.group_account_manager" string="Validate"/>
-                <field name="is_verified" widget="boolean_toggle" />
+                <field name="is_verified" string="Verified" widget="boolean_toggle" readonly="1" optional="show"
+                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
             </field>
         </field>
     </record>
@@ -29,13 +32,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
 
-            <div role="alert" position="after">
-                <field name="is_verified" invisible="1"/>
-                <div class="alert alert-warning" role="alert"
-                    attrs="{'invisible': [('is_verified', '=', False)]}">
-                    Verified invoice that will be confirmed by an accountant.
-                </div>
-            </div>
+            <xpath
+                expr="//widget[@name='web_ribbon']"
+                position="before">
+                <field name="is_verified" invisible="1" />
+                <widget name="web_ribbon" title="Verified" bg_color="bg-info" attrs="{'invisible': [('is_verified', '=', False)]}"/>
+            </xpath>
 
             <!-- Double buttons in native code.. Hide them
                  to recreate one with right access -->
@@ -54,7 +56,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </button>
             <button name="action_post" position="before">
                 <button name="action_move_unverify"
-                    class="oe_highlight" string="Unverify Bill" type="object"
+                    string="Unverify Bill" type="object"
                     attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', False), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
                     />
                 <button name="action_move_verify"
@@ -65,12 +67,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <button name="action_post"
                     groups="account.group_account_manager"
                     class="oe_highlight" string="Post" type="object"
-                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', True), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', False), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
                     />
                 <!-- One for Customer Invoice -->
                 <button name="action_post"
                     class="oe_highlight" string="Validate" type="object"
-                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', True), ('move_type', 'in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', False), ('move_type', 'in', ['in_invoice', 'in_refund'])]}"
                     />
             </button>
 
@@ -87,6 +89,26 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </xpath>
             <xpath
                 expr="//field[@name='supplier_invoice_number']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='fiscal_position_id']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_line_ids']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_vendor_bill_id']"
                 position="attributes">
                     <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
             </xpath>

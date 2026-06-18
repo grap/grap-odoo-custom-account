@@ -45,6 +45,8 @@ class AccountMove(models.Model):
                 lambda x: x.is_verified is True
             ).with_context(tracking_disable=True)
             verified_move.write({"state": "draft"})
+            # Set is_verified to True
+            supplier_move.write({"is_verified": True})
 
         res = super().action_post()
 
