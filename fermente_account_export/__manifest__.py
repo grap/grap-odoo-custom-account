@@ -19,6 +19,7 @@
         "report_xlsx",
         "res_company_code",
         "account_usability",
+        "account_invoice_supplierinfo_update",
         # GRAP
         "fiscal_company_base",
     ],
