@@ -10,15 +10,7 @@ from odoo.exceptions import UserError
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    state = fields.Selection(
-        selection_add=[
-            ("verified", "Verified"),
-            ("posted",),
-        ],
-        ondelete={
-            "verified": "set default",
-        },
-    )
+    is_verified = fields.Boolean(string="Verified Move")
 
     def _filtered_supplier_moves(self):
         return self.filtered(lambda x: x.move_type in ["in_invoice", "in_refund"])
@@ -29,7 +21,14 @@ class AccountMove(models.Model):
         )
         if draft_supplier_move:
             draft_supplier_move._check_supplier_information()
-            draft_supplier_move.write({"state": "verified"})
+            draft_supplier_move.write({"is_verified": True})
+
+    def action_move_unverify(self):
+        draft_supplier_move = self._filtered_supplier_moves().filtered(
+            lambda x: x.state == "draft"
+        )
+        if draft_supplier_move:
+            draft_supplier_move.write({"is_verified": False})
 
     def action_post(self):
         supplier_move = self._filtered_supplier_moves()
@@ -43,9 +42,11 @@ class AccountMove(models.Model):
             # Reset to draft verified moves to avoid error in super
             # of action_move_open
             verified_move = supplier_move.filtered(
-                lambda x: x.state == "verified"
+                lambda x: x.is_verified is True
             ).with_context(tracking_disable=True)
             verified_move.write({"state": "draft"})
+            # Set is_verified to True
+            supplier_move.write({"is_verified": True})
 
         res = super().action_post()
 
@@ -63,7 +64,7 @@ class AccountMove(models.Model):
 
     def button_draft(self):
         supplier_move = self._filtered_supplier_moves()
-        verified_moves = supplier_move.filtered(lambda x: x.state == "verified")
+        verified_moves = supplier_move.filtered(lambda x: x.is_verified is True)
         if verified_moves:
             verified_moves.write({"state": "draft"})
         cancel_moves = self - verified_moves

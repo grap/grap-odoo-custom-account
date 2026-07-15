@@ -10,12 +10,18 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Supplier move TREE -->
     <record id="view_account_move_tree_supplier" model="ir.ui.view">
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_in_invoice_tree"/>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
         <field name="arch" type="xml">
-            <field name="state" position="after">
-                <button name="action_move_verify" states="draft" string="Verify" type="object"/>
-                <button name="action_post" states="draft,verified" type="object"
+            <field name="payment_state" position="before">
+                <button name="action_move_verify" string="Verify" type="object"
+                    attrs="{'invisible':['|',('state', 'not in', ['draft']), ('is_verified', '=', True)]}"
+                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
+                <button name="action_post" type="object"
+                    attrs="{'invisible':['|',('state', 'not in', ['draft']), ('is_verified', '=', True)]}"
+                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"
                     groups="account.group_account_manager" string="Validate"/>
+                <field name="is_verified" string="Verified" widget="boolean_toggle" readonly="1" optional="show"
+                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
             </field>
         </field>
     </record>
@@ -25,9 +31,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
-            <field name="state" position="attributes">
-                <attribute name="statusbar_visible">draft,verified,open,paid</attribute>
-            </field>
+
+            <xpath
+                expr="//widget[@name='web_ribbon']"
+                position="before">
+                <field name="is_verified" invisible="1" />
+                <widget name="web_ribbon" title="Verified" bg_color="bg-info" attrs="{'invisible': [('is_verified', '=', False)]}"/>
+            </xpath>
+
             <!-- Double buttons in native code.. Hide them
                  to recreate one with right access -->
             <xpath
@@ -41,25 +52,67 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <attribute name="invisible">1</attribute>
             </xpath>
             <button name="button_draft" position="attributes">
-                <attribute name="states">verified,cancel</attribute>
+                <attribute name="states">cancel</attribute>
             </button>
             <button name="action_post" position="before">
+                <button name="action_move_unverify"
+                    string="Unverify Bill" type="object"
+                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', False), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    />
                 <button name="action_move_verify"
                     class="oe_highlight" string="Verify Bill" type="object"
-                    attrs="{'invisible':['|',('state', 'not in', ['draft']), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', True), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
                     />
                 <!-- One for Supplier Invoice, hiden for non manager -->
                 <button name="action_post"
                     groups="account.group_account_manager"
                     class="oe_highlight" string="Post" type="object"
-                    attrs="{'invisible':['|', ('state', 'not in', ['draft','verified']), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', False), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
                     />
                 <!-- One for Customer Invoice -->
                 <button name="action_post"
                     class="oe_highlight" string="Validate" type="object"
-                    attrs="{'invisible':['|', ('state', 'not in', ['draft','verified']), ('move_type', 'in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|', ('state', 'not in', ['draft']), ('move_type', 'in', ['in_invoice', 'in_refund'])]}"
                     />
             </button>
+
+            <!-- Set to readonly when it's verified -->
+            <xpath
+                expr="//field[@name='invoice_date']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_date_due']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='supplier_invoice_number']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='fiscal_position_id']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_line_ids']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_vendor_bill_id']"
+                position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_verified', '=', True)]}</attribute>
+            </xpath>
+
         </field>
     </record>
 
