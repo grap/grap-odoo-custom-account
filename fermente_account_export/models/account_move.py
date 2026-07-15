@@ -26,6 +26,8 @@ class AccountMove(models.Model):
         # Allow to create/delete attachment
         "message_attachment_count",
         "message_main_attachment_id",
+        # Allow account_invoice_supplierinfo_update
+        "supplierinfo_ok",
     ]
 
     account_export_id = fields.Many2one(
