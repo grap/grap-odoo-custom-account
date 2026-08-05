@@ -1,2 +1,8 @@
 # grap/odoo-addons-cae
 git+https://github.com/grap/odoo-addons-cae@16.0#subdirectory=setup/fiscal_company_base
+git+https://github.com/grap/odoo-addons-cae@16.0#subdirectory=setup/fiscal_company_account
+
+# grap/odoo-addons-intercompany-trade
+git+https://github.com/grap/odoo-addons-intercompany-trade@16.0#subdirectory=setup/intercompany_trade
+git+https://github.com/grap/odoo-addons-intercompany-trade@16.0#subdirectory=setup/intercompany_trade_product
+git+https://github.com/grap/odoo-addons-intercompany-trade@16.0#subdirectory=setup/intercompany_trade_account
