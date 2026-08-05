@@ -12,16 +12,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree"/>
         <field name="arch" type="xml">
-            <field name="payment_state" position="before">
-                <button name="action_move_verify" string="Verify" type="object"
-                    attrs="{'invisible':['|',('state', 'not in', ['draft']), ('is_verified', '=', True)]}"
+            <field name="state" position="after">
+                <!-- Allow all user to mark supplier invoice as verified in tree view -->
+                <field name="is_verified_toggle" string="Verified" widget="boolean_toggle"
+                    attrs="{'invisible':[('state', '!=', 'draft')]}"
                     invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
+                <!-- Allow accountant to post supplier invoice in tree view -->
                 <button name="action_post" type="object"
-                    attrs="{'invisible':['|',('state', 'not in', ['draft']), ('is_verified', '=', True)]}"
+                    attrs="{'invisible':[('state', '!=', 'draft')]}"
                     invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"
-                    groups="account.group_account_manager" string="Validate"/>
-                <field name="is_verified" string="Verified" widget="boolean_toggle" readonly="1" optional="show"
-                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
+                    groups="account.group_account_manager" string="Post"
+                    class="float-end btn-primary"/>
             </field>
         </field>
     </record>
@@ -36,10 +37,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 expr="//widget[@name='web_ribbon']"
                 position="before">
                 <field name="is_verified" invisible="1" />
-                <widget name="web_ribbon" title="Verified" bg_color="bg-info" attrs="{'invisible': [('is_verified', '=', False)]}"/>
+                <widget name="web_ribbon" title="Verified" bg_color="bg-info" attrs="{'invisible': ['|',
+                    ('state', '!=', 'draft'),
+                    ('is_verified', '=', False),
+                ]}"/>
             </xpath>
 
-            <!-- Double buttons in native code.. Hide them
+            <!-- Double buttons in native code. Hide them
                  to recreate one with right access -->
             <xpath
                 expr="//button[@name='action_post'][1]"
@@ -57,22 +61,36 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <button name="action_post" position="before">
                 <button name="action_move_unverify"
                     string="Unverify Bill" type="object"
-                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', False), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|', '|',
+                        ('state', '!=', 'draft'),
+                        ('is_verified', '=', False),
+                        ('move_type', 'not in', ['in_invoice', 'in_refund']),
+                    ]}"
                     />
                 <button name="action_move_verify"
                     class="oe_highlight" string="Verify Bill" type="object"
-                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', True), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|', '|',
+                        ('state', '!=', 'draft'),
+                        ('is_verified', '=', True),
+                        ('move_type', 'not in', ['in_invoice', 'in_refund']),
+                    ]}"
                     />
                 <!-- One for Supplier Invoice, hiden for non manager -->
                 <button name="action_post"
                     groups="account.group_account_manager"
                     class="oe_highlight" string="Post" type="object"
-                    attrs="{'invisible':['|','|', ('state', 'not in', ['draft']), ('is_verified', '=', False), ('move_type', 'not in', ['in_invoice', 'in_refund'])]}"
+                    attrs="{'invisible':['|',
+                        ('state', '!=', 'draft'),
+                        ('move_type', 'not in', ['in_invoice', 'in_refund']),
+                    ]}"
                     />
                 <!-- One for Customer Invoice -->
                 <button name="action_post"
-                    class="oe_highlight" string="Validate" type="object"
-                    attrs="{'invisible':['|', ('state', 'not in', ['draft']), ('move_type', 'in', ['in_invoice', 'in_refund'])]}"
+                    class="oe_highlight" string="Post" type="object"
+                    attrs="{'invisible':['|',
+                        ('state', '!=', 'draft'),
+                        ('move_type', 'in', ['in_invoice', 'in_refund']),
+                    ]}"
                     />
             </button>
 

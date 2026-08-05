@@ -111,6 +111,10 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
         )
 
     def test_01_account_move_verify_missing_fields(self):
+        self.assertEqual(self.move1.is_verified, False)
+        self.assertEqual(self.move1.is_verified_toggle, False)
+        self.assertEqual(self.move1.state, "draft")
+
         with self.assertRaises(UserError):
             self.move1.action_move_verify()
         self.move1.invoice_date = "1789-07-14"
@@ -120,8 +124,31 @@ class TestFermenteAccountInvoiceWorkflow(TransactionCase):
         # It should pass now
         self.move1.action_move_verify()
         self.assertEqual(self.move1.is_verified, True)
+        self.assertEqual(self.move1.is_verified_toggle, True)
+        self.assertEqual(self.move1.state, "draft")
+
+        self.move1.action_move_unverify()
+        self.assertEqual(self.move1.is_verified, False)
+        self.assertEqual(self.move1.is_verified_toggle, False)
+        self.assertEqual(self.move1.state, "draft")
+
+        self.move1.action_post()
+        self.assertEqual(self.move1.is_verified, True)
+        self.assertEqual(self.move1.is_verified_toggle, True)
+        self.assertEqual(self.move1.state, "posted")
 
         self.move1.button_draft()
+        self.assertEqual(self.move1.is_verified, False)
+        self.assertEqual(self.move1.is_verified_toggle, False)
+        self.assertEqual(self.move1.state, "draft")
+
+        # use alternative toggle_field
+        self.move1.is_verified_toggle = False
+        self.assertEqual(self.move1.is_verified, False)
+        self.assertEqual(self.move1.state, "draft")
+
+        self.move1.is_verified_toggle = True
+        self.assertEqual(self.move1.is_verified, True)
         self.assertEqual(self.move1.state, "draft")
 
     def test_02_account_move_post(self):
