@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Quentin DUPONT <quentin.dupont@grap.coop>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- ====================================-->
+    <!-- Comptes 4x =========================-->
+    <!-- ====================================-->
+
+    <!-- Renommage du compte 401100 en 401-->
+    <record model="account.account.template" id="l10n_fr.fr_pcg_pay">
+        <field name="code">401</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <!-- Désactivation du compte 401700-->
+    <record model="account.account.template" id="l10n_fr.pcg_4017">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Renommage du compte 411100 en 411-->
+    <record model="account.account.template" id="l10n_fr.fr_pcg_recv">
+        <field name="code">411</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <!-- Désactivation du compte 411101-->
+    <record model="account.account.template" id="l10n_fr.fr_pcg_recv_pos">
+        <field name="active" eval="False" />
+    </record>
+    <!-- Désactivation du compte 411700-->
+    <record model="account.account.template" id="l10n_fr.pcg_4117">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- N'existe plus -->
+    <!-- renommage du compte 445203 (taux de TVA 5.5 ACHAT INTRACOM)-->
+<!--     <record id="l10n_fr.pcg_445203" model="account.account.template">
+      <field name="name">TVA due intracommunautaire (Taux réduit)</field>
+    </record> -->
+
+    <!-- N'existe plus -->
+    <!-- renommage du compte 445204 (taux de TVA 2.1 ACHAT INTRACOM)-->
+<!--     <record id="l10n_fr.pcg_445204" model="account.account.template">
+      <field name="name">TVA due intracommunautaire (Taux très réduit)</field>
+    </record> -->
+
+    <!-- N'existe plus -->
+    <!-- renommage du compte 445713 (taux de TVA 5.5 VENTE)-->
+<!--     <record id="l10n_fr.pcg_445713" model="account.account.template">
+      <field name="name">TVA collectée (Taux réduit)</field>
+    </record> -->
+
+    <!-- Désactive, à revoir avec le pôle comptabilité -->
+    <!-- Création d'un nouveau compte 445714 pour le taux de TVA 2.1 Vente-->
+<!--     <record id="grap_l10n_fr_445714" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">445714</field>
+      <field name="name">TVA collectée (Taux très réduit)</field>
+      <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+    </record> -->
+
+    <!-- Création d'un nouveau compte 467BA-->
+    <record id="grap_l10n_fr_467BA" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">467BA</field>
+      <field name="name">Bon d'achat</field>
+      <field name="account_type">income_other</field>
+    </record>
+
+    <!-- ====================================-->
+    <!-- Comptes 5x =========================-->
+    <!-- ====================================-->
+
+    <!-- Création d'un nouveau compte 5312-->
+    <record id="grap_l10n_fr_5312" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">5312</field>
+      <field name="name">Caisse pour Petits achats</field>
+      <field name="account_type">asset_current</field>
+    </record>
+
+    <!-- Création d'un nouveau compte 581-->
+    <record id="grap_l10n_fr_581" model="account.account.template">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">581</field>
+      <field name="name">Espèce en attente d'encaissement</field>
+      <field name="account_type">asset_cash</field>
+    </record>
+
+    <!-- ====================================-->
+    <!-- Comptes 6x =========================-->
+    <!-- ====================================-->
+
+    <!-- Configure Export du compte 601000 -->
+    <record model="account.account.template" id="l10n_fr.pcg_601_account">
+      <field name="export_suffix_on_tax_required" eval="True"/>
+      <field name="export_suffix_on_tax_default">9</field>
+    </record>
+
+    <!-- Creation d'un sous-compte 6041 -->
+    <record model="account.account.template" id="grap_l10n_fr_6041">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">6041</field>
+      <field name="name">Contrib GRAP</field>
+      <field name="account_type">expense</field>
+    </record>
+
+    <!-- Renommage du compte 633800 (précédemment : Autres impôts, taxes et versements assimilés sur rémunérations (autres organismes)-->
+    <record model="account.account.template" id="l10n_fr.pcg_6338" >
+        <field name="name">Autres Taxes</field>
+    </record>
+
+    <!-- Renommage du compte 658100 (précédemment : Pénalités sur marchés (et dédits payés sur achats et ventes)) -->
+    <record model="account.account.template" id="l10n_fr.pcg_6581">
+        <field name="name">Fond de caisse (D)</field>
+    </record>
+
+    <!-- Renommage du compte 658200 (précédemment : Pénalités sur marchés (et dédits payés sur achats et ventes)) -->
+    <record model="account.account.template" id="l10n_fr.pcg_6582">
+      <field name="name">Erreurs de caisse</field>
+    </record>
+
+    <!-- Configure Export du compte 607000-->
+    <record model="account.account.template" id="l10n_fr.pcg_607_account">
+          <field name="export_suffix_on_tax_required" eval="True"/>
+          <field name="export_suffix_on_tax_default">9</field>
+    </record>
+
+    <!-- Renommage des comptes 609x00-->
+    <record model="account.account.template" id="l10n_fr.pcg_6091">
+        <field name="name">RRR sur achats de matières premières (et fournitures)</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6092">
+        <field name="name">RRR sur achats d'autres approvisionnements stockés</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6094">
+        <field name="name">RRR sur achats d'études et prestations de services</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6095">
+        <field name="name">RRR sur achats de matériel, équipements et travaux</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6096">
+        <field name="name">RRR sur achats d'approvisionnements non stockés</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6097">
+        <field name="name">RRR sur achats de marchandises</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_6098">
+        <field name="name">RRR non affectés</field>
+    </record>
+
+
+    <!-- ====================================-->
+    <!-- Comptes 7x =========================-->
+    <!-- ====================================-->
+
+    <!-- Configure Export du compte 701000-->
+    <record model="account.account.template" id="l10n_fr.pcg_701_account">
+      <field name="export_suffix_on_tax_required" eval="True"/>
+    </record>
+
+    <!-- Désactivation du compte 758000-->
+    <record model="account.account.template" id="l10n_fr.pcg_758">
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Renommage du compte 758100 (précédemment : Dédits et pénalités perçus sur achats et ventes -->
+    <record model="account.account.template" id="l10n_fr.pcg_7581">
+        <field name="name">Fond de caisse (C)</field>
+    </record>
+
+    <!-- Renommage du compte 758200 (précédemment : Libéralités reçues -->
+    <record model="account.account.template" id="l10n_fr.pcg_7582">
+        <field name="name">Erreurs de caisse</field>
+    </record>
+
+    <!-- Creation d'un sous-compte 7063 -->
+    <record model="account.account.template" id="grap_l10n_fr_7063">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">7063</field>
+      <field name="name">Commission sur Vente</field>
+      <field name="account_type">income</field>
+      <field name="export_suffix_on_tax_required" eval="True"/>
+    </record>
+
+    <!-- Creation d'un sous-compte 7066 -->
+    <record model="account.account.template" id="grap_l10n_fr_7066">
+      <field name="chart_template_id" ref="l10n_fr.l10n_fr_pcg_chart_template"/>
+      <field name="code">7066</field>
+      <field name="name">Prestation Formation</field>
+      <field name="account_type">income</field>
+      <field name="export_suffix_on_tax_required" eval="True"/>
+    </record>
+
+    <!-- Configure Export du compte 707000-->
+    <record model="account.account.template" id="l10n_fr.pcg_707_account">
+        <field name="export_suffix_on_tax_required" eval="True"/>
+    </record>
+
+    <!-- Renommage des comptes 709x-->
+    <record model="account.account.template" id="l10n_fr.pcg_7091">
+        <field name="name">RRR sur ventes de produits finis</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7092">
+        <field name="name">RRR sur ventes de produits intermédiaires</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7094">
+        <field name="name">RRR sur travaux</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7095">
+        <field name="name">RRR sur études</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7096">
+        <field name="name">RRR sur prestations de services</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7097">
+        <field name="name">RRR sur ventes de marchandises</field>
+    </record>
+    <record model="account.account.template" id="l10n_fr.pcg_7098">
+        <field name="name">RRR sur produits des activités annexes</field>
+    </record>
+</odoo>
