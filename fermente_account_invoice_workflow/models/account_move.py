@@ -54,7 +54,7 @@ class AccountMove(models.Model):
             self.env.user.notify_info(
                 message=_("New Account Move: %(name)s") % {"name": self.name}
             )
-        else:
+        elif len(self) > 1:
             self.env.user.notify_info(
                 message=_("%(move_qty)s New Account Moves: %(names)s")
                 % {"names": ",".join(self.mapped("name")), "move_qty": len(self)}
