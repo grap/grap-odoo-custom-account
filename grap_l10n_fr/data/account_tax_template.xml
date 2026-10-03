@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Quentin DUPONT <quentin.dupont@grap.coop>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- ====================================-->
+    <!-- TVA à la vente                      -->
+    <!-- ====================================-->
+
+    <!-- TVA Vente HT (consumable -> Nothing) -->
+    <record id="l10n_fr.tva_normale" model="account.tax.template">
+        <field name="name">TVA VT 20,0% HT</field>
+        <field name="description">20.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">1</field>
+    </record>
+
+    <record id="l10n_fr.tva_intermediaire" model="account.tax.template">
+        <field name="name">TVA VT 10,0% HT</field>
+        <field name="description">10.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">4</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Désactiver taxe corse (8.5%) -->
+    <record id="l10n_fr.tva_specifique" model="account.tax.template">
+        <field name="active" eval="False"/>
+        <field name="tax_scope" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_reduite" model="account.tax.template">
+        <field name="name">TVA VT 05,5% HT</field>
+        <field name="description">5.5%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">2</field>
+        <field name="active">True</field>
+    </record>
+
+     <record id="l10n_fr.tva_super_reduite" model="account.tax.template">
+        <field name="name">TVA VT 02,1% HT</field>
+        <field name="description">02.1%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">5</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- TVA Vente TTC  (consumable -> Nothing)  -->
+    <record id="l10n_fr.tva_normale_ttc" model="account.tax.template">
+        <field name="name">TVA VT 20,0% TTC</field>
+        <field name="description">20.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="l10n_fr.tva_intermediaire_ttc" model="account.tax.template">
+        <field name="name">TVA VT 10,0% TTC</field>
+        <field name="description">10.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">4</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="l10n_fr.tva_reduite_ttc" model="account.tax.template">
+        <field name="name">TVA VT 05,5% TTC</field>
+        <field name="description">5.5%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">2</field>
+        <field name="active">True</field>
+    </record>
+
+     <record id="l10n_fr.tva_super_reduite_ttc" model="account.tax.template">
+        <field name="name">TVA VT 02,1% TTC</field>
+        <field name="description">02.1%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">5</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- TVA Vente HT  (service) (or "encaissement")  -->
+    <record id="l10n_fr.tva_normale_encaissement" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- TVA Vente Exo  (service)  -->
+    <record id="l10n_fr.tva_sale_service_0" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_sale_service_export_0" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_sale_service_intra_0" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- TVA Vente Exo  (Consumable) Apply same naming as in l10n_fr_oca -->
+    <record id="l10n_fr.tva_sale_good_0" model="account.tax.template">
+        <field name="name">TVA 0% exonéré</field>
+        <field name="tax_scope" eval="False" />
+    </record>
+    <record id="l10n_fr.tva_sale_good_intra_0" model="account.tax.template">
+        <field name="name">TVA VT 0% intracom</field>
+        <field name="tax_scope" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_sale_good_export_0" model="account.tax.template">
+        <field name="name">TVA VT 0% extracom</field>
+        <field name="tax_scope" eval="False" />
+    </record>
+    <!-- TVA Vente Immo  (Consumable) disable for the time being -->
+    <record id="l10n_fr.tva_imm_normale" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- ====================================-->
+    <!-- TVA à l'achat                       -->
+    <!-- ====================================-->
+
+    <!-- TVA Achat HT (consumable -> Nothing) -->
+    <record id="l10n_fr.tva_acq_normale" model="account.tax.template">
+        <field name="name">TVA HA 20,0% HT</field>
+        <field name="description">20.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">1</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intermediaire" model="account.tax.template">
+        <field name="name">TVA HA 10,0% HT</field>
+        <field name="description">10.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">4</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_specifique" model="account.tax.template">
+        <field name="active" eval="False"/>
+        <field name="tax_scope" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_acq_reduite" model="account.tax.template">
+        <field name="name">TVA HA 05,5% HT</field>
+        <field name="description">5.5%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">2</field>
+    </record>
+
+    <record id="l10n_fr.tva_acq_super_reduite" model="account.tax.template">
+        <field name="name">TVA HA 02,1% HT</field>
+        <field name="description">2.1%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="export_suffix">5</field>
+    </record>
+
+    <!-- TVA Achat TTC -->
+    <record id="l10n_fr.tva_acq_normale_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_intermediaire_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_specifique_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_reduite_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_super_reduite_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- TVA Achat Carburant -->
+    <record id="l10n_fr.tva_purchase_good_fuel" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_purchase_good_fuel_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- TVA Achat  (service)  -->
+
+
+    <record id="l10n_fr.tva_intra_normale_services" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_purchase_service_20_import" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_purchase_service_0" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_encaissement" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_acq_encaissement_TTC" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="l10n_fr.tva_purchase_imm_normale" model="account.tax.template">
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- TVA Achat Intracom  (Consumable) Apply same naming as in l10n_fr_oca -->
+    <record id="l10n_fr.tva_intra_normale_biens" model="account.tax.template">
+        <field name="name">TVA HA 20,0% intracom</field>
+        <field name="description">20.0%</field>
+        <field name="tax_scope" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_intra_intermediaire_biens" model="account.tax.template">
+        <field name="name">TVA HA 10,0% intracom</field>
+        <field name="description">10.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="l10n_fr.tva_intra_reduite_biens" model="account.tax.template">
+        <field name="name">TVA HA 05,5% intracom</field>
+        <field name="description">5.5%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="l10n_fr.tva_intra_super_reduite_biens" model="account.tax.template">
+        <field name="name">TVA HA 02,1% intracom</field>
+        <field name="description">2.1%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="active" eval="True" />
+    </record>
+
+    <!-- TVA Achat Exo  (Consumable) Apply same naming as in l10n_fr_oca -->
+    <record id="l10n_fr.tva_import_outside_eu_20" model="account.tax.template">
+        <field name="name">TVA HA 20,0% extracom</field>
+        <field name="description">20.0%</field>
+        <field name="tax_scope" eval="False" />
+    </record>
+
+    <record id="l10n_fr.tva_import_outside_eu_10" model="account.tax.template">
+        <field name="name">TVA HA 10,0% extracom</field>
+        <field name="description">10.0%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="l10n_fr.tva_import_outside_eu_5_5" model="account.tax.template">
+        <field name="name">TVA HA 05,5% extracom</field>
+        <field name="description">5.5%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="l10n_fr.tva_import_outside_eu_2_1" model="account.tax.template">
+        <field name="name">TVA HA 02,1% extracom</field>
+        <field name="description">2.1%</field>
+        <field name="tax_scope" eval="False" />
+        <field name="active" eval="True" />
+    </record>
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2019 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Disabling some links in existing account.fiscal.positin.tax.template -->
+   <!-- =======================================================================
+    Zone Euro
+    ======================================================================= -->
+        <record id="l10n_fr.fp_tax_template_intraeub2b_ha_encaissement_deduc_intermediaire" model="account.fiscal.position.tax.template">
+            <field name="active" eval="False" />
+        </record>
+
+        <record id="l10n_fr.fp_tax_template_intraeub2b_ha_encaissement_reduite_deduc" model="account.fiscal.position.tax.template">
+            <field name="active" eval="False" />
+        </record>
+
+        <record id="l10n_fr.fp_tax_template_intraeub2b_ha_encaissement_super_reduite_deduc" model="account.fiscal.position.tax.template">
+            <field name="active" eval="False" />
+        </record>
+
+   <!-- =======================================================================
+    Import/Export Hors Europe + DOM-TOM
+    ======================================================================= -->
+
+        <record id="l10n_fr.fp_tax_template_impexp_vt_specifique_ttc" model="account.fiscal.position.tax.template">
+            <field name="active" eval="False" />
+        </record>
+
+</odoo>
