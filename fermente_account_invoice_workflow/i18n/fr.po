@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * fermente_account_invoice_workflow
+# 	* fermente_account_invoice_workflow
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-18 14:16+0000\n"
-"PO-Revision-Date: 2026-06-18 14:16+0000\n"
+"POT-Creation-Date: 2026-08-05 13:18+0000\n"
+"PO-Revision-Date: 2026-08-05 13:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -42,9 +42,16 @@ msgid "Due Date"
 msgstr "Date d'échéance"
 
 #. module: fermente_account_invoice_workflow
+#: model:ir.model.fields,field_description:fermente_account_invoice_workflow.field_account_bank_statement_line__is_verified_toggle
+#: model:ir.model.fields,field_description:fermente_account_invoice_workflow.field_account_move__is_verified_toggle
+#: model:ir.model.fields,field_description:fermente_account_invoice_workflow.field_account_payment__is_verified_toggle
+msgid "Is Verified Toggle"
+msgstr "Est vérifiée (Toggle)"
+
+#. module: fermente_account_invoice_workflow
 #: model:ir.model,name:fermente_account_invoice_workflow.model_account_move
 msgid "Journal Entry"
-msgstr "Pièce comptable"
+msgstr "Ecriture comptable"
 
 #. module: fermente_account_invoice_workflow
 #. odoo-python
@@ -55,25 +62,27 @@ msgstr "Nouvelle pièce comptable: %(name)s"
 
 #. module: fermente_account_invoice_workflow
 #: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_form_supplier
+#: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_tree_supplier
 msgid "Post"
 msgstr "Publier"
 
 #. module: fermente_account_invoice_workflow
-#: model:ir.model.fields,field_description:fermente_account_invoice_workflow.field_account_chart_template__smart_search
-#: model:ir.model.fields,field_description:fermente_account_invoice_workflow.field_account_move__smart_search
-msgid "Smart Search"
+#: model:ir.model.fields,help:fermente_account_invoice_workflow.field_account_bank_statement_line__is_verified_toggle
+#: model:ir.model.fields,help:fermente_account_invoice_workflow.field_account_move__is_verified_toggle
+#: model:ir.model.fields,help:fermente_account_invoice_workflow.field_account_payment__is_verified_toggle
+msgid ""
+"Technical field, used to have a single toggle button in tree view to mark "
+"supplier invoices as verified, instead of two columns for "
+"'action_move_verify' / 'action_move_unverify' buttons."
 msgstr ""
+"Champ technique, utilisé pour avoir un bouton on/off sur la vue liste pour marquer"
+" les factures fournisseurs comme vérifiées, au lieu d'avoir deux colonnes"
+" pour les boutons 'action_move_verify' et 'action_move_unverify'."
 
 #. module: fermente_account_invoice_workflow
 #: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_form_supplier
 msgid "Unverify Bill"
 msgstr "Dé-vérifier la Facture"
-
-#. module: fermente_account_invoice_workflow
-#: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_form_supplier
-#: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_tree_supplier
-msgid "Validate"
-msgstr "Valider"
 
 #. module: fermente_account_invoice_workflow
 #. odoo-python
@@ -94,11 +103,6 @@ msgstr "Vérifiée"
 #: model:ir.model.fields,field_description:fermente_account_invoice_workflow.field_account_payment__is_verified
 msgid "Verified Move"
 msgstr "Facture vérifiée"
-
-#. module: fermente_account_invoice_workflow
-#: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_tree_supplier
-msgid "Verify"
-msgstr "Vérifier"
 
 #. module: fermente_account_invoice_workflow
 #: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_form_supplier

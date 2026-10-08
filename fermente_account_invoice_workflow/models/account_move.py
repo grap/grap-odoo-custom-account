@@ -3,53 +3,84 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    is_verified = fields.Boolean(string="Verified Move")
+    is_verified = fields.Boolean(string="Verified Move", tracking=True, copy=False)
 
-    def _filtered_supplier_moves(self):
-        return self.filtered(lambda x: x.move_type in ["in_invoice", "in_refund"])
+    is_verified_toggle = fields.Boolean(
+        compute="_compute_is_verified_toggle",
+        inverse="_inverse_is_verified_toggle",
+        help="Technical field, used to have a single toggle button in tree view"
+        " to mark supplier invoices as verified, instead of two columns"
+        " for 'action_move_verify' / 'action_move_unverify' buttons.",
+    )
+
+    @api.depends("is_verified")
+    def _compute_is_verified_toggle(self):
+        for move in self:
+            move.is_verified_toggle = move.is_verified
+
+    def _inverse_is_verified_toggle(self):
+        self.filtered(lambda x: x.is_verified_toggle).action_move_verify()
+        self.filtered(lambda x: not x.is_verified_toggle).action_move_unverify()
 
     def action_move_verify(self):
-        draft_supplier_move = self._filtered_supplier_moves().filtered(
-            lambda x: x.state == "draft"
+        draft_supplier_moves = self._filtered_supplier_moves(
+            only_draft=True, only_unverified=True
         )
-        if draft_supplier_move:
-            draft_supplier_move._check_supplier_information()
-            draft_supplier_move.write({"is_verified": True})
+        draft_supplier_moves._check_before_mark_as_verified()
+        draft_supplier_moves.write({"is_verified": True})
 
     def action_move_unverify(self):
-        draft_supplier_move = self._filtered_supplier_moves().filtered(
-            lambda x: x.state == "draft"
+        draft_supplier_moves = self._filtered_supplier_moves(
+            only_draft=True, only_verified=True
         )
-        if draft_supplier_move:
-            draft_supplier_move.write({"is_verified": False})
+        draft_supplier_moves.write({"is_verified": False})
 
-    def action_post(self):
-        supplier_move = self._filtered_supplier_moves()
+    def button_draft(self):
+        verified_moves = self._filtered_supplier_moves(only_verified=True)
+        verified_moves.write({"is_verified": False})
+        return super().button_draft()
 
-        if supplier_move:
+    def _filtered_supplier_moves(
+        self,
+        only_draft=False,
+        only_posted=False,
+        only_verified=False,
+        only_unverified=False,
+    ):
+        result = self.filtered(lambda x: x.move_type in ["in_invoice", "in_refund"])
+        if only_draft:
+            result = result.filtered(lambda x: x.state == "draft")
+        if only_posted:
+            result = result.filtered(lambda x: x.state == "posted")
+        if only_unverified:
+            result = result.filtered(lambda x: not x.is_verified)
+        if only_verified:
+            result = result.filtered(lambda x: x.is_verified)
+        return result
+
+    def _post(self, *args, **kwargs):
+        supplier_moves = self._filtered_supplier_moves(only_draft=True)
+
+        if supplier_moves:
             # Check access right
-            supplier_move._check_supplier_validation_access()
+            supplier_moves._check_supplier_validation_access()
             # Check fields
-            supplier_move._check_supplier_information()
-
-            # Reset to draft verified moves to avoid error in super
-            # of action_move_open
-            verified_move = supplier_move.filtered(
-                lambda x: x.is_verified is True
-            ).with_context(tracking_disable=True)
-            verified_move.write({"state": "draft"})
+            supplier_moves._check_before_mark_as_verified()
             # Set is_verified to True
-            supplier_move.write({"is_verified": True})
+            supplier_moves.filtered(lambda x: not x.is_verified).write(
+                {"is_verified": True}
+            )
 
-        res = super().action_post()
+        res = super()._post(*args, **kwargs)
 
+        # Display a message for the user
         if len(self) == 1:
             self.env.user.notify_info(
                 message=_("New Account Move: %(name)s") % {"name": self.name}
@@ -62,14 +93,6 @@ class AccountMove(models.Model):
 
         return res
 
-    def button_draft(self):
-        supplier_move = self._filtered_supplier_moves()
-        verified_moves = supplier_move.filtered(lambda x: x.is_verified is True)
-        if verified_moves:
-            verified_moves.write({"state": "draft"})
-        cancel_moves = self - verified_moves
-        return super(AccountMove, cancel_moves).button_draft()
-
     def _check_supplier_validation_access(self):
         if not self.env.user.has_group("account.group_account_manager"):
             raise UserError(
@@ -79,28 +102,29 @@ class AccountMove(models.Model):
                 )
             )
 
-    def _check_supplier_information(self):
-        self.ensure_one()
-        message = []
-        if "expense_sheet_id" in self._fields and self.expense_sheet_id:
-            # Do not check fields, if the account move
-            # come from hr_expense
-            return
+    def _check_before_mark_as_verified(self):
         if self.env.context.get("chart_template_create_demo_data"):
             # Prevent to raise an error when demo data are created
             # without all required fields
             return
-        if not self.invoice_date:
-            message.append(_("Bill Date"))
-        if not self.invoice_date_due:
-            message.append(_("Due Date"))
-        if not self.supplier_invoice_number:
-            message.append(_("Vendor Invoice Number"))
-        if message:
-            raise UserError(
-                _(
-                    "Verify a supplier move requires to set the"
-                    " following fields :\n\n - %(message)s"
+
+        for move in self:
+            message = []
+            if "expense_sheet_id" in self._fields and move.expense_sheet_id:
+                # Do not check fields, if the account move
+                # come from hr_expense
+                return
+            if not move.invoice_date:
+                message.append(_("Bill Date"))
+            if not move.invoice_date_due:
+                message.append(_("Due Date"))
+            if not move.supplier_invoice_number:
+                message.append(_("Vendor Invoice Number"))
+            if message:
+                raise UserError(
+                    _(
+                        "Verify a supplier move requires to set the"
+                        " following fields :\n\n - %(message)s"
+                    )
+                    % {"message": ("\n - ".join(message))}
                 )
-                % {"message": ("\n - ".join(message))}
-            )
