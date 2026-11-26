@@ -21,24 +21,24 @@ msgstr ""
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"- 'T' symbolizes the tax suffix that will be added at the end of the code of "
-"the Profit & Loss account, according to the VAT collected or deducted."
+"- 'T' symbolizes the tax suffix that will be added at the end of the code of"
+" the Profit & Loss account, according to the VAT collected or deducted."
 msgstr ""
 "- 'T' symbolises le suffixe de taxe qui sera ajouté à la fin du code du "
 "compte comptable pour les comptes de résultat, en fonction de la TVA "
 "déductible ou collectée."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_config_settings_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_res_config_settings_form
 msgid ""
 "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
 "specific.\" aria-label=\"Values set here are company-specific.\" "
 "groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"Ces valeurs dépendent de la "
-"société\" aria-label=\"Ces valeurs dépendent de la société.\" groups=\"base."
-"group_multi_company\" role=\"img\"/>"
+"<span class=\"fa fa-lg fa-building-o\" title=\"Les valeurs définies ici sont"
+" spécifiques à l'entreprise.\" aria-label=\"Les valeurs définies ici sont "
+"spécifiques à l'entreprise.\" groups=\"base.group_multi_company\" "
+"role=\"img\"/>"
 
 #. module: fermente_account_export
 #. odoo-python
@@ -98,16 +98,11 @@ msgstr "Exports comptables"
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"Account code '%(account_code)s' is too long to be exported to the accounting "
-"software. The maximum length is %(max_size)s."
+"Account code '%(account_code)s' is too long to be exported to the accounting"
+" software. The maximum length is %(max_size)s."
 msgstr ""
 "Le compte comptable '%(account_code)s' est trop long pour être être exporté "
 "dans le logiciel comptable. La taille maximum est %(max_size)s."
-
-#. module: fermente_account_export
-#: model:ir.model,name:fermente_account_export.model_account_config_settings
-msgid "Accounting Settings"
-msgstr "Paramètres comptables"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__message_needaction
@@ -141,7 +136,6 @@ msgstr "Ajouter les codes d'export comptable"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_chart_template__third_account_add_company_suffix
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_config_settings__third_account_add_company_suffix
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_company__third_account_add_company_suffix
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_config_settings__third_account_add_company_suffix
 msgid "Add Company Suffix"
@@ -149,7 +143,6 @@ msgstr "Ajouter un suffixe de société"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_chart_template__third_account_add_partner_suffix
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_config_settings__third_account_add_partner_suffix
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_company__third_account_add_partner_suffix
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_config_settings__third_account_add_partner_suffix
 msgid "Add Partner Suffix"
@@ -297,11 +290,10 @@ msgstr "Date d'export"
 #. module: fermente_account_export
 #: model:ir.ui.menu,name:fermente_account_export.menu_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_account_form
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_config_settings_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_tax_template_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_res_config_settings_form
 msgid "Export Settings"
-msgstr "Paramétrage d'export"
+msgstr "Réglages de l'export"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_tax__export_suffix
@@ -319,13 +311,12 @@ msgstr "Suffixe d'export obligatoire"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_chart_template__export_type
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_config_settings__export_type
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__export_type
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_company__export_type
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_config_settings__export_type
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__export_type
 msgid "Export Type"
-msgstr "Type d'export"
+msgstr "Type d’export"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_account__export_suffix_on_tax_required
@@ -357,17 +348,17 @@ msgstr "Fichier"
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__file_name
 msgid "File Name"
-msgstr "Nom du fichier"
+msgstr "Nom de fichier"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_account_export__fiscal_year_id
 msgid "Fiscal Year"
-msgstr "Exercice fiscal"
+msgstr "Exercice"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__fiscal_year_id
 msgid "Fiscal year"
-msgstr "Exercice fiscal"
+msgstr "Année fiscale"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__message_follower_ids
@@ -408,7 +399,6 @@ msgid "Icon to indicate an exception activity."
 msgstr "Icône pour indiquer une activité d'exception."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_config_settings_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_res_config_settings_form
 msgid ""
 "If checked the third party account will be suffixed by a partner suffix, "
@@ -418,7 +408,6 @@ msgstr ""
 "partenaire durant l'export."
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_config_settings_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_res_config_settings_form
 msgid ""
 "If checked the third party account will be suffixed by the company code, "
@@ -434,6 +423,7 @@ msgstr "Si coché, de nouveaux messages demandent votre attention."
 
 #. module: fermente_account_export
 #: model:ir.model.fields,help:fermente_account_export.field_account_export__message_has_error
+#: model:ir.model.fields,help:fermente_account_export.field_account_export__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si coché, certains messages ont une erreur de livraison."
 
@@ -511,7 +501,7 @@ msgstr "Pièce comptable"
 #. module: fermente_account_export
 #: model:ir.model,name:fermente_account_export.model_account_move_line
 msgid "Journal Item"
-msgstr "Écritures comptables"
+msgstr "Écriture comptable"
 
 #. module: fermente_account_export
 #: model:ir.actions.act_window,name:fermente_account_export.action_account_move_from_account_export
@@ -562,21 +552,18 @@ msgstr "Fichier principal"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_chart_template__max_size_account_code
-#: model:ir.model.fields,field_description:fermente_account_export.field_account_config_settings__max_size_account_code
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_company__max_size_account_code
 #: model:ir.model.fields,field_description:fermente_account_export.field_res_config_settings__max_size_account_code
 msgid "Max Size Account Code"
 msgstr "Taille maximum d'un code comptable"
 
 #. module: fermente_account_export
-#: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_config_settings_form
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_res_config_settings_form
 msgid ""
 "Maximum size of account codes allowed by the accounting software that "
 "receives the exported account moves."
 msgstr ""
-"Taille maximum des codes de comptes comptables autorisée par le logiciel de "
-"comptabilité qui\n"
+"Taille maximum des codes de comptes comptables autorisée par le logiciel de comptabilité qui\n"
 " reçoit les pièces comptables exportées."
 
 #. module: fermente_account_export
@@ -592,7 +579,7 @@ msgstr "Messages"
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__move_ids
 msgid "Moves"
-msgstr "Pièces comptables"
+msgstr "Mouvements"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__move_qty
@@ -612,12 +599,12 @@ msgstr "Nom"
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr "Échéance de l'activité suivante"
+msgstr "Date limite de l'activité à venir"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__activity_summary
 msgid "Next Activity Summary"
-msgstr "Résumé d'activité suivant"
+msgstr "Résumé de l'activité suivante"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_account_export__activity_type_id
@@ -703,6 +690,12 @@ msgid "Responsible User"
 msgstr "Utilisateur responsable"
 
 #. module: fermente_account_export
+#: model:ir.model.fields,field_description:fermente_account_export.field_account_export__message_has_sms_error
+#, fuzzy
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
+
+#. module: fermente_account_export
 #: model:ir.model.fields.selection,name:fermente_account_export.selection__account_chart_template__export_type__sage
 #: model:ir.model.fields.selection,name:fermente_account_export.selection__account_export__export_type__sage
 #: model:ir.model.fields.selection,name:fermente_account_export.selection__res_company__export_type__sage
@@ -712,7 +705,7 @@ msgstr "Sage (Mache)"
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid "Settings"
-msgstr "Configuration"
+msgstr "Paramètres"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,field_description:fermente_account_export.field_wizard_res_partner_add_export_code_line__state
@@ -769,12 +762,10 @@ msgstr "Le suffixe d'export doit être unique par société !"
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"The account %(account_code)s - %(account_name)s is set 'export with tax "
-"suffix' but no default code is defined on the account.\n"
+"The account %(account_code)s - %(account_name)s is set 'export with tax suffix' but no default code is defined on the account.\n"
 " Move %(move_name)s"
 msgstr ""
-"Le compte %(account_code)s - %(account_name)s est défini 'à exporter avec un "
-"suffixe de taxe' mais aucun suffixe n'est défini.\n"
+"Le compte %(account_code)s - %(account_name)s est défini 'à exporter avec un suffixe de taxe' mais aucun suffixe n'est défini.\n"
 " Pièce comptable %(move_name)s"
 
 #. module: fermente_account_export
@@ -782,13 +773,10 @@ msgstr ""
 #: code:addons/fermente_account_export/models/account_account.py:0
 #, python-format
 msgid ""
-"The account %(account_code)s - %(account_name)s is set 'export with tax "
-"suffix' but no tax suffix is defined for the tax %(tax_name)s.\n"
+"The account %(account_code)s - %(account_name)s is set 'export with tax suffix' but no tax suffix is defined for the tax %(tax_name)s.\n"
 " Move %(move_name)s"
 msgstr ""
-"The compte %(account_code)s - %(account_name)s est défini 'à export avec un "
-"suffixe de taxe' mais aucun suffixe n'est défini pour les taxes "
-"%(tax_name)s.\n"
+"The compte %(account_code)s - %(account_name)s est défini 'à export avec un suffixe de taxe' mais aucun suffixe n'est défini pour les taxes %(tax_name)s.\n"
 " Pièce comptable %(move_name)s"
 
 #. module: fermente_account_export
@@ -798,21 +786,22 @@ msgid ""
 "empty if you don't want to export the accounting moves that are in this "
 "journal."
 msgstr ""
-"Ce code sera utilisé lors de l'export des écritures dans la colonne journal."
-"Veuillez laisser vide si vous ne voulez pas exporter les pièces de ce journal"
+"Ce code sera utilisé lors de l'export des écritures dans la colonne "
+"journal.Veuillez laisser vide si vous ne voulez pas exporter les pièces de "
+"ce journal"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,help:fermente_account_export.field_account_export__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "Type d'activité d'exception enregistrée"
+msgstr "Type d'activité d'exception enregistrée."
 
 #. module: fermente_account_export
 #. odoo-python
 #: code:addons/fermente_account_export/wizards/wizard_res_partner_add_export_code.py:0
 #, python-format
 msgid ""
-"Unable to affect the account export code because %(incorrect_line_qty)s over "
-"%(line_qty)s are incorrect."
+"Unable to affect the account export code because %(incorrect_line_qty)s over"
+" %(line_qty)s are incorrect."
 msgstr ""
 "Impossible d'affecter un suffixe d'export car %(incorrect_line_qty)s lines "
 "sur  %(line_qty)s sont incorrectes."
@@ -831,12 +820,10 @@ msgstr ""
 #: code:addons/fermente_account_export/wizards/wizard_res_partner_add_export_code.py:0
 #, python-format
 msgid ""
-"Unable to use the wizard to guess export code for global partners that are "
-"not related to a company.\n"
+"Unable to use the wizard to guess export code for global partners that are not related to a company.\n"
 " %(partner_names)s."
 msgstr ""
-"Impossible d'utiliser cet assistant pour deviner des suffixes d'export pour "
-"des partenaires globaux qui ne sont pas relié à une société.\n"
+"Impossible d'utiliser cet assistant pour deviner des suffixes d'export pour des partenaires globaux qui ne sont pas relié à une société.\n"
 " %(partner_names)s."
 
 #. module: fermente_account_export
@@ -853,11 +840,11 @@ msgstr "Historique de communication du site web"
 #: model:ir.model.fields,help:fermente_account_export.field_res_partner__export_suffix
 #: model:ir.model.fields,help:fermente_account_export.field_res_users__export_suffix
 msgid ""
-"When exporting Entries, this accounting_code will be appended to the Account "
-"Number to make it a Partner Account."
+"When exporting Entries, this accounting_code will be appended to the Account"
+" Number to make it a Partner Account."
 msgstr ""
-"Durant l'export vers le logiciel comptable, ce suffixe sera ajouté au compte "
-"comptable pour générer un nouveau sous compte de partenaire"
+"Durant l'export vers le logiciel comptable, ce suffixe sera ajouté au compte"
+" comptable pour générer un nouveau sous compte de partenaire"
 
 #. module: fermente_account_export
 #: model:ir.model.fields,help:fermente_account_export.field_account_account__export_suffix_on_tax_default
@@ -867,8 +854,8 @@ msgid ""
 "to make it a new Account, if 'Export according to Taxes' is checked, and if "
 "no taxes is defined on the account move line."
 msgstr ""
-"Durant l'export vers le logiciel comptable, ce suffixe sera ajouté au compte "
-"pour générer un nouveau sous compte, si la case 'Exporter selon les taxes' "
+"Durant l'export vers le logiciel comptable, ce suffixe sera ajouté au compte"
+" pour générer un nouveau sous compte, si la case 'Exporter selon les taxes' "
 "est cochée et si aucune taxes n'est défini sur l'écriture comptable."
 
 #. module: fermente_account_export
@@ -878,8 +865,8 @@ msgid ""
 "When exporting Entries, this suffix will be appended to the Account Number "
 "to make it a new Account."
 msgstr ""
-"Durant l'export vers le logiciel comptable, ce suffixe sera ajouté au compte "
-"comptable pour générer un nouveau sous compte."
+"Durant l'export vers le logiciel comptable, ce suffixe sera ajouté au compte"
+" comptable pour générer un nouveau sous compte."
 
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_account_tax_search
@@ -933,7 +920,8 @@ msgstr "pièces comptables qui sont marquées 'à vérifier'."
 #. module: fermente_account_export
 #: model_terms:ir.ui.view,arch_db:fermente_account_export.view_wizard_account_export_form
 msgid ""
-"moves that belong to a journal that doesn't have a correct 'Export code' set."
+"moves that belong to a journal that doesn't have a correct 'Export code' "
+"set."
 msgstr ""
 "pièces comptables qui appartiennent à un journal qui n'a pas de code "
 "d'export défini."
