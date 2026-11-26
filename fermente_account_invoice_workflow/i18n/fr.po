@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2026-08-05 13:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -32,7 +33,7 @@ msgstr "Modèle de plan comptable"
 #: code:addons/fermente_account_invoice_workflow/models/account_move.py:0
 #, python-format
 msgid "Bill Date"
-msgstr "Date de facture"
+msgstr "Date de facturation"
 
 #. module: fermente_account_invoice_workflow
 #. odoo-python
@@ -51,7 +52,7 @@ msgstr "Est vérifiée (Toggle)"
 #. module: fermente_account_invoice_workflow
 #: model:ir.model,name:fermente_account_invoice_workflow.model_account_move
 msgid "Journal Entry"
-msgstr "Ecriture comptable"
+msgstr "Pièce comptable"
 
 #. module: fermente_account_invoice_workflow
 #. odoo-python
@@ -75,9 +76,9 @@ msgid ""
 "supplier invoices as verified, instead of two columns for "
 "'action_move_verify' / 'action_move_unverify' buttons."
 msgstr ""
-"Champ technique, utilisé pour avoir un bouton on/off sur la vue liste pour marquer"
-" les factures fournisseurs comme vérifiées, au lieu d'avoir deux colonnes"
-" pour les boutons 'action_move_verify' et 'action_move_unverify'."
+"Champ technique, utilisé pour avoir un bouton on/off sur la vue liste pour "
+"marquer les factures fournisseurs comme vérifiées, au lieu d'avoir deux "
+"colonnes pour les boutons 'action_move_verify' et 'action_move_unverify'."
 
 #. module: fermente_account_invoice_workflow
 #: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_form_supplier
@@ -95,7 +96,7 @@ msgstr "Numéro de la facture"
 #: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_form_supplier
 #: model_terms:ir.ui.view,arch_db:fermente_account_invoice_workflow.view_account_move_tree_supplier
 msgid "Verified"
-msgstr "Vérifiée"
+msgstr "Vérifié"
 
 #. module: fermente_account_invoice_workflow
 #: model:ir.model.fields,field_description:fermente_account_invoice_workflow.field_account_bank_statement_line__is_verified
